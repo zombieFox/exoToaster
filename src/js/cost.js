@@ -9,10 +9,10 @@ var cost = (function() {
       difference: state.get.current().processor.cost.difference
     })
 
-    state.get.current().autotoasters.cost.toast = sequence.arithmetic.value({
+    state.get.current().autotoaster.cost.toast = sequence.arithmetic.value({
       target: 1,
-      constant: state.get.current().autotoasters.cost.constant,
-      difference: state.get.current().autotoasters.cost.difference
+      constant: state.get.current().autotoaster.cost.constant,
+      difference: state.get.current().autotoaster.cost.difference
     })
   }
 

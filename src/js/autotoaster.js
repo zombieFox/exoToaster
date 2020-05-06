@@ -1,40 +1,40 @@
-var processor = (function() {
+var autotoaster = (function() {
 
   var mod = {}
 
   mod.add = function(amount) {
     state.mod.set({
-      path: "processor.level",
-      value: state.mod.get.current().processor.level + amount
+      path: "autotoaster.level",
+      value: state.mod.get.current().autotoaster.level + amount
     })
   }
 
   mod.remove = function(amount) {
     state.mod.set({
-      path: "processor.level",
-      value: state.mod.get.current().processor.level - amount
+      path: "autotoaster.level",
+      value: state.mod.get.current().autotoaster.level - amount
     })
   }
 
   mod.increase = function(amount) {
     var costDetails = cost.calculate({
-      type: "geometric",
-      constant: state.get.current().processor.cost.constant,
-      difference: state.get.current().processor.cost.difference,
+      type: "arithmetic",
+      constant: state.get.current().autotoaster.cost.constant,
+      difference: state.get.current().autotoaster.cost.difference,
       level: {
-        current: state.get.current().processor.level,
-        target: state.get.current().processor.level + amount
+        current: state.get.current().autotoaster.level,
+        target: state.get.current().autotoaster.level + amount
       }
     })
 
     if (state.get.current().toast.inventory.current >= costDetails.cost.total) {
       toast.consume(costDetails.cost.total)
       state.set({
-        path: "processor.cost.toast",
-        value: sequence.geometric.value({
+        path: "autotoaster.cost.toast",
+        value: sequence.arithmetic.value({
           target: costDetails.level.target + 1,
-          constant: state.get.current().processor.cost.constant,
-          difference: state.get.current().processor.cost.difference
+          constant: state.get.current().autotoaster.cost.constant,
+          difference: state.get.current().autotoaster.cost.difference
         })
       })
       add(amount)

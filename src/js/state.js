@@ -1,6 +1,9 @@
 var state = (function() {
 
   var current = {
+    store: {
+      interval: 400000
+    },
     toast: {
       lifetime: {
         current: 0
@@ -13,10 +16,10 @@ var state = (function() {
       level: 1,
       cost: {
         constant: 20,
-        difference: 1.5
+        difference: 1.2
       }
     },
-    autotoasters: {
+    autotoaster: {
       level: 0,
       cost: {
         constant: 8,

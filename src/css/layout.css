@@ -1,7 +1,7 @@
 .layout {
-  display: grid;
   width: 100vw;
   height: 100vh;
+  display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
@@ -9,14 +9,34 @@
     "message toaster";
 }
 
+.layout-header,
+.layout-message,
+.layout-main {
+  padding: 1em 2em;
+}
+
 .layout-header {
+  background-color: rgb(var(--theme-color-01));
   grid-area: header;
+  position: sticky;
+  top: 0;
+  z-index: 3;
 }
 
 .layout-message {
+  background-color: rgb(var(--theme-black));
   grid-area: message;
+  z-index: 1;
 }
 
-.layout-toaster {
+.layout-main {
+  background-color: rgb(var(--theme-color-01));
   grid-area: toaster;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: max-content;
+  grid-gap: 2em;
+  justify-items: stretch;
+  align-items: start;
+  z-index: 2;
 }

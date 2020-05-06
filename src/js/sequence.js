@@ -156,8 +156,8 @@ var sequence = (function() {
     // table({
     //   type: "arithmetic",
     //   count: 20,
-    //   constant: state.get.current().autotoasters.cost.constant,
-    //   difference: state.get.current().autotoasters.cost.difference
+    //   constant: state.get.current().autotoaster.cost.constant,
+    //   difference: state.get.current().autotoaster.cost.difference
     // })
   }
 

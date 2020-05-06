@@ -43,6 +43,27 @@ var control = (function() {
       processor.increase(100)
       readout.render.all()
     }
+  }, {
+    element: "[control=autotoaster-add-1]",
+    type: "button",
+    func: function() {
+      autotoaster.increase(1)
+      readout.render.all()
+    }
+  }, {
+    element: "[control=autotoaster-add-10]",
+    type: "button",
+    func: function() {
+      autotoaster.increase(10)
+      readout.render.all()
+    }
+  }, {
+    element: "[control=autotoaster-add-100]",
+    type: "button",
+    func: function() {
+      autotoaster.increase(100)
+      readout.render.all()
+    }
   }]
 
   mod.processor = []
@@ -67,6 +88,9 @@ var control = (function() {
   bind.control.action = function(object) {
     if (object.element) {
       helper.e(object.element).addEventListener(bind.control.eventType[object.type], function(event) {
+        if (mod.debug.active) {
+          console.log(object)
+        }
         if (object.func) {
           object.func()
         }
