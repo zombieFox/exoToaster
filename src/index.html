@@ -11,18 +11,25 @@
 
 <body>
 
-  <div>current toast: <span readout="toast-inventory-current"></span></div>
+  <main class="layout">
 
-  <button class="button button-ring" control="toast">toast +<span readout="processor-level"></span></button>
+    <section class="layout-header">
+      <div>current toast: <span readout="toast-inventory-current"></span></div>
+      <button class="button button-ring" control="toast">toast +<span readout="processor-level"></span></button>
+    </section>
 
-  <hr>
+    <section class="layout-message"></section>
 
-  <div>processor level: <span readout="processor-level"></span></div>
+    <section class="layout-toaster">
+      <div>processor level: <span readout="processor-level"></span></div>
 
-  <button class="button button-line" control="processor-add-1">processor +1</button>
-  <button class="button button-line" control="processor-add-10">processor +10</button>
-  <button class="button button-line" control="processor-add-100">processor +100</button>
-  <div>processor +1 cost: <span readout="processor-cost-toast"></span></div>
+      <button class="button button-line" control="processor-add-1">processor +1</button>
+      <button class="button button-line" control="processor-add-10">processor +10</button>
+      <button class="button button-line" control="processor-add-100">processor +100</button>
+      <div>processor +1 cost: <span readout="processor-cost-toast"></span></div>
+    </section>
+
+  </main>
 
   @@include("./html/components/header.html")
   @@include("./html/js-block.html")
