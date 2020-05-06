@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" class="is-background-color-by-theme is-theme-style-dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>-</title>
+  @@include("./html/css-block.html")
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div>current toast: <span readout="toast-inventory-current"></span></div>
+
+  <button class="button button-ring" control="toast">toast +<span readout="processor-level"></span></button>
+
+  <hr>
+
+  <div>processor level: <span readout="processor-level"></span></div>
+
+  <button class="button button-line" control="processor-add-1">processor +1</button>
+  <button class="button button-line" control="processor-add-10">processor +10</button>
+  <button class="button button-line" control="processor-add-100">processor +100</button>
+  <div>processor +1 cost: <span readout="processor-cost-toast"></span></div>
+
+  @@include("./html/components/header.html")
+  @@include("./html/js-block.html")
+</body>
+
+</html>
