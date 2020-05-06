@@ -1,0 +1,6 @@
+sequence.init()
+cost.init()
+theme.init()
+control.init()
+readout.init()
+control.debug()
