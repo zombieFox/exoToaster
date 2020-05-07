@@ -74,7 +74,6 @@ const jsFiles = [
   path.src + '/js/tick.js',
   path.src + '/js/suffix.js',
   path.src + '/js/toast.js',
-  path.src + '/js/processor.js',
   path.src + '/js/control.js',
   path.src + '/js/readout.js',
   path.src + '/js/theme.js',

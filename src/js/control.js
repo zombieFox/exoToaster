@@ -25,19 +25,19 @@ var control = (function() {
     element: "[control=processor-add-1]",
     type: "button",
     func: function() {
-      processor.increase(1)
+      processor.upgrade(1)
     }
   }, {
     element: "[control=processor-add-10]",
     type: "button",
     func: function() {
-      processor.increase(10)
+      processor.upgrade(10)
     }
   }, {
     element: "[control=processor-add-100]",
     type: "button",
     func: function() {
-      processor.increase(100)
+      processor.upgrade(100)
     }
   }, {
     element: "[control=autotoaster-add-1]",

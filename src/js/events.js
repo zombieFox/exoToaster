@@ -1,13 +1,12 @@
 var events = (function() {
 
-	var mod = {}
+  var mod = {}
 
+  var init = function() {}
 
-	var init = function() {}
-
-	return {
-		mod: mod,
-		init: init
-	}
+  return {
+    mod: mod,
+    init: init
+  }
 
 })()
