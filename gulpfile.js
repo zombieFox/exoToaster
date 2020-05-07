@@ -66,6 +66,7 @@ const jsFiles = [
   path.src + '/js/helper.js',
   path.src + '/js/data.js',
   path.src + '/js/state.js',
+  path.src + '/js/events.js',
   path.src + '/js/sequence.js',
   path.src + '/js/operator.js',
   path.src + '/js/cost.js',

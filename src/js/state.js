@@ -1,8 +1,11 @@
 var state = (function() {
 
   var current = {
-    store: {
-      interval: 400000
+    save: {
+      interval: 200000
+    },
+    events: {
+      all: []
     },
     toast: {
       lifetime: {
@@ -23,8 +26,9 @@ var state = (function() {
       level: 0,
       cost: {
         constant: 8,
-        difference: 8
-      }
+        difference: 4
+      },
+      interval: 1000
     },
     theme: {
       accent: {
@@ -83,6 +87,9 @@ var state = (function() {
       shade: {
         opacity: 0.4
       }
+    },
+    readout: {
+      interval: 500
     }
   }
 

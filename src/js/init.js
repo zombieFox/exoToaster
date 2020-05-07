@@ -1,5 +1,7 @@
 sequence.init()
 cost.init()
-theme.init()
+events.init()
 control.init()
+autotoaster.init()
 readout.init()
+theme.init()

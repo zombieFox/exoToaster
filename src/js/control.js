@@ -20,49 +20,42 @@ var control = (function() {
     type: "button",
     func: function() {
       toast.make(state.get.current().processor.level)
-      readout.render.all()
     }
   }, {
     element: "[control=processor-add-1]",
     type: "button",
     func: function() {
       processor.increase(1)
-      readout.render.all()
     }
   }, {
     element: "[control=processor-add-10]",
     type: "button",
     func: function() {
       processor.increase(10)
-      readout.render.all()
     }
   }, {
     element: "[control=processor-add-100]",
     type: "button",
     func: function() {
       processor.increase(100)
-      readout.render.all()
     }
   }, {
     element: "[control=autotoaster-add-1]",
     type: "button",
     func: function() {
       autotoaster.increase(1)
-      readout.render.all()
     }
   }, {
     element: "[control=autotoaster-add-10]",
     type: "button",
     func: function() {
       autotoaster.increase(10)
-      readout.render.all()
     }
   }, {
     element: "[control=autotoaster-add-100]",
     type: "button",
     func: function() {
       autotoaster.increase(100)
-      readout.render.all()
     }
   }]
 
@@ -93,6 +86,7 @@ var control = (function() {
         }
         if (object.func) {
           object.func()
+          readout.render.all()
         }
       }, false)
     }
@@ -116,8 +110,8 @@ var control = (function() {
 
   return {
     mod: mod,
-    init: init,
-    debug: debug
+    debug: debug,
+    init: init
   }
 
 })()

@@ -5,17 +5,22 @@ var tick = (function() {
   var set = function(override) {
     var options = {
       name: null,
-      func: null
+      func: null,
+      interval: null
     }
 
     if (override) {
       options = helper.applyOptions(options, override)
     }
 
-    current[options.name] = window.setTimeout(function() {
+    if (options.interval == null) {
+      options.interval = state.get.current().save.interval
+    }
+
+    current[options.name] = setTimeout(function() {
       options.func()
       set(options)
-    }, state.get.current().store.interval)
+    }, options.interval)
   }
 
   var get = function() {
