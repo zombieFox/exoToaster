@@ -1,38 +1,71 @@
 var tick = (function() {
 
-  var current = {}
+	var current = {}
 
-  var set = function(override) {
-    var options = {
-      name: null,
-      func: null,
-      interval: null
-    }
+	var mod = {}
 
-    if (override) {
-      options = helper.applyOptions(options, override)
-    }
+	mod.activities = [{
+		name: "autotoaster",
+		condition: function() {
+			return state.get.current().autotoaster.level > 0
+		},
+		func: function() {
+			toast.make(state.get.current().autotoaster.level)
+		},
+		interval: "autotoaster.interval"
+	}]
 
-    if (options.interval == null) {
-      options.interval = state.get.current().save.interval
-    }
+	var set = function(override) {
+		var options = {
+			name: null,
+			func: null,
+			interval: null
+		}
 
-    current[options.name] = setTimeout(function() {
-      options.func()
-      set(options)
-    }, options.interval)
-  }
+		if (override) {
+			options = helper.applyOptions(options, override)
+		}
 
-  var get = function() {
-    return current
-  }
+		if (options.interval == null) {
+			options.interval = state.get.current().save.interval
+		}
 
-  var init = function() {}
+		current[options.name] = setTimeout(function() {
+			options.func()
+			set(options)
+		}, helper.getObject({
+			object: state.get.current(),
+			path: options.interval
+		}))
+	}
 
-  return {
-    set: set,
-    get: get,
-    init: init
-  }
+	var get = function() {
+		return current
+	}
+
+	var check = function() {
+		mod.activities.forEach(function(item, index) {
+
+			if (item.condition() && !(item.name in current)) {
+				set({
+					name: item.name,
+					func: item.func,
+					interval: item.interval
+				})
+			}
+
+		})
+	}
+
+	var init = function() {}
+
+	return {
+		current: current,
+		mod: mod,
+		set: set,
+		get: get,
+		check: check,
+		init: init
+	}
 
 })()

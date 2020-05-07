@@ -43,19 +43,22 @@ var control = (function() {
     element: "[control=autotoaster-add-1]",
     type: "button",
     func: function() {
-      autotoaster.increase(1)
+      autotoaster.upgrade(1)
+      tick.check()
     }
   }, {
     element: "[control=autotoaster-add-10]",
     type: "button",
     func: function() {
-      autotoaster.increase(10)
+      autotoaster.upgrade(10)
+      tick.check()
     }
   }, {
     element: "[control=autotoaster-add-100]",
     type: "button",
     func: function() {
-      autotoaster.increase(100)
+      autotoaster.upgrade(100)
+      tick.check()
     }
   }]
 

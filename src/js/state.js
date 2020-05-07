@@ -22,11 +22,14 @@ var state = (function() {
         difference: 1.2
       }
     },
+    cycles: {
+      current: 1
+    },
     autotoaster: {
       level: 0,
       cost: {
         constant: 8,
-        difference: 4
+        difference: 3
       },
       interval: 1000
     },

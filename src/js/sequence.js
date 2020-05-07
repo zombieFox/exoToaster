@@ -142,8 +142,8 @@ var sequence = (function() {
       })
     }
 
-    console.table(options);
-    console.table(arrayOfSequence);
+    console.table(options)
+    console.table(arrayOfSequence)
   }
 
   var init = function() {

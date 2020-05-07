@@ -62,7 +62,7 @@ var readout = (function() {
 			func: function() {
 				render.all()
 			},
-			interval: state.get.current().readout.interval
+			interval: "readout.interval"
 		})
 	}
 

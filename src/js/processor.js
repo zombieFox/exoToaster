@@ -5,14 +5,14 @@ var processor = (function() {
   mod.add = function(amount) {
     state.mod.set({
       path: "processor.level",
-      value: state.mod.get.current().processor.level + amount
+      value: state.get.current().processor.level + amount
     })
   }
 
   mod.remove = function(amount) {
     state.mod.set({
       path: "processor.level",
-      value: state.mod.get.current().processor.level - amount
+      value: state.get.current().processor.level - amount
     })
   }
 

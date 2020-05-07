@@ -73,7 +73,7 @@ var theme = (function() {
     }
   }
 
-  var render = {};
+  var render = {}
 
   render.accent = {
     color: function() {
@@ -113,9 +113,9 @@ var theme = (function() {
   };
 
   var init = function() {
-    mod.color.generated();
-    render.color.shade();
-    render.accent.color();
+    mod.color.generated()
+    render.color.shade()
+    render.accent.color()
   }
 
   return {

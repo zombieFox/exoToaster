@@ -6,13 +6,13 @@ var toast = (function() {
     lifetime: function(amount) {
       state.mod.set({
         path: "toast.lifetime.current",
-        value: state.mod.get.current().toast.lifetime.current + amount
+        value: state.get.current().toast.lifetime.current + amount
       })
     },
     inventory: function(amount) {
       state.mod.set({
         path: "toast.inventory.current",
-        value: state.mod.get.current().toast.inventory.current + amount
+        value: state.get.current().toast.inventory.current + amount
       })
     }
   }
@@ -21,7 +21,7 @@ var toast = (function() {
     inventory: function(amount) {
       state.mod.set({
         path: "toast.inventory.current",
-        value: state.mod.get.current().toast.inventory.current - amount
+        value: state.get.current().toast.inventory.current - amount
       })
     }
   }

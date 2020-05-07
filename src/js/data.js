@@ -17,7 +17,7 @@ var data = (function() {
   }
 
   var save = function() {
-    mod.set(mod.saveName, JSON.stringify(state.mod.get.current()))
+    mod.set(mod.saveName, JSON.stringify(state.get.current()))
   }
 
   var load = function() {
