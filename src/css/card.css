@@ -10,13 +10,16 @@
 }
 
 .card-body {
-  background-color: rgb(var(--theme-color-03));
+  background-color: rgb(var(--theme-color-01));
+  border: var(--horizontal-rule-large);
 }
 
 .card-body:not(:last-child) {
-  border-bottom: var(--horizontal-rule-small);
+  border-top: 0;
+  border-bottom: 0;
 }
 
+.card-body:last-child,
 .card-footer {
   border-bottom-left-radius: var(--theme-radius);
   border-bottom-right-radius: var(--theme-radius);
@@ -30,6 +33,6 @@
 .card-header,
 .card-body,
 .card-footer {
-  padding: 1em 1.5em;
+  padding: 0.75em 1.5em;
   transition: background-color var(--layout-timing-extra-fast)
 }
