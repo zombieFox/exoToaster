@@ -161,9 +161,21 @@ var sequence = (function() {
     // })
     // table({
     //   type: "geometric",
-    //   count: 100,
+    //   count: 20,
     //   constant: state.get.current().autotoaster.speed.cost.constant,
     //   difference: state.get.current().autotoaster.speed.cost.difference
+    // })
+    // table({
+    //   type: "arithmetic",
+    //   count: 20,
+    //   constant: state.get.current().megatoaster.cost.constant,
+    //   difference: state.get.current().megatoaster.cost.difference
+    // })
+    // table({
+    //   type: "geometric",
+    //   count: 20,
+    //   constant: state.get.current().megatoaster.speed.cost.constant,
+    //   difference: state.get.current().megatoaster.speed.cost.difference
     // })
   }
 

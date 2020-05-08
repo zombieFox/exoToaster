@@ -52,6 +52,18 @@ var readout = (function() {
         return state.get.current().autotoaster.speed.level
       },
       suffix: true
+    }, {
+      element: "[readout=autotoaster-efficiency-cost-toast]",
+      value: function() {
+        return state.get.current().autotoaster.efficiency.cost.toast
+      },
+      suffix: true
+    }, {
+      element: "[readout=autotoaster-efficiency-level]",
+      value: function() {
+        return state.get.current().autotoaster.efficiency.level
+      },
+      suffix: true
     }],
     megatoaster: [{
       element: "[readout=megatoaster-level]",
@@ -75,6 +87,18 @@ var readout = (function() {
       element: "[readout=megatoaster-speed-level]",
       value: function() {
         return state.get.current().megatoaster.speed.level
+      },
+      suffix: true
+    }, {
+      element: "[readout=megatoaster-efficiency-cost-toast]",
+      value: function() {
+        return state.get.current().megatoaster.efficiency.cost.toast
+      },
+      suffix: true
+    }, {
+      element: "[readout=megatoaster-efficiency-level]",
+      value: function() {
+        return state.get.current().megatoaster.efficiency.level
       },
       suffix: true
     }]

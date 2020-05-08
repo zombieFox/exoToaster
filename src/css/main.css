@@ -15,7 +15,7 @@
 .main-controls {
   padding: 2em;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: max-content;
   grid-gap: 2em;
   justify-items: stretch;

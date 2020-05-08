@@ -21,7 +21,7 @@ var tick = (function() {
       return state.get.current().autotoaster.level > 0
     },
     func: function() {
-      toast.make(state.get.current().autotoaster.level)
+      toast.make(state.get.current().autotoaster.level * state.get.current().autotoaster.efficiency.level)
     },
     interval: function() {
       return 10000 - (state.get.current().autotoaster.speed.level * 100)
@@ -32,7 +32,7 @@ var tick = (function() {
       return state.get.current().megatoaster.level > 0
     },
     func: function() {
-      toast.make(state.get.current().megatoaster.level * 10)
+      toast.make(state.get.current().megatoaster.level * state.get.current().megatoaster.efficiency.level * 10)
     },
     interval: function() {
       return 10000 - (state.get.current().megatoaster.speed.level * 100)

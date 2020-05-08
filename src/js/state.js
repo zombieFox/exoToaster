@@ -35,20 +35,34 @@ var state = (function() {
         level: 0,
         cost: {
           constant: 40,
-          difference: 1.15
+          difference: 1.1
+        }
+      },
+      efficiency: {
+        level: 0,
+        cost: {
+          constant: 80,
+          difference: 1.2
         }
       }
     },
     megatoaster: {
       level: 0,
       cost: {
-        constant: 16,
+        constant: 32,
         difference: 16
       },
       speed: {
         level: 0,
         cost: {
-          constant: 80,
+          constant: 160,
+          difference: 1.1
+        }
+      },
+      efficiency: {
+        level: 0,
+        cost: {
+          constant: 320,
           difference: 1.2
         }
       }

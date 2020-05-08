@@ -11,12 +11,9 @@
 
 .card-body {
   background-color: rgb(var(--theme-color-01));
-  border: var(--horizontal-rule-large);
-}
-
-.card-body:not(:last-child) {
-  border-top: 0;
-  border-bottom: 0;
+  border-left: var(--horizontal-rule-large);
+  border-right: var(--horizontal-rule-large);
+  border-bottom: var(--horizontal-rule-large);
 }
 
 .card-body:last-child,
