@@ -147,24 +147,24 @@ var sequence = (function() {
   }
 
   var init = function() {
-    table({
-      type: "geometric",
-      count: 20,
-      constant: state.get.current().processor.cost.constant,
-      difference: state.get.current().processor.cost.difference
-    })
-    table({
-      type: "arithmetic",
-      count: 20,
-      constant: state.get.current().autotoaster.cost.constant,
-      difference: state.get.current().autotoaster.cost.difference
-    })
-    table({
-      type: "geometric",
-      count: 20,
-      constant: state.get.current().autotoaster.speed.cost.constant,
-      difference: state.get.current().autotoaster.speed.cost.difference
-    })
+    // table({
+    //   type: "geometric",
+    //   count: 20,
+    //   constant: state.get.current().processor.cost.constant,
+    //   difference: state.get.current().processor.cost.difference
+    // })
+    // table({
+    //   type: "arithmetic",
+    //   count: 20,
+    //   constant: state.get.current().autotoaster.cost.constant,
+    //   difference: state.get.current().autotoaster.cost.difference
+    // })
+    // table({
+    //   type: "geometric",
+    //   count: 100,
+    //   constant: state.get.current().autotoaster.speed.cost.constant,
+    //   difference: state.get.current().autotoaster.speed.cost.difference
+    // })
   }
 
   return {

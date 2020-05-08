@@ -5,6 +5,17 @@ var tick = (function() {
   var mod = {}
 
   mod.activities = [{
+    name: "readout",
+    condition: function() {
+      return true
+    },
+    func: function() {
+      readout.render.all()
+    },
+    interval: function() {
+      return state.get.current().readout.interval
+    }
+  }, {
     name: "autotoaster",
     condition: function() {
       return state.get.current().autotoaster.level > 0
@@ -12,7 +23,9 @@ var tick = (function() {
     func: function() {
       toast.make(state.get.current().autotoaster.level)
     },
-    interval: "autotoaster.interval"
+    interval: function() {
+      return 10000 - (state.get.current().autotoaster.speed.level * 100)
+    }
   }]
 
   var set = function(override) {
@@ -26,17 +39,20 @@ var tick = (function() {
       options = helper.applyOptions(options, override)
     }
 
-    if (options.interval == null) {
-      options.interval = state.get.current().save.interval
+    var calculatedInterval;
+
+    if (typeof options.interval === "function") {
+      calculatedInterval = options.interval()
+    } else if (typeof options.interval === "number") {
+      calculatedInterval = options.interval
+    } else {
+      calculatedInterval = state.get.current().save.interval
     }
 
     current[options.name] = setTimeout(function() {
       options.func()
       set(options)
-    }, helper.getObject({
-      object: state.get.current(),
-      path: options.interval
-    }))
+    }, calculatedInterval)
   }
 
   var get = function() {
@@ -57,10 +73,11 @@ var tick = (function() {
     })
   }
 
-  var init = function() {}
+  var init = function() {
+    check()
+  }
 
   return {
-    current: current,
     mod: mod,
     set: set,
     get: get,

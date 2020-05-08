@@ -31,12 +31,11 @@ var state = (function() {
         constant: 8,
         difference: 4
       },
-      interval: 10000,
       speed: {
         level: 0,
         cost: {
-          constant: 50,
-          difference: 1.7
+          constant: 40,
+          difference: 1.15
         }
       }
     },

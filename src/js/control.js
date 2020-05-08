@@ -61,25 +61,22 @@ var control = (function() {
       tick.check()
     }
   }, {
-    element: "[control=autotoaster-speed-level-increase5]",
+    element: "[control=autotoaster-speed-level-increase1]",
     type: "button",
     func: function() {
-      var func = function() {
-        state.set({
-          path: "autotoaster.interval",
-          value: operator.mod({
-            type: "decrease",
-            value: state.get.current().autotoaster.interval,
-            by: operator.mod({
-              type: "percentage",
-              value: state.get.current().autotoaster.interval,
-              percentage: 5
-            }),
-            integer: true
-          })
-        })
-      }
-      autotoasterspeed.upgrade(1, func)
+      autotoasterspeed.upgrade(1)
+    }
+  }, {
+    element: "[control=autotoaster-speed-level-increase10]",
+    type: "button",
+    func: function() {
+      autotoasterspeed.upgrade(10)
+    }
+  }, {
+    element: "[control=autotoaster-speed-level-increase100]",
+    type: "button",
+    func: function() {
+      autotoasterspeed.upgrade(100)
     }
   }]
 

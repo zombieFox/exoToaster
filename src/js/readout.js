@@ -71,13 +71,6 @@ var readout = (function() {
 
   var init = function() {
     render.all()
-    tick.set({
-      name: "readout",
-      func: function() {
-        render.all()
-      },
-      interval: "readout.interval"
-    })
   }
 
   return {
