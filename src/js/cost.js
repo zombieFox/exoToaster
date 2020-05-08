@@ -1,33 +1,5 @@
 var cost = (function() {
 
-  var mod = {}
-
-  mod.startingCost = function() {
-    var generator = function(path, type) {
-      state.set({
-        path: path + ".cost.toast",
-        value: sequence[type].value({
-          target: helper.getObject({
-            object: state.get.current(),
-            path: path + ".level"
-          }) + 1,
-          constant: helper.getObject({
-            object: state.get.current(),
-            path: path + ".cost.constant"
-          }),
-          difference: helper.getObject({
-            object: state.get.current(),
-            path: path + ".cost.difference"
-          })
-        })
-      })
-    }
-
-    generator("processor", "geometric")
-    generator("autotoaster", "arithmetic")
-    generator("autotoaster.speed", "geometric")
-  }
-
   var calculate = function(override) {
     var options = {
       type: null, // arithmetic | geometric
@@ -60,14 +32,8 @@ var cost = (function() {
     return options
   }
 
-  var init = function() {
-    mod.startingCost()
-  }
-
   return {
-    mod: mod,
-    calculate: calculate,
-    init: init
+    calculate: calculate
   }
 
 })()

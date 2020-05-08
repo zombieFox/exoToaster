@@ -26,6 +26,17 @@ var tick = (function() {
     interval: function() {
       return 10000 - (state.get.current().autotoaster.speed.level * 100)
     }
+  }, {
+    name: "megatoaster",
+    condition: function() {
+      return state.get.current().megatoaster.level > 0
+    },
+    func: function() {
+      toast.make(state.get.current().megatoaster.level * 10)
+    },
+    interval: function() {
+      return 10000 - (state.get.current().megatoaster.speed.level * 100)
+    }
   }]
 
   var set = function(override) {

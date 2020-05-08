@@ -39,6 +39,20 @@ var state = (function() {
         }
       }
     },
+    megatoaster: {
+      level: 0,
+      cost: {
+        constant: 16,
+        difference: 16
+      },
+      speed: {
+        level: 0,
+        cost: {
+          constant: 80,
+          difference: 1.2
+        }
+      }
+    },
     readout: {
       interval: 10
     },

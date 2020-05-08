@@ -13,74 +13,114 @@ var control = (function() {
     }
   }
 
-  mod.header = []
-
-  mod.toast = [{
-    element: "[control=toast]",
-    type: "button",
-    func: function() {
-      toast.make(state.get.current().processor.level)
-    }
+  mod.all = {
+    toast: [{
+      element: "[control=toast]",
+      type: "button",
+      func: function() {
+        toast.make(state.get.current().processor.level)
+      }
+    }],
+    processor: [{
+      element: "[control=processor-level-increase1]",
+      type: "button",
+      func: function() {
+        processor.upgrade(1)
+      }
+    }, {
+      element: "[control=processor-level-increase10]",
+      type: "button",
+      func: function() {
+        processor.upgrade(10)
+      }
+    }, {
+      element: "[control=processor-level-increase100]",
+      type: "button",
+      func: function() {
+        processor.upgrade(100)
+      }
+    }],
+    autotoaster: [{
+      element: "[control=autotoaster-level-increase1]",
+      type: "button",
+      func: function() {
+        autotoaster.upgrade(1)
+        tick.check()
+      }
+    }, {
+      element: "[control=autotoaster-level-increase10]",
+      type: "button",
+      func: function() {
+        autotoaster.upgrade(10)
+        tick.check()
+      }
+    }, {
+      element: "[control=autotoaster-level-increase100]",
+      type: "button",
+      func: function() {
+        autotoaster.upgrade(100)
+        tick.check()
+      }
+    }, {
+      element: "[control=autotoaster-speed-level-increase1]",
+      type: "button",
+      func: function() {
+        autotoasterspeed.upgrade(1)
+      }
+    }, {
+      element: "[control=autotoaster-speed-level-increase10]",
+      type: "button",
+      func: function() {
+        autotoasterspeed.upgrade(10)
+      }
+    }, {
+      element: "[control=autotoaster-speed-level-increase100]",
+      type: "button",
+      func: function() {
+        autotoasterspeed.upgrade(100)
+      }
+    }],
+    megatoaster: [{
+      element: "[control=megatoaster-level-increase1]",
+      type: "button",
+      func: function() {
+        megatoaster.upgrade(1)
+        tick.check()
+      }
+    }, {
+      element: "[control=megatoaster-level-increase10]",
+      type: "button",
+      func: function() {
+        megatoaster.upgrade(10)
+        tick.check()
+      }
+    }, {
+      element: "[control=megatoaster-level-increase100]",
+      type: "button",
+      func: function() {
+        megatoaster.upgrade(100)
+        tick.check()
+      }
   }, {
-    element: "[control=processor-level-increase1]",
-    type: "button",
-    func: function() {
-      processor.upgrade(1)
-    }
-  }, {
-    element: "[control=processor-level-increase10]",
-    type: "button",
-    func: function() {
-      processor.upgrade(10)
-    }
-  }, {
-    element: "[control=processor-level-increase100]",
-    type: "button",
-    func: function() {
-      processor.upgrade(100)
-    }
-  }, {
-    element: "[control=autotoaster-level-increase1]",
-    type: "button",
-    func: function() {
-      autotoaster.upgrade(1)
-      tick.check()
-    }
-  }, {
-    element: "[control=autotoaster-level-increase10]",
-    type: "button",
-    func: function() {
-      autotoaster.upgrade(10)
-      tick.check()
-    }
-  }, {
-    element: "[control=autotoaster-level-increase100]",
-    type: "button",
-    func: function() {
-      autotoaster.upgrade(100)
-      tick.check()
-    }
-  }, {
-    element: "[control=autotoaster-speed-level-increase1]",
-    type: "button",
-    func: function() {
-      autotoasterspeed.upgrade(1)
-    }
-  }, {
-    element: "[control=autotoaster-speed-level-increase10]",
-    type: "button",
-    func: function() {
-      autotoasterspeed.upgrade(10)
-    }
-  }, {
-    element: "[control=autotoaster-speed-level-increase100]",
-    type: "button",
-    func: function() {
-      autotoasterspeed.upgrade(100)
-    }
-  }]
-
-  mod.processor = []
+      element: "[control=megatoaster-speed-level-increase1]",
+      type: "button",
+      func: function() {
+        megatoasterpeed.upgrade(1)
+      }
+    }, {
+      element: "[control=megatoaster-speed-level-increase10]",
+      type: "button",
+      func: function() {
+        megatoasterpeed.upgrade(10)
+      }
+    }, {
+      element: "[control=megatoaster-speed-level-increase100]",
+      type: "button",
+      func: function() {
+        megatoasterpeed.upgrade(100)
+      }
+    }]
+  }
 
   var bind = {}
 
@@ -113,12 +153,14 @@ var control = (function() {
     }
   }
 
-  bind.control.toast = function() {
-    mod.toast.forEach(function(arrayItem, index) {
-      if (helper.e(arrayItem.element)) {
-        bind.control.action(arrayItem)
-      }
-    })
+  bind.control.all = function() {
+    for (var key in mod.all) {
+      mod.all[key].forEach(function(item, index) {
+        if (helper.e(item.element)) {
+          bind.control.action(item)
+        }
+      })
+    }
   }
 
   var debug = function() {
@@ -126,12 +168,12 @@ var control = (function() {
   }
 
   var init = function() {
-    bind.control.toast()
+    bind.control.all()
   }
 
   return {
-    mod: mod,
     debug: debug,
+    mod: mod,
     init: init
   }
 

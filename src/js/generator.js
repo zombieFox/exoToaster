@@ -1,9 +1,13 @@
 var Generator = function(name, type) {
 
   this.debug = function() {
-    console.log("generator:", this.name, "| type:", this.type, "| level:", this.getDataFromPath(this.path.level))
-    console.log("path", this.path)
+    console.log("generator:", this.name)
+    console.log("type:", this.type)
+    console.log("level:", this.getDataFromPath(this.path.level))
+    console.log("constant:", this.getDataFromPath(this.path.constant))
+    console.log("difference:", this.getDataFromPath(this.path.difference))
     console.log("cost", this.cost(1))
+    console.log("path", this.path)
   }
 
   this.name = name
@@ -100,5 +104,23 @@ var Generator = function(name, type) {
 
     }
   }
+
+  // set the starting cost for this building
+  this.startingCost = function() {
+    var cost = sequence[this.type].value({
+      target: this.getDataFromPath(this.path.level) + 1,
+      constant: this.getDataFromPath(this.path.constant),
+      difference: this.getDataFromPath(this.path.difference)
+    })
+
+    var path = this.path.cost
+
+    state.set({
+      path: path,
+      value: cost
+    })
+  }
+
+  this.startingCost()
 
 }
