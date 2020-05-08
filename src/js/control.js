@@ -22,43 +22,64 @@ var control = (function() {
       toast.make(state.get.current().processor.level)
     }
   }, {
-    element: "[control=processor-add-1]",
+    element: "[control=processor-level-increase1]",
     type: "button",
     func: function() {
       processor.upgrade(1)
     }
   }, {
-    element: "[control=processor-add-10]",
+    element: "[control=processor-level-increase10]",
     type: "button",
     func: function() {
       processor.upgrade(10)
     }
   }, {
-    element: "[control=processor-add-100]",
+    element: "[control=processor-level-increase100]",
     type: "button",
     func: function() {
       processor.upgrade(100)
     }
   }, {
-    element: "[control=autotoaster-add-1]",
+    element: "[control=autotoaster-level-increase1]",
     type: "button",
     func: function() {
       autotoaster.upgrade(1)
       tick.check()
     }
   }, {
-    element: "[control=autotoaster-add-10]",
+    element: "[control=autotoaster-level-increase10]",
     type: "button",
     func: function() {
       autotoaster.upgrade(10)
       tick.check()
     }
   }, {
-    element: "[control=autotoaster-add-100]",
+    element: "[control=autotoaster-level-increase100]",
     type: "button",
     func: function() {
       autotoaster.upgrade(100)
       tick.check()
+    }
+  }, {
+    element: "[control=autotoaster-speed-level-increase5]",
+    type: "button",
+    func: function() {
+      var func = function() {
+        state.set({
+          path: "autotoaster.interval",
+          value: operator.mod({
+            type: "decrease",
+            value: state.get.current().autotoaster.interval,
+            by: operator.mod({
+              type: "percentage",
+              value: state.get.current().autotoaster.interval,
+              percentage: 5
+            }),
+            integer: true
+          })
+        })
+      }
+      autotoasterspeed.upgrade(1, func)
     }
   }]
 

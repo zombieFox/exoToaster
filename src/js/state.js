@@ -29,9 +29,19 @@ var state = (function() {
       level: 0,
       cost: {
         constant: 8,
-        difference: 3
+        difference: 4
       },
-      interval: 1000
+      interval: 10000,
+      speed: {
+        level: 0,
+        cost: {
+          constant: 50,
+          difference: 1.7
+        }
+      }
+    },
+    readout: {
+      interval: 10
     },
     theme: {
       accent: {
@@ -90,9 +100,6 @@ var state = (function() {
       shade: {
         opacity: 0.4
       }
-    },
-    readout: {
-      interval: 500
     }
   }
 

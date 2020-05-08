@@ -3,17 +3,29 @@ var cost = (function() {
   var mod = {}
 
   mod.startingCost = function() {
-    state.get.current().processor.cost.toast = sequence.geometric.value({
-      target: 2,
-      constant: state.get.current().processor.cost.constant,
-      difference: state.get.current().processor.cost.difference
-    })
+    var generator = function(path, type) {
+      state.set({
+        path: path + ".cost.toast",
+        value: sequence[type].value({
+          target: helper.getObject({
+            object: state.get.current(),
+            path: path + ".level"
+          }) + 1,
+          constant: helper.getObject({
+            object: state.get.current(),
+            path: path + ".cost.constant"
+          }),
+          difference: helper.getObject({
+            object: state.get.current(),
+            path: path + ".cost.difference"
+          })
+        })
+      })
+    }
 
-    state.get.current().autotoaster.cost.toast = sequence.arithmetic.value({
-      target: 1,
-      constant: state.get.current().autotoaster.cost.constant,
-      difference: state.get.current().autotoaster.cost.difference
-    })
+    generator("processor", "geometric")
+    generator("autotoaster", "arithmetic")
+    generator("autotoaster.speed", "geometric")
   }
 
   var calculate = function(override) {

@@ -60,26 +60,30 @@ var Generator = function(name, type) {
       constant: this.getDataFromPath(this.path.constant),
       difference: this.getDataFromPath(this.path.difference)
     })
-    // console.log(this.name, "next level cost", nextCost)
+    console.log(this.name, "next level cost", nextCost)
     state.set({
       path: this.path.cost,
       value: nextCost
     })
   }
 
-  this.upgrade = function(amount) {
+  this.upgrade = function(amount, func) {
     var priceDetails = this.cost(amount)
-    // console.log("try to upgrade", this.name, "by", amount)
-    // console.log("toast", this.getDataFromPath(this.path.currency.toast), " | cost", priceDetails.cost.total)
+    console.log("price details", priceDetails);
+    console.log("try to upgrade", this.name, "by", amount)
+    console.log("toast", this.getDataFromPath(this.path.currency.toast), " | cost", priceDetails.cost.total)
     if (this.getDataFromPath(this.path.currency.toast) >= priceDetails.cost.total) {
-      // console.log(this.name, "upgrade success")
+      console.log(this.name, "upgrade success")
       toast.consume(priceDetails.cost.total)
-      // console.log("toast consumed", priceDetails.cost.total)
+      console.log("toast consumed", priceDetails.cost.total)
       this.addLevel(amount)
-      // console.log(this.name, "upgrade by", amount)
+      console.log(this.name, "upgrade by", amount)
       this.increaseCost(priceDetails)
+      if (func) {
+        func()
+      }
     } else {
-      // console.log(this.name, "upgrade fail")
+      console.log(this.name, "upgrade fail")
     }
   }
 

@@ -37,6 +37,18 @@ var readout = (function() {
       return state.get.current().autotoaster.cost.toast
     },
     suffix: true
+  }, {
+    element: "[readout=autotoaster-speed-cost-toast]",
+    value: function() {
+      return state.get.current().autotoaster.speed.cost.toast
+    },
+    suffix: true
+  }, {
+    element: "[readout=autotoaster-speed-level]",
+    value: function() {
+      return state.get.current().autotoaster.speed.level
+    },
+    suffix: true
   }]
 
   var render = {}
