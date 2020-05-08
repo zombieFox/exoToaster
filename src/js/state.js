@@ -99,6 +99,11 @@ var state = (function() {
       shade: {
         opacity: 0.4
       }
+    },
+    report: {
+      message: {
+        max: 100
+      }
     }
   }
 

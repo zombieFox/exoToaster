@@ -1,0 +1,24 @@
+.main {
+  height: 100%;
+  position: relative;
+  overflow-y: auto;
+}
+
+.main-header {
+  background-color: rgb(var(--theme-color-01));
+  padding: 1em 2em;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.main-controls {
+  padding: 2em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: max-content;
+  grid-gap: 2em;
+  justify-items: stretch;
+  align-items: start;
+  z-index: 1;
+}

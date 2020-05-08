@@ -1,0 +1,82 @@
+.report {
+  padding: 1em 0.5em;
+  font-size: 0.8em;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.report-message {
+  display: flex;
+  flex-flow: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.report-message-type {
+  width: 5em;
+  text-align: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-weight: 900;
+}
+
+.report-message-text {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-flow: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.report-message-text-item {
+  display: inline-block;
+}
+
+.report-message-normal {
+  white-space: normal;
+}
+
+.report-message-pre {
+  white-space: pre;
+}
+
+.report-message .report-message-text-string {
+  margin-right: 0.5em;
+}
+
+.report-message .report-message-text-blink {
+  display: none;
+  font-weight: 900;
+}
+
+.report-message:last-child .report-message-text:last-child .report-message-text-blink {
+  display: inline-block;
+  opacity: 1;
+  animation-duration: 1s;
+  animation-name: blink;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(1);
+}
+
+.report-message-color-success {
+  color: green;
+}
+
+.report-message-color-normal {
+  color: white;
+}
+
+.report-message-color-error {
+  color: red;
+}
+
+.report-message-color-system {
+  color: yellow;
+}
+
+.report-message-color-motivation {
+  color: aqua;
+}

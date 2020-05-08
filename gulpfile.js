@@ -51,13 +51,14 @@ const cssFiles = [
   path.src + '/css/edge.css',
   path.src + '/css/form.css',
   path.src + '/css/group.css',
-  path.src + '/css/header.css',
   path.src + '/css/icons.css',
   path.src + '/css/layout.css',
+  path.src + '/css/main.css',
   path.src + '/css/menu.css',
   path.src + '/css/modal.css',
   path.src + '/css/search.css',
   path.src + '/css/shade.css',
+  path.src + '/css/report.css',
   path.src + '/css/theme.css',
   path.src + '/css/typography.css'
 ]
@@ -76,6 +77,7 @@ const jsFiles = [
   path.src + '/js/toast.js',
   path.src + '/js/control.js',
   path.src + '/js/readout.js',
+  path.src + '/js/report.js',
   path.src + '/js/theme.js',
   path.src + '/js/init.js'
 ]

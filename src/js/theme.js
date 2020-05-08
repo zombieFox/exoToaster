@@ -108,9 +108,9 @@ var theme = (function() {
           number = "0" + number
         }
         html.style.setProperty("--theme-shade-positive-" + number, rgb.r + ", " + rgb.g + ", " + rgb.b)
-      };
+      }
     }
-  };
+  }
 
   var init = function() {
     mod.color.generated()

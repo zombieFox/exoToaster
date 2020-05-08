@@ -69,10 +69,11 @@ var Generator = function(name, type) {
 
   this.upgrade = function(amount, func) {
     var priceDetails = this.cost(amount)
-    // console.log("price details", priceDetails);
+    // console.log("price details", priceDetails)
     // console.log("try to upgrade", this.name, "by", amount)
     // console.log("toast", this.getDataFromPath(this.path.currency.toast), " | cost", priceDetails.cost.total)
     if (this.getDataFromPath(this.path.currency.toast) >= priceDetails.cost.total) {
+
       // console.log(this.name, "upgrade success")
       toast.consume(priceDetails.cost.total)
       // console.log("toast consumed", priceDetails.cost.total)
@@ -82,8 +83,21 @@ var Generator = function(name, type) {
       if (func) {
         func()
       }
+      report.render({
+        type: "success",
+        message: ["+" + amount.toLocaleString(2) + " " + this.name + " added", this.getDataFromPath(this.path.level).toLocaleString(2) + " " + this.name + " online"],
+        format: "normal"
+      })
+
     } else {
+
       // console.log(this.name, "upgrade fail")
+      report.render({
+        type: "error",
+        message: ["toast inventory low", priceDetails.cost.total.toLocaleString(2) + " toast matter needed"],
+        format: "normal"
+      })
+
     }
   }
 

@@ -384,6 +384,83 @@ var helper = (function() {
     }
   }
 
+  var makeNode = function(override) {
+    var options = {
+      tag: null,
+      text: null,
+      attr: null
+    }
+    if (override) {
+      options = applyOptions(options, override)
+    }
+    var element = document.createElement(options.tag)
+    if (options.text != null) {
+      element.textContent = options.text
+    }
+    if (options.attr != null) {
+      options.attr.forEach(function(arrayItem, index) {
+        if ("key" in arrayItem && "value" in arrayItem) {
+          element.setAttribute(arrayItem.key, arrayItem.value)
+        } else if ("key" in arrayItem) {
+          element.setAttribute(arrayItem.key, "")
+        }
+      })
+    }
+    return element
+  }
+
+  var node = function(string, node) {
+    // set element
+    var tag
+    if (string.indexOf("|") > 0) {
+      tag = string.slice(0, string.indexOf("|"))
+    } else {
+      tag = string
+    }
+    var text = false
+    if (tag.indexOf(":") > 0) {
+      var pair = tag.split(":")
+      tag = pair[0]
+      text = pair[1]
+    }
+    var element = document.createElement(tag)
+    if (text && text != "") {
+      element.textContent = text
+    }
+    var attributes = string.slice(string.indexOf("|") + 1, string.length).split(",")
+    // set attributes
+    if (string.indexOf("|") > 0 && string.indexOf("|") < string.length - 1) {
+      attributes.forEach(function(arrayItem, index) {
+        if (arrayItem.indexOf(":") > 0) {
+          // if key and value
+          var pair = arrayItem.substring(0, arrayItem.indexOf(":")) + "," + arrayItem.substring((arrayItem.indexOf(":") + 1), arrayItem.length)
+          pair = pair.split(",")
+          attributes[index] = {
+            key: pair[0],
+            value: pair[1]
+          }
+        } else {
+          // if key only
+          attributes[index] = {
+            key: arrayItem,
+            value: undefined
+          }
+        }
+      })
+      attributes.forEach(function(arrayItem, index) {
+        if (("key" in arrayItem && arrayItem.key != undefined) && ("value" in arrayItem && arrayItem.value != undefined)) {
+          element.setAttribute(arrayItem.key, arrayItem.value)
+        } else if ("key" in arrayItem && arrayItem.key != undefined) {
+          element.setAttribute(arrayItem.key, "")
+        }
+      })
+    }
+    if (node) {
+      element.appendChild(node)
+    }
+    return element
+  }
+
   return {
     e: e,
     eA: eA,
@@ -393,7 +470,9 @@ var helper = (function() {
     sortObject: sortObject,
     numberSuffix: numberSuffix,
     timestamp: timestamp,
-    convertColor: convertColor
+    convertColor: convertColor,
+    makeNode: makeNode,
+    node: node
   }
 
 })()

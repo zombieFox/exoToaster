@@ -39,7 +39,7 @@ var tick = (function() {
       options = helper.applyOptions(options, override)
     }
 
-    var calculatedInterval;
+    var calculatedInterval
 
     if (typeof options.interval === "function") {
       calculatedInterval = options.interval()
