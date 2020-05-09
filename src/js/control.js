@@ -68,18 +68,6 @@ var control = (function() {
         autotoaster_speed.upgrade(1)
       }
     }, {
-      element: "[control=autotoaster-speed-level-increase10]",
-      type: "button",
-      func: function() {
-        autotoaster_speed.upgrade(10)
-      }
-    }, {
-      element: "[control=autotoaster-speed-level-increase100]",
-      type: "button",
-      func: function() {
-        autotoaster_speed.upgrade(100)
-      }
-    }, {
       element: "[control=autotoaster-efficiency-level-increase1]",
       type: "button",
       func: function() {
@@ -126,18 +114,6 @@ var control = (function() {
         megatoaster_speed.upgrade(1)
       }
     }, {
-      element: "[control=megatoaster-speed-level-increase10]",
-      type: "button",
-      func: function() {
-        megatoaster_speed.upgrade(10)
-      }
-    }, {
-      element: "[control=megatoaster-speed-level-increase100]",
-      type: "button",
-      func: function() {
-        megatoaster_speed.upgrade(100)
-      }
-    }, {
       element: "[control=megatoaster-efficiency-level-increase1]",
       type: "button",
       func: function() {
@@ -154,6 +130,52 @@ var control = (function() {
       type: "button",
       func: function() {
         megatoaster_efficiency.upgrade(100)
+      }
+    }],
+    rockettoaster: [{
+      element: "[control=rockettoaster-level-increase1]",
+      type: "button",
+      func: function() {
+        rockettoaster.upgrade(1)
+        tick.check()
+      }
+    }, {
+      element: "[control=rockettoaster-level-increase10]",
+      type: "button",
+      func: function() {
+        rockettoaster.upgrade(10)
+        tick.check()
+      }
+    }, {
+      element: "[control=rockettoaster-level-increase100]",
+      type: "button",
+      func: function() {
+        rockettoaster.upgrade(100)
+        tick.check()
+      }
+  }, {
+      element: "[control=rockettoaster-speed-level-increase1]",
+      type: "button",
+      func: function() {
+        rockettoaster_speed.upgrade(1)
+      }
+    }, {
+      element: "[control=rockettoaster-efficiency-level-increase1]",
+      type: "button",
+      func: function() {
+        rockettoaster_efficiency.upgrade(1)
+      }
+    }, {
+      element: "[control=rockettoaster-efficiency-level-increase10]",
+      type: "button",
+      func: function() {
+        rockettoaster_efficiency.upgrade(10)
+      }
+    }, {
+      element: "[control=rockettoaster-efficiency-level-increase100]",
+      type: "button",
+      func: function() {
+        rockettoaster_efficiency.upgrade(100)
       }
     }]
   }

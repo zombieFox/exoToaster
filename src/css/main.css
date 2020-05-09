@@ -5,7 +5,7 @@
 }
 
 .main-header {
-  background-color: rgb(var(--theme-color-01));
+  background-color: rgb(var(--theme-color-02));
   padding: 1em 2em;
   position: sticky;
   top: 0;
@@ -13,12 +13,12 @@
 }
 
 .main-controls {
-  padding: 2em;
+  padding: 2em 2em 70vh 2em;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: max-content;
-  grid-gap: 2em;
+  grid-gap: 1em;
   justify-items: stretch;
   align-items: start;
-  z-index: 1;
 }

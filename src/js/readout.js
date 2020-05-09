@@ -101,6 +101,43 @@ var readout = (function() {
         return state.get.current().megatoaster.efficiency.level
       },
       suffix: true
+    }],
+    rockettoaster: [{
+      element: "[readout=rockettoaster-level]",
+      value: function() {
+        return state.get.current().rockettoaster.level
+      },
+      suffix: true
+    }, {
+      element: "[readout=rockettoaster-cost-toast]",
+      value: function() {
+        return state.get.current().rockettoaster.cost.toast
+      },
+      suffix: true
+    }, {
+      element: "[readout=rockettoaster-speed-cost-toast]",
+      value: function() {
+        return state.get.current().rockettoaster.speed.cost.toast
+      },
+      suffix: true
+    }, {
+      element: "[readout=rockettoaster-speed-level]",
+      value: function() {
+        return state.get.current().rockettoaster.speed.level
+      },
+      suffix: true
+    }, {
+      element: "[readout=rockettoaster-efficiency-cost-toast]",
+      value: function() {
+        return state.get.current().rockettoaster.efficiency.cost.toast
+      },
+      suffix: true
+    }, {
+      element: "[readout=rockettoaster-efficiency-level]",
+      value: function() {
+        return state.get.current().rockettoaster.efficiency.level
+      },
+      suffix: true
     }]
   }
 

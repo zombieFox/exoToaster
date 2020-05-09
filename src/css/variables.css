@@ -1,9 +1,9 @@
 :root {
   /* theme */
   --theme-root-font-size:                               14px;
-  --theme-accent-r:                                     0;
-  --theme-accent-g:                                     80;
-  --theme-accent-b:                                     255;
+  --theme-accent-r:                                     74;
+  --theme-accent-g:                                     88;
+  --theme-accent-b:                                     115;
   --theme-accent:                                       var(--theme-accent-r), var(--theme-accent-g), var(--theme-accent-b);
   --theme-accent-accessible-threshold:                  0.5;
   --theme-accent-accessible-r:                          calc(var(--theme-accent-r) * 0.50);
@@ -206,7 +206,8 @@
                                                         inset 0 0 0 calc(var(--layout-line-width) * 8) rgba(var(--theme-accent), 0.1);
                                                         /* card */
   --card-autotoaster-meter-duration:                    10000ms;
-  --card-megatoaster-meter-duration:                    10000ms;
+  --card-megatoaster-meter-duration:                    20000ms;
+  --card-rockettoaster-meter-duration:               30000ms;
   /* breakpoint */
   /* can not be used in @media as of yet */
   --breakpoint-sm:                                      550px;

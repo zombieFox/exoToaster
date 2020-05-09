@@ -27,12 +27,16 @@ var state = (function() {
     },
     autotoaster: {
       level: 0,
+      toastperunit: 1,
       cost: {
         constant: 8,
         difference: 4
       },
       speed: {
         level: 0,
+        interval: {
+          starting: 10000
+        },
         cost: {
           constant: 40,
           difference: 1.1
@@ -48,12 +52,16 @@ var state = (function() {
     },
     megatoaster: {
       level: 0,
+      toastperunit: 20,
       cost: {
         constant: 32,
         difference: 16
       },
       speed: {
         level: 0,
+        interval: {
+          starting: 20000
+        },
         cost: {
           constant: 160,
           difference: 1.1
@@ -63,6 +71,31 @@ var state = (function() {
         level: 1,
         cost: {
           constant: 320,
+          difference: 1.2
+        }
+      }
+    },
+    rockettoaster: {
+      level: 0,
+      toastperunit: 30,
+      cost: {
+        constant: 128,
+        difference: 64
+      },
+      speed: {
+        level: 0,
+        interval: {
+          starting: 30000
+        },
+        cost: {
+          constant: 640,
+          difference: 1.1
+        }
+      },
+      efficiency: {
+        level: 1,
+        cost: {
+          constant: 1280,
           difference: 1.2
         }
       }
@@ -94,18 +127,18 @@ var state = (function() {
       },
       color: {
         hsl: {
-          h: 222,
-          s: 14,
-          l: 56
+          h: 219,
+          s: 22,
+          l: 37
         },
         rgb: {
-          r: 129,
-          g: 138,
-          b: 160
+          r: 74,
+          g: 88,
+          b: 115
         },
         contrast: {
-          light: 4,
-          dark: 4
+          light: 6,
+          dark: 3
         },
         generated: {}
       },

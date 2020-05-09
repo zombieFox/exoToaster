@@ -3,7 +3,6 @@ var suffix = (function() {
   var add = function(override) {
     var options = {
       number: null,
-      length: null,
       decimals: null
     }
 

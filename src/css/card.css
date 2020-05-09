@@ -1,18 +1,15 @@
 .card {}
 
-.card:not(:last-child) {
-  margin-bottom: 2em;
-}
-
 .card-header {
   border-top-left-radius: var(--theme-radius);
   border-top-right-radius: var(--theme-radius);
 }
 
 .card-body {
-  background-color: rgb(var(--theme-color-01));
-  border-left: var(--horizontal-rule-large);
-  border-right: var(--horizontal-rule-large);
+  background-color: rgb(var(--theme-color-03));
+}
+
+.card-body:not(:last-child) {
   border-bottom: var(--horizontal-rule-large);
 }
 
@@ -24,7 +21,7 @@
 
 .card-footer,
 .card-header {
-  background-color: rgb(var(--theme-color-02));
+  background-color: rgb(var(--theme-color-04));
 }
 
 .card-header,
@@ -35,8 +32,7 @@
 }
 
 .card-meter {
-  border-left: var(--horizontal-rule-large);
-  border-right: var(--horizontal-rule-large);
+  background-color: rgb(var(--theme-color-04));
   width: 100%;
   height: var(--layout-line-width);
   position: relative;
@@ -63,4 +59,8 @@
 
 .card-megatoaster.active .card-meter-progress {
   animation-duration: var(--card-megatoaster-meter-duration);
+}
+
+.card-rockettoaster.active .card-meter-progress {
+  animation-duration: var(--card-rockettoaster-meter-duration);
 }
