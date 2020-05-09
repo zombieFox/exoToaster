@@ -166,6 +166,12 @@ var sequence = (function() {
     //   difference: state.get.current().autotoaster.speed.cost.difference
     // })
     // table({
+    //   type: "geometric",
+    //   count: 20,
+    //   constant: state.get.current().autotoaster.efficiency.cost.constant,
+    //   difference: state.get.current().autotoaster.efficiency.cost.difference
+    // })
+    // table({
     //   type: "arithmetic",
     //   count: 20,
     //   constant: state.get.current().megatoaster.cost.constant,
@@ -176,6 +182,12 @@ var sequence = (function() {
     //   count: 20,
     //   constant: state.get.current().megatoaster.speed.cost.constant,
     //   difference: state.get.current().megatoaster.speed.cost.difference
+    // })
+    // table({
+    //   type: "geometric",
+    //   count: 20,
+    //   constant: state.get.current().megatoaster.efficiency.cost.constant,
+    //   difference: state.get.current().megatoaster.efficiency.cost.difference
     // })
   }
 

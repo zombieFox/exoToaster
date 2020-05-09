@@ -39,7 +39,7 @@ var state = (function() {
         }
       },
       efficiency: {
-        level: 0,
+        level: 1,
         cost: {
           constant: 80,
           difference: 1.2
@@ -60,7 +60,7 @@ var state = (function() {
         }
       },
       efficiency: {
-        level: 0,
+        level: 1,
         cost: {
           constant: 320,
           difference: 1.2

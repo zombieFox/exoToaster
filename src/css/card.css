@@ -33,3 +33,34 @@
   padding: 0.75em 1.5em;
   transition: background-color var(--layout-timing-extra-fast)
 }
+
+.card-meter {
+  border-left: var(--horizontal-rule-large);
+  border-right: var(--horizontal-rule-large);
+  width: 100%;
+  height: var(--layout-line-width);
+  position: relative;
+}
+
+.card-meter-progress {
+  background-color: rgb(var(--theme-accent));
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+}
+
+.card.active .card-meter-progress {
+  animation-name: progress;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+
+.card-autotoaster.active .card-meter-progress {
+  animation-duration: var(--card-autotoaster-meter-duration);
+}
+
+.card-megatoaster.active .card-meter-progress {
+  animation-duration: var(--card-megatoaster-meter-duration);
+}

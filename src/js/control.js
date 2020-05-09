@@ -137,6 +137,24 @@ var control = (function() {
       func: function() {
         megatoaster_speed.upgrade(100)
       }
+    }, {
+      element: "[control=megatoaster-efficiency-level-increase1]",
+      type: "button",
+      func: function() {
+        megatoaster_efficiency.upgrade(1)
+      }
+    }, {
+      element: "[control=megatoaster-efficiency-level-increase10]",
+      type: "button",
+      func: function() {
+        megatoaster_efficiency.upgrade(10)
+      }
+    }, {
+      element: "[control=megatoaster-efficiency-level-increase100]",
+      type: "button",
+      func: function() {
+        megatoaster_efficiency.upgrade(100)
+      }
     }]
   }
 
