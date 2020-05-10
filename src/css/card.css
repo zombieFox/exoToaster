@@ -32,7 +32,7 @@
 }
 
 .card-meter {
-  background-color: rgb(var(--theme-color-04));
+  background-color: rgb(var(--theme-color-03));
   width: 100%;
   height: var(--layout-line-width);
   position: relative;

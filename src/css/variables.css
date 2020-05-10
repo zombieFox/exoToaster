@@ -19,6 +19,9 @@
   --theme-font-ui-name:                                 "Roboto", sans-serif;
   --theme-font-ui-weight:                               400;
   --theme-font-ui-style:                                "normal";
+  --theme-font-mono-name:                               "Roboto Mono", monospace;
+  --theme-font-mono-weight:                             400;
+  --theme-font-mono-style:                              "normal";
   --theme-black:                                        0, 0, 0;
   --theme-white:                                        255, 255, 255;
   --theme-shade-negative-10:                            25, 25, 25;

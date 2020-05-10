@@ -20,6 +20,12 @@ var control = (function() {
       func: function() {
         toast.make(state.get.current().processor.level)
       }
+    }, {
+      element: "[control=toaster-motivate]",
+      type: "button",
+      func: function() {
+        motivation.render()
+      }
     }],
     processor: [{
       element: "[control=processor-level-increase1]",
@@ -107,7 +113,7 @@ var control = (function() {
         megatoaster.upgrade(100)
         tick.check()
       }
-  }, {
+    }, {
       element: "[control=megatoaster-speed-level-increase1]",
       type: "button",
       func: function() {
@@ -153,7 +159,7 @@ var control = (function() {
         rockettoaster.upgrade(100)
         tick.check()
       }
-  }, {
+    }, {
       element: "[control=rockettoaster-speed-level-increase1]",
       type: "button",
       func: function() {

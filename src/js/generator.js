@@ -71,7 +71,7 @@ var Generator = function(name, type) {
     })
   }
 
-  this.upgrade = function(amount, func) {
+  this.upgrade = function(amount) {
     var priceDetails = this.cost(amount)
 
     // console.log("price details", priceDetails)
@@ -86,9 +86,6 @@ var Generator = function(name, type) {
       this.addLevel(amount)
       // console.log(this.name, "upgrade by", amount)
       this.increaseCost(priceDetails)
-      if (func) {
-        func()
-      }
       report.render({
         type: "success",
         message: ["+" + suffix.add({

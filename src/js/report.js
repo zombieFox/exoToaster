@@ -61,9 +61,11 @@ var report = (function() {
       delay: null,
       callback: null
     }
+
     if (override) {
       options = helper.applyOptions(options, override)
     }
+
     if (options.index <= options.text.length) {
       options.target.innerHTML = options.text.substring(0, options.index + 1)
       scrollToBottom()
@@ -73,6 +75,7 @@ var report = (function() {
       } else {
         delay = 10
       }
+
       setTimeout(function() {
         typeWriter({
           text: options.text,

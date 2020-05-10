@@ -10,6 +10,10 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+  font-family: var(--theme-font-mono-name);
+  font-weight: var(--theme-font-mono-weight);
+  font-style: var(--theme-font-mono-style);
+  font-size: 0.8em;
 }
 
 .report-message-type {
@@ -60,22 +64,22 @@
   animation-timing-function: steps(1);
 }
 
-.report-message-color-success {
-  color: green;
+.report-message-color-normal {
+  color: #dcdcdc;
 }
 
-.report-message-color-normal {
-  color: white;
+.report-message-color-success {
+  color: #33cc66;
 }
 
 .report-message-color-error {
-  color: red;
+  color: #ff1177;
 }
 
 .report-message-color-system {
-  color: yellow;
+  color: #ffbb00;
 }
 
 .report-message-color-motivation {
-  color: aqua;
+  color: #00bbdd;
 }
