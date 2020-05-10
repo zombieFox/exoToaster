@@ -25,18 +25,18 @@ var tick = (function() {
     },
     func: function() {
       var level = state.get.current().autotoaster.level
-      var efficiency = state.get.current().autotoaster.efficiency.level
+      var efficiency = state.get.current().autotoasterefficiency.level
       var toastperunit = state.get.current().autotoaster.toastperunit
       toast.make(level * efficiency * toastperunit)
 
-      helper.e("html").style.setProperty("--card-autotoaster-meter-duration", (state.get.current().autotoaster.speed.interval.starting - (state.get.current().autotoaster.speed.level * 100)) + "ms");
+      helper.e("html").style.setProperty("--card-autotoasterspeed-meter-duration", (state.get.current().autotoasterspeed.interval.starting - (state.get.current().autotoasterspeed.level * 100)) + "ms")
 
-      helper.e(".card-autotoaster").classList.remove("active");
-      void helper.e(".card-autotoaster .card-meter-progress").offsetWidth;
-      helper.e(".card-autotoaster").classList.add("active");
+      helper.e(".card-autotoaster").classList.remove("active")
+      void helper.e(".card-autotoaster .card-meter-progress").offsetWidth
+      helper.e(".card-autotoaster").classList.add("active")
     },
     interval: function() {
-      return state.get.current().autotoaster.speed.interval.starting - (state.get.current().autotoaster.speed.level * 100)
+      return state.get.current().autotoasterspeed.interval.starting - (state.get.current().autotoasterspeed.level * 100)
     }
   }, {
     name: "megatoaster",
@@ -48,18 +48,18 @@ var tick = (function() {
     },
     func: function() {
       var level = state.get.current().megatoaster.level
-      var efficiency = state.get.current().megatoaster.efficiency.level
+      var efficiency = state.get.current().megatoasterefficiency.level
       var toastperunit = state.get.current().megatoaster.toastperunit
       toast.make(level * efficiency * toastperunit)
 
-      helper.e("html").style.setProperty("--card-megatoaster-meter-duration", (state.get.current().megatoaster.speed.interval.starting - (state.get.current().megatoaster.speed.level * 100)) + "ms");
+      helper.e("html").style.setProperty("--card-megatoasterspeed-meter-duration", (state.get.current().megatoasterspeed.interval.starting - (state.get.current().megatoasterspeed.level * 100)) + "ms")
 
-      helper.e(".card-megatoaster").classList.remove("active");
-      void helper.e(".card-megatoaster .card-meter-progress").offsetWidth;
-      helper.e(".card-megatoaster").classList.add("active");
+      helper.e(".card-megatoaster").classList.remove("active")
+      void helper.e(".card-megatoaster .card-meter-progress").offsetWidth
+      helper.e(".card-megatoaster").classList.add("active")
     },
     interval: function() {
-      return state.get.current().megatoaster.speed.interval.starting - (state.get.current().megatoaster.speed.level * 100)
+      return state.get.current().megatoasterspeed.interval.starting - (state.get.current().megatoasterspeed.level * 100)
     }
   }, {
     name: "rockettoaster",
@@ -71,18 +71,41 @@ var tick = (function() {
     },
     func: function() {
       var level = state.get.current().rockettoaster.level
-      var efficiency = state.get.current().rockettoaster.efficiency.level
+      var efficiency = state.get.current().rockettoasterefficiency.level
       var toastperunit = state.get.current().rockettoaster.toastperunit
       toast.make(level * efficiency * toastperunit)
 
-      helper.e("html").style.setProperty("--card-rockettoaster-meter-duration", (state.get.current().rockettoaster.speed.interval.starting - (state.get.current().rockettoaster.speed.level * 100)) + "ms");
+      helper.e("html").style.setProperty("--card-rockettoasterspeed-meter-duration", (state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 100)) + "ms")
 
-      helper.e(".card-rockettoaster").classList.remove("active");
-      void helper.e(".card-rockettoaster .card-meter-progress").offsetWidth;
-      helper.e(".card-rockettoaster").classList.add("active");
+      helper.e(".card-rockettoaster").classList.remove("active")
+      void helper.e(".card-rockettoaster .card-meter-progress").offsetWidth
+      helper.e(".card-rockettoaster").classList.add("active")
     },
     interval: function() {
-      return state.get.current().rockettoaster.speed.interval.starting - (state.get.current().rockettoaster.speed.level * 100)
+      return state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 100)
+    }
+  }, {
+    name: "quantumtoaster",
+    condition: function() {
+      return state.get.current().quantumtoaster.level > 0
+    },
+    setup: function() {
+      helper.e(".card-quantumtoaster").classList.add("active")
+    },
+    func: function() {
+      var level = state.get.current().quantumtoaster.level
+      var efficiency = state.get.current().quantumtoasterefficiency.level
+      var toastperunit = state.get.current().quantumtoaster.toastperunit
+      toast.make(level * efficiency * toastperunit)
+
+      helper.e("html").style.setProperty("--card-quantumtoasterspeed-meter-duration", (state.get.current().quantumtoasterspeed.interval.starting - (state.get.current().quantumtoasterspeed.level * 100)) + "ms")
+
+      helper.e(".card-quantumtoaster").classList.remove("active")
+      void helper.e(".card-quantumtoaster .card-meter-progress").offsetWidth
+      helper.e(".card-quantumtoaster").classList.add("active")
+    },
+    interval: function() {
+      return state.get.current().quantumtoasterspeed.interval.starting - (state.get.current().quantumtoasterspeed.level * 100)
     }
   }]
 

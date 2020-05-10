@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 30% auto;
   grid-template-rows: 100vh;
   grid-template-areas:
     "report main";

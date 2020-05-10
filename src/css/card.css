@@ -51,16 +51,21 @@
   animation-name: progress;
   animation-iteration-count: 1;
   animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 .card-autotoaster.active .card-meter-progress {
-  animation-duration: var(--card-autotoaster-meter-duration);
+  animation-duration: var(--card-autotoasterspeed-meter-duration);
 }
 
 .card-megatoaster.active .card-meter-progress {
-  animation-duration: var(--card-megatoaster-meter-duration);
+  animation-duration: var(--card-megatoasterspeed-meter-duration);
 }
 
 .card-rockettoaster.active .card-meter-progress {
-  animation-duration: var(--card-rockettoaster-meter-duration);
+  animation-duration: var(--card-rockettoasterspeed-meter-duration);
+}
+
+.card-quantumtoaster.active .card-meter-progress {
+  animation-duration: var(--card-quantumtoasterspeed-meter-duration);
 }

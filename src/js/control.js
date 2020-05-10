@@ -68,28 +68,32 @@ var control = (function() {
         tick.check()
       }
     }, {
-      element: "[control=autotoaster-speed-level-increase1]",
+      element: "[control=autotoasterspeed-level-increase1]",
       type: "button",
       func: function() {
-        autotoaster_speed.upgrade(1)
+        autotoasterspeed.upgrade(1)
+        render.disable.check(this)
+      },
+      disable: function() {
+        return ((state.get.current().autotoasterspeed.interval.starting - (state.get.current().autotoasterspeed.level * 100)) <= 200)
       }
     }, {
-      element: "[control=autotoaster-efficiency-level-increase1]",
+      element: "[control=autotoasterefficiency-level-increase1]",
       type: "button",
       func: function() {
-        autotoaster_efficiency.upgrade(1)
+        autotoasterefficiency.upgrade(1)
       }
     }, {
-      element: "[control=autotoaster-efficiency-level-increase10]",
+      element: "[control=autotoasterefficiency-level-increase10]",
       type: "button",
       func: function() {
-        autotoaster_efficiency.upgrade(10)
+        autotoasterefficiency.upgrade(10)
       }
     }, {
-      element: "[control=autotoaster-efficiency-level-increase100]",
+      element: "[control=autotoasterefficiency-level-increase100]",
       type: "button",
       func: function() {
-        autotoaster_efficiency.upgrade(100)
+        autotoasterefficiency.upgrade(100)
       }
     }],
     megatoaster: [{
@@ -114,28 +118,32 @@ var control = (function() {
         tick.check()
       }
     }, {
-      element: "[control=megatoaster-speed-level-increase1]",
+      element: "[control=megatoasterspeed-level-increase1]",
       type: "button",
       func: function() {
-        megatoaster_speed.upgrade(1)
+        megatoasterspeed.upgrade(1)
+        render.disable.check(this)
+      },
+      disable: function() {
+        return ((state.get.current().megatoasterspeed.interval.starting - (state.get.current().megatoasterspeed.level * 100)) <= 200)
       }
     }, {
-      element: "[control=megatoaster-efficiency-level-increase1]",
+      element: "[control=megatoasterefficiency-level-increase1]",
       type: "button",
       func: function() {
-        megatoaster_efficiency.upgrade(1)
+        megatoasterefficiency.upgrade(1)
       }
     }, {
-      element: "[control=megatoaster-efficiency-level-increase10]",
+      element: "[control=megatoasterefficiency-level-increase10]",
       type: "button",
       func: function() {
-        megatoaster_efficiency.upgrade(10)
+        megatoasterefficiency.upgrade(10)
       }
     }, {
-      element: "[control=megatoaster-efficiency-level-increase100]",
+      element: "[control=megatoasterefficiency-level-increase100]",
       type: "button",
       func: function() {
-        megatoaster_efficiency.upgrade(100)
+        megatoasterefficiency.upgrade(100)
       }
     }],
     rockettoaster: [{
@@ -160,28 +168,82 @@ var control = (function() {
         tick.check()
       }
     }, {
-      element: "[control=rockettoaster-speed-level-increase1]",
+      element: "[control=rockettoasterspeed-level-increase1]",
       type: "button",
       func: function() {
-        rockettoaster_speed.upgrade(1)
+        rockettoasterspeed.upgrade(1)
+        render.disable.check(this)
+      },
+      disable: function() {
+        return ((state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 100)) <= 200)
       }
     }, {
-      element: "[control=rockettoaster-efficiency-level-increase1]",
+      element: "[control=rockettoasterefficiency-level-increase1]",
       type: "button",
       func: function() {
-        rockettoaster_efficiency.upgrade(1)
+        rockettoasterefficiency.upgrade(1)
       }
     }, {
-      element: "[control=rockettoaster-efficiency-level-increase10]",
+      element: "[control=rockettoasterefficiency-level-increase10]",
       type: "button",
       func: function() {
-        rockettoaster_efficiency.upgrade(10)
+        rockettoasterefficiency.upgrade(10)
       }
     }, {
-      element: "[control=rockettoaster-efficiency-level-increase100]",
+      element: "[control=rockettoasterefficiency-level-increase100]",
       type: "button",
       func: function() {
-        rockettoaster_efficiency.upgrade(100)
+        rockettoasterefficiency.upgrade(100)
+      }
+    }],
+    quantumtoaster: [{
+      element: "[control=quantumtoaster-level-increase1]",
+      type: "button",
+      func: function() {
+        quantumtoaster.upgrade(1)
+        tick.check()
+      }
+    }, {
+      element: "[control=quantumtoaster-level-increase10]",
+      type: "button",
+      func: function() {
+        quantumtoaster.upgrade(10)
+        tick.check()
+      }
+    }, {
+      element: "[control=quantumtoaster-level-increase100]",
+      type: "button",
+      func: function() {
+        quantumtoaster.upgrade(100)
+        tick.check()
+      }
+    }, {
+      element: "[control=quantumtoasterspeed-level-increase1]",
+      type: "button",
+      func: function() {
+        quantumtoasterspeed.upgrade(1)
+        render.disable.check(this)
+      },
+      disable: function() {
+        return ((state.get.current().quantumtoasterspeed.interval.starting - (state.get.current().quantumtoasterspeed.level * 100)) <= 200)
+      }
+    }, {
+      element: "[control=quantumtoasterefficiency-level-increase1]",
+      type: "button",
+      func: function() {
+        quantumtoasterefficiency.upgrade(1)
+      }
+    }, {
+      element: "[control=quantumtoasterefficiency-level-increase10]",
+      type: "button",
+      func: function() {
+        quantumtoasterefficiency.upgrade(10)
+      }
+    }, {
+      element: "[control=quantumtoasterefficiency-level-increase100]",
+      type: "button",
+      func: function() {
+        quantumtoasterefficiency.upgrade(100)
       }
     }]
   }
@@ -224,6 +286,16 @@ var control = (function() {
           bind.control.action(item)
         }
       })
+    }
+  }
+
+  var render = {}
+
+  render.disable = {
+    check: function(controlObject) {
+      if (controlObject.disable()) {
+        helper.e(controlObject.element).disabled = true
+      }
     }
   }
 

@@ -146,56 +146,10 @@ var sequence = (function() {
     console.table(arrayOfSequence)
   }
 
-  var init = function() {
-    // table({
-    //   type: "geometric",
-    //   count: 20,
-    //   constant: state.get.current().processor.cost.constant,
-    //   difference: state.get.current().processor.cost.difference
-    // })
-    // table({
-    //   type: "arithmetic",
-    //   count: 20,
-    //   constant: state.get.current().autotoaster.cost.constant,
-    //   difference: state.get.current().autotoaster.cost.difference
-    // })
-    // table({
-    //   type: "geometric",
-    //   count: 20,
-    //   constant: state.get.current().autotoaster.speed.cost.constant,
-    //   difference: state.get.current().autotoaster.speed.cost.difference
-    // })
-    // table({
-    //   type: "geometric",
-    //   count: 20,
-    //   constant: state.get.current().autotoaster.efficiency.cost.constant,
-    //   difference: state.get.current().autotoaster.efficiency.cost.difference
-    // })
-    // table({
-    //   type: "arithmetic",
-    //   count: 20,
-    //   constant: state.get.current().megatoaster.cost.constant,
-    //   difference: state.get.current().megatoaster.cost.difference
-    // })
-    // table({
-    //   type: "geometric",
-    //   count: 20,
-    //   constant: state.get.current().megatoaster.speed.cost.constant,
-    //   difference: state.get.current().megatoaster.speed.cost.difference
-    // })
-    // table({
-    //   type: "geometric",
-    //   count: 20,
-    //   constant: state.get.current().megatoaster.efficiency.cost.constant,
-    //   difference: state.get.current().megatoaster.efficiency.cost.difference
-    // })
-  }
-
   return {
     arithmetic: arithmetic,
     geometric: geometric,
-    table: table,
-    init: init
+    table: table
   }
 
 })()

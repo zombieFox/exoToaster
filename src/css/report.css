@@ -13,11 +13,11 @@
   font-family: var(--theme-font-mono-name);
   font-weight: var(--theme-font-mono-weight);
   font-style: var(--theme-font-mono-style);
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 .report-message-type {
-  width: 5em;
+  width: 6em;
   text-align: center;
   flex-grow: 0;
   flex-shrink: 0;

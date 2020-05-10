@@ -1,18 +1,21 @@
 var processor = new Generator("processor", "geometric")
 
 var autotoaster = new Generator("autotoaster", "arithmetic")
-var autotoaster_speed = new Generator("autotoaster.speed", "geometric")
-var autotoaster_efficiency = new Generator("autotoaster.efficiency", "geometric")
+var autotoasterspeed = new Generator("autotoasterspeed", "arithmetic")
+var autotoasterefficiency = new Generator("autotoasterefficiency", "arithmetic")
 
 var megatoaster = new Generator("megatoaster", "arithmetic")
-var megatoaster_speed = new Generator("megatoaster.speed", "geometric")
-var megatoaster_efficiency = new Generator("megatoaster.efficiency", "geometric")
+var megatoasterspeed = new Generator("megatoasterspeed", "arithmetic")
+var megatoasterefficiency = new Generator("megatoasterefficiency", "arithmetic")
 
 var rockettoaster = new Generator("rockettoaster", "arithmetic")
-var rockettoaster_speed = new Generator("rockettoaster.speed", "geometric")
-var rockettoaster_efficiency = new Generator("rockettoaster.efficiency", "geometric")
+var rockettoasterspeed = new Generator("rockettoasterspeed", "arithmetic")
+var rockettoasterefficiency = new Generator("rockettoasterefficiency", "arithmetic")
 
-sequence.init()
+var quantumtoaster = new Generator("quantumtoaster", "arithmetic")
+var quantumtoasterspeed = new Generator("quantumtoasterspeed", "arithmetic")
+var quantumtoasterefficiency = new Generator("quantumtoasterefficiency", "arithmetic")
+
 events.init()
 control.init()
 theme.init()

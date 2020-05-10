@@ -156,28 +156,28 @@ var motivation = (function() {
       "▄██▄██▄██▄██▄██▄" + "\n" +
       "  ▀█▀  ▀▀  ▀█▀  ",
     format: "pre"
-  }];
+  }]
 
-  var nextMotivation;
+  var nextMotivation
 
   var render = function(index) {
-    var randomIndex = Math.round(Math.random() * (phaseMessage.toast.length - 1));
+    var randomIndex = Math.round(Math.random() * (phaseMessage.toast.length - 1))
     if (index && index <= (phaseMessage.toast.length - 1) || index == 0) {
-      randomIndex = index;
-    };
+      randomIndex = index
+    }
     report.render({
       type: "motivation",
       message: [phaseMessage.toast[randomIndex]],
       format: "normal"
-    });
-    var motivationTime = Math.round(Math.random() * 200000);
-    console.log("motivation in: " + Math.round(motivationTime / 1000) + "s");
-    clearInterval(nextMotivation);
-    nextMotivation = setInterval(render, motivationTime);
-  };
+    })
+    var motivationTime = Math.round(Math.random() * 200000)
+    console.log("motivation in: " + Math.round(motivationTime / 1000) + "s")
+    clearInterval(nextMotivation)
+    nextMotivation = setInterval(render, motivationTime)
+  }
 
   return {
     render: render
-  };
+  }
 
-})();
+})()

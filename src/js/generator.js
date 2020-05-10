@@ -8,6 +8,12 @@ var Generator = function(name, type) {
     console.log("difference:", this.getDataFromPath(this.path.difference))
     console.log("cost", this.cost(1))
     console.log("path", this.path)
+    sequence.table({
+      type: this.type,
+      count: 150,
+      constant: this.getDataFromPath(this.path.constant),
+      difference: this.getDataFromPath(this.path.difference)
+    })
   }
 
   this.name = name
@@ -19,9 +25,9 @@ var Generator = function(name, type) {
     constant: this.name + ".cost.constant",
     difference: this.name + ".cost.difference",
     cost: this.name + ".cost.toast",
+    interval: this.name + ".interval.starting",
     currency: {
-      toast: "toast.inventory.current",
-      cycles: "cycles.current"
+      toast: "toast.inventory.current"
     }
   }
 
@@ -90,7 +96,7 @@ var Generator = function(name, type) {
         type: "success",
         message: ["+" + suffix.add({
           number: amount
-        }) + " " + this.name + " added", suffix.add({
+        }) + " unit, " + suffix.add({
           number: this.getDataFromPath(this.path.level)
         }) + " " + this.name + " online"],
         format: "normal"
@@ -110,7 +116,6 @@ var Generator = function(name, type) {
     }
   }
 
-  // set the starting cost for this building
   this.startingCost = function() {
     var cost = sequence[this.type].value({
       target: this.getDataFromPath(this.path.level) + 1,
@@ -127,5 +132,13 @@ var Generator = function(name, type) {
   }
 
   this.startingCost()
+
+  this.startingAnimation = function() {
+    if (this.getDataFromPath(this.path.interval)) {
+      helper.e("html").style.setProperty("--card-" + this.name + "-meter-duration", this.getDataFromPath(this.path.interval) + "ms")
+    }
+  }
+
+  this.startingAnimation()
 
 }

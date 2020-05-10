@@ -207,10 +207,6 @@
   --edge-shadow:                                        inset 0 0 0 var(--layout-line-width) rgb(var(--theme-accent)),
                                                         inset 0 0 0 calc(var(--layout-line-width) * 4) rgba(var(--theme-accent), 0.1),
                                                         inset 0 0 0 calc(var(--layout-line-width) * 8) rgba(var(--theme-accent), 0.1);
-                                                        /* card */
-  --card-autotoaster-meter-duration:                    10000ms;
-  --card-megatoaster-meter-duration:                    20000ms;
-  --card-rockettoaster-meter-duration:               30000ms;
   /* breakpoint */
   /* can not be used in @media as of yet */
   --breakpoint-sm:                                      550px;
