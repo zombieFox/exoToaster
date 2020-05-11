@@ -66,6 +66,10 @@
   animation-duration: var(--card-rockettoasterspeed-meter-duration);
 }
 
+.card-atomictoaster.active .card-meter-progress {
+  animation-duration: var(--card-atomictoasterspeed-meter-duration);
+}
+
 .card-quantumtoaster.active .card-meter-progress {
   animation-duration: var(--card-quantumtoasterspeed-meter-duration);
 }
