@@ -1,13 +1,21 @@
-.card {}
+.card {
+  background-color: rgb(var(--theme-color-03));
+  border-radius: var(--theme-radius);
+  box-shadow: none;
+  transition: box-shadow var(--layout-timing-extra-fast);
+}
+
+.card:focus {
+  box-shadow: var(--form-ring-accent);
+  outline: none;
+}
 
 .card-header {
   border-top-left-radius: var(--theme-radius);
   border-top-right-radius: var(--theme-radius);
 }
 
-.card-body {
-  background-color: rgb(var(--theme-color-03));
-}
+.card-body {}
 
 .card-body:not(:last-child) {
   border-bottom: var(--horizontal-rule-large);
@@ -27,7 +35,7 @@
 .card-header,
 .card-body,
 .card-footer {
-  padding: 0.75em 1.5em;
+  padding: 1em 1.5em;
   transition: background-color var(--layout-timing-extra-fast)
 }
 
@@ -52,6 +60,14 @@
   animation-iteration-count: 1;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
+}
+
+.card-toaster {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.card-strategy {
+  grid-area: 2 / 1 / 2 / 2;
 }
 
 .card-autotoaster.active .card-meter-progress {

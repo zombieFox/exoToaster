@@ -101,9 +101,11 @@ var report = (function() {
       cursor: null,
       callback: null
     }
+
     if (override) {
       options = helper.applyOptions(options, override)
     }
+
     options.textArray.forEach(function(arrayItem, index) {
       var item = helper.node("span|class:report-message-text-item")
       var string = helper.node("span|class:report-message-text-string")
@@ -130,9 +132,11 @@ var report = (function() {
       format: null,
       callback: null
     }
+
     if (override) {
       options = helper.applyOptions(options, override)
     }
+
     var maxMessages = state.get.current().report.message.max
     var report = helper.e(".report")
     var newMessage = helper.node("pre|class:report-message report-message-color-" + options.type)
@@ -153,7 +157,9 @@ var report = (function() {
     while (report.childNodes.length > maxMessages) {
       report.firstChild.remove()
     }
+
     report.appendChild(newMessage)
+
     startTypeWriter({
       textArray: options.message,
       index: 0,

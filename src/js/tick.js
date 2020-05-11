@@ -16,6 +16,17 @@ var tick = (function() {
       return state.get.current().readout.interval
     }
   }, {
+    name: "events",
+    condition: function() {
+      return true
+    },
+    func: function() {
+      events.mod.check()
+    },
+    interval: function() {
+      return state.get.current().events.interval
+    }
+  }, {
     name: "autotoaster",
     condition: function() {
       return state.get.current().autotoaster.level > 0

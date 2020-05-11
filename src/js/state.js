@@ -69,7 +69,11 @@ var state = (function() {
       interval: 200000
     },
     events: {
+      interval: 100,
       all: []
+    },
+    readout: {
+      interval: 100
     },
     toast: {
       lifetime: {
@@ -232,9 +236,6 @@ var state = (function() {
         difference: null,
         toast: null
       }
-    },
-    readout: {
-      interval: 100
     },
     theme: {
       accent: {
