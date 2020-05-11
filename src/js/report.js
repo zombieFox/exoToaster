@@ -107,10 +107,10 @@ var report = (function() {
     options.textArray.forEach(function(arrayItem, index) {
       var item = helper.node("span|class:report-message-text-item")
       var string = helper.node("span|class:report-message-text-string")
-      var blink = helper.node("span|class:report-message-text-blink")
-      blink.textContent = options.cursor
+      var cursor = helper.node("span|class:report-message-text-cursor")
+      cursor.textContent = options.cursor
       item.appendChild(string)
-      item.appendChild(blink)
+      item.appendChild(cursor)
       options.target.appendChild(item)
       typeWriter({
         text: arrayItem,
@@ -135,7 +135,7 @@ var report = (function() {
     }
     var maxMessages = state.get.current().report.message.max
     var report = helper.e(".report")
-    var newMessage = helper.node("pre|class:report-message report-message-color-" + options.type + " mb-2")
+    var newMessage = helper.node("pre|class:report-message report-message-color-" + options.type)
     var format = {
       normal: function() {
         newMessage.classList.add("report-message-normal")

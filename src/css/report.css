@@ -5,6 +5,7 @@
 }
 
 .report-message {
+  margin-bottom: 0.25em;
   display: flex;
   flex-flow: nowrap;
   flex-direction: row;
@@ -46,16 +47,15 @@
   white-space: pre;
 }
 
-.report-message .report-message-text-string {
-  margin-right: 0.5em;
-}
+.report-message .report-message-text-string {}
 
-.report-message .report-message-text-blink {
+.report-message .report-message-text-cursor {
+  margin-left: 0.5em;
   display: none;
   font-weight: 900;
 }
 
-.report-message:last-child .report-message-text:last-child .report-message-text-blink {
+.report-message:last-child .report-message-text:last-child .report-message-text-cursor {
   display: inline-block;
   opacity: 1;
   animation-duration: 1s;

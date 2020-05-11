@@ -13,8 +13,7 @@ var readout = (function() {
       element: "[readout=toast-lifetime-current]",
       value: function() {
         return state.get.current().toast.lifetime.current
-      },
-      suffix: true
+      }
     }],
     processor: [{
       element: "[readout=processor-level]",
