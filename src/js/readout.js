@@ -200,6 +200,63 @@ var readout = (function() {
       },
       suffix: true
     }],
+    atomictoaster: [{
+      element: "[readout=atomictoaster-stat-toast]",
+      value: function() {
+        var level = state.get.current().atomictoaster.level
+        var efficiency = state.get.current().atomictoasterefficiency.level
+        var toastperunit = state.get.current().atomictoaster.toastperunit
+        return level * efficiency * toastperunit
+      },
+      suffix: true
+    }, {
+      element: "[readout=atomictoaster-stat-speed]",
+      value: function() {
+        var interval
+        if (state.get.current().atomictoaster.level <= 0) {
+          interval = 0
+        } else {
+          interval = (state.get.current().atomictoasterspeed.interval.starting - (state.get.current().atomictoasterspeed.level * 100)) / 1000
+        }
+        return interval
+      }
+    }, {
+      element: "[readout=atomictoaster-level]",
+      value: function() {
+        return state.get.current().atomictoaster.level
+      },
+      suffix: true
+    }, {
+      element: "[readout=atomictoaster-cost-toast]",
+      value: function() {
+        return state.get.current().atomictoaster.cost.toast
+      },
+      suffix: true
+    }, {
+      element: "[readout=atomictoasterspeed-cost-toast]",
+      value: function() {
+        return state.get.current().atomictoasterspeed.cost.toast
+      },
+      suffix: true
+    }, {
+      element: "[readout=atomictoasterspeed-level]",
+      value: function() {
+        return state.get.current().atomictoasterspeed.level
+      },
+      suffix: true
+    }, {
+      element: "[readout=atomictoasterefficiency-cost-toast]",
+      value: function() {
+        return state.get.current().atomictoasterefficiency.cost.toast
+      },
+      suffix: true
+    }, {
+      element: "[readout=atomictoasterefficiency-level]",
+      value: function() {
+        return state.get.current().atomictoasterefficiency.level
+      },
+      suffix: true
+    }],
     quantumtoaster: [{
       element: "[readout=quantumtoaster-stat-toast]",
       value: function() {
@@ -266,7 +323,7 @@ var readout = (function() {
       mod.all[key].forEach(function(item, index) {
         var content = item.value()
 
-        if (content) {
+        if (content != undefined) {
           if (item.suffix) {
             content = suffix.add({
               number: content

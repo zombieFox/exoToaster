@@ -202,6 +202,58 @@ var control = (function() {
         rockettoasterefficiency.upgrade(100)
       }
     }],
+    atomictoaster: [{
+      element: "[control=atomictoaster-level-increase1]",
+      type: "button",
+      func: function() {
+        atomictoaster.upgrade(1)
+        tick.check()
+      }
+    }, {
+      element: "[control=atomictoaster-level-increase10]",
+      type: "button",
+      func: function() {
+        atomictoaster.upgrade(10)
+        tick.check()
+      }
+    }, {
+      element: "[control=atomictoaster-level-increase100]",
+      type: "button",
+      func: function() {
+        atomictoaster.upgrade(100)
+        tick.check()
+      }
+    }, {
+      element: "[control=atomictoasterspeed-level-increase1]",
+      type: "button",
+      func: function() {
+        atomictoasterspeed.upgrade(1)
+        render.disable.check(this)
+      },
+      disable: {
+        condition: function() {
+          return ((state.get.current().atomictoasterspeed.interval.starting - (state.get.current().atomictoasterspeed.level * 100)) <= 100)
+        }
+      }
+    }, {
+      element: "[control=atomictoasterefficiency-level-increase1]",
+      type: "button",
+      func: function() {
+        atomictoasterefficiency.upgrade(1)
+      }
+    }, {
+      element: "[control=atomictoasterefficiency-level-increase10]",
+      type: "button",
+      func: function() {
+        atomictoasterefficiency.upgrade(10)
+      }
+    }, {
+      element: "[control=atomictoasterefficiency-level-increase100]",
+      type: "button",
+      func: function() {
+        atomictoasterefficiency.upgrade(100)
+      }
+    }],
     quantumtoaster: [{
       element: "[control=quantumtoaster-level-increase1]",
       type: "button",

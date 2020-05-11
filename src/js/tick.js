@@ -85,6 +85,29 @@ var tick = (function() {
       return state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 100)
     }
   }, {
+    name: "atomictoaster",
+    condition: function() {
+      return state.get.current().atomictoaster.level > 0
+    },
+    setup: function() {
+      helper.e(".card-atomictoaster").classList.add("active")
+    },
+    func: function() {
+      var level = state.get.current().atomictoaster.level
+      var efficiency = state.get.current().atomictoasterefficiency.level
+      var toastperunit = state.get.current().atomictoaster.toastperunit
+      toast.make(level * efficiency * toastperunit)
+
+      helper.e("html").style.setProperty("--card-atomictoasterspeed-meter-duration", (state.get.current().atomictoasterspeed.interval.starting - (state.get.current().atomictoasterspeed.level * 100)) + "ms")
+
+      helper.e(".card-atomictoaster").classList.remove("active")
+      void helper.e(".card-atomictoaster .card-meter-progress").offsetWidth
+      helper.e(".card-atomictoaster").classList.add("active")
+    },
+    interval: function() {
+      return state.get.current().atomictoasterspeed.interval.starting - (state.get.current().atomictoasterspeed.level * 100)
+    }
+  }, {
     name: "quantumtoaster",
     condition: function() {
       return state.get.current().quantumtoaster.level > 0

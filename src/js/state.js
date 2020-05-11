@@ -2,26 +2,36 @@ var state = (function() {
 
   var baseCost = 4
 
+  var baseToastPerUnit = 1
+
   var baseInterval = 10000
 
   var mod = {}
 
   mod.formula = {
+    toast: {
+      perUnit: function(number) {
+        return baseToastPerUnit * number
+      }
+    },
     cost: {
-      constant: function(unitmultiplier) {
-        return unitmultiplier * baseCost
+      multiplier: function(number) {
+        return baseToastPerUnit * number * number
+      },
+      constant: function(multiplier) {
+        return multiplier * baseCost
       },
       difference: {
-        arithmetic: function(unitmultiplier) {
-          return (unitmultiplier * 2) * baseCost
+        arithmetic: function(multiplier) {
+          return (multiplier * 2) * baseCost
         },
-        geometric: function(unitmultiplier) {
-          return (unitmultiplier / 10) + 1
+        geometric: function(multiplier) {
+          return (multiplier / 10) + 1
         }
       }
     },
-    interval: function(unitmultiplier) {
-      return (unitmultiplier / 32) * baseInterval
+    interval: function(multiplier) {
+      return (multiplier / 32) * baseInterval
     }
   }
 
@@ -71,8 +81,8 @@ var state = (function() {
     },
     processor: {
       level: 1,
-      unitmultiplier: 2,
       cost: {
+        multiplier: 2,
         constant: null,
         difference: null,
         toast: null
@@ -80,9 +90,9 @@ var state = (function() {
     },
     autotoaster: {
       level: 0,
-      toastperunit: 1,
-      unitmultiplier: 16,
+      toastperunit: null,
       cost: {
+        multiplier: null,
         constant: null,
         difference: null,
         toast: null
@@ -109,9 +119,9 @@ var state = (function() {
     },
     megatoaster: {
       level: 0,
-      toastperunit: 4,
-      unitmultiplier: 32,
+      toastperunit: null,
       cost: {
+        multiplier: null,
         constant: null,
         difference: null,
         toast: null
@@ -138,9 +148,9 @@ var state = (function() {
     },
     rockettoaster: {
       level: 0,
-      toastperunit: 16,
-      unitmultiplier: 64,
+      toastperunit: null,
       cost: {
+        multiplier: null,
         constant: null,
         difference: null,
         toast: null
@@ -165,11 +175,40 @@ var state = (function() {
         toast: null
       }
     },
+    atomictoaster: {
+      level: 0,
+      toastperunit: null,
+      cost: {
+        multiplier: null,
+        constant: null,
+        difference: null,
+        toast: null
+      }
+    },
+    atomictoasterspeed: {
+      level: 0,
+      cost: {
+        constant: null,
+        difference: null,
+        toast: null
+      },
+      interval: {
+        starting: null
+      }
+    },
+    atomictoasterefficiency: {
+      level: 1,
+      cost: {
+        constant: null,
+        difference: null,
+        toast: null
+      }
+    },
     quantumtoaster: {
       level: 0,
-      toastperunit: 64,
-      unitmultiplier: 128,
+      toastperunit: null,
       cost: {
+        multiplier: null,
         constant: null,
         difference: null,
         toast: null
@@ -263,60 +302,83 @@ var state = (function() {
   }
 
   // processor
-  current.processor.cost.constant = mod.formula.cost.constant(current.processor.unitmultiplier)
-  current.processor.cost.difference = mod.formula.cost.difference.geometric(current.processor.unitmultiplier)
+  current.processor.cost.constant = mod.formula.cost.constant(current.processor.cost.multiplier)
+  current.processor.cost.difference = mod.formula.cost.difference.geometric(current.processor.cost.multiplier)
 
   // autotoaster
-  current.autotoaster.cost.constant = mod.formula.cost.constant(current.autotoaster.unitmultiplier)
-  current.autotoaster.cost.difference = mod.formula.cost.difference.arithmetic(current.autotoaster.unitmultiplier)
+  current.autotoaster.toastperunit = mod.formula.toast.perUnit(1)
+  current.autotoaster.cost.multiplier = mod.formula.cost.multiplier(1)
+  current.autotoaster.cost.constant = mod.formula.cost.constant(current.autotoaster.cost.multiplier)
+  current.autotoaster.cost.difference = mod.formula.cost.difference.arithmetic(current.autotoaster.cost.multiplier)
 
   // autotoasterspeed
-  current.autotoasterspeed.cost.constant = mod.formula.cost.constant(current.autotoaster.unitmultiplier)
-  current.autotoasterspeed.cost.difference = mod.formula.cost.difference.arithmetic(current.autotoaster.unitmultiplier)
-  current.autotoasterspeed.interval.starting = mod.formula.interval(current.autotoaster.unitmultiplier)
+  current.autotoasterspeed.cost.constant = mod.formula.cost.constant(current.autotoaster.cost.multiplier)
+  current.autotoasterspeed.cost.difference = mod.formula.cost.difference.arithmetic(current.autotoaster.cost.multiplier)
+  current.autotoasterspeed.interval.starting = mod.formula.interval(current.autotoaster.cost.multiplier)
 
   // autotoasterefficiency
-  current.autotoasterefficiency.cost.constant = mod.formula.cost.constant(current.autotoaster.unitmultiplier)
-  current.autotoasterefficiency.cost.difference = mod.formula.cost.difference.arithmetic(current.autotoaster.unitmultiplier)
+  current.autotoasterefficiency.cost.constant = mod.formula.cost.constant(current.autotoaster.cost.multiplier)
+  current.autotoasterefficiency.cost.difference = mod.formula.cost.difference.arithmetic(current.autotoaster.cost.multiplier)
 
   // megatoaster
-  current.megatoaster.cost.constant = mod.formula.cost.constant(current.megatoaster.unitmultiplier)
-  current.megatoaster.cost.difference = mod.formula.cost.difference.arithmetic(current.megatoaster.unitmultiplier)
+  current.megatoaster.toastperunit = mod.formula.toast.perUnit(2)
+  current.megatoaster.cost.multiplier = mod.formula.cost.multiplier(2)
+  current.megatoaster.cost.constant = mod.formula.cost.constant(current.megatoaster.cost.multiplier)
+  current.megatoaster.cost.difference = mod.formula.cost.difference.arithmetic(current.megatoaster.cost.multiplier)
 
   // megatoasterspeed
-  current.megatoasterspeed.cost.constant = mod.formula.cost.constant(current.megatoaster.unitmultiplier)
-  current.megatoasterspeed.cost.difference = mod.formula.cost.difference.arithmetic(current.megatoaster.unitmultiplier)
-  current.megatoasterspeed.interval.starting = mod.formula.interval(current.megatoaster.unitmultiplier)
+  current.megatoasterspeed.cost.constant = mod.formula.cost.constant(current.megatoaster.cost.multiplier)
+  current.megatoasterspeed.cost.difference = mod.formula.cost.difference.arithmetic(current.megatoaster.cost.multiplier)
+  current.megatoasterspeed.interval.starting = mod.formula.interval(current.megatoaster.cost.multiplier)
 
   // megatoasterefficiency
-  current.megatoasterefficiency.cost.constant = mod.formula.cost.constant(current.megatoaster.unitmultiplier)
-  current.megatoasterefficiency.cost.difference = mod.formula.cost.difference.arithmetic(current.megatoaster.unitmultiplier)
+  current.megatoasterefficiency.cost.constant = mod.formula.cost.constant(current.megatoaster.cost.multiplier)
+  current.megatoasterefficiency.cost.difference = mod.formula.cost.difference.arithmetic(current.megatoaster.cost.multiplier)
 
   // rockettoaster
-  current.rockettoaster.cost.constant = mod.formula.cost.constant(current.rockettoaster.unitmultiplier)
-  current.rockettoaster.cost.difference = mod.formula.cost.difference.arithmetic(current.rockettoaster.unitmultiplier)
+  current.rockettoaster.toastperunit = mod.formula.toast.perUnit(4)
+  current.rockettoaster.cost.multiplier = mod.formula.cost.multiplier(4)
+  current.rockettoaster.cost.constant = mod.formula.cost.constant(current.rockettoaster.cost.multiplier)
+  current.rockettoaster.cost.difference = mod.formula.cost.difference.arithmetic(current.rockettoaster.cost.multiplier)
 
   // rockettoasterspeed
-  current.rockettoasterspeed.cost.constant = mod.formula.cost.constant(current.rockettoaster.unitmultiplier)
-  current.rockettoasterspeed.cost.difference = mod.formula.cost.difference.arithmetic(current.rockettoaster.unitmultiplier)
-  current.rockettoasterspeed.interval.starting = mod.formula.interval(current.rockettoaster.unitmultiplier)
+  current.rockettoasterspeed.cost.constant = mod.formula.cost.constant(current.rockettoaster.cost.multiplier)
+  current.rockettoasterspeed.cost.difference = mod.formula.cost.difference.arithmetic(current.rockettoaster.cost.multiplier)
+  current.rockettoasterspeed.interval.starting = mod.formula.interval(current.rockettoaster.cost.multiplier)
 
   // rockettoasterefficiency
-  current.rockettoasterefficiency.cost.constant = mod.formula.cost.constant(current.rockettoaster.unitmultiplier)
-  current.rockettoasterefficiency.cost.difference = mod.formula.cost.difference.arithmetic(current.rockettoaster.unitmultiplier)
+  current.rockettoasterefficiency.cost.constant = mod.formula.cost.constant(current.rockettoaster.cost.multiplier)
+  current.rockettoasterefficiency.cost.difference = mod.formula.cost.difference.arithmetic(current.rockettoaster.cost.multiplier)
+
+  // atomictoaster
+  current.atomictoaster.toastperunit = mod.formula.toast.perUnit(8)
+  current.atomictoaster.cost.multiplier = mod.formula.cost.multiplier(8)
+  current.atomictoaster.cost.constant = mod.formula.cost.constant(current.atomictoaster.cost.multiplier)
+  current.atomictoaster.cost.difference = mod.formula.cost.difference.arithmetic(current.atomictoaster.cost.multiplier)
+
+  // atomictoasterspeed
+  current.atomictoasterspeed.cost.constant = mod.formula.cost.constant(current.atomictoaster.cost.multiplier)
+  current.atomictoasterspeed.cost.difference = mod.formula.cost.difference.arithmetic(current.atomictoaster.cost.multiplier)
+  current.atomictoasterspeed.interval.starting = mod.formula.interval(current.atomictoaster.cost.multiplier)
+
+  // atomictoasterefficiency
+  current.atomictoasterefficiency.cost.constant = mod.formula.cost.constant(current.atomictoaster.cost.multiplier)
+  current.atomictoasterefficiency.cost.difference = mod.formula.cost.difference.arithmetic(current.atomictoaster.cost.multiplier)
 
   // quantumtoaster
-  current.quantumtoaster.cost.constant = mod.formula.cost.constant(current.quantumtoaster.unitmultiplier)
-  current.quantumtoaster.cost.difference = mod.formula.cost.difference.arithmetic(current.quantumtoaster.unitmultiplier)
+  current.quantumtoaster.toastperunit = mod.formula.toast.perUnit(16)
+  current.quantumtoaster.cost.multiplier = mod.formula.cost.multiplier(16)
+  current.quantumtoaster.cost.constant = mod.formula.cost.constant(current.quantumtoaster.cost.multiplier)
+  current.quantumtoaster.cost.difference = mod.formula.cost.difference.arithmetic(current.quantumtoaster.cost.multiplier)
 
   // quantumtoasterspeed
-  current.quantumtoasterspeed.cost.constant = mod.formula.cost.constant(current.quantumtoaster.unitmultiplier)
-  current.quantumtoasterspeed.cost.difference = mod.formula.cost.difference.arithmetic(current.quantumtoaster.unitmultiplier)
-  current.quantumtoasterspeed.interval.starting = mod.formula.interval(current.quantumtoaster.unitmultiplier)
+  current.quantumtoasterspeed.cost.constant = mod.formula.cost.constant(current.quantumtoaster.cost.multiplier)
+  current.quantumtoasterspeed.cost.difference = mod.formula.cost.difference.arithmetic(current.quantumtoaster.cost.multiplier)
+  current.quantumtoasterspeed.interval.starting = mod.formula.interval(current.quantumtoaster.cost.multiplier)
 
   // quantumtoasterefficiency
-  current.quantumtoasterefficiency.cost.constant = mod.formula.cost.constant(current.quantumtoaster.unitmultiplier)
-  current.quantumtoasterefficiency.cost.difference = mod.formula.cost.difference.arithmetic(current.quantumtoaster.unitmultiplier)
+  current.quantumtoasterefficiency.cost.constant = mod.formula.cost.constant(current.quantumtoaster.cost.multiplier)
+  current.quantumtoasterefficiency.cost.difference = mod.formula.cost.difference.arithmetic(current.quantumtoaster.cost.multiplier)
 
   var get = {
     current: function() {
