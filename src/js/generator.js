@@ -133,12 +133,33 @@ var Generator = function(name, type) {
 
   this.startingCost()
 
-  this.startingAnimation = function() {
-    if (this.getDataFromPath(this.path.interval)) {
-      helper.e("html").style.setProperty("--card-" + this.name + "-meter-duration", this.getDataFromPath(this.path.interval) + "ms")
+  this.render = {}
+
+  this.render.card = {
+    animation: {
+      interval: function(data) {
+
+        if (!data.getDataFromPath(data.path.interval) == "") {
+          helper.e("html").style.setProperty("--card-" + data.name + "-meter-duration", (data.getDataFromPath(data.path.interval) - (data.getDataFromPath(data.path.level) * 100)) + "ms")
+
+          var mainGeneratorLevel = data.getDataFromPath(data.name.replace("speed", "") + ".level")
+
+          if (mainGeneratorLevel > 0) {
+            helper.e(".card-" + data.name.replace("speed", "")).classList.remove("active")
+            void helper.e(".card-" + data.name.replace("speed", "") + " .card-meter-progress").offsetWidth
+            helper.e(".card-" + data.name.replace("speed", "")).classList.add("active")
+          }
+        }
+
+      }
     }
   }
 
-  this.startingAnimation()
+  this.render.card.animation.interval(this)
+
+  this.cardAnimationInterval = function() {
+    var data = this
+    data.render.card.animation.interval(data)
+  }
 
 }

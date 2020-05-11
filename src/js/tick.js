@@ -28,12 +28,7 @@ var tick = (function() {
       var efficiency = state.get.current().autotoasterefficiency.level
       var toastperunit = state.get.current().autotoaster.toastperunit
       toast.make(level * efficiency * toastperunit)
-
-      helper.e("html").style.setProperty("--card-autotoasterspeed-meter-duration", (state.get.current().autotoasterspeed.interval.starting - (state.get.current().autotoasterspeed.level * 100)) + "ms")
-
-      helper.e(".card-autotoaster").classList.remove("active")
-      void helper.e(".card-autotoaster .card-meter-progress").offsetWidth
-      helper.e(".card-autotoaster").classList.add("active")
+      autotoasterspeed.cardAnimationInterval()
     },
     interval: function() {
       return state.get.current().autotoasterspeed.interval.starting - (state.get.current().autotoasterspeed.level * 100)
@@ -51,12 +46,7 @@ var tick = (function() {
       var efficiency = state.get.current().megatoasterefficiency.level
       var toastperunit = state.get.current().megatoaster.toastperunit
       toast.make(level * efficiency * toastperunit)
-
-      helper.e("html").style.setProperty("--card-megatoasterspeed-meter-duration", (state.get.current().megatoasterspeed.interval.starting - (state.get.current().megatoasterspeed.level * 100)) + "ms")
-
-      helper.e(".card-megatoaster").classList.remove("active")
-      void helper.e(".card-megatoaster .card-meter-progress").offsetWidth
-      helper.e(".card-megatoaster").classList.add("active")
+      megatoasterspeed.cardAnimationInterval()
     },
     interval: function() {
       return state.get.current().megatoasterspeed.interval.starting - (state.get.current().megatoasterspeed.level * 100)
@@ -74,12 +64,7 @@ var tick = (function() {
       var efficiency = state.get.current().rockettoasterefficiency.level
       var toastperunit = state.get.current().rockettoaster.toastperunit
       toast.make(level * efficiency * toastperunit)
-
-      helper.e("html").style.setProperty("--card-rockettoasterspeed-meter-duration", (state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 100)) + "ms")
-
-      helper.e(".card-rockettoaster").classList.remove("active")
-      void helper.e(".card-rockettoaster .card-meter-progress").offsetWidth
-      helper.e(".card-rockettoaster").classList.add("active")
+      rockettoasterspeed.cardAnimationInterval()
     },
     interval: function() {
       return state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 100)
@@ -97,15 +82,7 @@ var tick = (function() {
       var efficiency = state.get.current().atomictoasterefficiency.level
       var toastperunit = state.get.current().atomictoaster.toastperunit
       toast.make(level * efficiency * toastperunit)
-
-      helper.e("html").style.setProperty("--card-atomictoasterspeed-meter-duration", (state.get.current().atomictoasterspeed.interval.starting - (state.get.current().atomictoasterspeed.level * 100)) + "ms")
-
-      helper.e(".card-atomictoaster").classList.remove("active")
-      void helper.e(".card-atomictoaster .card-meter-progress").offsetWidth
-      helper.e(".card-atomictoaster").classList.add("active")
-    },
-    interval: function() {
-      return state.get.current().atomictoasterspeed.interval.starting - (state.get.current().atomictoasterspeed.level * 100)
+      atomictoasterspeed.cardAnimationInterval()
     }
   }, {
     name: "quantumtoaster",
@@ -120,12 +97,7 @@ var tick = (function() {
       var efficiency = state.get.current().quantumtoasterefficiency.level
       var toastperunit = state.get.current().quantumtoaster.toastperunit
       toast.make(level * efficiency * toastperunit)
-
-      helper.e("html").style.setProperty("--card-quantumtoasterspeed-meter-duration", (state.get.current().quantumtoasterspeed.interval.starting - (state.get.current().quantumtoasterspeed.level * 100)) + "ms")
-
-      helper.e(".card-quantumtoaster").classList.remove("active")
-      void helper.e(".card-quantumtoaster .card-meter-progress").offsetWidth
-      helper.e(".card-quantumtoaster").classList.add("active")
+      quantumtoasterspeed.cardAnimationInterval()
     },
     interval: function() {
       return state.get.current().quantumtoasterspeed.interval.starting - (state.get.current().quantumtoasterspeed.level * 100)
