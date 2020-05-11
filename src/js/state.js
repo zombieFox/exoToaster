@@ -80,7 +80,7 @@ var state = (function() {
     },
     autotoaster: {
       level: 0,
-      toastperunit: 2,
+      toastperunit: 1,
       unitmultiplier: 16,
       cost: {
         constant: null,
@@ -138,7 +138,7 @@ var state = (function() {
     },
     rockettoaster: {
       level: 0,
-      toastperunit: 8,
+      toastperunit: 16,
       unitmultiplier: 64,
       cost: {
         constant: null,
@@ -167,7 +167,7 @@ var state = (function() {
     },
     quantumtoaster: {
       level: 0,
-      toastperunit: 16,
+      toastperunit: 64,
       unitmultiplier: 128,
       cost: {
         constant: null,

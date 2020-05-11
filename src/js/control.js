@@ -74,8 +74,10 @@ var control = (function() {
         autotoasterspeed.upgrade(1)
         render.disable.check(this)
       },
-      disable: function() {
-        return ((state.get.current().autotoasterspeed.interval.starting - (state.get.current().autotoasterspeed.level * 100)) <= 200)
+      disable: {
+        condition: function() {
+          return ((state.get.current().autotoasterspeed.interval.starting - (state.get.current().autotoasterspeed.level * 100)) <= 100)
+        }
       }
     }, {
       element: "[control=autotoasterefficiency-level-increase1]",
@@ -124,8 +126,10 @@ var control = (function() {
         megatoasterspeed.upgrade(1)
         render.disable.check(this)
       },
-      disable: function() {
-        return ((state.get.current().megatoasterspeed.interval.starting - (state.get.current().megatoasterspeed.level * 100)) <= 200)
+      disable: {
+        condition: function() {
+          return ((state.get.current().megatoasterspeed.interval.starting - (state.get.current().megatoasterspeed.level * 100)) <= 100)
+        }
       }
     }, {
       element: "[control=megatoasterefficiency-level-increase1]",
@@ -174,8 +178,10 @@ var control = (function() {
         rockettoasterspeed.upgrade(1)
         render.disable.check(this)
       },
-      disable: function() {
-        return ((state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 100)) <= 200)
+      disable: {
+        condition: function() {
+          return ((state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 100)) <= 100)
+        }
       }
     }, {
       element: "[control=rockettoasterefficiency-level-increase1]",
@@ -224,8 +230,10 @@ var control = (function() {
         quantumtoasterspeed.upgrade(1)
         render.disable.check(this)
       },
-      disable: function() {
-        return ((state.get.current().quantumtoasterspeed.interval.starting - (state.get.current().quantumtoasterspeed.level * 100)) <= 200)
+      disable: {
+        condition: function() {
+          return ((state.get.current().quantumtoasterspeed.interval.starting - (state.get.current().quantumtoasterspeed.level * 100)) <= 100)
+        }
       }
     }, {
       element: "[control=quantumtoasterefficiency-level-increase1]",
@@ -293,7 +301,7 @@ var control = (function() {
 
   render.disable = {
     check: function(controlObject) {
-      if (controlObject.disable()) {
+      if (controlObject.disable.condition()) {
         helper.e(controlObject.element).disabled = true
       }
     }

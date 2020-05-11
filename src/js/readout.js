@@ -30,6 +30,26 @@ var readout = (function() {
       suffix: true
     }],
     autotoaster: [{
+      element: "[readout=autotoaster-stat-toast]",
+      value: function() {
+        var level = state.get.current().autotoaster.level
+        var efficiency = state.get.current().autotoasterefficiency.level
+        var toastperunit = state.get.current().autotoaster.toastperunit
+        return level * efficiency * toastperunit
+      },
+      suffix: true
+    }, {
+      element: "[readout=autotoaster-stat-speed]",
+      value: function() {
+        var interval
+        if (state.get.current().autotoaster.level <= 0) {
+          interval = 0
+        } else {
+          interval = (state.get.current().autotoasterspeed.interval.starting - (state.get.current().autotoasterspeed.level * 100)) / 1000
+        }
+        return interval
+      }
+    }, {
       element: "[readout=autotoaster-level]",
       value: function() {
         return state.get.current().autotoaster.level
@@ -67,6 +87,26 @@ var readout = (function() {
       suffix: true
     }],
     megatoaster: [{
+      element: "[readout=megatoaster-stat-toast]",
+      value: function() {
+        var level = state.get.current().megatoaster.level
+        var efficiency = state.get.current().megatoasterefficiency.level
+        var toastperunit = state.get.current().megatoaster.toastperunit
+        return level * efficiency * toastperunit
+      },
+      suffix: true
+    }, {
+      element: "[readout=megatoaster-stat-speed]",
+      value: function() {
+        var interval
+        if (state.get.current().megatoaster.level <= 0) {
+          interval = 0
+        } else {
+          interval = (state.get.current().megatoasterspeed.interval.starting - (state.get.current().megatoasterspeed.level * 100)) / 1000
+        }
+        return interval
+      }
+    }, {
       element: "[readout=megatoaster-level]",
       value: function() {
         return state.get.current().megatoaster.level
@@ -104,6 +144,26 @@ var readout = (function() {
       suffix: true
     }],
     rockettoaster: [{
+      element: "[readout=rockettoaster-stat-toast]",
+      value: function() {
+        var level = state.get.current().rockettoaster.level
+        var efficiency = state.get.current().rockettoasterefficiency.level
+        var toastperunit = state.get.current().rockettoaster.toastperunit
+        return level * efficiency * toastperunit
+      },
+      suffix: true
+    }, {
+      element: "[readout=rockettoaster-stat-speed]",
+      value: function() {
+        var interval
+        if (state.get.current().rockettoaster.level <= 0) {
+          interval = 0
+        } else {
+          interval = (state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 100)) / 1000
+        }
+        return interval
+      }
+    }, {
       element: "[readout=rockettoaster-level]",
       value: function() {
         return state.get.current().rockettoaster.level
@@ -141,6 +201,26 @@ var readout = (function() {
       suffix: true
     }],
     quantumtoaster: [{
+      element: "[readout=quantumtoaster-stat-toast]",
+      value: function() {
+        var level = state.get.current().quantumtoaster.level
+        var efficiency = state.get.current().quantumtoasterefficiency.level
+        var toastperunit = state.get.current().quantumtoaster.toastperunit
+        return level * efficiency * toastperunit
+      },
+      suffix: true
+    }, {
+      element: "[readout=quantumtoaster-stat-speed]",
+      value: function() {
+        var interval
+        if (state.get.current().quantumtoaster.level <= 0) {
+          interval = 0
+        } else {
+          interval = (state.get.current().quantumtoasterspeed.interval.starting - (state.get.current().quantumtoasterspeed.level * 100)) / 1000
+        }
+        return interval
+      }
+    }, {
       element: "[readout=quantumtoaster-level]",
       value: function() {
         return state.get.current().quantumtoaster.level
@@ -186,17 +266,20 @@ var readout = (function() {
       mod.all[key].forEach(function(item, index) {
         var content = item.value()
 
-        if (item.suffix) {
-          content = suffix.add({
-            number: content
+        if (content) {
+          if (item.suffix) {
+            content = suffix.add({
+              number: content
+            })
+          } else {
+            content = content.toLocaleString(2)
+          }
+
+          helper.eA(item.element).forEach(function(item, index) {
+            item.textContent = content
           })
-        } else {
-          content = content.toLocaleString(2)
         }
 
-        helper.eA(item.element).forEach(function(item, index) {
-          item.textContent = content
-        })
       })
     }
   }
