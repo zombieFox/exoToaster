@@ -27,7 +27,7 @@ var cycle = (function() {
   mod.max = function() {
     state.set({
       path: "cycle.max",
-      value: state.get.current().processor.level * 3
+      value: state.get.current().processor.level * 2
     })
   }
 
@@ -45,11 +45,12 @@ var cycle = (function() {
       }
     },
     animation: function() {
-      helper.e("html").style.setProperty("--card-cycle-meter-duration", state.get.current().cycle.interval.current + "ms")
-
-      helper.e(".card-cycle").classList.remove("active")
-      void helper.e(".card-cycle .card-meter-progress").offsetWidth
-      helper.e(".card-cycle").classList.add("active")
+      if (state.get.current().cycle.current != state.get.current().cycle.max) {
+        helper.e("html").style.setProperty("--card-cycle-meter-duration", state.get.current().cycle.interval.current + "ms")
+        helper.e("[stage=cycle]").classList.remove("active")
+        void helper.e("[stage=cycle] .card-meter-progress").offsetWidth
+        helper.e("[stage=cycle]").classList.add("active")
+      }
     }
   }
 

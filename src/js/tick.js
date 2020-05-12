@@ -44,7 +44,7 @@ var tick = (function() {
       return state.get.current().autotoaster.level > 0
     },
     setup: function() {
-      helper.e(".card-autotoaster").classList.add("active")
+      helper.e("[stage=autotoaster]").classList.add("active")
     },
     func: function() {
       toast.make(state.get.current().autotoaster.level * state.get.current().autotoaster.toastperunit)
@@ -59,7 +59,7 @@ var tick = (function() {
       return state.get.current().megatoaster.level > 0
     },
     setup: function() {
-      helper.e(".card-megatoaster").classList.add("active")
+      helper.e("[stage=megatoaster]").classList.add("active")
     },
     func: function() {
       toast.make(state.get.current().megatoaster.level * state.get.current().megatoaster.toastperunit)
@@ -74,7 +74,7 @@ var tick = (function() {
       return state.get.current().rockettoaster.level > 0
     },
     setup: function() {
-      helper.e(".card-rockettoaster").classList.add("active")
+      helper.e("[stage=rockettoaster]").classList.add("active")
     },
     func: function() {
       toast.make(state.get.current().rockettoaster.level * state.get.current().rockettoaster.toastperunit)
@@ -89,7 +89,7 @@ var tick = (function() {
       return state.get.current().atomictoaster.level > 0
     },
     setup: function() {
-      helper.e(".card-atomictoaster").classList.add("active")
+      helper.e("[stage=atomictoaster]").classList.add("active")
     },
     func: function() {
       toast.make(state.get.current().atomictoaster.level * state.get.current().atomictoaster.toastperunit)
@@ -104,7 +104,7 @@ var tick = (function() {
       return state.get.current().quantumtoaster.level > 0
     },
     setup: function() {
-      helper.e(".card-quantumtoaster").classList.add("active")
+      helper.e("[stage=quantumtoaster]").classList.add("active")
     },
     func: function() {
       toast.make(state.get.current().quantumtoaster.level * state.get.current().quantumtoaster.toastperunit)

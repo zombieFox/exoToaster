@@ -286,7 +286,7 @@ var state = (function() {
   current.processor.cost.difference = mod.formula.cost.difference.geometric(current.processor.cost.multiplier)
 
   // cycle
-  current.cycle.interval.starting = mod.formula.interval(4)
+  current.cycle.interval.starting = mod.formula.interval(8)
 
   // autotoaster
   current.autotoaster.toastperunit = mod.formula.toast.perUnit(1)

@@ -12,7 +12,7 @@
   --theme-accent-accessible-sum:                        calc(var(--theme-accent-accessible-r) + var(--theme-accent-accessible-g) + var(--theme-accent-accessible-b));
   --theme-accent-accessible-perceived-lightness:        calc(var(--theme-accent-accessible-sum) / 255);
   --theme-accent-accessible-color:                      0, calc(0 * 1%), calc((var(--theme-accent-accessible-perceived-lightness) - var(--theme-accent-accessible-threshold)) * -10000000%);
-  --theme-radius:                                       0.2rem;
+  --theme-radius:                                       0.25rem;
   --theme-font-display-name:                            "Roboto", sans-serif;
   --theme-font-display-weight:                          400;
   --theme-font-display-style:                           "normal";
@@ -102,8 +102,8 @@
   --layout-timing-medium:                               var(--layout-duration-06) ease-in-out;
   --layout-timing-slow:                                 var(--layout-duration-08) ease-in-out;
   --layout-timing-extra-slow:                           var(--layout-duration-10) ease-in-out;
-  --horizontal-rule-small:                              1px solid rgb(var(--theme-color-02));
-  --horizontal-rule-large:                              2px solid rgb(var(--theme-color-02));
+  --horizontal-rule-small:                              1px solid rgb(var(--theme-color-03));
+  --horizontal-rule-large:                              2px solid rgb(var(--theme-color-03));
   /* background */
   --background-color-theme:                             var(--theme-color-01);
   --background-color-custom:                            rgb(0, 0, 0);
@@ -187,22 +187,26 @@
   --menu-space:                                         0.75em;
   --menu-edge-opacity:                                  0.75;
   /* button */
-  --button-background:                                  var(--theme-color-02);
-  --button-background-focus-hover:                      var(--theme-color-03);
-  --button-background-active:                           var(--theme-color-04);
-  --button-background-disabled:                         var(--theme-color-01);
-  --button-border:                                      var(--theme-color-02);
-  --button-border-focus-hover:                          var(--theme-color-06);
+  --button-background:                                  var(--theme-color-03);
+  --button-background-focus-hover:                      var(--theme-color-04);
+  --button-background-active:                           var(--theme-color-05);
+  --button-background-disabled:                         var(--theme-color-02);
+  --button-border:                                      var(--theme-color-03);
+  --button-border-focus-hover:                          var(--theme-color-07);
   --button-border-active:                               var(--theme-accent);
-  --button-border-disabled:                             var(--theme-color-01);
-  --button-text:                                        var(--theme-color-12);
+  --button-border-disabled:                             var(--theme-color-02);
+  --button-text:                                        var(--theme-color-13);
   --button-text-focus-hover:                            var(--theme-color-20);
   --button-text-active:                                 var(--theme-style-text);
-  --button-text-disabled:                               var(--theme-color-04);
-  --button-link-text:                                   var(--theme-color-12);
+  --button-text-disabled:                               var(--theme-color-05);
+  --button-link-text:                                   var(--theme-color-13);
   --button-link-text-focus-hover:                       var(--theme-style-text);
   --button-link-text-active:                            var(--theme-style-text);
-  --button-link-text-disabled:                          var(--theme-color-04);
+  --button-link-text-disabled:                          var(--theme-color-05);
+  --button-accent-background:                           var(--theme-accent);
+  --button-accent-background-focus-hover:               calc(var(--theme-accent-r) + 20), calc(var(--theme-accent-g) + 20), calc(var(--theme-accent-b) + 20);
+  --button-accent-background-active:                    calc(var(--theme-accent-r) + 40), calc(var(--theme-accent-g) + 40), calc(var(--theme-accent-b) + 40);
+  --button-accent-background-disabled:                  calc(var(--theme-accent-r) - 60), calc(var(--theme-accent-g) - 60), calc(var(--theme-accent-b) - 60);
   /* edge */
   --edge-shadow:                                        inset 0 0 0 var(--layout-line-width) rgb(var(--theme-accent)),
                                                         inset 0 0 0 calc(var(--layout-line-width) * 4) rgba(var(--theme-accent), 0.1),

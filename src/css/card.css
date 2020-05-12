@@ -1,8 +1,17 @@
 .card {
-  background-color: rgb(var(--theme-color-03));
+  background-color: rgb(var(--theme-color-02));
   border-radius: var(--theme-radius);
   box-shadow: none;
   transition: box-shadow var(--layout-timing-extra-fast);
+  transform: scale(1);
+  opacity: 1;
+  animation-duration: 2s;
+  animation-name: swing;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+  transform-origin: top center;
+  animation-delay: 0s;
 }
 
 .card:focus {
@@ -10,37 +19,45 @@
   outline: none;
 }
 
-.card-header {
+.card>*:first-child {
   border-top-left-radius: var(--theme-radius);
   border-top-right-radius: var(--theme-radius);
 }
 
-.card-body {}
-
-.card-body:not(:last-child) {
-  border-bottom: var(--horizontal-rule-large);
-}
-
-.card-body:last-child,
-.card-footer {
+.card>*:last-child {
   border-bottom-left-radius: var(--theme-radius);
   border-bottom-right-radius: var(--theme-radius);
 }
 
-.card-footer,
+.card>*:only-child {
+  border-radius: var(--theme-radius);
+}
+
 .card-header {
-  background-color: rgb(var(--theme-color-04));
+  background-color: rgb(var(--theme-color-03));
+  background-color: rgb(var(--theme-color-03));
+  transition: background-color var(--layout-timing-extra-fast)
+}
+
+.card-body {}
+
+.card-body:not(:last-child):not(:only-child) {
+  border-bottom: var(--horizontal-rule-large);
+}
+
+.card-footer {
+  background-color: rgb(var(--theme-color-03));
 }
 
 .card-header,
 .card-body,
 .card-footer {
-  padding: 0.75em 1.5em;
-  transition: background-color var(--layout-timing-extra-fast)
+  padding: 0.75em 1.25em;
+  transition: background-color var(--layout-timing-extra-fast);
 }
 
 .card-meter {
-  background-color: rgb(var(--theme-color-03));
+  background-color: rgb(var(--theme-color-02));
   width: 100%;
   height: var(--layout-line-width);
   position: relative;
@@ -59,29 +76,29 @@
   animation-name: progress;
   animation-iteration-count: 1;
   animation-timing-function: linear;
-  animation-fill-mode: forwards;
+  animation-fill-mode: backwards;
 }
 
-.card-cycle.active .card-meter-progress {
+[stage=cycle].active .card-meter-progress {
   animation-duration: var(--card-cycle-meter-duration);
 }
 
-.card-autotoaster.active .card-meter-progress {
+[stage=autotoaster].active .card-meter-progress {
   animation-duration: var(--card-autotoasterspeed-meter-duration);
 }
 
-.card-megatoaster.active .card-meter-progress {
+[stage=megatoaster].active .card-meter-progress {
   animation-duration: var(--card-megatoasterspeed-meter-duration);
 }
 
-.card-rockettoaster.active .card-meter-progress {
+[stage=rockettoaster].active .card-meter-progress {
   animation-duration: var(--card-rockettoasterspeed-meter-duration);
 }
 
-.card-atomictoaster.active .card-meter-progress {
+[stage=atomictoaster].active .card-meter-progress {
   animation-duration: var(--card-atomictoasterspeed-meter-duration);
 }
 
-.card-quantumtoaster.active .card-meter-progress {
+[stage=quantumtoaster].active .card-meter-progress {
   animation-duration: var(--card-quantumtoasterspeed-meter-duration);
 }

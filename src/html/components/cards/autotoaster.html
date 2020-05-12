@@ -1,4 +1,4 @@
-<div class="card card-autotoaster" stage="autotoaster">
+<div class="card is-hidden" stage="autotoaster" tabindex="1">
 
   <div class="card-header">
     <p class="mb-0"><strong>Auto Toasters</strong></p>
@@ -12,9 +12,9 @@
   <div class="card-body">
     <p class="mb-2">Count: <span readout="autotoaster-level"></span></p>
     <div class="form-group mb-2">
-      <button class="button button-line button-small" control="autotoaster-level-increase1">+1</button>
-      <button class="button button-line button-small" control="autotoaster-level-increase10">+10</button>
-      <button class="button button-line button-small" control="autotoaster-level-increase100">+100</button>
+      <button class="button button-line button-small" control="autotoaster-level-increase1" tabindex="1">+1</button>
+      <button class="button button-line button-small" control="autotoaster-level-increase10" tabindex="1">+10</button>
+      <button class="button button-line button-small" control="autotoaster-level-increase100" tabindex="1">+100</button>
     </div>
     <p class="small muted">+1 cost <strong readout="autotoaster-cost-toast"></strong> <abbr title="Toast matter">Tm</abbr></p>
   </div>
@@ -22,7 +22,7 @@
   <div class="card-body">
     <p class="mb-2">Speed: <span readout="autotoasterspeed-level"></span></p>
     <div class="form-group mb-2">
-      <button class="button button-line button-small" control="autotoasterspeed-level-increase1">+1</button>
+      <button class="button button-line button-small" control="autotoasterspeed-level-increase1" tabindex="1">+1</button>
     </div>
     <p class="small muted">+1 cost <strong readout="autotoasterspeed-cost-toast"></strong> <abbr title="Toast matter">Tm</abbr></p>
   </div>

@@ -223,19 +223,19 @@ button [class*=" button-"]:last-child,
 }
 
 .button-accent {
-  background-color: rgb(var(--theme-accent));
-  color: rgb(var(--theme-accent-accessible-color));
+  background-color: rgb(var(--button-accent-background));
+  color: hsl(var(--theme-accent-accessible-color));
 }
 
-.button-accent:hover,
-.button-accent:focus {
-  background-color: rgb(calc(var(--theme-accent-r) + 20), calc(var(--theme-accent-g) + 20), calc(var(--theme-accent-b) + 20));
-  color: rgb(var(--theme-accent-accessible-color));
+.button-accent:focus,
+.button-accent:hover {
+  background-color: rgb(var(--button-accent-background-focus-hover));
+  color: hsl(var(--theme-accent-accessible-color));
 }
 
 .button-accent:active {
-  background-color: rgb(calc(var(--theme-accent-r) + 40), calc(var(--theme-accent-g) + 40), calc(var(--theme-accent-b) + 40));
-  color: rgb(var(--theme-accent-accessible-color));
+  background-color: rgb(var(--button-accent-background-active));
+  color: hsl(var(--theme-accent-accessible-color));
 }
 
 .button-accent.button-ring:focus,
@@ -253,5 +253,6 @@ button [class*=" button-"]:last-child,
 .button-accent.button-ring:disabled:hover,
 .button-accent.button-ring.disabled:active,
 .button-accent.button-ring:disabled:active {
+  background-color: rgb(var(--button-accent-background-disabled));
   box-shadow: none;
 }
