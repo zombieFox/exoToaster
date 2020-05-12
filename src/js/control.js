@@ -76,26 +76,8 @@ var control = (function() {
       },
       disable: {
         condition: function() {
-          return ((state.get.current().autotoasterspeed.interval.starting - (state.get.current().autotoasterspeed.level * 100)) <= 100)
+          return ((state.get.current().autotoasterspeed.interval.starting - (state.get.current().autotoasterspeed.level * 100)) <= 1000)
         }
-      }
-    }, {
-      element: "[control=autotoasterefficiency-level-increase1]",
-      type: "button",
-      func: function() {
-        autotoasterefficiency.upgrade(1)
-      }
-    }, {
-      element: "[control=autotoasterefficiency-level-increase10]",
-      type: "button",
-      func: function() {
-        autotoasterefficiency.upgrade(10)
-      }
-    }, {
-      element: "[control=autotoasterefficiency-level-increase100]",
-      type: "button",
-      func: function() {
-        autotoasterefficiency.upgrade(100)
       }
     }],
     megatoaster: [{
@@ -128,26 +110,8 @@ var control = (function() {
       },
       disable: {
         condition: function() {
-          return ((state.get.current().megatoasterspeed.interval.starting - (state.get.current().megatoasterspeed.level * 100)) <= 100)
+          return ((state.get.current().megatoasterspeed.interval.starting - (state.get.current().megatoasterspeed.level * 100)) <= 1000)
         }
-      }
-    }, {
-      element: "[control=megatoasterefficiency-level-increase1]",
-      type: "button",
-      func: function() {
-        megatoasterefficiency.upgrade(1)
-      }
-    }, {
-      element: "[control=megatoasterefficiency-level-increase10]",
-      type: "button",
-      func: function() {
-        megatoasterefficiency.upgrade(10)
-      }
-    }, {
-      element: "[control=megatoasterefficiency-level-increase100]",
-      type: "button",
-      func: function() {
-        megatoasterefficiency.upgrade(100)
       }
     }],
     rockettoaster: [{
@@ -180,26 +144,8 @@ var control = (function() {
       },
       disable: {
         condition: function() {
-          return ((state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 100)) <= 100)
+          return ((state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 100)) <= 1000)
         }
-      }
-    }, {
-      element: "[control=rockettoasterefficiency-level-increase1]",
-      type: "button",
-      func: function() {
-        rockettoasterefficiency.upgrade(1)
-      }
-    }, {
-      element: "[control=rockettoasterefficiency-level-increase10]",
-      type: "button",
-      func: function() {
-        rockettoasterefficiency.upgrade(10)
-      }
-    }, {
-      element: "[control=rockettoasterefficiency-level-increase100]",
-      type: "button",
-      func: function() {
-        rockettoasterefficiency.upgrade(100)
       }
     }],
     atomictoaster: [{
@@ -232,26 +178,8 @@ var control = (function() {
       },
       disable: {
         condition: function() {
-          return ((state.get.current().atomictoasterspeed.interval.starting - (state.get.current().atomictoasterspeed.level * 100)) <= 100)
+          return ((state.get.current().atomictoasterspeed.interval.starting - (state.get.current().atomictoasterspeed.level * 100)) <= 1000)
         }
-      }
-    }, {
-      element: "[control=atomictoasterefficiency-level-increase1]",
-      type: "button",
-      func: function() {
-        atomictoasterefficiency.upgrade(1)
-      }
-    }, {
-      element: "[control=atomictoasterefficiency-level-increase10]",
-      type: "button",
-      func: function() {
-        atomictoasterefficiency.upgrade(10)
-      }
-    }, {
-      element: "[control=atomictoasterefficiency-level-increase100]",
-      type: "button",
-      func: function() {
-        atomictoasterefficiency.upgrade(100)
       }
     }],
     quantumtoaster: [{
@@ -284,26 +212,8 @@ var control = (function() {
       },
       disable: {
         condition: function() {
-          return ((state.get.current().quantumtoasterspeed.interval.starting - (state.get.current().quantumtoasterspeed.level * 100)) <= 100)
+          return ((state.get.current().quantumtoasterspeed.interval.starting - (state.get.current().quantumtoasterspeed.level * 100)) <= 1000)
         }
-      }
-    }, {
-      element: "[control=quantumtoasterefficiency-level-increase1]",
-      type: "button",
-      func: function() {
-        quantumtoasterefficiency.upgrade(1)
-      }
-    }, {
-      element: "[control=quantumtoasterefficiency-level-increase10]",
-      type: "button",
-      func: function() {
-        quantumtoasterefficiency.upgrade(10)
-      }
-    }, {
-      element: "[control=quantumtoasterefficiency-level-increase100]",
-      type: "button",
-      func: function() {
-        quantumtoasterefficiency.upgrade(100)
       }
     }]
   }

@@ -32,9 +32,8 @@ var readout = (function() {
       element: "[readout=autotoaster-stat-toast]",
       value: function() {
         var level = state.get.current().autotoaster.level
-        var efficiency = state.get.current().autotoasterefficiency.level
         var toastperunit = state.get.current().autotoaster.toastperunit
-        return level * efficiency * toastperunit
+        return level * toastperunit
       },
       suffix: true
     }, {
@@ -72,26 +71,13 @@ var readout = (function() {
         return state.get.current().autotoasterspeed.level
       },
       suffix: true
-    }, {
-      element: "[readout=autotoasterefficiency-cost-toast]",
-      value: function() {
-        return state.get.current().autotoasterefficiency.cost.toast
-      },
-      suffix: true
-    }, {
-      element: "[readout=autotoasterefficiency-level]",
-      value: function() {
-        return state.get.current().autotoasterefficiency.level
-      },
-      suffix: true
     }],
     megatoaster: [{
       element: "[readout=megatoaster-stat-toast]",
       value: function() {
         var level = state.get.current().megatoaster.level
-        var efficiency = state.get.current().megatoasterefficiency.level
         var toastperunit = state.get.current().megatoaster.toastperunit
-        return level * efficiency * toastperunit
+        return level * toastperunit
       },
       suffix: true
     }, {
@@ -129,26 +115,13 @@ var readout = (function() {
         return state.get.current().megatoasterspeed.level
       },
       suffix: true
-    }, {
-      element: "[readout=megatoasterefficiency-cost-toast]",
-      value: function() {
-        return state.get.current().megatoasterefficiency.cost.toast
-      },
-      suffix: true
-    }, {
-      element: "[readout=megatoasterefficiency-level]",
-      value: function() {
-        return state.get.current().megatoasterefficiency.level
-      },
-      suffix: true
     }],
     rockettoaster: [{
       element: "[readout=rockettoaster-stat-toast]",
       value: function() {
         var level = state.get.current().rockettoaster.level
-        var efficiency = state.get.current().rockettoasterefficiency.level
         var toastperunit = state.get.current().rockettoaster.toastperunit
-        return level * efficiency * toastperunit
+        return level * toastperunit
       },
       suffix: true
     }, {
@@ -186,26 +159,13 @@ var readout = (function() {
         return state.get.current().rockettoasterspeed.level
       },
       suffix: true
-    }, {
-      element: "[readout=rockettoasterefficiency-cost-toast]",
-      value: function() {
-        return state.get.current().rockettoasterefficiency.cost.toast
-      },
-      suffix: true
-    }, {
-      element: "[readout=rockettoasterefficiency-level]",
-      value: function() {
-        return state.get.current().rockettoasterefficiency.level
-      },
-      suffix: true
     }],
     atomictoaster: [{
       element: "[readout=atomictoaster-stat-toast]",
       value: function() {
         var level = state.get.current().atomictoaster.level
-        var efficiency = state.get.current().atomictoasterefficiency.level
         var toastperunit = state.get.current().atomictoaster.toastperunit
-        return level * efficiency * toastperunit
+        return level * toastperunit
       },
       suffix: true
     }, {
@@ -243,26 +203,13 @@ var readout = (function() {
         return state.get.current().atomictoasterspeed.level
       },
       suffix: true
-    }, {
-      element: "[readout=atomictoasterefficiency-cost-toast]",
-      value: function() {
-        return state.get.current().atomictoasterefficiency.cost.toast
-      },
-      suffix: true
-    }, {
-      element: "[readout=atomictoasterefficiency-level]",
-      value: function() {
-        return state.get.current().atomictoasterefficiency.level
-      },
-      suffix: true
     }],
     quantumtoaster: [{
       element: "[readout=quantumtoaster-stat-toast]",
       value: function() {
         var level = state.get.current().quantumtoaster.level
-        var efficiency = state.get.current().quantumtoasterefficiency.level
         var toastperunit = state.get.current().quantumtoaster.toastperunit
-        return level * efficiency * toastperunit
+        return level * toastperunit
       },
       suffix: true
     }, {
@@ -298,18 +245,6 @@ var readout = (function() {
       element: "[readout=quantumtoasterspeed-level]",
       value: function() {
         return state.get.current().quantumtoasterspeed.level
-      },
-      suffix: true
-    }, {
-      element: "[readout=quantumtoasterefficiency-cost-toast]",
-      value: function() {
-        return state.get.current().quantumtoasterefficiency.cost.toast
-      },
-      suffix: true
-    }, {
-      element: "[readout=quantumtoasterefficiency-level]",
-      value: function() {
-        return state.get.current().quantumtoasterefficiency.level
       },
       suffix: true
     }]

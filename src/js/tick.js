@@ -36,9 +36,8 @@ var tick = (function() {
     },
     func: function() {
       var level = state.get.current().autotoaster.level
-      var efficiency = state.get.current().autotoasterefficiency.level
       var toastperunit = state.get.current().autotoaster.toastperunit
-      toast.make(level * efficiency * toastperunit)
+      toast.make(level * toastperunit)
       autotoasterspeed.cardAnimationInterval()
     },
     interval: function() {
@@ -54,9 +53,8 @@ var tick = (function() {
     },
     func: function() {
       var level = state.get.current().megatoaster.level
-      var efficiency = state.get.current().megatoasterefficiency.level
       var toastperunit = state.get.current().megatoaster.toastperunit
-      toast.make(level * efficiency * toastperunit)
+      toast.make(level * toastperunit)
       megatoasterspeed.cardAnimationInterval()
     },
     interval: function() {
@@ -72,9 +70,8 @@ var tick = (function() {
     },
     func: function() {
       var level = state.get.current().rockettoaster.level
-      var efficiency = state.get.current().rockettoasterefficiency.level
       var toastperunit = state.get.current().rockettoaster.toastperunit
-      toast.make(level * efficiency * toastperunit)
+      toast.make(level * toastperunit)
       rockettoasterspeed.cardAnimationInterval()
     },
     interval: function() {
@@ -90,9 +87,8 @@ var tick = (function() {
     },
     func: function() {
       var level = state.get.current().atomictoaster.level
-      var efficiency = state.get.current().atomictoasterefficiency.level
       var toastperunit = state.get.current().atomictoaster.toastperunit
-      toast.make(level * efficiency * toastperunit)
+      toast.make(level * toastperunit)
       atomictoasterspeed.cardAnimationInterval()
     }
   }, {
@@ -105,9 +101,8 @@ var tick = (function() {
     },
     func: function() {
       var level = state.get.current().quantumtoaster.level
-      var efficiency = state.get.current().quantumtoasterefficiency.level
       var toastperunit = state.get.current().quantumtoaster.toastperunit
-      toast.make(level * efficiency * toastperunit)
+      toast.make(level * toastperunit)
       quantumtoasterspeed.cardAnimationInterval()
     },
     interval: function() {
