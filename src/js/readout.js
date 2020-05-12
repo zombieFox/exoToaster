@@ -28,6 +28,24 @@ var readout = (function() {
       },
       suffix: true
     }],
+    cycle: [{
+      element: "[readout=cycle-current]",
+      value: function() {
+        return state.get.current().cycle.current
+      },
+      suffix: true
+    }, {
+      element: "[readout=cycle-max]",
+      value: function() {
+        return state.get.current().cycle.max
+      },
+      suffix: true
+    }, {
+      element: "[readout=cycle-speed]",
+      value: function() {
+        return state.get.current().cycle.interval.current / 1000
+      }
+    }],
     autotoaster: [{
       element: "[readout=autotoaster-stat-toast]",
       value: function() {
@@ -37,15 +55,9 @@ var readout = (function() {
       },
       suffix: true
     }, {
-      element: "[readout=autotoaster-stat-speed]",
+      element: "[readout=autotoasterspeed-interval-current]",
       value: function() {
-        var interval
-        if (state.get.current().autotoaster.level <= 0) {
-          interval = 0
-        } else {
-          interval = (state.get.current().autotoasterspeed.interval.starting - (state.get.current().autotoasterspeed.level * 100)) / 1000
-        }
-        return interval
+        return state.get.current().autotoasterspeed.interval.current / 1000
       }
     }, {
       element: "[readout=autotoaster-level]",
@@ -81,15 +93,9 @@ var readout = (function() {
       },
       suffix: true
     }, {
-      element: "[readout=megatoaster-stat-speed]",
+      element: "[readout=megatoasterspeed-interval-current]",
       value: function() {
-        var interval
-        if (state.get.current().megatoaster.level <= 0) {
-          interval = 0
-        } else {
-          interval = (state.get.current().megatoasterspeed.interval.starting - (state.get.current().megatoasterspeed.level * 100)) / 1000
-        }
-        return interval
+        return state.get.current().megatoasterspeed.interval.current / 1000
       }
     }, {
       element: "[readout=megatoaster-level]",
@@ -125,15 +131,9 @@ var readout = (function() {
       },
       suffix: true
     }, {
-      element: "[readout=rockettoaster-stat-speed]",
+      element: "[readout=rockettoasterspeed-interval-current]",
       value: function() {
-        var interval
-        if (state.get.current().rockettoaster.level <= 0) {
-          interval = 0
-        } else {
-          interval = (state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 100)) / 1000
-        }
-        return interval
+        return state.get.current().rockettoasterspeed.interval.current / 1000
       }
     }, {
       element: "[readout=rockettoaster-level]",
@@ -169,15 +169,9 @@ var readout = (function() {
       },
       suffix: true
     }, {
-      element: "[readout=atomictoaster-stat-speed]",
+      element: "[readout=atomictoasterspeed-interval-current]",
       value: function() {
-        var interval
-        if (state.get.current().atomictoaster.level <= 0) {
-          interval = 0
-        } else {
-          interval = (state.get.current().atomictoasterspeed.interval.starting - (state.get.current().atomictoasterspeed.level * 100)) / 1000
-        }
-        return interval
+        return state.get.current().atomictoasterspeed.interval.current / 1000
       }
     }, {
       element: "[readout=atomictoaster-level]",
@@ -213,15 +207,9 @@ var readout = (function() {
       },
       suffix: true
     }, {
-      element: "[readout=quantumtoaster-stat-speed]",
+      element: "[readout=quantumtoasterspeed-interval-current]",
       value: function() {
-        var interval
-        if (state.get.current().quantumtoaster.level <= 0) {
-          interval = 0
-        } else {
-          interval = (state.get.current().quantumtoasterspeed.interval.starting - (state.get.current().quantumtoasterspeed.level * 100)) / 1000
-        }
-        return interval
+        return state.get.current().quantumtoasterspeed.interval.current / 1000
       }
     }, {
       element: "[readout=quantumtoaster-level]",

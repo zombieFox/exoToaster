@@ -32,18 +32,24 @@ var control = (function() {
       type: "button",
       func: function() {
         processor.upgrade(1)
+        cycle.mod.max()
+        cycle.mod.interval.set()
       }
     }, {
       element: "[control=processor-level-increase10]",
       type: "button",
       func: function() {
         processor.upgrade(10)
+        cycle.mod.max()
+        cycle.mod.interval.set()
       }
     }, {
       element: "[control=processor-level-increase100]",
       type: "button",
       func: function() {
         processor.upgrade(100)
+        cycle.mod.max()
+        cycle.mod.interval.set()
       }
     }],
     autotoaster: [{
@@ -72,11 +78,12 @@ var control = (function() {
       type: "button",
       func: function() {
         autotoasterspeed.upgrade(1)
+        autotoasterspeed.setInterval()
         render.disable.check(this)
       },
       disable: {
         condition: function() {
-          return ((state.get.current().autotoasterspeed.interval.starting - (state.get.current().autotoasterspeed.level * 100)) <= 1000)
+          return state.get.current().autotoasterspeed.interval.current <= state.get.current().autotoasterspeed.interval.min
         }
       }
     }],
@@ -106,11 +113,12 @@ var control = (function() {
       type: "button",
       func: function() {
         megatoasterspeed.upgrade(1)
+        megatoasterspeed.setInterval()
         render.disable.check(this)
       },
       disable: {
         condition: function() {
-          return ((state.get.current().megatoasterspeed.interval.starting - (state.get.current().megatoasterspeed.level * 100)) <= 1000)
+          return state.get.current().megatoasterspeed.interval.current <= state.get.current().megatoasterspeed.interval.min
         }
       }
     }],
@@ -140,11 +148,12 @@ var control = (function() {
       type: "button",
       func: function() {
         rockettoasterspeed.upgrade(1)
+        rockettoasterspeed.setInterval()
         render.disable.check(this)
       },
       disable: {
         condition: function() {
-          return ((state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 100)) <= 1000)
+          return state.get.current().rockettoasterspeed.interval.current <= state.get.current().rockettoasterspeed.interval.min
         }
       }
     }],
@@ -174,11 +183,12 @@ var control = (function() {
       type: "button",
       func: function() {
         atomictoasterspeed.upgrade(1)
+        atomictoasterspeed.setInterval()
         render.disable.check(this)
       },
       disable: {
         condition: function() {
-          return ((state.get.current().atomictoasterspeed.interval.starting - (state.get.current().atomictoasterspeed.level * 100)) <= 1000)
+          return state.get.current().atomictoasterspeed.interval.current <= state.get.current().atomictoasterspeed.interval.min
         }
       }
     }],
@@ -208,11 +218,12 @@ var control = (function() {
       type: "button",
       func: function() {
         quantumtoasterspeed.upgrade(1)
+        quantumtoasterspeed.setInterval()
         render.disable.check(this)
       },
       disable: {
         condition: function() {
-          return ((state.get.current().quantumtoasterspeed.interval.starting - (state.get.current().quantumtoasterspeed.level * 100)) <= 1000)
+          return state.get.current().quantumtoasterspeed.interval.current <= state.get.current().quantumtoasterspeed.interval.min
         }
       }
     }]

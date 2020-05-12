@@ -92,6 +92,15 @@ var state = (function() {
         toast: null
       }
     },
+    cycle: {
+      current: 0,
+      max: null,
+      interval: {
+        starting: null,
+        current: null,
+        min: 1000
+      }
+    },
     autotoaster: {
       level: 0,
       toastperunit: null,
@@ -110,7 +119,9 @@ var state = (function() {
         toast: null
       },
       interval: {
-        starting: null
+        starting: null,
+        current: null,
+        min: 1000
       }
     },
     megatoaster: {
@@ -131,7 +142,9 @@ var state = (function() {
         toast: null
       },
       interval: {
-        starting: null
+        starting: null,
+        current: null,
+        min: 1000
       }
     },
     rockettoaster: {
@@ -152,7 +165,9 @@ var state = (function() {
         toast: null
       },
       interval: {
-        starting: null
+        starting: null,
+        current: null,
+        min: 1000
       }
     },
     atomictoaster: {
@@ -173,7 +188,9 @@ var state = (function() {
         toast: null
       },
       interval: {
-        starting: null
+        starting: null,
+        current: null,
+        min: 1000
       }
     },
     quantumtoaster: {
@@ -194,7 +211,9 @@ var state = (function() {
         toast: null
       },
       interval: {
-        starting: null
+        starting: null,
+        current: null,
+        min: 1000
       }
     },
     theme: {
@@ -265,6 +284,9 @@ var state = (function() {
   // processor
   current.processor.cost.constant = mod.formula.cost.constant(current.processor.cost.multiplier)
   current.processor.cost.difference = mod.formula.cost.difference.geometric(current.processor.cost.multiplier)
+
+  // cycle
+  current.cycle.interval.starting = mod.formula.interval(4)
 
   // autotoaster
   current.autotoaster.toastperunit = mod.formula.toast.perUnit(1)

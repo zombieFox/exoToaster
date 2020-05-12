@@ -1,35 +1,23 @@
 var Generator = function(name, type) {
 
   this.debug = function() {
-    console.log("generator:", this.name)
+    console.log("name:", this.name)
     console.log("type:", this.type)
-    console.log("level:", this.getDataFromPath(this.path.level))
-    console.log("constant:", this.getDataFromPath(this.path.constant))
-    console.log("difference:", this.getDataFromPath(this.path.difference))
+    console.log("level:", this.getDataFromPath(this.name + ".level"))
+    console.log("constant:", this.getDataFromPath(this.name + "cost.constant"))
+    console.log("difference:", this.getDataFromPath(this.name + "cost.difference"))
     console.log("cost", this.cost(1))
-    console.log("path", this.path)
     sequence.table({
       type: this.type,
       count: 150,
-      constant: this.getDataFromPath(this.path.constant),
-      difference: this.getDataFromPath(this.path.difference)
+      constant: this.getDataFromPath(this.name + ".cost.constant"),
+      difference: this.getDataFromPath(this.name + ".cost.difference")
     })
   }
 
   this.name = name
 
   this.type = type
-
-  this.path = {
-    level: this.name + ".level",
-    constant: this.name + ".cost.constant",
-    difference: this.name + ".cost.difference",
-    cost: this.name + ".cost.toast",
-    interval: this.name + ".interval.starting",
-    currency: {
-      toast: "toast.inventory.current"
-    }
-  }
 
   this.getDataFromPath = function(path) {
     return helper.getObject({
@@ -40,26 +28,26 @@ var Generator = function(name, type) {
 
   this.addLevel = function(amount) {
     state.mod.set({
-      path: this.path.level,
-      value: this.getDataFromPath(this.path.level) + amount
+      path: this.name + ".level",
+      value: this.getDataFromPath(this.name + ".level") + amount
     })
   }
 
   this.removeLevel = function(amount) {
     state.mod.set({
-      path: this.path.level,
-      value: this.getDataFromPath(this.path.level) - amount
+      path: this.name + ".level",
+      value: this.getDataFromPath(this.name + ".level") - amount
     })
   }
 
   this.cost = function(amount) {
     return cost.calculate({
       type: this.type,
-      constant: this.getDataFromPath(this.path.constant),
-      difference: this.getDataFromPath(this.path.difference),
+      constant: this.getDataFromPath(this.name + ".cost.constant"),
+      difference: this.getDataFromPath(this.name + ".cost.difference"),
       level: {
-        current: this.getDataFromPath(this.path.level),
-        target: this.getDataFromPath(this.path.level) + amount
+        current: this.getDataFromPath(this.name + ".level"),
+        target: this.getDataFromPath(this.name + ".level") + amount
       }
     })
   }
@@ -67,44 +55,49 @@ var Generator = function(name, type) {
   this.increaseCost = function(priceDetails) {
     var nextCost = sequence[this.type].value({
       target: priceDetails.level.calculate.to + 1,
-      constant: this.getDataFromPath(this.path.constant),
-      difference: this.getDataFromPath(this.path.difference)
+      constant: this.getDataFromPath(this.name + ".cost.constant"),
+      difference: this.getDataFromPath(this.name + ".cost.difference")
     })
-    // console.log(this.name, "next level cost", nextCost)
+
     state.set({
-      path: this.path.cost,
+      path: this.name + ".cost.toast",
       value: nextCost
     })
   }
 
+  this.setInterval = function() {
+    if ("interval" in this.getDataFromPath(this.name)) {
+
+      state.mod.set({
+        path: this.name + ".interval.current",
+        value: this.getDataFromPath(this.name + ".interval.starting") - (this.getDataFromPath(this.name + ".level") * 100)
+      })
+
+    }
+  }
+
+  this.setInterval()
+
   this.upgrade = function(amount) {
     var priceDetails = this.cost(amount)
 
-    // console.log("price details", priceDetails)
-    // console.log("try to upgrade", this.name, "by", amount)
-    // console.log("toast", this.getDataFromPath(this.path.currency.toast), " | cost", priceDetails.cost.total)
+    if (state.get.current().toast.inventory.current >= priceDetails.cost.total) {
 
-    if (this.getDataFromPath(this.path.currency.toast) >= priceDetails.cost.total) {
-
-      // console.log(this.name, "upgrade success")
       toast.consume(priceDetails.cost.total)
-      // console.log("toast consumed", priceDetails.cost.total)
       this.addLevel(amount)
-      // console.log(this.name, "upgrade by", amount)
       this.increaseCost(priceDetails)
       report.render({
         type: "success",
         message: ["+" + suffix.add({
           number: amount
         }) + " unit, " + suffix.add({
-          number: this.getDataFromPath(this.path.level)
+          number: this.getDataFromPath(this.name + ".level")
         }) + " " + this.name + " online"],
         format: "normal"
       })
 
     } else {
 
-      // console.log(this.name, "upgrade fail")
       report.render({
         type: "error",
         message: [suffix.add({
@@ -118,12 +111,12 @@ var Generator = function(name, type) {
 
   this.startingCost = function() {
     var cost = sequence[this.type].value({
-      target: this.getDataFromPath(this.path.level) + 1,
-      constant: this.getDataFromPath(this.path.constant),
-      difference: this.getDataFromPath(this.path.difference)
+      target: this.getDataFromPath(this.name + ".level") + 1,
+      constant: this.getDataFromPath(this.name + ".cost.constant"),
+      difference: this.getDataFromPath(this.name + ".cost.difference")
     })
 
-    var path = this.path.cost
+    var path = this.name + ".cost.toast"
 
     state.set({
       path: path,
@@ -139,8 +132,8 @@ var Generator = function(name, type) {
     animation: {
       interval: function(data) {
 
-        if (!data.getDataFromPath(data.path.interval) == "") {
-          helper.e("html").style.setProperty("--card-" + data.name + "-meter-duration", (data.getDataFromPath(data.path.interval) - (data.getDataFromPath(data.path.level) * 100)) + "ms")
+        if ("interval" in data.getDataFromPath(data.name)) {
+          helper.e("html").style.setProperty("--card-" + data.name + "-meter-duration", data.getDataFromPath(data.name + ".interval.current") + "ms")
 
           var mainGeneratorLevel = data.getDataFromPath(data.name.replace("speed", "") + ".level")
 

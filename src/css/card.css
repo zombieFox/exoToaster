@@ -35,7 +35,7 @@
 .card-header,
 .card-body,
 .card-footer {
-  padding: 1em 1.5em;
+  padding: 0.75em 1.5em;
   transition: background-color var(--layout-timing-extra-fast)
 }
 
@@ -62,12 +62,8 @@
   animation-fill-mode: forwards;
 }
 
-.card-toaster {
-  grid-area: 1 / 1 / 2 / 2;
-}
-
-.card-strategy {
-  grid-area: 2 / 1 / 2 / 2;
+.card-cycle.active .card-meter-progress {
+  animation-duration: var(--card-cycle-meter-duration);
 }
 
 .card-autotoaster.active .card-meter-progress {
