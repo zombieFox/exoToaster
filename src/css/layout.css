@@ -12,10 +12,32 @@
   background-color: rgb(var(--theme-black));
   grid-area: report;
   height: 100%;
+  transition: background-color var(--layout-timing-extra-fast);
+}
+
+.is-theme-style-dark .layout-report {
+  background-color: rgb(var(--theme-black));
+}
+
+.is-theme-style-light .layout-report {
+  background-color: rgb(var(--theme-white));
+}
+
+@media (prefers-color-scheme: light) {
+  .is-theme-style-system .layout-report {
+    background-color: rgb(var(--theme-white));
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .is-theme-style-system .layout-report {
+    background-color: rgb(var(--theme-light));
+  }
 }
 
 .layout-main {
   background-color: rgb(var(--theme-color-01));
   grid-area: main;
   height: 100%;
+  transition: background-color var(--layout-timing-extra-fast);
 }

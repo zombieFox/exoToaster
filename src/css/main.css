@@ -10,6 +10,7 @@
   position: sticky;
   top: 0;
   z-index: 3;
+  transition: background-color var(--layout-timing-extra-fast);
 }
 
 .main-body {

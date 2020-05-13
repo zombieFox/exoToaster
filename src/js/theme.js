@@ -2,6 +2,27 @@ var theme = (function() {
 
   var mod = {}
 
+  mod.style = {
+    light: function() {
+      state.set({
+        path: "theme.style",
+        value: "light"
+      })
+    },
+    dark: function() {
+      state.set({
+        path: "theme.style",
+        value: "dark"
+      })
+    },
+    system: function() {
+      state.set({
+        path: "theme.style",
+        value: "system"
+      })
+    }
+  }
+
   mod.color = {
     hsl: function() {
       var hsl = helper.convertColor.rgb.hsl(state.get.current().theme.color.rgb)
@@ -112,6 +133,58 @@ var theme = (function() {
     }
   }
 
+  render.style = {
+    dark: function() {
+      var html = helper.e("html")
+      html.classList.add("is-theme-style-dark")
+      html.classList.remove("is-theme-style-light")
+      html.classList.remove("is-theme-style-system")
+    },
+    light: function() {
+      var html = helper.e("html")
+      html.classList.remove("is-theme-style-dark")
+      html.classList.add("is-theme-style-light")
+      html.classList.remove("is-theme-style-system")
+    },
+    system: function() {
+      var html = helper.e("html")
+      html.classList.remove("is-theme-style-dark")
+      html.classList.remove("is-theme-style-light")
+      html.classList.add("is-theme-style-system")
+    }
+  }
+
+  var style = {
+    dark: function() {
+      mod.style.dark()
+      render.style.dark()
+    },
+    light: function() {
+      mod.style.light()
+      render.style.light()
+    },
+    system: function() {
+      mod.style.system()
+      render.style.system()
+    },
+    check: function() {
+      if (state.get.current().theme.style == "dark") {
+        style.dark()
+      } else if (state.get.current().theme.style == "light") {
+        style.light()
+      } else if (state.get.current().theme.style == "system") {
+        style.system()
+      }
+    },
+    toggle: function() {
+      if (state.get.current().theme.style == "dark") {
+        style.light()
+      } else if (state.get.current().theme.style == "light") {
+        style.dark()
+      }
+    }
+  }
+
   var init = function() {
     mod.color.generated()
     render.color.shade()
@@ -120,6 +193,7 @@ var theme = (function() {
 
   return {
     mod: mod,
+    style: style,
     init: init
   }
 

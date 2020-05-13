@@ -1,7 +1,6 @@
 .card {
   border-radius: var(--theme-radius);
   box-shadow: none;
-  transition: box-shadow var(--layout-timing-extra-fast);
   transform: scale(1);
   opacity: 1;
   animation-duration: 2s;
@@ -11,6 +10,7 @@
   animation-fill-mode: backwards;
   transform-origin: top center;
   animation-delay: 0s;
+  transition: box-shadow var(--layout-timing-extra-fast);
 }
 
 .card:focus {
@@ -35,7 +35,6 @@
 .card-header {
   background-color: rgb(var(--theme-color-03));
   padding: 0.75em 1.25em;
-  transition: background-color var(--layout-timing-extra-fast)
 }
 
 .card-body {

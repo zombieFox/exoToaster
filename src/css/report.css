@@ -65,21 +65,21 @@
 }
 
 .report-message-color-normal {
-  color: #dcdcdc;
-}
-
-.report-message-color-success {
-  color: #33cc66;
-}
-
-.report-message-color-error {
-  color: #ff1177;
+  color: hsl(var(--report-color-normal));
 }
 
 .report-message-color-system {
-  color: #ffbb00;
+  color: hsl(var(--report-color-system));
+}
+
+.report-message-color-success {
+  color: hsl(var(--report-color-success));
+}
+
+.report-message-color-error {
+  color: hsl(var(--report-color-error));
 }
 
 .report-message-color-motivation {
-  color: #00bbdd;
+  color: hsl(var(--report-color-motivation));
 }

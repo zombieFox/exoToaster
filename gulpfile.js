@@ -77,6 +77,7 @@ const jsFiles = [
   path.src + '/js/report.js',
   path.src + '/js/motivation.js',
   path.src + '/js/theme.js',
+  path.src + '/js/keyboard.js',
   path.src + '/js/boot.js',
   path.src + '/js/init.js'
 ]
