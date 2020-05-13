@@ -57,21 +57,18 @@ var control = (function() {
       type: "button",
       func: function() {
         autotoaster.upgrade(1)
-        tick.check()
       }
     }, {
       element: "[control=autotoaster-level-increase10]",
       type: "button",
       func: function() {
         autotoaster.upgrade(10)
-        tick.check()
       }
     }, {
       element: "[control=autotoaster-level-increase100]",
       type: "button",
       func: function() {
         autotoaster.upgrade(100)
-        tick.check()
       }
     }, {
       element: "[control=autotoasterspeed-level-increase1]",
@@ -92,21 +89,18 @@ var control = (function() {
       type: "button",
       func: function() {
         megatoaster.upgrade(1)
-        tick.check()
       }
     }, {
       element: "[control=megatoaster-level-increase10]",
       type: "button",
       func: function() {
         megatoaster.upgrade(10)
-        tick.check()
       }
     }, {
       element: "[control=megatoaster-level-increase100]",
       type: "button",
       func: function() {
         megatoaster.upgrade(100)
-        tick.check()
       }
     }, {
       element: "[control=megatoasterspeed-level-increase1]",
@@ -127,21 +121,18 @@ var control = (function() {
       type: "button",
       func: function() {
         rockettoaster.upgrade(1)
-        tick.check()
       }
     }, {
       element: "[control=rockettoaster-level-increase10]",
       type: "button",
       func: function() {
         rockettoaster.upgrade(10)
-        tick.check()
       }
     }, {
       element: "[control=rockettoaster-level-increase100]",
       type: "button",
       func: function() {
         rockettoaster.upgrade(100)
-        tick.check()
       }
     }, {
       element: "[control=rockettoasterspeed-level-increase1]",
@@ -162,21 +153,18 @@ var control = (function() {
       type: "button",
       func: function() {
         atomictoaster.upgrade(1)
-        tick.check()
       }
     }, {
       element: "[control=atomictoaster-level-increase10]",
       type: "button",
       func: function() {
         atomictoaster.upgrade(10)
-        tick.check()
       }
     }, {
       element: "[control=atomictoaster-level-increase100]",
       type: "button",
       func: function() {
         atomictoaster.upgrade(100)
-        tick.check()
       }
     }, {
       element: "[control=atomictoasterspeed-level-increase1]",
@@ -197,21 +185,18 @@ var control = (function() {
       type: "button",
       func: function() {
         quantumtoaster.upgrade(1)
-        tick.check()
       }
     }, {
       element: "[control=quantumtoaster-level-increase10]",
       type: "button",
       func: function() {
         quantumtoaster.upgrade(10)
-        tick.check()
       }
     }, {
       element: "[control=quantumtoaster-level-increase100]",
       type: "button",
       func: function() {
         quantumtoaster.upgrade(100)
-        tick.check()
       }
     }, {
       element: "[control=quantumtoasterspeed-level-increase1]",

@@ -17,8 +17,6 @@ var quantumtoasterspeed = new Generator("quantumtoasterspeed", "arithmetic")
 
 control.init()
 theme.init()
-readout.init()
 cycle.init()
 events.init()
-tick.init()
 boot.init()

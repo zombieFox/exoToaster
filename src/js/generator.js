@@ -138,9 +138,9 @@ var Generator = function(name, type) {
           var mainGeneratorLevel = data.getDataFromPath(data.name.replace("speed", "") + ".level")
 
           if (mainGeneratorLevel > 0) {
-            helper.e("[stage="+data.name.replace("speed", "")+"]").classList.remove("active")
-            void helper.e("[stage="+data.name.replace("speed", "")+"]" + " .card-meter-progress").offsetWidth
-            helper.e("[stage="+data.name.replace("speed", "")+"]").classList.add("active")
+            helper.e("[stage=" + data.name.replace("speed", "") + "]").classList.remove("active")
+            void helper.e("[stage=" + data.name.replace("speed", "") + "]" + " .card-meter-progress").offsetWidth
+            helper.e("[stage=" + data.name.replace("speed", "") + "]").classList.add("active")
           }
         }
 

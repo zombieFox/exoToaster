@@ -263,15 +263,9 @@ var readout = (function() {
     }
   }
 
-
-  var init = function() {
-    render.all()
-  }
-
   return {
     mod: mod,
-    render: render,
-    init: init
+    render: render
   }
 
 })()

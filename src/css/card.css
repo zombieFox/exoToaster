@@ -1,5 +1,4 @@
 .card {
-  background-color: rgb(var(--theme-color-02));
   border-radius: var(--theme-radius);
   box-shadow: none;
   transition: box-shadow var(--layout-timing-extra-fast);
@@ -35,11 +34,14 @@
 
 .card-header {
   background-color: rgb(var(--theme-color-03));
-  background-color: rgb(var(--theme-color-03));
+  padding: 0.75em 1.25em;
   transition: background-color var(--layout-timing-extra-fast)
 }
 
-.card-body {}
+.card-body {
+  background-color: rgb(var(--theme-color-02));
+  padding: 1.25em;
+}
 
 .card-body:not(:last-child):not(:only-child) {
   border-bottom: var(--horizontal-rule-large);
@@ -47,12 +49,12 @@
 
 .card-footer {
   background-color: rgb(var(--theme-color-03));
+  padding: 0.75em 1.25em;
 }
 
 .card-header,
 .card-body,
 .card-footer {
-  padding: 0.75em 1.25em;
   transition: background-color var(--layout-timing-extra-fast);
 }
 
@@ -81,6 +83,16 @@
 
 [stage=cycle].active .card-meter-progress {
   animation-duration: var(--card-cycle-meter-duration);
+}
+
+[stage=strategy] .card-body {
+  animation-duration: 2s;
+  animation-name: swing;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+  transform-origin: top center;
+  animation-delay: 0s;
 }
 
 [stage=autotoaster].active .card-meter-progress {

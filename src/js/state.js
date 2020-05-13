@@ -69,11 +69,13 @@ var state = (function() {
       interval: 200000
     },
     events: {
-      interval: 100,
-      all: []
+      interval: 200
+    },
+    tick: {
+      interval: 200
     },
     readout: {
-      interval: 100
+      interval: 200
     },
     toast: {
       lifetime: {
@@ -99,6 +101,38 @@ var state = (function() {
         starting: null,
         current: null,
         min: 1000
+      }
+    },
+    strategy: {
+      autotoaster: {
+        active: false,
+        cost: {
+          cycle: 2
+        }
+      },
+      megatoaster: {
+        active: false,
+        cost: {
+          cycle: 4
+        }
+      },
+      rockettoaster: {
+        active: false,
+        cost: {
+          cycle: 8
+        }
+      },
+      atomictoaster: {
+        active: false,
+        cost: {
+          cycle: 16
+        }
+      },
+      quantumtoaster: {
+        active: false,
+        cost: {
+          cycle: 32
+        }
       }
     },
     autotoaster: {
@@ -286,7 +320,7 @@ var state = (function() {
   current.processor.cost.difference = mod.formula.cost.difference.geometric(current.processor.cost.multiplier)
 
   // cycle
-  current.cycle.interval.starting = mod.formula.interval(8)
+  current.cycle.interval.starting = mod.formula.interval(4)
 
   // autotoaster
   current.autotoaster.toastperunit = mod.formula.toast.perUnit(1)
