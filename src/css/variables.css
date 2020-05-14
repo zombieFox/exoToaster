@@ -12,7 +12,7 @@
   --theme-accent-accessible-sum:                        calc(var(--theme-accent-accessible-r) + var(--theme-accent-accessible-g) + var(--theme-accent-accessible-b));
   --theme-accent-accessible-perceived-lightness:        calc(var(--theme-accent-accessible-sum) / 255);
   --theme-accent-accessible-color:                      0, calc(0 * 1%), calc((var(--theme-accent-accessible-perceived-lightness) - var(--theme-accent-accessible-threshold)) * -10000000%);
-  --theme-radius:                                       0.25rem;
+  --theme-radius:                                       0.3rem;
   --theme-font-display-name:                            "Share", sans-serif;
   --theme-font-display-weight:                          400;
   --theme-font-display-style:                           "normal";
@@ -47,7 +47,7 @@
   --theme-shade-positive-10:                            25, 25, 25;
   --theme-preview-size:                                 6em;
   --theme-custom-edit-height:                           2.5em;
-  --theme-shadow:                                       1;
+  --theme-shadow:                                       0.75;
   --theme-shadow-offset-y:                              0.02em;
   --theme-shadow-blur:                                  0.02em;
   --theme-shadow-opacity:                               0.02;

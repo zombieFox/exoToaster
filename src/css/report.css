@@ -1,5 +1,5 @@
 .report {
-  padding: 2em;
+  padding: 2em 2em 10vh 2em;
   height: 100%;
   overflow-y: auto;
 }

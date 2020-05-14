@@ -3,21 +3,21 @@ var boot = (function() {
   var intro = [{
     report: {
       type: "system",
-      message: ["TAI.dat loaded"],
+      message: ["exoToaster.init loaded"],
       format: "normal",
       delay: 0
     }
   }, {
     report: {
       type: "normal",
-      message: ["TAI: stable"],
+      message: ["tai: stable"],
       format: "normal",
       delay: 100
     }
   }, {
     report: {
       type: "system",
-      message: ["Directive.dat loaded"],
+      message: ["directive.init loaded"],
       format: "normal",
       delay: 1000
     }
@@ -31,7 +31,7 @@ var boot = (function() {
   }, {
     report: {
       type: "system",
-      message: ["Motivation.dat loaded"],
+      message: ["motivation.init loaded"],
       format: "normal",
       delay: 1000
     }

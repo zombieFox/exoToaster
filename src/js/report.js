@@ -15,7 +15,7 @@ var report = (function() {
     },
     motivation: function() {
       var eyes = ["~", "-", "^", "*", "=", "x", "¬", "¯", "×", "÷", "•", "†", "—", "Y", "O", "o", "V", "v", "M", "m", "U", "u", "8", "0", "ö", "õ", "₪", "θ", "Ξ", "+", "■", "◆", "◇", "◈", "◉", "◍", "◎", "●", "◐", "◑", "◒", "◓", "◔", "◕", "◴", "◵", "◶", "◷", "☉"]
-      var mouths = ["_", ".", "▁", "◡", "◠", "w"]
+      var mouths = ["_", ".", "▁", "◡", "◠", "w", " "]
       var sides = [{
         left: "[",
         right: "]"
@@ -37,6 +37,9 @@ var report = (function() {
       }, {
         left: ":",
         right: ":"
+      }, {
+        left: "",
+        right: ""
       }]
       var randomBracket = sides[Math.round(Math.random() * (sides.length - 1))]
       var randomEyes = eyes[Math.round(Math.random() * (eyes.length - 1))]

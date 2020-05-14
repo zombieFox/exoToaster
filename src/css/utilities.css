@@ -19,6 +19,10 @@
   font-size: 0.8em;
 }
 
+.large {
+  font-size: 1.2em;
+}
+
 .muted {
   color: rgb(var(--theme-color-12));
 }
