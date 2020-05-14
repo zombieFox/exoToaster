@@ -77,7 +77,7 @@ var control = (function() {
         func: function() {
           autotoasterspeed.upgrade(1)
           autotoasterspeed.setInterval()
-          render.disable.check(this)
+          render.disable.check()
         },
         disable: {
           condition: function() {
@@ -109,7 +109,7 @@ var control = (function() {
         func: function() {
           megatoasterspeed.upgrade(1)
           megatoasterspeed.setInterval()
-          render.disable.check(this)
+          render.disable.check()
         },
         disable: {
           condition: function() {
@@ -141,7 +141,7 @@ var control = (function() {
         func: function() {
           rockettoasterspeed.upgrade(1)
           rockettoasterspeed.setInterval()
-          render.disable.check(this)
+          render.disable.check()
         },
         disable: {
           condition: function() {
@@ -173,7 +173,7 @@ var control = (function() {
         func: function() {
           atomictoasterspeed.upgrade(1)
           atomictoasterspeed.setInterval()
-          render.disable.check(this)
+          render.disable.check()
         },
         disable: {
           condition: function() {
@@ -205,7 +205,7 @@ var control = (function() {
         func: function() {
           quantumtoasterspeed.upgrade(1)
           quantumtoasterspeed.setInterval()
-          render.disable.check(this)
+          render.disable.check()
         },
         disable: {
           condition: function() {
@@ -2353,10 +2353,14 @@ var control = (function() {
   }
 
   render.disable = {
-    check: function(controlObject) {
-      if (controlObject.disable.condition()) {
-        helper.e(controlObject.element).disabled = true
-      }
+    check: function() {
+      mod.game.all().forEach(function(arrayItem, index) {
+        if ("disable" in arrayItem) {
+          if (arrayItem.disable.condition()) {
+            helper.e(arrayItem.element).disabled = true
+          }
+        }
+      })
     }
   }
 
@@ -2371,6 +2375,7 @@ var control = (function() {
     render.update.control.menu()
     render.dependents()
     render.class()
+    render.disable.check()
   }
 
   return {

@@ -234,14 +234,14 @@ var state = (function() {
     theme: {
       accent: {
         hsl: {
-          h: 80,
+          h: 221,
           s: 100,
           l: 50
         },
         rgb: {
-          r: 170,
-          g: 255,
-          b: 0
+          r: 0,
+          g: 80,
+          b: 255
         },
         random: {
           active: false,
@@ -341,9 +341,9 @@ var state = (function() {
     theme: {
       accent: {
         rgb: {
-          r: 170,
-          g: 255,
-          b: 0
+          r: 0,
+          g: 80,
+          b: 255
         }
       },
       color: {
