@@ -35,11 +35,13 @@
 .card-header {
   background-color: rgb(var(--theme-color-03));
   padding: 0.75em 1.25em;
+  transition: background-color var(--layout-timing-extra-fast);
 }
 
 .card-body {
   background-color: rgb(var(--theme-color-02));
   padding: 1.25em;
+  transition: background-color var(--layout-timing-extra-fast), border var(--layout-timing-extra-fast);
 }
 
 .card-body:not(:last-child):not(:only-child) {
@@ -49,11 +51,6 @@
 .card-footer {
   background-color: rgb(var(--theme-color-03));
   padding: 0.75em 1.25em;
-}
-
-.card-header,
-.card-body,
-.card-footer {
   transition: background-color var(--layout-timing-extra-fast);
 }
 
@@ -62,6 +59,7 @@
   width: 100%;
   height: var(--layout-line-width);
   position: relative;
+  transition: background-color var(--layout-timing-extra-fast);
 }
 
 .card-meter-progress {

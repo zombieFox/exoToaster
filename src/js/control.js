@@ -14,6 +14,63 @@ var control = (function() {
   }
 
   mod.all = {
+    menu: [{
+      element: "[control=menu-open]",
+      type: "button",
+      func: function() {
+        menu.open()
+      }
+    }, {
+      element: "[control=menu-close]",
+      type: "button",
+      func: function() {
+        menu.close()
+      }
+    }, {
+      element: "[control=menu-theme]",
+      type: "button",
+      func: function() {
+        menu.nav("theme")
+      }
+    }, {
+      element: "[control=menu-data]",
+      type: "button",
+      func: function() {
+        menu.nav("data")
+      }
+    }, {
+      element: "[control=menu-coffee]",
+      type: "button",
+      func: function() {
+        menu.nav("coffee")
+      }
+    }, {
+      element: "[control=menu-exotoaster]",
+      type: "button",
+      func: function() {
+        menu.nav("exotoaster")
+      }
+    }],
+    data: [{
+      element: "[control=data-import]",
+      type: "file",
+      func: function() {
+        data.mod.import()
+      }
+    }, {
+      element: "[control=data-export]",
+      type: "button",
+      func: function() {
+        data.mod.export.all()
+      }
+    }, {
+      element: "[control=data-clear]",
+      type: "button",
+      func: function() {
+        data.render.clear()
+        menu.close()
+      }
+    }],
     toast: [{
       element: "[control=toast]",
       type: "button",
@@ -241,7 +298,8 @@ var control = (function() {
           object.func()
           readout.render.all()
         }
-      }, false)
+        data.save()
+      })
     }
   }
 

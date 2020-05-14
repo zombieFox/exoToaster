@@ -147,14 +147,6 @@ button:disabled:active,
   pointer-events: none;
 }
 
-button [class^="icon-"],
-button [class*=" icon-"],
-.button [class^="icon-"],
-.button [class*=" icon-"] {
-  line-height: 1;
-  font-size: 1.5em;
-}
-
 .button-small {
   font-size: 0.8em;
 }

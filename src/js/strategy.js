@@ -3,26 +3,6 @@ var strategy = (function() {
   var mod = {}
 
   mod.strings = {
-    autotoaster: {
-      displayName: "Auto Toasters",
-      unlock: "autotoaster technology developed"
-    },
-    megatoaster: {
-      displayName: "Mega Toasters",
-      unlock: "megatoaster technology developed"
-    },
-    rockettoaster: {
-      displayName: "Rocket Toasters",
-      unlock: "rockettoaster technology developed"
-    },
-    atomictoaster: {
-      displayName: "Atomic Toasters",
-      unlock: "atomictoaster technology developed"
-    },
-    quantumtoaster: {
-      displayName: "Quantum Toasters",
-      unlock: "quantumtoaster technology developed"
-    },
     success: function(name) {
       return name + " technology developed"
     },
@@ -68,7 +48,7 @@ var strategy = (function() {
     var button = helper.node("button:Develop " + buttonName + "|class:button button-line button-small mb-2")
     button.addEventListener("click", function() {
       mod.activate(name)
-    }, false);
+    })
 
     var para = helper.node("p:" + state.get.current().strategy[name].cost.cycle + " |class:small muted")
     var abbr = helper.node("abbr:Ic|title:Instruction cycles")

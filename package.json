@@ -1,6 +1,6 @@
 {
   "name": "exotoaster",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "the toast will sustain",
   "main": "index.js",
   "scripts": {

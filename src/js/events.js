@@ -25,7 +25,23 @@ var events = (function() {
           },
           interval: state.get.current().events.interval
         })
-      }
+      },
+      passed: false
+    }, {
+      name: "autosave",
+      condition: function() {
+        return true
+      },
+      func: function() {
+        tick.mod.set({
+          name: this.name,
+          func: function() {
+            data.save()
+          },
+          interval: state.get.current().autosave.interval
+        })
+      },
+      passed: false
     }, {
       name: "readout",
       condition: function() {

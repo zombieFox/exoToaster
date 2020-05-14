@@ -43,6 +43,7 @@ const cssFiles = [
   path.src + '/css/spacing.css',
   path.src + '/css/utilities.css',
   path.src + '/css/base.css',
+  path.src + '/css/icons.css',
   path.src + '/css/card.css',
   path.src + '/css/animation.css',
   path.src + '/css/button.css',
@@ -51,6 +52,7 @@ const cssFiles = [
   path.src + '/css/group.css',
   path.src + '/css/layout.css',
   path.src + '/css/main.css',
+  path.src + '/css/header.css',
   path.src + '/css/menu.css',
   path.src + '/css/modal.css',
   path.src + '/css/shade.css',
@@ -60,7 +62,9 @@ const cssFiles = [
 
 const jsFiles = [
   path.src + '/js/helper.js',
+  path.src + '/js/version.js',
   path.src + '/js/data.js',
+  path.src + '/js/update.js',
   path.src + '/js/state.js',
   path.src + '/js/generator.js',
   path.src + '/js/events.js',
@@ -78,6 +82,8 @@ const jsFiles = [
   path.src + '/js/motivation.js',
   path.src + '/js/theme.js',
   path.src + '/js/keyboard.js',
+  path.src + '/js/menu.js',
+  path.src + '/js/modal.js',
   path.src + '/js/boot.js',
   path.src + '/js/init.js'
 ]

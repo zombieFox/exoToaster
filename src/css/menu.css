@@ -71,7 +71,7 @@
   border-radius: 0;
 }
 
-.menu-close-tab {
+.menu-close {
   background-color: transparent;
   margin: 0;
   padding: 0;
@@ -263,7 +263,7 @@
     border-radius: 0;
   }
 
-  .menu-close-tab {
+  .menu-close {
     border-radius: var(--theme-radius);
     height: calc(var(--menu-space) * 4);
     width: calc(var(--menu-space) * 4);
@@ -290,7 +290,7 @@
     padding: calc(var(--menu-space) * 3) calc(var(--menu-space) * 5);
   }
 
-  .menu-close-tab {
+  .menu-close {
     height: calc(var(--menu-space) * 5);
     width: calc(var(--menu-space) * 5);
   }

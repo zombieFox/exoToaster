@@ -384,6 +384,15 @@ var helper = (function() {
     }
   }
 
+  var isJsonString = function(string) {
+    try {
+      JSON.parse(string)
+    } catch (error) {
+      return false
+    }
+    return true
+  }
+
   var makeNode = function(override) {
     var options = {
       tag: null,
@@ -471,6 +480,7 @@ var helper = (function() {
     numberSuffix: numberSuffix,
     timestamp: timestamp,
     convertColor: convertColor,
+    isJsonString: isJsonString,
     makeNode: makeNode,
     node: node
   }

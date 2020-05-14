@@ -13,7 +13,7 @@
   --theme-accent-accessible-perceived-lightness:        calc(var(--theme-accent-accessible-sum) / 255);
   --theme-accent-accessible-color:                      0, calc(0 * 1%), calc((var(--theme-accent-accessible-perceived-lightness) - var(--theme-accent-accessible-threshold)) * -10000000%);
   --theme-radius:                                       0.25rem;
-  --theme-font-display-name:                            "Roboto", sans-serif;
+  --theme-font-display-name:                            "Share", sans-serif;
   --theme-font-display-weight:                          400;
   --theme-font-display-style:                           "normal";
   --theme-font-ui-name:                                 "Roboto", sans-serif;
@@ -211,6 +211,9 @@
   --edge-shadow:                                        inset 0 0 0 var(--layout-line-width) rgb(var(--theme-accent)),
                                                         inset 0 0 0 calc(var(--layout-line-width) * 4) rgba(var(--theme-accent), 0.1),
                                                         inset 0 0 0 calc(var(--layout-line-width) * 8) rgba(var(--theme-accent), 0.1);
+  /* z index */
+  --z-index-header:                                     1000;
+  --z-index-menu:                                       2000;
   /* breakpoint */
   /* can not be used in @media as of yet */
   --breakpoint-sm:                                      550px;
@@ -248,7 +251,7 @@
   --report-color-system:                                30, 100%, 50%;
   --report-color-success:                               150, 60%, 50%;
   --report-color-error:                                 330, 100%, 50%;
-  --report-color-motivation:                            210, 100%, 50%;
+  --report-color-motivation:                            210, 100%, 60%;
 }
 
 .is-theme-style-light {
@@ -279,7 +282,7 @@
   --report-color-system:                                30, 100%, 35%;
   --report-color-success:                               150, 60%, 30%;
   --report-color-error:                                 330, 100%, 40%;
-  --report-color-motivation:                            210, 100%, 25%;
+  --report-color-motivation:                            210, 100%, 30%;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -310,7 +313,7 @@
     --report-color-system:                              30, 100%, 50%;
     --report-color-success:                             150, 60%, 50%;
     --report-color-error:                               330, 100%, 50%;
-    --report-color-motivation:                          210, 100%, 50%;
+    --report-color-motivation:                          210, 100%, 60%;
   }
 }
 
@@ -342,7 +345,7 @@
     --report-color-system:                              30, 100%, 35%;
     --report-color-success:                             150, 60%, 30%;
     --report-color-error:                               330, 100%, 40%;
-    --report-color-motivation:                          210, 100%, 25%;
+    --report-color-motivation:                          210, 100%, 30%;
   }
 }
 

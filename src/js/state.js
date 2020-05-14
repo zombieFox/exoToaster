@@ -65,11 +65,12 @@ var state = (function() {
   }
 
   var current = {
-    save: {
-      interval: 200000
+    autosave: {
+      interval: 1000
     },
     events: {
-      interval: 200
+      interval: 200,
+      all: []
     },
     tick: {
       interval: 200
@@ -107,31 +108,31 @@ var state = (function() {
       autotoaster: {
         active: false,
         cost: {
-          cycle: 2
+          cycle: 4
         }
       },
       megatoaster: {
         active: false,
         cost: {
-          cycle: 4
+          cycle: 8
         }
       },
       rockettoaster: {
         active: false,
         cost: {
-          cycle: 8
+          cycle: 16
         }
       },
       atomictoaster: {
         active: false,
         cost: {
-          cycle: 16
+          cycle: 32
         }
       },
       quantumtoaster: {
         active: false,
         cost: {
-          cycle: 32
+          cycle: 64
         }
       }
     },
@@ -265,11 +266,6 @@ var state = (function() {
         random: {
           active: false,
           style: "any"
-        },
-        cycle: {
-          active: false,
-          speed: 300,
-          step: 10
         }
       },
       color: {
@@ -312,7 +308,8 @@ var state = (function() {
       message: {
         max: 100
       }
-    }
+    },
+    menu: false
   }
 
   // processor
@@ -387,10 +384,17 @@ var state = (function() {
     mod.set(override)
   }
 
+  var init = function() {
+    if (data.load()) {
+      mod.restore(data.load())
+    }
+  }
+
   return {
     mod: mod,
     get: get,
-    set: set
+    set: set,
+    init: init
   }
 
 })()

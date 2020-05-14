@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
+.header-stats {
+  flex-grow: 1;
+  margin-right: 0.5em;
+}
+
+.header-controls {
+  flex-grow: 0;
+  display: flex;
+  align-items: center;
+}
