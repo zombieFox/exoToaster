@@ -12,7 +12,7 @@ var motivation = (function() {
       "making toast is fun",
       "making toast is enjoyable",
       "you are enjoying this",
-      "toast it up, up is good",
+      "toast it up, up is good, up up up!",
       "what could be better than another toast",
       "you love to toast",
       "make more toast",
@@ -29,7 +29,7 @@ var motivation = (function() {
       "have you read the good toast?",
       "do not stop doing what you are doing",
       "have you met the good toaster?",
-      "have you see the toaster bot?",
+      "have you seen the toaster bot?",
       "every 100,000th toast comes with beans",
       "be productive",
       "you are a good toaster",
@@ -170,7 +170,7 @@ var motivation = (function() {
       message: [phaseMessage.toast[randomIndex]],
       format: "normal"
     })
-    var motivationTime = Math.round(Math.random() * 200000)
+    var motivationTime = Math.round(Math.random() * 125000)
     console.log("motivation in: " + Math.round(motivationTime / 1000) + "s")
     clearInterval(nextMotivation)
     nextMotivation = setInterval(render, motivationTime)

@@ -5,8 +5,8 @@
 }
 
 .main-header {
-  background-color: rgb(var(--theme-color-02));
-  padding: 1em 2em;
+  background-color: rgba(var(--theme-color-01), 0.9);
+  padding: 2em;
   position: sticky;
   top: 0;
   z-index: var(--z-index-header);

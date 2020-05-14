@@ -2,6 +2,97 @@ var theme = (function() {
 
   var mod = {}
 
+  mod.accent = {
+    hsl: function() {
+      var hsl = helper.convertColor.rgb.hsl(state.get.current().theme.accent.rgb)
+      helper.setObject({
+        object: state.get.current(),
+        path: "theme.accent.hsl",
+        newValue: {
+          h: Math.round(hsl.h),
+          s: Math.round(hsl.s),
+          l: Math.round(hsl.l)
+        }
+      })
+    },
+    rgb: function() {
+      var rgb = helper.convertColor.hsl.rgb(state.get.current().theme.accent.hsl)
+      helper.setObject({
+        object: state.get.current(),
+        path: "theme.accent.rgb",
+        newValue: {
+          r: Math.round(rgb.r),
+          g: Math.round(rgb.g),
+          b: Math.round(rgb.b)
+        }
+      })
+    },
+    random: function() {
+      if (state.get.current().theme.accent.random.active) {
+        var randomValue = function(min, max) {
+          return Math.floor(Math.random() * (max - min) + 1) + min
+        }
+        var color = {
+          any: function() {
+            return {
+              h: randomValue(0, 360),
+              s: randomValue(0, 100),
+              l: randomValue(0, 100)
+            }
+          },
+          light: function() {
+            return {
+              h: randomValue(0, 360),
+              s: randomValue(50, 90),
+              l: randomValue(50, 90)
+            }
+          },
+          dark: function() {
+            return {
+              h: randomValue(0, 360),
+              s: randomValue(10, 50),
+              l: randomValue(10, 50)
+            }
+          },
+          pastel: function() {
+            return {
+              h: randomValue(0, 360),
+              s: 50,
+              l: 80
+            }
+          },
+          saturated: function() {
+            return {
+              h: randomValue(0, 360),
+              s: 100,
+              l: 50
+            }
+          }
+        }
+        var hsl = color[state.get.current().theme.accent.random.style]()
+        var rgb = helper.convertColor.hsl.rgb(hsl)
+        helper.setObject({
+          object: state.get.current(),
+          path: "theme.accent.rgb",
+          newValue: {
+            r: Math.round(rgb.r),
+            g: Math.round(rgb.g),
+            b: Math.round(rgb.b)
+          }
+        })
+        helper.setObject({
+          object: state.get.current(),
+          path: "theme.accent.hsl",
+          newValue: {
+            h: Math.round(hsl.h),
+            s: Math.round(hsl.s),
+            l: Math.round(hsl.l)
+          }
+        })
+      }
+    }
+  }
+
   mod.style = {
     light: function() {
       state.set({
@@ -154,6 +245,23 @@ var theme = (function() {
     }
   }
 
+  render.themeMetaTag = function() {
+    var head = helper.e("head")
+    var metaThemeColor = helper.e(".meta-theme-color")
+    if (metaThemeColor) {
+      metaThemeColor.remove()
+    }
+    var meta = helper.node("meta|class:meta-theme-color,name:theme-color,content:" + helper.convertColor.rgb.hex(state.get.current().theme.color.generated.negative[10]))
+    head.appendChild(meta)
+  }
+
+  var accent = {
+    random: function() {
+      mod.accent.random()
+      render.accent.color()
+    }
+  }
+
   var style = {
     dark: function() {
       mod.style.dark()
@@ -187,13 +295,17 @@ var theme = (function() {
 
   var init = function() {
     mod.color.generated()
+    mod.accent.random()
     render.color.shade()
     render.accent.color()
+    render.themeMetaTag()
   }
 
   return {
     mod: mod,
+    accent: accent,
     style: style,
+    render: render,
     init: init
   }
 

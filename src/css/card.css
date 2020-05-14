@@ -33,13 +33,13 @@
 }
 
 .card-header {
-  background-color: rgb(var(--theme-color-03));
+  background-color: rgb(var(--theme-color-04));
   padding: 0.75em 1.25em;
   transition: background-color var(--layout-timing-extra-fast);
 }
 
 .card-body {
-  background-color: rgb(var(--theme-color-02));
+  background-color: rgb(var(--theme-color-03));
   padding: 1.25em;
   transition: background-color var(--layout-timing-extra-fast), border var(--layout-timing-extra-fast);
 }
@@ -49,13 +49,13 @@
 }
 
 .card-footer {
-  background-color: rgb(var(--theme-color-03));
+  background-color: rgb(var(--theme-color-04));
   padding: 0.75em 1.25em;
   transition: background-color var(--layout-timing-extra-fast);
 }
 
 .card-meter {
-  background-color: rgb(var(--theme-color-02));
+  background-color: rgb(var(--theme-color-03));
   width: 100%;
   height: var(--layout-line-width);
   position: relative;

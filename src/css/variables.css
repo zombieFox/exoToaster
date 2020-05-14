@@ -84,7 +84,6 @@
                                                         0 calc(var(--theme-shadow-size-large) * calc(calc(var(--theme-shadow-offset-y) * -1) * 4)) calc(var(--theme-shadow-size-large) * calc(var(--theme-shadow-blur) * 8)) rgba(0, 0, 0, calc(var(--theme-shadow-size-large) * calc(var(--theme-shadow-opacity) * 2))),
                                                         0 calc(var(--theme-shadow-size-large) * calc(calc(var(--theme-shadow-offset-y) * -1) * 8)) calc(var(--theme-shadow-size-large) * calc(var(--theme-shadow-blur) * 16)) rgba(0, 0, 0, calc(var(--theme-shadow-size-large) * calc(var(--theme-shadow-opacity) * 3))),
                                                         0 calc(var(--theme-shadow-size-large) * calc(calc(var(--theme-shadow-offset-y) * -1) * 16)) calc(var(--theme-shadow-size-large) * calc(var(--theme-shadow-blur) * 32)) rgba(0, 0, 0, calc(var(--theme-shadow-size-large) * calc(var(--theme-shadow-opacity) * 4)));
-  --theme-shade-opacity:                                0.4;
   /* layout */
   --layout-line-width:                                  0.2em;
   --layout-duration-01:                                 0.1s;
@@ -102,11 +101,8 @@
   --layout-timing-medium:                               var(--layout-duration-06) ease-in-out;
   --layout-timing-slow:                                 var(--layout-duration-08) ease-in-out;
   --layout-timing-extra-slow:                           var(--layout-duration-10) ease-in-out;
-  --horizontal-rule-small:                              1px solid rgb(var(--theme-color-03));
-  --horizontal-rule-large:                              2px solid rgb(var(--theme-color-03));
-  /* background */
-  --background-color-theme:                             var(--theme-color-01);
-  --background-color-custom:                            rgb(0, 0, 0);
+  --horizontal-rule-small:                              1px solid rgb(var(--theme-color-02));
+  --horizontal-rule-large:                              2px solid rgb(var(--theme-color-02));
   /* form */
   --form-label:                                         var(--theme-color-16);
   --form-label-hover:                                   var(--theme-color-20);
@@ -187,22 +183,22 @@
   --menu-space:                                         0.75em;
   --menu-edge-opacity:                                  0.75;
   /* button */
-  --button-background:                                  var(--theme-color-03);
-  --button-background-focus-hover:                      var(--theme-color-04);
-  --button-background-active:                           var(--theme-color-05);
-  --button-background-disabled:                         var(--theme-color-02);
-  --button-border:                                      var(--theme-color-03);
-  --button-border-focus-hover:                          var(--theme-color-07);
+  --button-background:                                  var(--theme-color-02);
+  --button-background-focus-hover:                      var(--theme-color-03);
+  --button-background-active:                           var(--theme-color-04);
+  --button-background-disabled:                         var(--theme-color-01);
+  --button-border:                                      var(--theme-color-02);
+  --button-border-focus-hover:                          var(--theme-color-06);
   --button-border-active:                               var(--theme-accent);
-  --button-border-disabled:                             var(--theme-color-02);
-  --button-text:                                        var(--theme-color-13);
+  --button-border-disabled:                             var(--theme-color-01);
+  --button-text:                                        var(--theme-color-12);
   --button-text-focus-hover:                            var(--theme-color-20);
   --button-text-active:                                 var(--theme-style-text);
-  --button-text-disabled:                               var(--theme-color-05);
-  --button-link-text:                                   var(--theme-color-13);
+  --button-text-disabled:                               var(--theme-color-04);
+  --button-link-text:                                   var(--theme-color-12);
   --button-link-text-focus-hover:                       var(--theme-style-text);
   --button-link-text-active:                            var(--theme-style-text);
-  --button-link-text-disabled:                          var(--theme-color-05);
+  --button-link-text-disabled:                          var(--theme-color-04);
   --button-accent-background:                           var(--theme-accent);
   --button-accent-background-focus-hover:               calc(var(--theme-accent-r) + 20), calc(var(--theme-accent-g) + 20), calc(var(--theme-accent-b) + 20);
   --button-accent-background-active:                    calc(var(--theme-accent-r) + 40), calc(var(--theme-accent-g) + 40), calc(var(--theme-accent-b) + 40);

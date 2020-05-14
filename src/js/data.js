@@ -109,7 +109,7 @@ var data = (function() {
 
   render.clear = function() {
     var clearContent = helper.node("div")
-    var para1 = helper.node("p:Are you sure you want to clear all exoToaster game data? All exoToaster progress will be lost.")
+    var para1 = helper.node("p:Are you sure you want to clear all exoToaster data? All game progress will be lost.")
     var para2 = helper.node("p:This can not be undone.")
     clearContent.appendChild(para1)
     clearContent.appendChild(para2)

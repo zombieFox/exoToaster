@@ -35,8 +35,8 @@ var menu = (function() {
 
   bind.focus = {
     loop: function(event) {
-      var firstElement = helper.e(".control-menu-layout")
-      var lastElement = helper.e(".menu-close")
+      var firstElement = helper.e("[control=menu-theme]")
+      var lastElement = helper.e("[control=menu-close]")
       if (event.keyCode == 9 && event.shiftKey) {
         if (document.activeElement === firstElement) {
           lastElement.focus()
@@ -93,7 +93,7 @@ var menu = (function() {
     },
     tabindex: function() {
       var menu = helper.e(".menu")
-      var menuCloseTab = helper.e(".menu-close")
+      var menuCloseTab = helper.e("[control=menu-close]")
       var allMenuContent = helper.eA(".menu-content")
       allMenuContent.forEach(function(arrayItem, index) {
         arrayItem.querySelectorAll("[tabindex]").forEach(function(arrayItem, index) {

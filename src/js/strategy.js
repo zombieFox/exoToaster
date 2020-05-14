@@ -22,7 +22,7 @@ var strategy = (function() {
         })
         render.remove(name)
         report.render({
-          type: "success",
+          type: "system",
           message: [mod.strings.success(name)],
           format: "normal"
         })

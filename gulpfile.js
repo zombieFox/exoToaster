@@ -39,6 +39,7 @@ const jsDependencies = []
 const cssFiles = [
   path.src + '/css/reset.css',
   path.src + '/css/variables.css',
+  path.src + '/css/theme.css',
   path.src + '/css/state.css',
   path.src + '/css/spacing.css',
   path.src + '/css/utilities.css',
@@ -55,7 +56,6 @@ const cssFiles = [
   path.src + '/css/header.css',
   path.src + '/css/menu.css',
   path.src + '/css/modal.css',
-  path.src + '/css/shade.css',
   path.src + '/css/report.css',
   path.src + '/css/typography.css'
 ]
