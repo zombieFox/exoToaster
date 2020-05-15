@@ -8,6 +8,11 @@ var cycle = (function() {
         path: "cycle.current",
         value: state.get.current().cycle.current + amount
       })
+    } else {
+      state.mod.set({
+        path: "cycle.current",
+        value: state.get.current().cycle.max
+      })
     }
   }
 

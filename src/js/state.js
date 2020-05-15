@@ -139,13 +139,13 @@ var state = (function() {
           restore: true
         }],
       },
-      interval: 300
-    },
-    tick: {
-      interval: 300
+      interval: 500
     },
     readout: {
       interval: 100
+    },
+    tick: {
+      interval: 300
     },
     toast: {
       lifetime: {
@@ -374,8 +374,7 @@ var state = (function() {
   mod.current.processor.cost.difference = mod.formula.cost.difference.geometric(mod.current.processor.cost.multiplier)
 
   // cycle
-  mod.current.cycle.interval.starting = mod.formula.interval(4)
-  mod.current.cycle.interval.starting = 2000
+  mod.current.cycle.interval.starting = mod.formula.interval(3)
 
   // autotoaster
   mod.current.autotoaster.toastperunit = mod.formula.toast.perUnit(1)
@@ -483,7 +482,7 @@ var state = (function() {
       return mod.get.current()
     },
     default: function() {
-      return JSON.parse(JSON.stringify(mod.default))
+      return mod.get.default()
     }
   }
 

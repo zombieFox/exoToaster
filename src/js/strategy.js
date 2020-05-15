@@ -4,11 +4,11 @@ var strategy = (function() {
 
   mod.strings = {
     name: {
-      autotoaster: "auto toaster",
-      megatoaster: "mega toaster",
-      rockettoaster: "rocket toaster",
-      atomictoaster: "atomic toaster",
-      quantumtoaster: "quantum toaster"
+      autotoaster: "Auto Toasters",
+      megatoaster: "Mega Toasters",
+      rockettoaster: "Rocket Toasters",
+      atomictoaster: "Atomic Toasters",
+      quantumtoaster: "Quantum Toasters"
     },
     success: function(name) {
       return name + " technology developed"
@@ -51,12 +51,12 @@ var strategy = (function() {
 
     var buttonName = mod.strings.name[name]
 
-    var button = helper.node("button:develop " + buttonName + "|class:button button-line button-small mb-2")
+    var button = helper.node("button:Develop " + buttonName + "|class:button button-line button-small mb-2")
     button.addEventListener("click", function() {
       mod.activate(name)
     })
 
-    var para = helper.node("p:" + state.get.current().strategy[name].cost.cycle + " |class:small muted")
+    var para = helper.node("p:Develop cost " + state.get.current().strategy[name].cost.cycle + " |class:small muted")
     var abbr = helper.node("abbr:Ic|title:Instruction cycles")
 
     para.appendChild(abbr)

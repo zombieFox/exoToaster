@@ -6,21 +6,21 @@ var events = (function() {
     var all = [{
       func: function() {
         tick.mod.set({
-          name: "events",
-          func: function() {
-            mod.check()
-          },
-          interval: state.get.current().events.interval
-        })
-      }
-    }, {
-      func: function() {
-        tick.mod.set({
           name: "autosave",
           func: function() {
             data.save()
           },
           interval: state.get.current().autosave.interval
+        })
+      }
+    }, {
+      func: function() {
+        tick.mod.set({
+          name: "events",
+          func: function() {
+            mod.check()
+          },
+          interval: state.get.current().events.interval
         })
       }
     }, {

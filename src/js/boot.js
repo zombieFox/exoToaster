@@ -3,7 +3,7 @@ var boot = (function() {
   var intro = [{
     report: {
       type: "system",
-      message: ["exoToaster.init loaded"],
+      message: ["exoToaster.data loaded"],
       format: "normal",
       delay: 0
     }
@@ -17,7 +17,7 @@ var boot = (function() {
   }, {
     report: {
       type: "system",
-      message: ["directive.init loaded"],
+      message: ["directive.data loaded"],
       format: "normal",
       delay: 1000
     }
@@ -31,7 +31,7 @@ var boot = (function() {
   }, {
     report: {
       type: "system",
-      message: ["motivation.init loaded"],
+      message: ["motivation.data loaded"],
       format: "normal",
       delay: 1000
     }
@@ -69,9 +69,7 @@ var boot = (function() {
 
     intro.forEach(function(arrayItem, index) {
       for (var key in arrayItem) {
-
         action[key](arrayItem[key])
-
       }
     })
   }
