@@ -58,7 +58,6 @@ var cycle = (function() {
 
   var init = function() {
     mod.interval.set()
-    mod.interval.animation()
     mod.max()
   }
 

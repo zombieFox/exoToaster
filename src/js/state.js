@@ -40,7 +40,7 @@ var state = (function() {
       return mod.current
     },
     default: function() {
-      return JSON.parse(JSON.stringify(mod.default));
+      return JSON.parse(JSON.stringify(mod.default))
     }
   }
 
@@ -49,8 +49,97 @@ var state = (function() {
       interval: 1000
     },
     events: {
-      interval: 300,
-      all: []
+      all: {
+        processor: [{
+          path: "processor",
+          passed: false,
+          restore: true
+        }],
+        cycle: [{
+          path: "cycle.open",
+          passed: false,
+          restore: true
+        }, {
+          path: "cycle.start",
+          passed: false,
+          restore: true
+        }, {
+          path: "cycle.stop",
+          passed: false,
+          restore: true
+        }],
+        strategy: [{
+          path: "strategy.open",
+          passed: false,
+          restore: true
+        }, {
+          path: "strategy.autotoaster",
+          passed: false,
+          restore: true
+        }, {
+          path: "strategy.megatoaster",
+          passed: false,
+          restore: true
+        }, {
+          path: "strategy.rockettoaster",
+          passed: false,
+          restore: true
+        }, {
+          path: "strategy.atomictoaster",
+          passed: false,
+          restore: true
+        }, {
+          path: "strategy.quantumtoaster",
+          passed: false,
+          restore: true
+        }],
+        autotoaster: [{
+          path: "autotoaster.open",
+          passed: false,
+          restore: true
+        }, {
+          path: "autotoaster.active",
+          passed: false,
+          restore: true
+        }],
+        megatoaster: [{
+          path: "megatoaster.open",
+          passed: false,
+          restore: true
+        }, {
+          path: "megatoaster.active",
+          passed: false,
+          restore: true
+        }],
+        rockettoaster: [{
+          path: "rockettoaster.open",
+          passed: false,
+          restore: true
+        }, {
+          path: "rockettoaster.active",
+          passed: false,
+          restore: true
+        }],
+        atomictoaster: [{
+          path: "atomictoaster.open",
+          passed: false,
+          restore: true
+        }, {
+          path: "atomictoaster.active",
+          passed: false,
+          restore: true
+        }],
+        quantumtoaster: [{
+          path: "quantumtoaster.open",
+          passed: false,
+          restore: true
+        }, {
+          path: "quantumtoaster.active",
+          passed: false,
+          restore: true
+        }],
+      },
+      interval: 300
     },
     tick: {
       interval: 300
@@ -88,37 +177,38 @@ var state = (function() {
       autotoaster: {
         active: false,
         cost: {
-          cycle: 4
+          cycle: 2
         }
       },
       megatoaster: {
         active: false,
         cost: {
-          cycle: 8
+          cycle: 4
         }
       },
       rockettoaster: {
         active: false,
         cost: {
-          cycle: 16
+          cycle: 8
         }
       },
       atomictoaster: {
         active: false,
         cost: {
-          cycle: 32
+          cycle: 16
         }
       },
       quantumtoaster: {
         active: false,
         cost: {
-          cycle: 64
+          cycle: 32
         }
       }
     },
     autotoaster: {
       level: 0,
       toastperunit: null,
+      efficiency: 0,
       cost: {
         multiplier: null,
         constant: null,
@@ -142,6 +232,7 @@ var state = (function() {
     megatoaster: {
       level: 0,
       toastperunit: null,
+      efficiency: 0,
       cost: {
         multiplier: null,
         constant: null,
@@ -165,6 +256,7 @@ var state = (function() {
     rockettoaster: {
       level: 0,
       toastperunit: null,
+      efficiency: 0,
       cost: {
         multiplier: null,
         constant: null,
@@ -188,6 +280,7 @@ var state = (function() {
     atomictoaster: {
       level: 0,
       toastperunit: null,
+      efficiency: 0,
       cost: {
         multiplier: null,
         constant: null,
@@ -211,6 +304,7 @@ var state = (function() {
     quantumtoaster: {
       level: 0,
       toastperunit: null,
+      efficiency: 0,
       cost: {
         multiplier: null,
         constant: null,
@@ -281,6 +375,7 @@ var state = (function() {
 
   // cycle
   mod.current.cycle.interval.starting = mod.formula.interval(4)
+  mod.current.cycle.interval.starting = 2000
 
   // autotoaster
   mod.current.autotoaster.toastperunit = mod.formula.toast.perUnit(1)
@@ -388,7 +483,7 @@ var state = (function() {
       return mod.get.current()
     },
     default: function() {
-      return JSON.parse(JSON.stringify(mod.default));
+      return JSON.parse(JSON.stringify(mod.default))
     }
   }
 

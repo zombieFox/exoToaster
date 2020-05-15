@@ -36,7 +36,7 @@ var tick = (function() {
   }
 
   mod.remove = function(name) {
-    clearInterval(tick.get()[name])
+    clearTimeout(current[name])
   }
 
   return {

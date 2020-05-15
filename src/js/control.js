@@ -34,7 +34,6 @@ var control = (function() {
         func: function() {
           processor.upgrade(1)
           cycle.mod.max()
-          cycle.mod.interval.set()
         }
       }, {
         element: "[control=processor-level-increase10]",
@@ -42,7 +41,6 @@ var control = (function() {
         func: function() {
           processor.upgrade(10)
           cycle.mod.max()
-          cycle.mod.interval.set()
         }
       }, {
         element: "[control=processor-level-increase100]",
@@ -50,7 +48,6 @@ var control = (function() {
         func: function() {
           processor.upgrade(100)
           cycle.mod.max()
-          cycle.mod.interval.set()
         }
       }],
       autotoaster: [{

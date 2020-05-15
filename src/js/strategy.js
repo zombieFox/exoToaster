@@ -3,6 +3,13 @@ var strategy = (function() {
   var mod = {}
 
   mod.strings = {
+    name: {
+      autotoaster: "auto toaster",
+      megatoaster: "mega toaster",
+      rockettoaster: "rocket toaster",
+      atomictoaster: "atomic toaster",
+      quantumtoaster: "quantum toaster"
+    },
     success: function(name) {
       return name + " technology developed"
     },
@@ -12,7 +19,7 @@ var strategy = (function() {
   }
 
   mod.activate = function(name) {
-    if (!state.get.current().strategy[name].active) {
+    // if (!state.get.current().strategy[name].active) {
 
       if (state.get.current().cycle.current >= state.get.current().strategy[name].cost.cycle) {
         cycle.mod.remove(state.get.current().strategy[name].cost.cycle)
@@ -34,7 +41,7 @@ var strategy = (function() {
         })
       }
 
-    }
+    // }
   }
 
   var render = {}
@@ -42,10 +49,9 @@ var strategy = (function() {
   render.card = function(name) {
     var cardBody = helper.node("div|class:card-body,strategy:" + name)
 
-    var buttonName = name.replace("toaster", " Toaster")
-    buttonName = buttonName.charAt(0).toUpperCase() + buttonName.slice(1)
+    var buttonName = mod.strings.name[name]
 
-    var button = helper.node("button:Develop " + buttonName + "|class:button button-line button-small mb-2")
+    var button = helper.node("button:develop " + buttonName + "|class:button button-line button-small mb-2")
     button.addEventListener("click", function() {
       mod.activate(name)
     })
@@ -61,7 +67,9 @@ var strategy = (function() {
   }
 
   render.add = function(name) {
-    helper.e("[stage=strategy]").appendChild(render.card(name))
+    if (!state.get.current().strategy[name].active) {
+      helper.e("[stage=strategy]").appendChild(render.card(name))
+    }
   }
 
   render.remove = function(name) {

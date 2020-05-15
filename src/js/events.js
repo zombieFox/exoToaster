@@ -2,318 +2,427 @@ var events = (function() {
 
   var mod = {}
 
-  mod.strings = {
-    processor: {
-      unlock: "processor discovered"
-    },
-    cycle: {
-      unlock: "cycle discovered"
-    }
-  }
-
-  mod.all = {
-    background: [{
-      name: "events",
-      condition: function() {
-        return true
-      },
+  mod.background = function() {
+    var all = [{
       func: function() {
         tick.mod.set({
-          name: this.name,
+          name: "events",
           func: function() {
             mod.check()
           },
           interval: state.get.current().events.interval
         })
-      },
-      passed: false
+      }
     }, {
-      name: "autosave",
-      condition: function() {
-        return true
-      },
       func: function() {
         tick.mod.set({
-          name: this.name,
+          name: "autosave",
           func: function() {
             data.save()
           },
           interval: state.get.current().autosave.interval
         })
-      },
-      passed: false
+      }
     }, {
-      name: "readout",
-      condition: function() {
-        return true
-      },
       func: function() {
         tick.mod.set({
-          name: this.name,
+          name: "readout",
           func: function() {
             readout.render.all()
           },
           interval: state.get.current().readout.interval
         })
-      },
-      passed: false
-    }],
-    processor: [{
+      }
+    }]
+
+    all.forEach(function(item, index) {
+      if (item.func) {
+        item.func()
+      }
+    })
+  }
+
+
+  mod.strings = {
+    processor: {
+      unlock: ["system discovered", "processor"]
+    },
+    cycle: {
+      unlock: ["system discovered", "instruction cycles"]
+    },
+    strategy: {
+      unlock: ["system discovered", "strategy"],
+      new: {
+        autotoaster: ["strategy derived", "auto toaster"],
+        megatoaster: ["strategy derived", "mega toaster"],
+        rockettoaster: ["strategy derived", "rocket toaster"],
+        atomictoaster: ["strategy derived", "atomic toaster"],
+        quantumtoaster: ["strategy derived", "quantum toaster"]
+      }
+    },
+    autotoaster: {
+      open: ["technology developed", "auto toaster"]
+    },
+    megatoaster: {
+      open: ["technology developed", "mega toaster"]
+    },
+    rockettoaster: {
+      open: ["technology developed", "rocket toaster"]
+    },
+    atomictoaster: {
+      open: ["technology developed", "atomic toaster"]
+    },
+    quantumtoaster: {
+      open: ["technology developed", "quantum toaster"]
+    }
+  }
+
+  mod.all = {
+    processor: {
       condition: function() {
         return state.get.current().toast.inventory.current >= state.get.current().processor.cost.toast
       },
-      func: function() {
-        helper.e("[stage=processor]").classList.remove("is-hidden")
-        render(mod.strings.processor.unlock)
+      stage: "processor",
+      report: mod.strings.processor.unlock
+    },
+    cycle: {
+      open: {
+        condition: function() {
+          return state.get.current().processor.level > 2
+        },
+        stage: "cycle",
+        report: mod.strings.cycle.unlock
       },
-      passed: false
-    }],
-    cycle: [{
-      name: "cycle",
-      condition: function() {
-        return state.get.current().processor.level > 2
+      start: {
+        condition: function() {
+          return state.get.current().processor.level > 2 && state.get.current().cycle.current != state.get.current().cycle.max
+        },
+        func: function() {
+          cycle.mod.interval.animation()
+          tick.mod.set({
+            name: "cycle",
+            func: function() {
+              cycle.mod.add(1)
+              cycle.mod.interval.set()
+              cycle.mod.interval.animation()
+            },
+            interval: function() {
+              return state.get.current().cycle.interval.current
+            }
+          })
+          state.get.current().events.all.cycle[2].passed = false
+        }
       },
-      func: function() {
-        helper.e("[stage=cycle]").classList.remove("is-hidden")
-        helper.e("[stage=cycle]").classList.add("active")
-        tick.mod.set({
-          name: this.name,
-          func: function() {
-            cycle.mod.add(1)
-            cycle.mod.interval.animation()
-          },
-          interval: function() {
-            return state.get.current().cycle.interval.current
-          }
-        })
-        render(mod.strings.cycle.unlock)
+      stop: {
+        condition: function() {
+          return state.get.current().cycle.current == state.get.current().cycle.max
+        },
+        func: function() {
+          tick.mod.remove("cycle")
+          state.get.current().events.all.cycle[1].passed = false
+        }
+      }
+    },
+    strategy: {
+      open: {
+        condition: function() {
+          return state.get.current().processor.level >= 4
+        },
+        stage: "strategy",
+        report: mod.strings.strategy.unlock
       },
-      passed: false
-    }],
-    strategy: [{
-      condition: function() {
-        return state.get.current().processor.level >= 4
+      autotoaster: {
+        condition: function() {
+          return state.get.current().processor.level >= 6
+        },
+        report: mod.strings.strategy.new.autotoaster,
+        func: function() {
+          strategy.render.add("autotoaster")
+        }
       },
-      func: function() {
-        helper.e("[stage=strategy]").classList.remove("is-hidden")
-        report.render({
-          type: "system",
-          message: ["strategy discovered"],
-          format: "normal"
-        })
+      megatoaster: {
+        condition: function() {
+          return state.get.current().processor.level >= 12
+        },
+        report: mod.strings.strategy.new.megatoaster,
+        func: function() {
+          strategy.render.add("megatoaster")
+        }
       },
-      passed: false
-    }, {
-      condition: function() {
-        return state.get.current().processor.level >= 5 && !state.get.current().strategy.autotoaster.active
+      rockettoaster: {
+        condition: function() {
+          return state.get.current().processor.level >= 18
+        },
+        report: mod.strings.strategy.new.rockettoaster,
+        func: function() {
+          strategy.render.add("rockettoaster")
+        }
       },
-      func: function() {
-        strategy.render.add("autotoaster")
+      atomictoaster: {
+        condition: function() {
+          return state.get.current().processor.level >= 24
+        },
+        report: mod.strings.strategy.new.atomictoaster,
+        func: function() {
+          strategy.render.add("atomictoaster")
+        }
       },
-      passed: false
-    }, {
-      condition: function() {
-        return state.get.current().processor.level >= 10 && !state.get.current().strategy.megatoaster.active
+      quantumtoaster: {
+        condition: function() {
+          return state.get.current().processor.level >= 30
+        },
+        report: mod.strings.strategy.new.quantumtoaster,
+        func: function() {
+          strategy.render.add("quantumtoaster")
+        }
+      }
+    },
+    autotoaster: {
+      open: {
+        condition: function() {
+          return state.get.current().strategy.autotoaster.active
+        },
+        stage: "autotoaster",
+        report: mod.strings.autotoaster.open
       },
-      func: function() {
-        strategy.render.add("megatoaster")
+      active: {
+        condition: function() {
+          return state.get.current().autotoaster.level >= 1
+        },
+        func: function() {
+          helper.e("[stage=autotoaster]").classList.add("active")
+          tick.mod.set({
+            name: "autotoaster",
+            func: function() {
+              toast.make(state.get.current().autotoaster.level * (state.get.current().autotoaster.toastperunit + state.get.current().autotoaster.efficiency))
+              autotoasterspeed.cardAnimationInterval()
+            },
+            interval: function() {
+              return state.get.current().autotoasterspeed.interval.current
+            }
+          })
+        }
+      }
+    },
+    megatoaster: {
+      open: {
+        condition: function() {
+          return state.get.current().strategy.megatoaster.active
+        },
+        stage: "megatoaster",
+        report: mod.strings.megatoaster.open
       },
-      passed: false
-    }, {
-      condition: function() {
-        return state.get.current().processor.level >= 15 && !state.get.current().strategy.rockettoaster.active
+      active: {
+        condition: function() {
+          return state.get.current().megatoaster.level >= 5
+        },
+        func: function() {
+          helper.e("[stage=megatoaster]").classList.add("active")
+          tick.mod.set({
+            name: "megatoaster",
+            func: function() {
+              toast.make(state.get.current().megatoaster.level * (state.get.current().megatoaster.toastperunit + state.get.current().megatoaster.efficiency))
+              megatoasterspeed.cardAnimationInterval()
+            },
+            interval: function() {
+              return state.get.current().megatoasterspeed.interval.current
+            }
+          })
+        }
+      }
+    },
+    rockettoaster: {
+      open: {
+        condition: function() {
+          return state.get.current().strategy.rockettoaster.active
+        },
+        stage: "rockettoaster",
+        report: mod.strings.rockettoaster.open
       },
-      func: function() {
-        strategy.render.add("rockettoaster")
+      active: {
+        condition: function() {
+          return state.get.current().rockettoaster.level >= 5
+        },
+        func: function() {
+          helper.e("[stage=rockettoaster]").classList.add("active")
+          tick.mod.set({
+            name: "rockettoaster",
+            func: function() {
+              toast.make(state.get.current().rockettoaster.level * (state.get.current().rockettoaster.toastperunit + state.get.current().rockettoaster.efficiency))
+              rockettoasterspeed.cardAnimationInterval()
+            },
+            interval: function() {
+              return state.get.current().rockettoasterspeed.interval.current
+            }
+          })
+        }
+      }
+    },
+    rockettoaster: {
+      open: {
+        condition: function() {
+          return state.get.current().strategy.rockettoaster.active
+        },
+        stage: "rockettoaster",
+        report: mod.strings.rockettoaster.open
       },
-      passed: false
-    }, {
-      condition: function() {
-        return state.get.current().processor.level >= 20 && !state.get.current().strategy.atomictoaster.active
+      active: {
+        condition: function() {
+          return state.get.current().rockettoaster.level >= 5
+        },
+        func: function() {
+          helper.e("[stage=rockettoaster]").classList.add("active")
+          tick.mod.set({
+            name: "rockettoaster",
+            func: function() {
+              toast.make(state.get.current().rockettoaster.level * (state.get.current().rockettoaster.toastperunit + state.get.current().rockettoaster.efficiency))
+              rockettoasterspeed.cardAnimationInterval()
+            },
+            interval: function() {
+              return state.get.current().rockettoasterspeed.interval.current
+            }
+          })
+        }
+      }
+    },
+    atomictoaster: {
+      open: {
+        condition: function() {
+          return state.get.current().strategy.atomictoaster.active
+        },
+        stage: "atomictoaster",
+        report: mod.strings.atomictoaster.open
       },
-      func: function() {
-        strategy.render.add("atomictoaster")
+      active: {
+        condition: function() {
+          return state.get.current().atomictoaster.level >= 5
+        },
+        func: function() {
+          helper.e("[stage=atomictoaster]").classList.add("active")
+          tick.mod.set({
+            name: "atomictoaster",
+            func: function() {
+              toast.make(state.get.current().atomictoaster.level * (state.get.current().atomictoaster.toastperunit + state.get.current().atomictoaster.efficiency))
+              atomictoasterspeed.cardAnimationInterval()
+            },
+            interval: function() {
+              return state.get.current().atomictoasterspeed.interval.current
+            }
+          })
+        }
+      }
+    },
+    quantumtoaster: {
+      open: {
+        condition: function() {
+          return state.get.current().strategy.quantumtoaster.active
+        },
+        stage: "quantumtoaster",
+        report: mod.strings.quantumtoaster.open
       },
-      passed: false
-    }, {
-      condition: function() {
-        return state.get.current().processor.level >= 25 && !state.get.current().strategy.quantumtoaster.active
-      },
-      func: function() {
-        strategy.render.add("quantumtoaster")
-      },
-      passed: false
-    }],
-    autotoaster: [{
-      name: "autotoaster",
-      condition: function() {
-        return state.get.current().strategy.autotoaster.active
-      },
-      func: function() {
-        helper.e("[stage=autotoaster]").classList.remove("is-hidden")
-      },
-      passed: false
-    }, {
-      name: "autotoaster",
-      condition: function() {
-        return state.get.current().autotoaster.level >= 1
-      },
-      func: function() {
-        helper.e("[stage=autotoaster]").classList.add("active")
-        tick.mod.set({
-          name: this.name,
-          func: function() {
-            toast.make(state.get.current().autotoaster.level * state.get.current().autotoaster.toastperunit)
-            autotoasterspeed.cardAnimationInterval()
-          },
-          interval: function() {
-            return state.get.current().autotoasterspeed.interval.current
-          }
-        })
-      },
-      passed: false
-    }],
-    megatoaster: [{
-      name: "megatoaster",
-      condition: function() {
-        return state.get.current().strategy.megatoaster.active
-      },
-      func: function() {
-        helper.e("[stage=megatoaster]").classList.remove("is-hidden")
-      },
-      passed: false
-    }, {
-      name: "megatoaster",
-      condition: function() {
-        return state.get.current().megatoaster.level >= 1
-      },
-      func: function() {
-        helper.e("[stage=megatoaster]").classList.add("active")
-        tick.mod.set({
-          name: this.name,
-          func: function() {
-            toast.make(state.get.current().megatoaster.level * state.get.current().megatoaster.toastperunit)
-            megatoasterspeed.cardAnimationInterval()
-          },
-          interval: function() {
-            return state.get.current().megatoasterspeed.interval.current
-          }
-        })
-      },
-      passed: false
-    }],
-    rockettoaster: [{
-      name: "rockettoaster",
-      condition: function() {
-        return state.get.current().strategy.rockettoaster.active
-      },
-      func: function() {
-        helper.e("[stage=rockettoaster]").classList.remove("is-hidden")
-      },
-      passed: false
-    }, {
-      name: "rockettoaster",
-      condition: function() {
-        return state.get.current().rockettoaster.level >= 1
-      },
-      func: function() {
-        helper.e("[stage=rockettoaster]").classList.add("active")
-        tick.mod.set({
-          name: this.name,
-          func: function() {
-            toast.make(state.get.current().rockettoaster.level * state.get.current().rockettoaster.toastperunit)
-            rockettoasterspeed.cardAnimationInterval()
-          },
-          interval: function() {
-            return state.get.current().rockettoasterspeed.interval.current
-          }
-        })
-      },
-      passed: false
-    }],
-    atomictoaster: [{
-      name: "atomictoaster",
-      condition: function() {
-        return state.get.current().strategy.atomictoaster.active
-      },
-      func: function() {
-        helper.e("[stage=atomictoaster]").classList.remove("is-hidden")
-      },
-      passed: false
-    }, {
-      name: "atomictoaster",
-      condition: function() {
-        return state.get.current().atomictoaster.level >= 1
-      },
-      func: function() {
-        helper.e("[stage=atomictoaster]").classList.add("active")
-        tick.mod.set({
-          name: this.name,
-          func: function() {
-            toast.make(state.get.current().atomictoaster.level * state.get.current().atomictoaster.toastperunit)
-            atomictoasterspeed.cardAnimationInterval()
-          },
-          interval: function() {
-            return state.get.current().atomictoasterspeed.interval.current
-          }
-        })
-      },
-      passed: false
-    }],
-    quantumtoaster: [{
-      name: "quantumtoaster",
-      condition: function() {
-        return state.get.current().strategy.quantumtoaster.active
-      },
-      func: function() {
-        helper.e("[stage=quantumtoaster]").classList.remove("is-hidden")
-      },
-      passed: false
-    }, {
-      name: "quantumtoaster",
-      condition: function() {
-        return state.get.current().quantumtoaster.level >= 1
-      },
-      func: function() {
-        helper.e("[stage=quantumtoaster]").classList.add("active")
-        tick.mod.set({
-          name: this.name,
-          func: function() {
-            toast.make(state.get.current().quantumtoaster.level * state.get.current().quantumtoaster.toastperunit)
-            quantumtoasterspeed.cardAnimationInterval()
-          },
-          interval: function() {
-            return state.get.current().quantumtoasterspeed.interval.current
-          }
-        })
-      },
-      passed: false
-    }]
+      active: {
+        condition: function() {
+          return state.get.current().quantumtoaster.level >= 5
+        },
+        func: function() {
+          helper.e("[stage=quantumtoaster]").classList.add("active")
+          tick.mod.set({
+            name: "quantumtoaster",
+            func: function() {
+              toast.make(state.get.current().quantumtoaster.level * (state.get.current().quantumtoaster.toastperunit + state.get.current().quantumtoaster.efficiency))
+              quantumtoasterspeed.cardAnimationInterval()
+            },
+            interval: function() {
+              return state.get.current().quantumtoasterspeed.interval.current
+            }
+          })
+        }
+      }
+    }
   }
 
   mod.check = function() {
-    for (var key in mod.all) {
-      mod.all[key].forEach(function(item, index) {
+    // loop over all events in state
+    for (var key in state.get.current().events.all) {
+      state.get.current().events.all[key].forEach(function(item, index) {
 
-        if (!item.passed && item.condition()) {
-          item.passed = true
-          item.func()
+        // if event is not passed
+        if (!item.passed) {
+          // get event data
+          var eventData = helper.getObject({
+            object: mod.all,
+            path: item.path
+          })
+
+          // check if event condition has been met
+          if (eventData.condition()) {
+            // set event to passed so event will not be evaluated again
+            state.get.current().events.all[key][index].passed = true
+
+            // run event data
+            if (eventData.stage) {
+              render.unlock(eventData.stage)
+            }
+            if (eventData.report) {
+              render.report(eventData.report)
+            }
+            if (eventData.func) {
+              eventData.func()
+            }
+          }
         }
 
       })
     }
   }
 
-  var render = function(string) {
+  mod.update = function() {
+    // loop over all events in state
+    for (var key in state.get.current().events.all) {
+      state.get.current().events.all[key].forEach(function(item, index) {
+
+        // if event is not passed and should be restored
+        if (item.passed && item.restore) {
+          // get event data
+          var eventData = helper.getObject({
+            object: mod.all,
+            path: item.path
+          })
+
+          // run event data
+          if (eventData.stage) {
+            render.unlock(eventData.stage)
+          }
+          if (eventData.func) {
+            eventData.func()
+          }
+        }
+
+      })
+    }
+  }
+
+  var render = {}
+
+  render.unlock = function(name) {
+    helper.e("[stage=" + name + "]").classList.remove("is-hidden")
+  }
+
+  render.lock = function(name) {
+    helper.e("[stage=" + name + "]").classList.add("is-hidden")
+  }
+
+  render.report = function(strings) {
     report.render({
       type: "system",
-      message: [string],
+      message: strings,
       format: "normal"
     })
   }
 
   var init = function() {
-    mod.check()
+    mod.background()
+    mod.update()
   }
 
   return {
