@@ -2,6 +2,29 @@ var events = (function() {
 
   var mod = {}
 
+  mod.addresses = [
+    "all.processor.open",
+    "all.cycle.open",
+    "all.cycle.start",
+    "all.cycle.stop",
+    "all.strategy.open",
+    "all.strategy.autotoaster.open",
+    "all.strategy.megatoaster.open",
+    "all.strategy.rockettoaster.open",
+    "all.strategy.atomictoaster.open",
+    "all.strategy.quantumtoaster.open",
+    "all.autotoaster.open",
+    "all.autotoaster.active",
+    "all.megatoaster.open",
+    "all.megatoaster.active",
+    "all.rockettoaster.open",
+    "all.rockettoaster.active",
+    "all.atomictoaster.open",
+    "all.atomictoaster.active",
+    "all.quantumtoaster.open",
+    "all.quantumtoaster.active"
+  ]
+
   mod.background = function() {
     var all = [{
       func: function() {
@@ -74,11 +97,13 @@ var events = (function() {
 
   mod.all = {
     processor: {
-      condition: function() {
-        return state.get.current().toast.inventory.current >= state.get.current().processor.cost.toast
-      },
-      stage: "processor",
-      report: mod.strings.processor.open
+      open: {
+        condition: function() {
+          return state.get.current().toast.inventory.current >= state.get.current().processor.cost.toast
+        },
+        stage: "processor",
+        report: mod.strings.processor.open
+      }
     },
     cycle: {
       open: {
@@ -105,7 +130,11 @@ var events = (function() {
               return state.get.current().cycle.interval.current
             }
           })
-          state.get.current().events.all.cycle[2].passed = false
+          helper.setObject({
+            object: state.get.current(),
+            path: "events.all.cycle.stop.passed",
+            newValue: false
+          })
         }
       },
       stop: {
@@ -114,7 +143,11 @@ var events = (function() {
         },
         func: function() {
           tick.mod.remove("cycle")
-          state.get.current().events.all.cycle[1].passed = false
+          helper.setObject({
+            object: state.get.current(),
+            path: "events.all.cycle.start.passed",
+            newValue: false
+          })
         }
       }
     },
@@ -127,64 +160,85 @@ var events = (function() {
         report: mod.strings.strategy.open
       },
       autotoaster: {
-        condition: function() {
-          return state.get.current().processor.level >= 6
-        },
-        report: mod.strings.strategy.autotoaster.open,
-        func: function() {
-          strategy.render.add("autotoaster")
+        open: {
+          condition: function() {
+            return state.get.current().processor.level >= 6
+          },
+          report: mod.strings.strategy.autotoaster.open,
+          func: function() {
+            strategy.render.card({
+              path: "all.strategy.autotoaster",
+              name: "autotoaster",
+              displayName: "Auto Toaster"
+            })
+          }
         }
       },
       megatoaster: {
-        condition: function() {
-          return state.get.current().processor.level >= 12
-        },
-        report: mod.strings.strategy.megatoaster.open,
-        func: function() {
-          strategy.render.add("megatoaster")
+        open: {
+          condition: function() {
+            return state.get.current().processor.level >= 12
+          },
+          report: mod.strings.strategy.megatoaster.open,
+          func: function() {
+            strategy.render.card({
+              path: "all.strategy.megatoaster",
+              name: "megatoaster",
+              displayName: "Mega Toaster"
+            })
+          }
         }
       },
       rockettoaster: {
-        condition: function() {
-          return state.get.current().processor.level >= 18
-        },
-        report: mod.strings.strategy.rockettoaster.open,
-        func: function() {
-          strategy.render.add("rockettoaster")
+        open: {
+          condition: function() {
+            return state.get.current().processor.level >= 18
+          },
+          report: mod.strings.strategy.rockettoaster.open,
+          func: function() {
+            strategy.render.card({
+              path: "all.strategy.rockettoaster",
+              name: "rockettoaster",
+              displayName: "Rocket Toaster"
+            })
+          }
         }
       },
       atomictoaster: {
-        condition: function() {
-          return state.get.current().processor.level >= 24
-        },
-        report: mod.strings.strategy.atomictoaster.open,
-        func: function() {
-          strategy.render.add("atomictoaster")
+        open: {
+          condition: function() {
+            return state.get.current().processor.level >= 24
+          },
+          report: mod.strings.strategy.atomictoaster.open,
+          func: function() {
+            strategy.render.card({
+              path: "all.strategy.atomictoaster",
+              name: "atomictoaster",
+              displayName: "Atomic Toaster"
+            })
+          }
         }
       },
       quantumtoaster: {
-        condition: function() {
-          return state.get.current().processor.level >= 30
-        },
-        report: mod.strings.strategy.quantumtoaster.open,
-        func: function() {
-          strategy.render.add("quantumtoaster")
-        }
-      },
-      unmotivated: {
-        condition: function() {
-          return state.get.current().processor.level >= 10
-        },
-        report: mod.strings.strategy.unmotivated.open,
-        func: function() {
-          strategy.render.add("unmotivated")
+        open: {
+          condition: function() {
+            return state.get.current().processor.level >= 30
+          },
+          report: mod.strings.strategy.quantumtoaster.open,
+          func: function() {
+            strategy.render.card({
+              path: "all.strategy.quantumtoaster",
+              name: "quantumtoaster",
+              displayName: "Quantum Toaster"
+            })
+          }
         }
       }
     },
     autotoaster: {
       open: {
         condition: function() {
-          return state.get.current().strategy.autotoaster.active
+          return state.get.current().events.all.strategy.autotoaster.active.passed
         },
         stage: "autotoaster"
       },
@@ -211,13 +265,13 @@ var events = (function() {
     megatoaster: {
       open: {
         condition: function() {
-          return state.get.current().strategy.megatoaster.active
+          return state.get.current().events.all.strategy.megatoaster.active.passed
         },
         stage: "megatoaster"
       },
       active: {
         condition: function() {
-          return state.get.current().megatoaster.level >= 5
+          return state.get.current().megatoaster.level >= 1
         },
         func: function() {
           helper.e("[stage=megatoaster]").classList.add("active")
@@ -238,13 +292,13 @@ var events = (function() {
     rockettoaster: {
       open: {
         condition: function() {
-          return state.get.current().strategy.rockettoaster.active
+          return state.get.current().events.all.strategy.rockettoaster.active.passed
         },
         stage: "rockettoaster"
       },
       active: {
         condition: function() {
-          return state.get.current().rockettoaster.level >= 5
+          return state.get.current().rockettoaster.level >= 1
         },
         func: function() {
           helper.e("[stage=rockettoaster]").classList.add("active")
@@ -265,13 +319,13 @@ var events = (function() {
     atomictoaster: {
       open: {
         condition: function() {
-          return state.get.current().strategy.atomictoaster.active
+          return state.get.current().events.all.strategy.atomictoaster.active.passed
         },
         stage: "atomictoaster"
       },
       active: {
         condition: function() {
-          return state.get.current().atomictoaster.level >= 5
+          return state.get.current().atomictoaster.level >= 1
         },
         func: function() {
           helper.e("[stage=atomictoaster]").classList.add("active")
@@ -292,13 +346,13 @@ var events = (function() {
     quantumtoaster: {
       open: {
         condition: function() {
-          return state.get.current().strategy.quantumtoaster.active
+          return state.get.current().events.all.strategy.quantumtoaster.active.passed
         },
         stage: "quantumtoaster"
       },
       active: {
         condition: function() {
-          return state.get.current().quantumtoaster.level >= 5
+          return state.get.current().quantumtoaster.level >= 1
         },
         func: function() {
           helper.e("[stage=quantumtoaster]").classList.add("active")
@@ -315,76 +369,90 @@ var events = (function() {
           })
         }
       }
-    },
-    unmotivated: {
-      open: {
-        condition: function() {
-          return state.get.current().strategy.unmotivated.active
-        },
-        stage: "unmotivated"
-      },
     }
   }
 
   mod.check = function() {
-    // loop over all events in state
-    for (var key in state.get.current().events.all) {
-      state.get.current().events.all[key].forEach(function(item, index) {
 
-        // if event is not passed
-        if (!item.passed) {
-          // get event data
-          var eventData = helper.getObject({
-            object: mod.all,
-            path: item.path
-          })
+    var action = function functionName(path) {
 
-          // check if event condition has been met
-          if (eventData.condition()) {
-            // set event to passed so event will not be evaluated again
-            state.get.current().events.all[key][index].passed = true
-
-            // run event data
-            if (eventData.stage) {
-              render.unlock(eventData.stage)
-            }
-            if (eventData.report) {
-              render.report(eventData.report)
-            }
-            if (eventData.func) {
-              eventData.func()
-            }
-          }
-        }
-
+      // get state data
+      var stateData = helper.getObject({
+        object: state.get.current(),
+        path: "events." + path
       })
-    }
-  }
 
-  mod.update = function() {
-    // loop over all events in state
-    for (var key in state.get.current().events.all) {
-      state.get.current().events.all[key].forEach(function(item, index) {
+      // if event is not passed
+      if (!stateData.passed) {
+        // get event data
+        var eventData = helper.getObject({
+          object: mod,
+          path: path
+        })
 
-        // if event is not passed and should be restored
-        if (item.passed && item.restore) {
-          // get event data
-          var eventData = helper.getObject({
-            object: mod.all,
-            path: item.path
+        // check if event condition has been met
+        if (eventData.condition()) {
+          // set event to passed so event will not be evaluated again
+          helper.setObject({
+            object: state.get.current(),
+            path: "events." + path + ".passed",
+            newValue: true
           })
 
           // run event data
           if (eventData.stage) {
             render.unlock(eventData.stage)
           }
+          if (eventData.report) {
+            render.report(eventData.report)
+          }
           if (eventData.func) {
             eventData.func()
           }
         }
+      }
 
-      })
     }
+
+    mod.addresses.forEach(function(path, index) {
+      action(path)
+    })
+
+  }
+
+  mod.update = function() {
+
+    var action = function functionName(path) {
+
+      // get state data
+      var stateData = helper.getObject({
+        object: state.get.current(),
+        path: "events." + path
+      })
+
+      // if event is not passed and should be restored
+      if (stateData.passed && stateData.restore) {
+        // get event data
+        var eventData = helper.getObject({
+          object: mod,
+          path: path
+        })
+
+        // run event data
+        if (eventData.stage) {
+          render.unlock(eventData.stage)
+        }
+        if (eventData.func) {
+          eventData.func()
+        }
+      }
+
+    }
+
+    mod.addresses.forEach(function(path, index) {
+      action(path)
+    })
+
   }
 
   var render = {}

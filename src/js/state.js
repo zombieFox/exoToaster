@@ -50,103 +50,153 @@ var state = (function() {
     },
     events: {
       all: {
-        processor: [{
-          path: "processor",
-          passed: false,
-          restore: true
-        }],
-        cycle: [{
-          path: "cycle.open",
-          passed: false,
-          restore: true
-        }, {
-          path: "cycle.start",
-          passed: false,
-          restore: true
-        }, {
-          path: "cycle.stop",
-          passed: false,
-          restore: true
-        }],
-        strategy: [{
-          path: "strategy.open",
-          passed: false,
-          restore: true
-        }, {
-          path: "strategy.autotoaster",
-          passed: false,
-          restore: true
-        }, {
-          path: "strategy.megatoaster",
-          passed: false,
-          restore: true
-        }, {
-          path: "strategy.rockettoaster",
-          passed: false,
-          restore: true
-        }, {
-          path: "strategy.atomictoaster",
-          passed: false,
-          restore: true
-        }, {
-          path: "strategy.quantumtoaster",
-          passed: false,
-          restore: true
-        }, {
-          path: "strategy.unmotivated",
-          passed: false,
-          restore: true
-        }],
-        autotoaster: [{
-          path: "autotoaster.open",
-          passed: false,
-          restore: true
-        }, {
-          path: "autotoaster.active",
-          passed: false,
-          restore: true
-        }],
-        megatoaster: [{
-          path: "megatoaster.open",
-          passed: false,
-          restore: true
-        }, {
-          path: "megatoaster.active",
-          passed: false,
-          restore: true
-        }],
-        rockettoaster: [{
-          path: "rockettoaster.open",
-          passed: false,
-          restore: true
-        }, {
-          path: "rockettoaster.active",
-          passed: false,
-          restore: true
-        }],
-        atomictoaster: [{
-          path: "atomictoaster.open",
-          passed: false,
-          restore: true
-        }, {
-          path: "atomictoaster.active",
-          passed: false,
-          restore: true
-        }],
-        quantumtoaster: [{
-          path: "quantumtoaster.open",
-          passed: false,
-          restore: true
-        }, {
-          path: "quantumtoaster.active",
-          passed: false,
-          restore: true
-        }],
-        unmotivated: [{
-          path: "unmotivated.open",
-          passed: false,
-          restore: true
-        }]
+        toaster: {
+          open: {
+            passed: false,
+            restore: true
+          }
+        },
+        processor: {
+          open: {
+            passed: false,
+            restore: true
+          }
+        },
+        cycle: {
+          open: {
+            passed: false,
+            restore: true
+          },
+          start: {
+            passed: false,
+            restore: true
+          },
+          stop: {
+            passed: false,
+            restore: true
+          },
+        },
+        strategy: {
+          open: {
+            passed: false,
+            restore: true
+          },
+          autotoaster: {
+            open: {
+              passed: false,
+              restore: true,
+              cost: {
+                cycle: 2
+              }
+            },
+            active: {
+              passed: false,
+              restore: true
+            }
+          },
+          megatoaster: {
+            open: {
+              passed: false,
+              restore: true,
+              cost: {
+                cycle: 4
+              }
+            },
+            active: {
+              passed: false,
+              restore: true
+            }
+          },
+          rockettoaster: {
+            open: {
+              passed: false,
+              restore: true,
+              cost: {
+                cycle: 8
+              }
+            },
+            active: {
+              passed: false,
+              restore: true
+            }
+          },
+          atomictoaster: {
+            open: {
+              passed: false,
+              restore: true,
+              cost: {
+                cycle: 16
+              }
+            },
+            active: {
+              passed: false,
+              restore: true
+            }
+          },
+          quantumtoaster: {
+            open: {
+              passed: false,
+              restore: true,
+              cost: {
+                cycle: 32
+              }
+            },
+            active: {
+              passed: false,
+              restore: true
+            }
+          },
+        },
+        autotoaster: {
+          open: {
+            passed: false,
+            restore: true
+          },
+          active: {
+            passed: false,
+            restore: true
+          }
+        },
+        megatoaster: {
+          open: {
+            passed: false,
+            restore: true
+          },
+          active: {
+            passed: false,
+            restore: true
+          }
+        },
+        rockettoaster: {
+          open: {
+            passed: false,
+            restore: true
+          },
+          active: {
+            passed: false,
+            restore: true
+          }
+        },
+        atomictoaster: {
+          open: {
+            passed: false,
+            restore: true
+          },
+          active: {
+            passed: false,
+            restore: true
+          }
+        },
+        quantumtoaster: {
+          open: {
+            passed: false,
+            restore: true
+          },
+          active: {
+            passed: false,
+            restore: true
+          }
+        }
       },
       interval: 500
     },
@@ -181,44 +231,6 @@ var state = (function() {
         current: null,
         min: 1000
       }
-    },
-    strategy: {
-      autotoaster: {
-        active: false,
-        cost: {
-          cycle: 2
-        }
-      },
-      megatoaster: {
-        active: false,
-        cost: {
-          cycle: 4
-        }
-      },
-      rockettoaster: {
-        active: false,
-        cost: {
-          cycle: 8
-        }
-      },
-      atomictoaster: {
-        active: false,
-        cost: {
-          cycle: 16
-        }
-      },
-      quantumtoaster: {
-        active: false,
-        cost: {
-          cycle: 32
-        }
-      },
-      unmotivated: {
-        active: false,
-        cost: {
-          cycle: 16
-        }
-      },
     },
     autotoaster: {
       level: 0,

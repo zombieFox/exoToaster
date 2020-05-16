@@ -3,14 +3,6 @@ var strategy = (function() {
   var mod = {}
 
   mod.strings = {
-    name: {
-      autotoaster: "Auto Toasters",
-      megatoaster: "Mega Toasters",
-      rockettoaster: "Rocket Toasters",
-      atomictoaster: "Atomic Toasters",
-      quantumtoaster: "Quantum Toasters",
-      unmotivated: "Unmotivated"
-    },
     success: {
       autotoaster: {
         open: ["auto_toaster.data loaded"]
@@ -36,26 +28,48 @@ var strategy = (function() {
     }
   }
 
-  mod.activate = function(name) {
-    if (state.get.current().cycle.current >= state.get.current().strategy[name].cost.cycle) {
-      cycle.consume(state.get.current().strategy[name].cost.cycle)
+  mod.activate = function(override) {
+    var options = {
+      path: null,
+      name: null,
+      displayName: null
+    }
 
-      state.set({
-        path: "strategy." + name + ".active",
-        value: true
+    if (override) {
+      options = helper.applyOptions(options, override)
+    }
+
+    var stateData = helper.getObject({
+      object: state.get.current(),
+      path: "events." + options.path
+    })
+
+    if (state.get.current().cycle.current >= stateData.open.cost.cycle) {
+      cycle.consume(stateData.open.cost.cycle)
+
+      helper.setObject({
+        object: state.get.current(),
+        path: "events." + options.path + ".open.restore",
+        newValue: false
       })
 
-      render.remove(name)
+      helper.setObject({
+        object: state.get.current(),
+        path: "events." + options.path + ".active.passed",
+        newValue: true
+      })
+
+      render.remove(options.name)
 
       report.render({
         type: "system",
-        message: mod.strings.success[name].open,
+        message: mod.strings.success[options.name].open,
         format: "normal"
       })
     } else {
       report.render({
         type: "error",
-        message: [mod.strings.fail(state.get.current().strategy[name].cost.cycle)],
+        message: [mod.strings.fail(stateData.open.cost.cycle)],
         format: "normal"
       })
     }
@@ -63,29 +77,44 @@ var strategy = (function() {
 
   var render = {}
 
-  render.card = function(name) {
-    var cardBody = helper.node("div|class:card-body,strategy:" + name)
+  render.card = function(override) {
+    var options = {
+      path: null,
+      name: null,
+      displayName: null
+    }
 
-    var buttonName = mod.strings.name[name]
+    if (override) {
+      options = helper.applyOptions(options, override)
+    }
 
-    var button = helper.node("button:Develop " + buttonName + "|class:button button-line button-small mb-2")
-    button.addEventListener("click", function() {
-      mod.activate(name)
+    var stateData = helper.getObject({
+      object: state.get.current(),
+      path: "events." + options.path
     })
 
-    var para = helper.node("p:Develop cost " + state.get.current().strategy[name].cost.cycle + " |class:small muted")
-    var abbr = helper.node("abbr:Ic|title:Instruction cycles")
+    if (stateData.open.restore) {
 
-    para.appendChild(abbr)
-    cardBody.appendChild(button)
-    cardBody.appendChild(para)
+      var cardBody = helper.node("div|class:card-body,strategy:" + options.name)
 
-    return cardBody
-  }
+      var button = helper.node("button:Develop " + options.displayName + "|class:button button-line button-small mb-2")
 
-  render.add = function(name) {
-    if (!state.get.current().strategy[name].active) {
-      helper.e("[stage=strategy]").appendChild(render.card(name))
+      button.addEventListener("click", function() {
+        mod.activate(options)
+      })
+
+      var para = helper.node("p:Develop cost " + stateData.open.cost.cycle + " |class:small muted")
+
+      var abbr = helper.node("abbr:Ic|title:Instruction cycles")
+
+      para.appendChild(abbr)
+
+      cardBody.appendChild(button)
+
+      cardBody.appendChild(para)
+
+      helper.e("[stage=strategy]").appendChild(cardBody)
+
     }
   }
 
