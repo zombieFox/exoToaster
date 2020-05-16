@@ -38,7 +38,7 @@ var strategy = (function() {
 
   mod.activate = function(name) {
     if (state.get.current().cycle.current >= state.get.current().strategy[name].cost.cycle) {
-      cycle.mod.remove(state.get.current().strategy[name].cost.cycle)
+      cycle.consume(state.get.current().strategy[name].cost.cycle)
 
       state.set({
         path: "strategy." + name + ".active",

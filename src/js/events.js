@@ -97,7 +97,7 @@ var events = (function() {
           tick.mod.set({
             name: "cycle",
             func: function() {
-              cycle.mod.add(1)
+              cycle.make(1)
               cycle.mod.interval.set()
               cycle.mod.interval.animation()
             },
@@ -194,6 +194,7 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=autotoaster]").classList.add("active")
+          autotoasterspeed.cardAnimationInterval()
           tick.mod.set({
             name: "autotoaster",
             func: function() {
@@ -220,6 +221,7 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=megatoaster]").classList.add("active")
+          megatoasterspeed.cardAnimationInterval()
           tick.mod.set({
             name: "megatoaster",
             func: function() {
@@ -246,32 +248,7 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=rockettoaster]").classList.add("active")
-          tick.mod.set({
-            name: "rockettoaster",
-            func: function() {
-              toast.make(state.get.current().rockettoaster.level * (state.get.current().rockettoaster.toastperunit + state.get.current().rockettoaster.efficiency))
-              rockettoasterspeed.cardAnimationInterval()
-            },
-            interval: function() {
-              return state.get.current().rockettoasterspeed.interval.current
-            }
-          })
-        }
-      }
-    },
-    rockettoaster: {
-      open: {
-        condition: function() {
-          return state.get.current().strategy.rockettoaster.active
-        },
-        stage: "rockettoaster"
-      },
-      active: {
-        condition: function() {
-          return state.get.current().rockettoaster.level >= 5
-        },
-        func: function() {
-          helper.e("[stage=rockettoaster]").classList.add("active")
+          rockettoasterspeed.cardAnimationInterval()
           tick.mod.set({
             name: "rockettoaster",
             func: function() {
@@ -298,6 +275,7 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=atomictoaster]").classList.add("active")
+          atomictoasterspeed.cardAnimationInterval()
           tick.mod.set({
             name: "atomictoaster",
             func: function() {
@@ -324,6 +302,7 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=quantumtoaster]").classList.add("active")
+          quantumtoasterspeed.cardAnimationInterval()
           tick.mod.set({
             name: "quantumtoaster",
             func: function() {

@@ -59,7 +59,21 @@ var cycle = (function() {
     }
   }
 
-  var render = {}
+  var make = function(amount) {
+    if (amount != null && amount != undefined && typeof amount == "number") {
+      mod.add(amount)
+    }
+  }
+
+  var consume = function(amount) {
+    if (amount != null && amount != undefined && typeof amount == "number") {
+      mod.remove(amount)
+    }
+  }
+
+  var max = function() {
+    mod.max()
+  }
 
   var init = function() {
     mod.interval.set()
@@ -68,7 +82,9 @@ var cycle = (function() {
 
   return {
     mod: mod,
-    render: render,
+    make: make,
+    consume: consume,
+    max: max,
     init: init
   }
 

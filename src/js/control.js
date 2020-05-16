@@ -33,21 +33,21 @@ var control = (function() {
         type: "button",
         func: function() {
           processor.upgrade(1)
-          cycle.mod.max()
+          cycle.max()
         }
       }, {
         element: "[control=processor-level-increase10]",
         type: "button",
         func: function() {
           processor.upgrade(10)
-          cycle.mod.max()
+          cycle.max()
         }
       }, {
         element: "[control=processor-level-increase100]",
         type: "button",
         func: function() {
           processor.upgrade(100)
-          cycle.mod.max()
+          cycle.max()
         }
       }],
       autotoaster: [{
