@@ -8,7 +8,8 @@ var strategy = (function() {
       megatoaster: "Mega Toasters",
       rockettoaster: "Rocket Toasters",
       atomictoaster: "Atomic Toasters",
-      quantumtoaster: "Quantum Toasters"
+      quantumtoaster: "Quantum Toasters",
+      unmotivated: "Unmotivated"
     },
     success: {
       autotoaster: {
@@ -25,6 +26,9 @@ var strategy = (function() {
       },
       quantumtoaster: {
         open: ["quantum_toaster.data loaded"]
+      },
+      unmotivated: {
+        open: ["unmotivated.data loaded"]
       }
     },
     fail: function(amount) {

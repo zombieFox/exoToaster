@@ -217,7 +217,7 @@
 
 @keyframes swing {
   0% {
-    transform: perspective(1000px) rotateX(-90deg);
+    transform: perspective(1000px) rotateX(-50deg);
     opacity: 0;
   }
 
@@ -225,11 +225,8 @@
     transform: perspective(1000px) rotateX(45deg);
   }
 
-  20% {
-    opacity: 1;
-  }
-
   30% {
+    opacity: 1;
     transform: perspective(1000px) rotateX(-30deg);
   }
 
@@ -238,15 +235,19 @@
   }
 
   60% {
-    transform: perspective(1000px) rotateX(-10deg);
+    transform: perspective(1000px) rotateX(-5deg);
   }
 
   70% {
-    transform: perspective(1000px) rotateX(10deg);
+    transform: perspective(1000px) rotateX(4deg);
+  }
+
+  80% {
+    transform: perspective(1000px) rotateX(-3deg);
   }
 
   90% {
-    transform: perspective(1000px) rotateX(-5deg);
+    transform: perspective(1000px) rotateX(2deg);
   }
 
   100% {

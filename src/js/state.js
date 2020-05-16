@@ -92,6 +92,10 @@ var state = (function() {
           path: "strategy.quantumtoaster",
           passed: false,
           restore: true
+        }, {
+          path: "strategy.unmotivated",
+          passed: false,
+          restore: true
         }],
         autotoaster: [{
           path: "autotoaster.open",
@@ -138,6 +142,11 @@ var state = (function() {
           passed: false,
           restore: true
         }],
+        unmotivated: [{
+          path: "unmotivated.open",
+          passed: false,
+          restore: true
+        }]
       },
       interval: 500
     },
@@ -203,7 +212,13 @@ var state = (function() {
         cost: {
           cycle: 32
         }
-      }
+      },
+      unmotivated: {
+        active: false,
+        cost: {
+          cycle: 16
+        }
+      },
     },
     autotoaster: {
       level: 0,

@@ -65,6 +65,9 @@ var events = (function() {
       },
       quantumtoaster: {
         open: ["strategy.quantum_toaster.data loaded"]
+      },
+      unmotivated: {
+        open: ["strategy.unmotivated.data loaded"]
       }
     }
   }
@@ -166,6 +169,15 @@ var events = (function() {
         report: mod.strings.strategy.quantumtoaster.open,
         func: function() {
           strategy.render.add("quantumtoaster")
+        }
+      },
+      unmotivated: {
+        condition: function() {
+          return state.get.current().processor.level >= 5
+        },
+        report: mod.strings.strategy.unmotivated.open,
+        func: function() {
+          strategy.render.add("unmotivated")
         }
       }
     },
@@ -324,6 +336,14 @@ var events = (function() {
           })
         }
       }
+    },
+    unmotivated: {
+      open: {
+        condition: function() {
+          return state.get.current().strategy.unmotivated.active
+        },
+        stage: "unmotivated"
+      },
     }
   }
 
