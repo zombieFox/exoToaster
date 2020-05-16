@@ -42,38 +42,30 @@ var events = (function() {
     })
   }
 
-
   mod.strings = {
     processor: {
-      unlock: ["system discovered", "processor"]
+      open: ["processor.data loaded"]
     },
     cycle: {
-      unlock: ["system discovered", "instruction cycles"]
+      open: ["instruction_cycles.data loaded"]
     },
     strategy: {
-      unlock: ["system discovered", "strategy"],
-      new: {
-        autotoaster: ["strategy derived", "auto toaster"],
-        megatoaster: ["strategy derived", "mega toaster"],
-        rockettoaster: ["strategy derived", "rocket toaster"],
-        atomictoaster: ["strategy derived", "atomic toaster"],
-        quantumtoaster: ["strategy derived", "quantum toaster"]
+      open: ["strategy.data loaded"],
+      autotoaster: {
+        open: ["strategy.auto_toaster.data loaded"]
+      },
+      megatoaster: {
+        open: ["strategy.mega_toaster.data loaded"]
+      },
+      rockettoaster: {
+        open: ["strategy.rocket_toaster.data loaded"]
+      },
+      atomictoaster: {
+        open: ["strategy.atomic_toaster.data loaded"]
+      },
+      quantumtoaster: {
+        open: ["strategy.quantum_toaster.data loaded"]
       }
-    },
-    autotoaster: {
-      open: ["technology developed", "auto toaster"]
-    },
-    megatoaster: {
-      open: ["technology developed", "mega toaster"]
-    },
-    rockettoaster: {
-      open: ["technology developed", "rocket toaster"]
-    },
-    atomictoaster: {
-      open: ["technology developed", "atomic toaster"]
-    },
-    quantumtoaster: {
-      open: ["technology developed", "quantum toaster"]
     }
   }
 
@@ -83,7 +75,7 @@ var events = (function() {
         return state.get.current().toast.inventory.current >= state.get.current().processor.cost.toast
       },
       stage: "processor",
-      report: mod.strings.processor.unlock
+      report: mod.strings.processor.open
     },
     cycle: {
       open: {
@@ -91,7 +83,7 @@ var events = (function() {
           return state.get.current().processor.level > 2
         },
         stage: "cycle",
-        report: mod.strings.cycle.unlock
+        report: mod.strings.cycle.open
       },
       start: {
         condition: function() {
@@ -129,13 +121,13 @@ var events = (function() {
           return state.get.current().processor.level >= 4
         },
         stage: "strategy",
-        report: mod.strings.strategy.unlock
+        report: mod.strings.strategy.open
       },
       autotoaster: {
         condition: function() {
           return state.get.current().processor.level >= 6
         },
-        report: mod.strings.strategy.new.autotoaster,
+        report: mod.strings.strategy.autotoaster.open,
         func: function() {
           strategy.render.add("autotoaster")
         }
@@ -144,7 +136,7 @@ var events = (function() {
         condition: function() {
           return state.get.current().processor.level >= 12
         },
-        report: mod.strings.strategy.new.megatoaster,
+        report: mod.strings.strategy.megatoaster.open,
         func: function() {
           strategy.render.add("megatoaster")
         }
@@ -153,7 +145,7 @@ var events = (function() {
         condition: function() {
           return state.get.current().processor.level >= 18
         },
-        report: mod.strings.strategy.new.rockettoaster,
+        report: mod.strings.strategy.rockettoaster.open,
         func: function() {
           strategy.render.add("rockettoaster")
         }
@@ -162,7 +154,7 @@ var events = (function() {
         condition: function() {
           return state.get.current().processor.level >= 24
         },
-        report: mod.strings.strategy.new.atomictoaster,
+        report: mod.strings.strategy.atomictoaster.open,
         func: function() {
           strategy.render.add("atomictoaster")
         }
@@ -171,7 +163,7 @@ var events = (function() {
         condition: function() {
           return state.get.current().processor.level >= 30
         },
-        report: mod.strings.strategy.new.quantumtoaster,
+        report: mod.strings.strategy.quantumtoaster.open,
         func: function() {
           strategy.render.add("quantumtoaster")
         }
@@ -182,8 +174,7 @@ var events = (function() {
         condition: function() {
           return state.get.current().strategy.autotoaster.active
         },
-        stage: "autotoaster",
-        report: mod.strings.autotoaster.open
+        stage: "autotoaster"
       },
       active: {
         condition: function() {
@@ -209,8 +200,7 @@ var events = (function() {
         condition: function() {
           return state.get.current().strategy.megatoaster.active
         },
-        stage: "megatoaster",
-        report: mod.strings.megatoaster.open
+        stage: "megatoaster"
       },
       active: {
         condition: function() {
@@ -236,8 +226,7 @@ var events = (function() {
         condition: function() {
           return state.get.current().strategy.rockettoaster.active
         },
-        stage: "rockettoaster",
-        report: mod.strings.rockettoaster.open
+        stage: "rockettoaster"
       },
       active: {
         condition: function() {
@@ -263,8 +252,7 @@ var events = (function() {
         condition: function() {
           return state.get.current().strategy.rockettoaster.active
         },
-        stage: "rockettoaster",
-        report: mod.strings.rockettoaster.open
+        stage: "rockettoaster"
       },
       active: {
         condition: function() {
@@ -290,8 +278,7 @@ var events = (function() {
         condition: function() {
           return state.get.current().strategy.atomictoaster.active
         },
-        stage: "atomictoaster",
-        report: mod.strings.atomictoaster.open
+        stage: "atomictoaster"
       },
       active: {
         condition: function() {
@@ -317,8 +304,7 @@ var events = (function() {
         condition: function() {
           return state.get.current().strategy.quantumtoaster.active
         },
-        stage: "quantumtoaster",
-        report: mod.strings.quantumtoaster.open
+        stage: "quantumtoaster"
       },
       active: {
         condition: function() {

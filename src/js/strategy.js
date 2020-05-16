@@ -10,8 +10,22 @@ var strategy = (function() {
       atomictoaster: "Atomic Toasters",
       quantumtoaster: "Quantum Toasters"
     },
-    success: function(name) {
-      return name + " technology developed"
+    success: {
+      autotoaster: {
+        open: ["auto_toaster.data loaded"]
+      },
+      megatoaster: {
+        open: ["mega_toaster.data loaded"]
+      },
+      rockettoaster: {
+        open: ["rocket_toaster.data loaded"]
+      },
+      atomictoaster: {
+        open: ["atomic_toaster.data loaded"]
+      },
+      quantumtoaster: {
+        open: ["quantum_toaster.data loaded"]
+      }
     },
     fail: function(amount) {
       return amount + " instruction cycles needed"
@@ -19,29 +33,28 @@ var strategy = (function() {
   }
 
   mod.activate = function(name) {
-    // if (!state.get.current().strategy[name].active) {
+    if (state.get.current().cycle.current >= state.get.current().strategy[name].cost.cycle) {
+      cycle.mod.remove(state.get.current().strategy[name].cost.cycle)
 
-      if (state.get.current().cycle.current >= state.get.current().strategy[name].cost.cycle) {
-        cycle.mod.remove(state.get.current().strategy[name].cost.cycle)
-        state.set({
-          path: "strategy." + name + ".active",
-          value: true
-        })
-        render.remove(name)
-        report.render({
-          type: "system",
-          message: [mod.strings.success(name)],
-          format: "normal"
-        })
-      } else {
-        report.render({
-          type: "error",
-          message: [mod.strings.fail(state.get.current().strategy[name].cost.cycle)],
-          format: "normal"
-        })
-      }
+      state.set({
+        path: "strategy." + name + ".active",
+        value: true
+      })
 
-    // }
+      render.remove(name)
+
+      report.render({
+        type: "system",
+        message: mod.strings.success[name].open,
+        format: "normal"
+      })
+    } else {
+      report.render({
+        type: "error",
+        message: [mod.strings.fail(state.get.current().strategy[name].cost.cycle)],
+        format: "normal"
+      })
+    }
   }
 
   var render = {}
