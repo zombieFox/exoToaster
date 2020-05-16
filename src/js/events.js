@@ -173,7 +173,7 @@ var events = (function() {
       },
       unmotivated: {
         condition: function() {
-          return state.get.current().processor.level >= 5
+          return state.get.current().processor.level >= 10
         },
         report: mod.strings.strategy.unmotivated.open,
         func: function() {

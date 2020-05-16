@@ -70,7 +70,7 @@ var Generator = function(name, type) {
 
       state.mod.set({
         path: this.name + ".interval.current",
-        value: this.getDataFromPath(this.name + ".interval.starting") - (this.getDataFromPath(this.name + ".level") * 100)
+        value: this.getDataFromPath(this.name + ".interval.starting") - (this.getDataFromPath(this.name + ".level") * 500)
       })
 
     }
