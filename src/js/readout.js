@@ -163,6 +163,45 @@ var readout = (function() {
       },
       suffix: true
     }],
+    plasmatoaster: [{
+      element: "[readout=plasmatoaster-stat-toast]",
+      value: function() {
+        var level = state.get.current().plasmatoaster.level
+        var toastperunit = state.get.current().plasmatoaster.toastperunit
+        var efficiency = state.get.current().plasmatoaster.efficiency
+        return level * (toastperunit + efficiency)
+      },
+      suffix: true
+    }, {
+      element: "[readout=plasmatoasterspeed-interval-current]",
+      value: function() {
+        return state.get.current().plasmatoasterspeed.interval.current / 1000
+      }
+    }, {
+      element: "[readout=plasmatoaster-level]",
+      value: function() {
+        return state.get.current().plasmatoaster.level
+      },
+      suffix: true
+    }, {
+      element: "[readout=plasmatoaster-cost-toast]",
+      value: function() {
+        return state.get.current().plasmatoaster.cost.toast
+      },
+      suffix: true
+    }, {
+      element: "[readout=plasmatoasterspeed-cost-toast]",
+      value: function() {
+        return state.get.current().plasmatoasterspeed.cost.toast
+      },
+      suffix: true
+    }, {
+      element: "[readout=plasmatoasterspeed-level]",
+      value: function() {
+        return state.get.current().plasmatoasterspeed.level
+      },
+      suffix: true
+    }],
     atomictoaster: [{
       element: "[readout=atomictoaster-stat-toast]",
       value: function() {

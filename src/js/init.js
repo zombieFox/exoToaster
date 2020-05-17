@@ -9,6 +9,9 @@ var megatoasterspeed = new Generator("megatoasterspeed", "arithmetic")
 var rockettoaster = new Generator("rockettoaster", "arithmetic")
 var rockettoasterspeed = new Generator("rockettoasterspeed", "arithmetic")
 
+var plasmatoaster = new Generator("plasmatoaster", "arithmetic")
+var plasmatoasterspeed = new Generator("plasmatoasterspeed", "arithmetic")
+
 var atomictoaster = new Generator("atomictoaster", "arithmetic")
 var atomictoasterspeed = new Generator("atomictoasterspeed", "arithmetic")
 

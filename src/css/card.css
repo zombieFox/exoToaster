@@ -104,6 +104,10 @@
   animation-duration: var(--card-rockettoasterspeed-meter-duration);
 }
 
+[stage=plasmatoaster].active .card-meter-progress {
+  animation-duration: var(--card-plasmatoasterspeed-meter-duration);
+}
+
 [stage=atomictoaster].active .card-meter-progress {
   animation-duration: var(--card-atomictoasterspeed-meter-duration);
 }

@@ -13,6 +13,9 @@ var strategy = (function() {
       rockettoaster: {
         open: ["rocket_toaster.data loaded"]
       },
+      plasmatoaster: {
+        open: ["plasma_toaster.data loaded"]
+      },
       atomictoaster: {
         open: ["atomic_toaster.data loaded"]
       },

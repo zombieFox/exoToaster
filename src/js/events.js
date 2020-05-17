@@ -11,6 +11,7 @@ var events = (function() {
     "all.strategy.autotoaster.open",
     "all.strategy.megatoaster.open",
     "all.strategy.rockettoaster.open",
+    "all.strategy.plasmatoaster.open",
     "all.strategy.atomictoaster.open",
     "all.strategy.quantumtoaster.open",
     "all.autotoaster.open",
@@ -19,6 +20,8 @@ var events = (function() {
     "all.megatoaster.active",
     "all.rockettoaster.open",
     "all.rockettoaster.active",
+    "all.plasmatoaster.open",
+    "all.plasmatoaster.active",
     "all.atomictoaster.open",
     "all.atomictoaster.active",
     "all.quantumtoaster.open",
@@ -82,6 +85,9 @@ var events = (function() {
       },
       rockettoaster: {
         open: ["strategy.rocket_toaster.data loaded"]
+      },
+      plasmatoaster: {
+        open: ["strategy.plasma_toaster.data loaded"]
       },
       atomictoaster: {
         open: ["strategy.atomic_toaster.data loaded"]
@@ -204,10 +210,25 @@ var events = (function() {
           }
         }
       },
-      atomictoaster: {
+      plasmatoaster: {
         open: {
           condition: function() {
             return state.get.current().processor.level >= 24
+          },
+          report: mod.strings.strategy.plasmatoaster.open,
+          func: function() {
+            strategy.render.card({
+              path: "all.strategy.plasmatoaster",
+              name: "plasmatoaster",
+              displayName: "Plasma Toaster"
+            })
+          }
+        }
+      },
+      atomictoaster: {
+        open: {
+          condition: function() {
+            return state.get.current().processor.level >= 30
           },
           report: mod.strings.strategy.atomictoaster.open,
           func: function() {
@@ -222,7 +243,7 @@ var events = (function() {
       quantumtoaster: {
         open: {
           condition: function() {
-            return state.get.current().processor.level >= 30
+            return state.get.current().processor.level >= 36
           },
           report: mod.strings.strategy.quantumtoaster.open,
           func: function() {
@@ -311,6 +332,33 @@ var events = (function() {
             },
             interval: function() {
               return state.get.current().rockettoasterspeed.interval.current
+            }
+          })
+        }
+      }
+    },
+    plasmatoaster: {
+      open: {
+        condition: function() {
+          return state.get.current().events.all.strategy.plasmatoaster.active.passed
+        },
+        stage: "plasmatoaster"
+      },
+      active: {
+        condition: function() {
+          return state.get.current().plasmatoaster.level >= 1
+        },
+        func: function() {
+          helper.e("[stage=plasmatoaster]").classList.add("active")
+          plasmatoasterspeed.cardAnimationInterval()
+          tick.mod.set({
+            name: "plasmatoaster",
+            func: function() {
+              toast.make(state.get.current().plasmatoaster.level * (state.get.current().plasmatoaster.toastperunit + state.get.current().plasmatoaster.efficiency))
+              plasmatoasterspeed.cardAnimationInterval()
+            },
+            interval: function() {
+              return state.get.current().plasmatoasterspeed.interval.current
             }
           })
         }

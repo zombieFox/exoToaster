@@ -146,6 +146,38 @@ var control = (function() {
           }
         }
       }],
+      plasmatoaster: [{
+        element: "[control=plasmatoaster-level-increase1]",
+        type: "button",
+        func: function() {
+          plasmatoaster.upgrade(1)
+        }
+      }, {
+        element: "[control=plasmatoaster-level-increase10]",
+        type: "button",
+        func: function() {
+          plasmatoaster.upgrade(10)
+        }
+      }, {
+        element: "[control=plasmatoaster-level-increase100]",
+        type: "button",
+        func: function() {
+          plasmatoaster.upgrade(100)
+        }
+      }, {
+        element: "[control=plasmatoasterspeed-level-increase1]",
+        type: "button",
+        func: function() {
+          plasmatoasterspeed.upgrade(1)
+          plasmatoasterspeed.setInterval()
+          render.disable.check()
+        },
+        disable: {
+          condition: function() {
+            return state.get.current().plasmatoasterspeed.interval.current <= state.get.current().plasmatoasterspeed.interval.min
+          }
+        }
+      }],
       atomictoaster: [{
         element: "[control=atomictoaster-level-increase1]",
         type: "button",
@@ -1976,8 +2008,6 @@ var control = (function() {
       return allMenuControls
     }
   }
-
-  mod.all = {}
 
   mod.default = function(path) {
     state.set({
