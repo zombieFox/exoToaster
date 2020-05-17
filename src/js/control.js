@@ -2408,6 +2408,7 @@ var control = (function() {
   return {
     debug: debug,
     mod: mod,
+    render: render,
     init: init
   }
 

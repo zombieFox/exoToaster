@@ -2,32 +2,6 @@ var events = (function() {
 
   var mod = {}
 
-  mod.addresses = [
-    "all.processor.open",
-    "all.cycle.open",
-    "all.cycle.start",
-    "all.cycle.stop",
-    "all.strategy.open",
-    "all.strategy.autotoaster.open",
-    "all.strategy.megatoaster.open",
-    "all.strategy.rockettoaster.open",
-    "all.strategy.plasmatoaster.open",
-    "all.strategy.atomictoaster.open",
-    "all.strategy.quantumtoaster.open",
-    "all.autotoaster.open",
-    "all.autotoaster.active",
-    "all.megatoaster.open",
-    "all.megatoaster.active",
-    "all.rockettoaster.open",
-    "all.rockettoaster.active",
-    "all.plasmatoaster.open",
-    "all.plasmatoaster.active",
-    "all.atomictoaster.open",
-    "all.atomictoaster.active",
-    "all.quantumtoaster.open",
-    "all.quantumtoaster.active"
-  ]
-
   mod.background = function() {
     var all = [{
       func: function() {
@@ -78,28 +52,73 @@ var events = (function() {
     strategy: {
       open: ["strategy.data loaded"],
       autotoaster: {
-        open: ["strategy.auto_toaster.data loaded"]
+        displayName: "Auto Toaster",
+        open: ["strategy.auto_toaster.data loaded"],
+        active: ["auto_toaster.data loaded"]
       },
       megatoaster: {
-        open: ["strategy.mega_toaster.data loaded"]
+        displayName: "Mega Toaster",
+        open: ["strategy.mega_toaster.data loaded"],
+        active: ["mega_toaster.data loaded"]
       },
       rockettoaster: {
-        open: ["strategy.rocket_toaster.data loaded"]
+        displayName: "Rocket Toaster",
+        open: ["strategy.rocket_toaster.data loaded"],
+        active: ["rocket_toaster.data loaded"]
       },
       plasmatoaster: {
-        open: ["strategy.plasma_toaster.data loaded"]
+        displayName: "Plasma Toaster",
+        open: ["strategy.plasma_toaster.data loaded"],
+        active: ["plasma_toaster.data loaded"]
       },
       atomictoaster: {
-        open: ["strategy.atomic_toaster.data loaded"]
+        displayName: "Atomic Toaster",
+        open: ["strategy.atomic_toaster.data loaded"],
+        active: ["atomic_toaster.data loaded"]
       },
       quantumtoaster: {
-        open: ["strategy.quantum_toaster.data loaded"]
+        displayName: "Quantum Toaster",
+        open: ["strategy.quantum_toaster.data loaded"],
+        active: ["quantum_toaster.data loaded"]
       },
       unmotivated: {
-        open: ["strategy.unmotivated.data loaded"]
+        open: ["strategy.unmotivated.data loaded"],
+        active: ["unmotivated.data loaded"]
       }
     }
   }
+
+  mod.addresses = [
+    "all.processor.open",
+    "all.cycle.open",
+    "all.cycle.start",
+    "all.cycle.stop",
+    "all.strategy.open",
+    "all.strategy.autotoaster.open",
+    "all.strategy.autotoaster.active",
+    "all.strategy.megatoaster.open",
+    "all.strategy.megatoaster.active",
+    "all.strategy.rockettoaster.open",
+    "all.strategy.rockettoaster.active",
+    "all.strategy.plasmatoaster.open",
+    "all.strategy.plasmatoaster.active",
+    "all.strategy.atomictoaster.open",
+    "all.strategy.atomictoaster.active",
+    "all.strategy.quantumtoaster.open",
+    "all.strategy.quantumtoaster.active",
+    "all.autotoaster.open",
+    "all.autotoaster.active",
+    "all.megatoaster.open",
+    "all.megatoaster.active",
+    "all.rockettoaster.open",
+    "all.rockettoaster.active",
+    "all.plasmatoaster.open",
+    "all.plasmatoaster.active",
+    "all.atomictoaster.open",
+    "all.atomictoaster.active",
+    "all.quantumtoaster.open",
+    "all.quantumtoaster.active"
+  ]
 
   mod.all = {
     processor: {
@@ -160,7 +179,7 @@ var events = (function() {
     strategy: {
       open: {
         condition: function() {
-          return state.get.current().processor.level >= 4
+          return state.get.current().processor.level >= state.get.current().events.all.strategy.open.condition.processor
         },
         stage: "strategy",
         report: mod.strings.strategy.open
@@ -168,93 +187,129 @@ var events = (function() {
       autotoaster: {
         open: {
           condition: function() {
-            return state.get.current().processor.level >= 6
+            return state.get.current().processor.level >= state.get.current().events.all.strategy.autotoaster.open.condition.processor
           },
           report: mod.strings.strategy.autotoaster.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.autotoaster",
               name: "autotoaster",
-              displayName: "Auto Toaster"
+              displayName: mod.strings.strategy.autotoaster.displayName
             })
           }
+        },
+        active: {
+          condition: function() {
+            return state.get.current().events.all.strategy.autotoaster.active.level > 0
+          },
+          report: mod.strings.strategy.autotoaster.active
         }
       },
       megatoaster: {
         open: {
           condition: function() {
-            return state.get.current().processor.level >= 12
+            return state.get.current().processor.level >= state.get.current().events.all.strategy.megatoaster.open.condition.processor
           },
           report: mod.strings.strategy.megatoaster.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.megatoaster",
               name: "megatoaster",
-              displayName: "Mega Toaster"
+              displayName: mod.strings.strategy.megatoaster.displayName
             })
           }
+        },
+        active: {
+          condition: function() {
+            return state.get.current().events.all.strategy.megatoaster.active.level > 0
+          },
+          report: mod.strings.strategy.megatoaster.active
         }
       },
       rockettoaster: {
         open: {
           condition: function() {
-            return state.get.current().processor.level >= 18
+            return state.get.current().processor.level >= state.get.current().events.all.strategy.rockettoaster.open.condition.processor
           },
           report: mod.strings.strategy.rockettoaster.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.rockettoaster",
               name: "rockettoaster",
-              displayName: "Rocket Toaster"
+              displayName: mod.strings.strategy.rockettoaster.displayName
             })
           }
+        },
+        active: {
+          condition: function() {
+            return state.get.current().events.all.strategy.rockettoaster.active.level > 0
+          },
+          report: mod.strings.strategy.rockettoaster.active
         }
       },
       plasmatoaster: {
         open: {
           condition: function() {
-            return state.get.current().processor.level >= 24
+            return state.get.current().processor.level >= state.get.current().events.all.strategy.plasmatoaster.open.condition.processor
           },
           report: mod.strings.strategy.plasmatoaster.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.plasmatoaster",
               name: "plasmatoaster",
-              displayName: "Plasma Toaster"
+              displayName: mod.strings.strategy.plasmatoaster.displayName
             })
           }
+        },
+        active: {
+          condition: function() {
+            return state.get.current().events.all.strategy.plasmatoaster.active.level > 0
+          },
+          report: mod.strings.strategy.plasmatoaster.active
         }
       },
       atomictoaster: {
         open: {
           condition: function() {
-            return state.get.current().processor.level >= 30
+            return state.get.current().processor.level >= state.get.current().events.all.strategy.atomictoaster.open.condition.processor
           },
           report: mod.strings.strategy.atomictoaster.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.atomictoaster",
               name: "atomictoaster",
-              displayName: "Atomic Toaster"
+              displayName: mod.strings.strategy.atomictoaster.displayName
             })
           }
+        },
+        active: {
+          condition: function() {
+            return state.get.current().events.all.strategy.atomictoaster.active.level > 0
+          },
+          report: mod.strings.strategy.atomictoaster.active
         }
       },
       quantumtoaster: {
         open: {
           condition: function() {
-            return state.get.current().processor.level >= 36
+            return state.get.current().processor.level >= state.get.current().events.all.strategy.quantumtoaster.open.condition.processor
           },
           report: mod.strings.strategy.quantumtoaster.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.quantumtoaster",
               name: "quantumtoaster",
-              displayName: "Quantum Toaster"
+              displayName: mod.strings.strategy.quantumtoaster.displayName
             })
           }
+        },
+        active: {
+          condition: function() {
+            return state.get.current().events.all.strategy.quantumtoaster.active.level > 0
+          },
+          report: mod.strings.strategy.quantumtoaster.active
         }
-      }
+      },
     },
     autotoaster: {
       open: {

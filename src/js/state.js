@@ -78,6 +78,9 @@ var state = (function() {
         },
         strategy: {
           open: {
+            condition: {
+              processor: 4
+            },
             passed: false,
             restore: true
           },
@@ -85,11 +88,15 @@ var state = (function() {
             open: {
               passed: false,
               restore: true,
+              condition: {
+                processor: 6
+              },
               cost: {
                 cycle: 2
               }
             },
             active: {
+              level: 0,
               passed: false,
               restore: true
             }
@@ -98,11 +105,15 @@ var state = (function() {
             open: {
               passed: false,
               restore: true,
+              condition: {
+                processor: 12
+              },
               cost: {
                 cycle: 4
               }
             },
             active: {
+              level: 0,
               passed: false,
               restore: true
             }
@@ -111,11 +122,15 @@ var state = (function() {
             open: {
               passed: false,
               restore: true,
+              condition: {
+                processor: 18
+              },
               cost: {
                 cycle: 8
               }
             },
             active: {
+              level: 0,
               passed: false,
               restore: true
             }
@@ -124,11 +139,15 @@ var state = (function() {
             open: {
               passed: false,
               restore: true,
+              condition: {
+                processor: 24
+              },
               cost: {
                 cycle: 16
               }
             },
             active: {
+              level: 0,
               passed: false,
               restore: true
             }
@@ -137,11 +156,15 @@ var state = (function() {
             open: {
               passed: false,
               restore: true,
+              condition: {
+                processor: 30
+              },
               cost: {
                 cycle: 32
               }
             },
             active: {
+              level: 0,
               passed: false,
               restore: true
             }
@@ -150,11 +173,15 @@ var state = (function() {
             open: {
               passed: false,
               restore: true,
+              condition: {
+                processor: 36
+              },
               cost: {
                 cycle: 64
               }
             },
             active: {
+              level: 0,
               passed: false,
               restore: true
             }
@@ -420,16 +447,16 @@ var state = (function() {
         hsl: {
           h: 220,
           s: 22,
-          l: 40
+          l: 50
         },
         rgb: {
-          r: 80,
-          g: 95,
-          b: 124
+          r: 99,
+          g: 118,
+          b: 156
         },
         contrast: {
-          light: 6,
-          dark: 3
+          light: 4,
+          dark: 4
         },
         generated: {}
       },
@@ -527,14 +554,14 @@ var state = (function() {
       },
       color: {
         rgb: {
-          r: 80,
-          g: 95,
-          b: 124
+          r: 99,
+          g: 118,
+          b: 156
         },
         contrast: {
-          light: 6,
-          dark: 3
-        }
+          light: 4,
+          dark: 4
+        },
       }
     }
   }

@@ -2,35 +2,6 @@ var strategy = (function() {
 
   var mod = {}
 
-  mod.strings = {
-    success: {
-      autotoaster: {
-        open: ["auto_toaster.data loaded"]
-      },
-      megatoaster: {
-        open: ["mega_toaster.data loaded"]
-      },
-      rockettoaster: {
-        open: ["rocket_toaster.data loaded"]
-      },
-      plasmatoaster: {
-        open: ["plasma_toaster.data loaded"]
-      },
-      atomictoaster: {
-        open: ["atomic_toaster.data loaded"]
-      },
-      quantumtoaster: {
-        open: ["quantum_toaster.data loaded"]
-      },
-      unmotivated: {
-        open: ["unmotivated.data loaded"]
-      }
-    },
-    fail: function(amount) {
-      return amount + " instruction cycles needed"
-    }
-  }
-
   mod.activate = function(override) {
     var options = {
       path: null,
@@ -58,21 +29,18 @@ var strategy = (function() {
 
       helper.setObject({
         object: state.get.current(),
-        path: "events." + options.path + ".active.passed",
-        newValue: true
+        path: "events." + options.path + ".active.level",
+        newValue: helper.getObject({
+          object: state.get.current(),
+          path: "events." + options.path + ".active.level"
+        }) + 1
       })
 
       render.remove(options.name)
-
-      report.render({
-        type: "system",
-        message: mod.strings.success[options.name].open,
-        format: "normal"
-      })
     } else {
       report.render({
         type: "error",
-        message: [mod.strings.fail(stateData.open.cost.cycle)],
+        message: [stateData.open.cost.cycle + " instruction cycles needed"],
         format: "normal"
       })
     }
@@ -100,7 +68,7 @@ var strategy = (function() {
 
       var cardBody = helper.node("div|class:card-body,strategy:" + options.name)
 
-      var button = helper.node("button:Develop " + options.displayName + "|class:button button-line button-small mb-2")
+      var button = helper.node("button:Develop " + options.displayName + "|class:button button-line button-small mb-2,tabindex:1")
 
       button.addEventListener("click", function() {
         mod.activate(options)

@@ -20,6 +20,7 @@ var keyboard = (function() {
       // ctrl+alt+d
       if (event.ctrlKey && event.altKey && event.keyCode == 68) {
         theme.style.toggle()
+        control.render.update.control.menu()
       }
     })
   }
