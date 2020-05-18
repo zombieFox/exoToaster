@@ -4,49 +4,29 @@ var cycle = (function() {
 
   mod.add = function(amount) {
     if (state.get.current().cycle.current + amount <= state.get.current().cycle.max) {
-      state.mod.set({
-        path: "cycle.current",
-        value: state.get.current().cycle.current + amount
-      })
-    } else {
-      state.mod.set({
-        path: "cycle.current",
-        value: state.get.current().cycle.max
-      })
+      state.get.current().cycle.current = state.get.current().cycle.current + amount
+      state.get.current().cycle.current = state.get.current().cycle.max
     }
   }
 
   mod.remove = function(amount) {
-    state.mod.set({
-      path: "cycle.current",
-      value: state.get.current().cycle.current - amount
-    })
+    state.get.current().cycle.current = state.get.current().cycle.current - amount
+
     if (state.get.current().cycle.current < 0) {
-      state.mod.set({
-        path: "cycle.current",
-        value: 0
-      })
+      state.get.current().cycle.current = 0
     }
   }
 
   mod.max = function() {
-    state.set({
-      path: "cycle.max",
-      value: state.get.current().processor.level * 2
-    })
+    state.get.current().cycle.max = state.get.current().processor.level * 2
   }
 
   mod.interval = {
     set: function() {
-      state.set({
-        path: "cycle.interval.current",
-        value: state.get.current().cycle.interval.starting - (state.get.current().processor.level * 100)
-      })
+      state.get.current().cycle.interval.current = state.get.current().cycle.interval.starting - (state.get.current().processor.level * 100)
+
       if (state.get.current().cycle.interval.current < state.get.current().cycle.interval.min) {
-        state.mod.set({
-          path: "cycle.interval.current",
-          value: state.get.current().cycle.interval.min
-        })
+        state.get.current().cycle.interval.current = state.get.current().cycle.interval.min
       }
     },
     animation: function() {

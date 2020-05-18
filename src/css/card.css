@@ -40,7 +40,7 @@
 
 .card-body {
   background-color: rgb(var(--theme-color-03));
-  padding: 1.25em;
+  padding: 0.75em 1.25em;
   transition: background-color var(--layout-timing-extra-fast), border var(--layout-timing-extra-fast);
 }
 

@@ -5,17 +5,11 @@ var modal = (function() {
   var mod = {}
 
   mod.open = function() {
-    state.set({
-      path: "modal",
-      value: true
-    })
+    state.get.current().modal = true
   }
 
   mod.close = function() {
-    state.set({
-      path: "modal",
-      value: false
-    })
+    state.get.current().modal = false
   }
 
   var bind = {}

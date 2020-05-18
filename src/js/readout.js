@@ -14,6 +14,30 @@ var readout = (function() {
       value: function() {
         return state.get.current().toast.lifetime.current
       }
+    }, {
+      element: "[readout=toast-automatic-toast-per-sec]",
+      value: function() {
+        var autotoasterTotalToast = state.get.current().autotoaster.level * (state.get.current().autotoaster.toastperunit + state.get.current().autotoaster.efficiency)
+        var autotoasterPerSec = ((state.get.current().autotoasterspeed.interval.starting - (state.get.current().autotoasterspeed.level * 500)) / 1000)
+
+        var megatoasterTotalToast = state.get.current().megatoaster.level * (state.get.current().megatoaster.toastperunit + state.get.current().megatoaster.efficiency)
+        var megatoasterPerSec = ((state.get.current().megatoasterspeed.interval.starting - (state.get.current().megatoasterspeed.level * 500)) / 1000)
+
+        var rockettoasterTotalToast = state.get.current().rockettoaster.level * (state.get.current().rockettoaster.toastperunit + state.get.current().rockettoaster.efficiency)
+        var rockettoasterPerSec = ((state.get.current().rockettoasterspeed.interval.starting - (state.get.current().rockettoasterspeed.level * 500)) / 1000)
+
+        var plasmatoasterTotalToast = state.get.current().plasmatoaster.level * (state.get.current().plasmatoaster.toastperunit + state.get.current().plasmatoaster.efficiency)
+        var plasmatoasterPerSec = ((state.get.current().plasmatoasterspeed.interval.starting - (state.get.current().plasmatoasterspeed.level * 500)) / 1000)
+
+        var atomictoasterTotalToast = state.get.current().atomictoaster.level * (state.get.current().atomictoaster.toastperunit + state.get.current().atomictoaster.efficiency)
+        var atomictoasterPerSec = ((state.get.current().atomictoasterspeed.interval.starting - (state.get.current().atomictoasterspeed.level * 500)) / 1000)
+
+        var quantumtoasterTotalToast = state.get.current().quantumtoaster.level * (state.get.current().quantumtoaster.toastperunit + state.get.current().quantumtoaster.efficiency)
+        var quantumtoasterPerSec = ((state.get.current().quantumtoasterspeed.interval.starting - (state.get.current().quantumtoasterspeed.level * 500)) / 1000)
+
+        return (autotoasterTotalToast / autotoasterPerSec) + (megatoasterTotalToast / megatoasterPerSec) + (rockettoasterTotalToast / rockettoasterPerSec) + (plasmatoasterTotalToast / plasmatoasterPerSec) + (atomictoasterTotalToast / atomictoasterPerSec) + (quantumtoasterTotalToast / quantumtoasterPerSec)
+      },
+      suffix: true
     }],
     processor: [{
       element: "[readout=processor-level]",

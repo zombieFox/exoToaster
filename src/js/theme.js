@@ -95,22 +95,13 @@ var theme = (function() {
 
   mod.style = {
     light: function() {
-      state.set({
-        path: "theme.style",
-        value: "light"
-      })
+      state.get.current().theme.style = "light"
     },
     dark: function() {
-      state.set({
-        path: "theme.style",
-        value: "dark"
-      })
+      state.get.current().theme.style = "dark"
     },
     system: function() {
-      state.set({
-        path: "theme.style",
-        value: "system"
-      })
+      state.get.current().theme.style = "system"
     }
   }
 

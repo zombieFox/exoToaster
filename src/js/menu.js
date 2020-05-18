@@ -3,17 +3,11 @@ var menu = (function() {
   var mod = {}
 
   mod.open = function() {
-    state.set({
-      path: "menu",
-      value: true
-    })
+    state.get.current().menu = true
   }
 
   mod.close = function() {
-    state.set({
-      path: "menu",
-      value: false
-    })
+    state.get.current().menu = false
   }
 
   mod.nav = {
