@@ -22,7 +22,7 @@
   text-align: center;
   flex-grow: 0;
   flex-shrink: 0;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .report-message-text {
@@ -52,7 +52,7 @@
 .report-message .report-message-text-cursor {
   margin-left: 0.5em;
   display: none;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .report-message:last-child .report-message-text:last-child .report-message-text-cursor {

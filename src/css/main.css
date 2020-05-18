@@ -5,7 +5,7 @@
 }
 
 .main-header {
-  background-color: rgba(var(--theme-color-01), 0.9);
+  background-color: rgba(var(--background-color-theme), 0.9);
   padding: 2em;
   position: sticky;
   top: 0;
@@ -14,7 +14,7 @@
 }
 
 .main-body {
-  padding: 2em 2em 70vh 2em;
+  padding: 2em 2em 50vh 2em;
   z-index: 1;
   display: grid;
   grid-template-columns: 1fr 3fr;

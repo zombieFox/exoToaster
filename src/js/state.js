@@ -175,6 +175,23 @@ var state = (function() {
               restore: true
             }
           },
+          unmotivated: {
+            open: {
+              passed: false,
+              restore: true,
+              condition: {
+                processor: 32
+              },
+              cost: {
+                cycle: 32
+              }
+            },
+            active: {
+              level: 0,
+              passed: false,
+              restore: true
+            }
+          }
         },
         autotoaster: {
           open: {
@@ -232,6 +249,12 @@ var state = (function() {
             restore: true
           },
           active: {
+            passed: false,
+            restore: true
+          }
+        },
+        unmotivated: {
+          open: {
             passed: false,
             restore: true
           }

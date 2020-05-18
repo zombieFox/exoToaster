@@ -203,6 +203,8 @@
   --button-accent-background-focus-hover:               calc(var(--theme-accent-r) + 20), calc(var(--theme-accent-g) + 20), calc(var(--theme-accent-b) + 20);
   --button-accent-background-active:                    calc(var(--theme-accent-r) + 40), calc(var(--theme-accent-g) + 40), calc(var(--theme-accent-b) + 40);
   --button-accent-background-disabled:                  calc(var(--theme-accent-r) - 60), calc(var(--theme-accent-g) - 60), calc(var(--theme-accent-b) - 60);
+  /* background */
+  --background-color-theme:                             var(--theme-color-01);
   /* edge */
   --edge-shadow:                                        inset 0 0 0 var(--layout-line-width) rgb(var(--theme-accent)),
                                                         inset 0 0 0 calc(var(--layout-line-width) * 4) rgba(var(--theme-accent), 0.1),

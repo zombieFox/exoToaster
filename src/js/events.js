@@ -82,6 +82,7 @@ var events = (function() {
         active: ["quantum_toaster.data loaded"]
       },
       unmotivated: {
+        displayName: "Self-motivation",
         open: ["strategy.unmotivated.data loaded"],
         active: ["unmotivated.data loaded"]
       }
@@ -106,6 +107,8 @@ var events = (function() {
     "all.strategy.atomictoaster.active",
     "all.strategy.quantumtoaster.open",
     "all.strategy.quantumtoaster.active",
+    "all.strategy.unmotivated.open",
+    "all.strategy.unmotivated.active",
     "all.autotoaster.open",
     "all.autotoaster.active",
     "all.megatoaster.open",
@@ -117,7 +120,8 @@ var events = (function() {
     "all.atomictoaster.open",
     "all.atomictoaster.active",
     "all.quantumtoaster.open",
-    "all.quantumtoaster.active"
+    "all.quantumtoaster.active",
+    "all.unmotivated.open"
   ]
 
   mod.all = {
@@ -310,6 +314,27 @@ var events = (function() {
           report: mod.strings.strategy.quantumtoaster.active
         }
       },
+      unmotivated: {
+        open: {
+          condition: function() {
+            return state.get.current().processor.level >= state.get.current().events.all.strategy.unmotivated.open.condition.processor
+          },
+          report: mod.strings.strategy.unmotivated.open,
+          func: function() {
+            strategy.render.card({
+              path: "all.strategy.unmotivated",
+              name: "unmotivated",
+              displayName: mod.strings.strategy.unmotivated.displayName
+            })
+          }
+        },
+        active: {
+          condition: function() {
+            return state.get.current().events.all.strategy.unmotivated.active.level > 0
+          },
+          report: mod.strings.strategy.unmotivated.active
+        }
+      }
     },
     autotoaster: {
       open: {
@@ -471,6 +496,14 @@ var events = (function() {
             }
           })
         }
+      }
+    },
+    unmotivated: {
+      open: {
+        condition: function() {
+          return state.get.current().events.all.strategy.unmotivated.active.level >= 1
+        },
+        stage: "unmotivated"
       }
     }
   }

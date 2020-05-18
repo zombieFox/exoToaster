@@ -2,7 +2,6 @@
 
   <div class="card-header">
     <p class="mb-0"><strong>Rocket Toasters</strong></p>
-    <p class="small muted">Prod <span readout="rockettoaster-stat-toast">0</span> toast every <span readout="rockettoasterspeed-interval-current">0</span>s</p>
   </div>
 
   <div class="card-meter">
@@ -10,7 +9,7 @@
   </div>
 
   <div class="card-body">
-    <p class="mb-2">Count: <span readout="rockettoaster-level"></span></p>
+    <p class="mb-2">Unit count: <span readout="rockettoaster-level"></span></p>
     <div class="form-group mb-2">
       <button class="button button-line button-small" control="rockettoaster-level-increase1" tabindex="1">+1</button>
       <button class="button button-line button-small" control="rockettoaster-level-increase10" tabindex="1">+10</button>
@@ -25,6 +24,11 @@
       <button class="button button-line button-small" control="rockettoasterspeed-level-increase1" tabindex="1">+1</button>
     </div>
     <p class="small muted">+1 cost <strong readout="rockettoasterspeed-cost-toast"></strong> <abbr title="Toast matter">Tm</abbr></p>
+  </div>
+
+  <div class="card-footer">
+    <p class="small muted">Toast per unit: <span readout="rockettoaster-toastperunit"></span></p>
+    <p class="small muted mb-0">Producing <span readout="rockettoaster-toast">0</span> toast every <span readout="rockettoasterspeed-interval-current">0</span>s</p>
   </div>
 
 </div>

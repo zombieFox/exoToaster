@@ -10,7 +10,7 @@ var boot = (function() {
   }, {
     report: {
       type: "normal",
-      message: ["tai: stable"],
+      message: ["tei: stable"],
       format: "normal",
       delay: 100
     }

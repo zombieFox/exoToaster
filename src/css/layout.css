@@ -9,14 +9,12 @@
 }
 
 .layout-report {
-  background-color: rgb(var(--theme-color-01));
   grid-area: report;
   height: 100%;
   transition: background-color var(--layout-timing-extra-fast);
 }
 
 .layout-main {
-  background-color: rgb(var(--theme-color-01));
   grid-area: main;
   height: 100%;
   transition: background-color var(--layout-timing-extra-fast);
