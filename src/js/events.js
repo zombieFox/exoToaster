@@ -324,12 +324,12 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=autotoaster]").classList.add("active")
-          autotoasterspeed.cardAnimationInterval()
+          autotoasterspeed.setCardMeterDuration()
           tick.mod.set({
             name: "autotoaster",
             func: function() {
               toast.make(state.get.current().autotoaster.level * (state.get.current().autotoaster.toastperunit + state.get.current().autotoaster.efficiency))
-              autotoasterspeed.cardAnimationInterval()
+              autotoasterspeed.setCardMeterDuration()
             },
             interval: function() {
               return state.get.current().autotoasterspeed.interval.current
@@ -351,12 +351,12 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=megatoaster]").classList.add("active")
-          megatoasterspeed.cardAnimationInterval()
+          megatoasterspeed.setCardMeterDuration()
           tick.mod.set({
             name: "megatoaster",
             func: function() {
               toast.make(state.get.current().megatoaster.level * (state.get.current().megatoaster.toastperunit + state.get.current().megatoaster.efficiency))
-              megatoasterspeed.cardAnimationInterval()
+              megatoasterspeed.setCardMeterDuration()
             },
             interval: function() {
               return state.get.current().megatoasterspeed.interval.current
@@ -378,12 +378,12 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=rockettoaster]").classList.add("active")
-          rockettoasterspeed.cardAnimationInterval()
+          rockettoasterspeed.setCardMeterDuration()
           tick.mod.set({
             name: "rockettoaster",
             func: function() {
               toast.make(state.get.current().rockettoaster.level * (state.get.current().rockettoaster.toastperunit + state.get.current().rockettoaster.efficiency))
-              rockettoasterspeed.cardAnimationInterval()
+              rockettoasterspeed.setCardMeterDuration()
             },
             interval: function() {
               return state.get.current().rockettoasterspeed.interval.current
@@ -405,12 +405,12 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=plasmatoaster]").classList.add("active")
-          plasmatoasterspeed.cardAnimationInterval()
+          plasmatoasterspeed.setCardMeterDuration()
           tick.mod.set({
             name: "plasmatoaster",
             func: function() {
               toast.make(state.get.current().plasmatoaster.level * (state.get.current().plasmatoaster.toastperunit + state.get.current().plasmatoaster.efficiency))
-              plasmatoasterspeed.cardAnimationInterval()
+              plasmatoasterspeed.setCardMeterDuration()
             },
             interval: function() {
               return state.get.current().plasmatoasterspeed.interval.current
@@ -432,12 +432,12 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=atomictoaster]").classList.add("active")
-          atomictoasterspeed.cardAnimationInterval()
+          atomictoasterspeed.setCardMeterDuration()
           tick.mod.set({
             name: "atomictoaster",
             func: function() {
               toast.make(state.get.current().atomictoaster.level * (state.get.current().atomictoaster.toastperunit + state.get.current().atomictoaster.efficiency))
-              atomictoasterspeed.cardAnimationInterval()
+              atomictoasterspeed.setCardMeterDuration()
             },
             interval: function() {
               return state.get.current().atomictoasterspeed.interval.current
@@ -459,12 +459,12 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=quantumtoaster]").classList.add("active")
-          quantumtoasterspeed.cardAnimationInterval()
+          quantumtoasterspeed.setCardMeterDuration()
           tick.mod.set({
             name: "quantumtoaster",
             func: function() {
               toast.make(state.get.current().quantumtoaster.level * (state.get.current().quantumtoaster.toastperunit + state.get.current().quantumtoaster.efficiency))
-              quantumtoasterspeed.cardAnimationInterval()
+              quantumtoasterspeed.setCardMeterDuration()
             },
             interval: function() {
               return state.get.current().quantumtoasterspeed.interval.current

@@ -1,17 +1,17 @@
-var Generator = function(name, type) {
+var Generator = function(name, type, multiplier) {
 
   this.debug = function() {
     console.log("name:", this.name)
     console.log("type:", this.type)
-    console.log("level:", this.getDataFromPath(this.name + ".level"))
-    console.log("constant:", this.getDataFromPath(this.name + "cost.constant"))
-    console.log("difference:", this.getDataFromPath(this.name + "cost.difference"))
+    console.log("level:", state.get.current()[this.name].level)
+    console.log("constant:", state.get.current()[this.name].cost.constant)
+    console.log("difference:", state.get.current()[this.name].cost.difference)
     console.log("cost", this.cost(1))
     sequence.table({
       type: this.type,
       count: 150,
-      constant: this.getDataFromPath(this.name + ".cost.constant"),
-      difference: this.getDataFromPath(this.name + ".cost.difference")
+      constant: state.get.current()[this.name].cost.constant,
+      difference: state.get.current()[this.name].cost.difference
     })
   }
 
@@ -19,64 +19,33 @@ var Generator = function(name, type) {
 
   this.type = type
 
-  this.getDataFromPath = function(path) {
-    return helper.getObject({
-      object: state.get.current(),
-      path: path
-    })
-  }
-
   this.addLevel = function(amount) {
-    state.mod.set({
-      path: this.name + ".level",
-      value: this.getDataFromPath(this.name + ".level") + amount
-    })
+    state.get.current()[this.name].level = state.get.current()[this.name].level + amount
   }
 
   this.removeLevel = function(amount) {
-    state.mod.set({
-      path: this.name + ".level",
-      value: this.getDataFromPath(this.name + ".level") - amount
-    })
+    state.get.current()[this.name].level = state.get.current()[this.name].level - amount
   }
 
   this.cost = function(amount) {
     return cost.calculate({
       type: this.type,
-      constant: this.getDataFromPath(this.name + ".cost.constant"),
-      difference: this.getDataFromPath(this.name + ".cost.difference"),
+      constant: state.get.current()[this.name].cost.constant,
+      difference: state.get.current()[this.name].cost.difference,
       level: {
-        current: this.getDataFromPath(this.name + ".level"),
-        target: this.getDataFromPath(this.name + ".level") + amount
+        current: state.get.current()[this.name].level,
+        target: state.get.current()[this.name].level + amount
       }
     })
   }
 
   this.increaseCost = function(priceDetails) {
-    var nextCost = sequence[this.type].value({
+    state.get.current()[this.name].cost.toast = sequence[this.type].value({
       target: priceDetails.level.calculate.to + 1,
-      constant: this.getDataFromPath(this.name + ".cost.constant"),
-      difference: this.getDataFromPath(this.name + ".cost.difference")
-    })
-
-    state.set({
-      path: this.name + ".cost.toast",
-      value: nextCost
+      constant: state.get.current()[this.name].cost.constant,
+      difference: state.get.current()[this.name].cost.difference
     })
   }
-
-  this.setInterval = function() {
-    if ("interval" in this.getDataFromPath(this.name)) {
-
-      state.mod.set({
-        path: this.name + ".interval.current",
-        value: this.getDataFromPath(this.name + ".interval.starting") - (this.getDataFromPath(this.name + ".level") * 500)
-      })
-
-    }
-  }
-
-  this.setInterval()
 
   this.upgrade = function(amount) {
     var priceDetails = this.cost(amount)
@@ -84,14 +53,17 @@ var Generator = function(name, type) {
     if (state.get.current().toast.inventory.current >= priceDetails.cost.total) {
 
       toast.consume(priceDetails.cost.total)
+
       this.addLevel(amount)
+
       this.increaseCost(priceDetails)
+
       report.render({
         type: "success",
         message: ["+" + suffix.add({
           number: amount
         }) + " unit, " + suffix.add({
-          number: this.getDataFromPath(this.name + ".level")
+          number: state.get.current()[this.name].level
         }) + " " + this.name + " online"],
         format: "normal"
       })
@@ -109,50 +81,68 @@ var Generator = function(name, type) {
     }
   }
 
-  this.startingCost = function() {
-    var cost = sequence[this.type].value({
-      target: this.getDataFromPath(this.name + ".level") + 1,
-      constant: this.getDataFromPath(this.name + ".cost.constant"),
-      difference: this.getDataFromPath(this.name + ".cost.difference")
-    })
+  this.setToastperunit = function() {
+    if ("toastperunit" in state.get.current()[this.name]) {
+      state.get.current()[this.name].toastperunit = state.mod.formula.toastPerUnit(state.get.current()[this.name].unitmultiplier)
+    }
+  }
 
-    var path = this.name + ".cost.toast"
+  this.setIntervalStarting = function() {
+    if (state.get.current()[this.name].interval) {
+      state.get.current()[this.name].interval.starting = state.mod.formula.interval(state.get.current()[this.name].unitmultiplier)
+    }
+  }
 
-    state.set({
-      path: path,
-      value: cost
+  this.setIntervalCurrent = function() {
+    if (state.get.current()[this.name].interval) {
+      state.get.current()[this.name].interval.current = state.get.current()[this.name].interval.starting - (state.get.current()[this.name].level * 500)
+    }
+  }
+
+  this.setConstant = function() {
+    state.get.current()[this.name].cost.constant = state.mod.formula.cost.constant(state.get.current()[this.name].unitmultiplier)
+
+  }
+
+  this.setDifference = function() {
+    state.get.current()[this.name].cost.difference = state.mod.formula.cost.difference[this.type](state.get.current()[this.name].unitmultiplier)
+
+  }
+
+  this.setStartingCost = function() {
+    state.get.current()[this.name].cost.toast = sequence[this.type].value({
+      target: state.get.current()[this.name].level + 1,
+      constant: state.get.current()[this.name].cost.constant,
+      difference: state.get.current()[this.name].cost.difference
     })
   }
 
-  this.startingCost()
+  this.setCardMeterDuration = function() {
+    if (state.get.current()[this.name].interval) {
+      helper.e("html").style.setProperty("--card-" + this.name + "-meter-duration", state.get.current()[this.name].interval.current + "ms")
 
-  this.render = {}
+      var parentUnitName = this.name.replace("speed", "")
 
-  this.render.card = {
-    animation: {
-      interval: function(data) {
-
-        if ("interval" in data.getDataFromPath(data.name)) {
-          helper.e("html").style.setProperty("--card-" + data.name + "-meter-duration", data.getDataFromPath(data.name + ".interval.current") + "ms")
-
-          var mainGeneratorLevel = data.getDataFromPath(data.name.replace("speed", "") + ".level")
-
-          if (mainGeneratorLevel > 0) {
-            helper.e("[stage=" + data.name.replace("speed", "") + "]").classList.remove("active")
-            void helper.e("[stage=" + data.name.replace("speed", "") + "]" + " .card-meter-progress").offsetWidth
-            helper.e("[stage=" + data.name.replace("speed", "") + "]").classList.add("active")
-          }
-        }
-
+      if (state.get.current()[parentUnitName].level > 0) {
+        helper.e("[stage=" + parentUnitName + "]").classList.remove("active")
+        void helper.e("[stage=" + parentUnitName + "]" + " .card-meter-progress").offsetWidth
+        helper.e("[stage=" + parentUnitName + "]").classList.add("active")
       }
     }
   }
 
-  this.render.card.animation.interval(this)
+  this.setToastperunit()
 
-  this.cardAnimationInterval = function() {
-    var data = this
-    data.render.card.animation.interval(data)
-  }
+  this.setIntervalStarting()
+
+  this.setIntervalCurrent()
+
+  this.setConstant()
+
+  this.setDifference()
+
+  this.setStartingCost()
+
+  this.setCardMeterDuration()
 
 }

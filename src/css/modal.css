@@ -23,7 +23,7 @@
 }
 
 .modal-wrapper {
-  background-color: rgb(var(--theme-color-01));
+  background-color: rgb(var(--theme-color-02));
   border-radius: var(--theme-radius);
   box-shadow: var(--theme-shadow-bottom-large);
   position: relative;
@@ -34,7 +34,7 @@
   grid-template-rows: 1fr auto;
   justify-items: stretch;
   align-items: stretch;
-  transition: opacity var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-timing-extra-fast), opacity var(--layout-timing-extra-fast);
 }
 
 .modal-wrapper .container {
@@ -55,7 +55,6 @@
 }
 
 .modal-controls {
-  background-color: rgb(var(--theme-color-01));
   border-radius: 0 0 var(--theme-radius) var(--theme-radius);
   position: relative;
   z-index: 2;
@@ -63,11 +62,8 @@
 }
 
 .modal-button {
-  background-color: transparent;
-  margin: 0;
   padding-top: 1.5em;
   padding-bottom: 1.5em;
-  flex-basis: 50%;
 }
 
 .modal-controls .modal-button:first-child {

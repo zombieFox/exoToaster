@@ -73,7 +73,7 @@ var control = (function() {
         type: "button",
         func: function() {
           autotoasterspeed.upgrade(1)
-          autotoasterspeed.setInterval()
+          autotoasterspeed.setIntervalCurrent()
           render.disable.check()
         },
         disable: {
@@ -105,7 +105,7 @@ var control = (function() {
         type: "button",
         func: function() {
           megatoasterspeed.upgrade(1)
-          megatoasterspeed.setInterval()
+          megatoasterspeed.setIntervalCurrent()
           render.disable.check()
         },
         disable: {
@@ -137,7 +137,7 @@ var control = (function() {
         type: "button",
         func: function() {
           rockettoasterspeed.upgrade(1)
-          rockettoasterspeed.setInterval()
+          rockettoasterspeed.setIntervalCurrent()
           render.disable.check()
         },
         disable: {
@@ -169,7 +169,7 @@ var control = (function() {
         type: "button",
         func: function() {
           plasmatoasterspeed.upgrade(1)
-          plasmatoasterspeed.setInterval()
+          plasmatoasterspeed.setIntervalCurrent()
           render.disable.check()
         },
         disable: {
@@ -201,7 +201,7 @@ var control = (function() {
         type: "button",
         func: function() {
           atomictoasterspeed.upgrade(1)
-          atomictoasterspeed.setInterval()
+          atomictoasterspeed.setIntervalCurrent()
           render.disable.check()
         },
         disable: {
@@ -233,7 +233,7 @@ var control = (function() {
         type: "button",
         func: function() {
           quantumtoasterspeed.upgrade(1)
-          quantumtoasterspeed.setInterval()
+          quantumtoasterspeed.setIntervalCurrent()
           render.disable.check()
         },
         disable: {
