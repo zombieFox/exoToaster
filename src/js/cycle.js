@@ -5,6 +5,7 @@ var cycle = (function() {
   mod.add = function(amount) {
     if (state.get.current().cycle.current + amount <= state.get.current().cycle.max) {
       state.get.current().cycle.current = state.get.current().cycle.current + amount
+    } else {
       state.get.current().cycle.current = state.get.current().cycle.max
     }
   }

@@ -3,6 +3,7 @@ var suffix = (function() {
   var add = function(override) {
     var options = {
       number: null,
+      abbreviations: null,
       decimals: null
     }
 
@@ -10,81 +11,169 @@ var suffix = (function() {
       options = helper.applyOptions(options, override)
     }
 
+    var suffix = ""
+
+    if (options.number > 999999999999999999999999999999999999999999999999999) {
+      options.number = options.number / 1000000000000000000000000000000000000000000000000000
+
+      if (options.abbreviations) {
+        suffix = "Sxd"
+      } else {
+        suffix = "sexdecillion"
+      }
+
+    } else if (options.number > 999999999999999999999999999999999999999999999999) {
+      options.number = options.number / 1000000000000000000000000000000000000000000000000
+
+      if (options.abbreviations) {
+        suffix = "Qid"
+      } else {
+        suffix = "quindecillion"
+      }
+
+    } else if (options.number > 999999999999999999999999999999999999999999999) {
+      options.number = options.number / 1000000000000000000000000000000000000000000000
+
+      if (options.abbreviations) {
+        suffix = "Qad"
+      } else {
+        suffix = "quattuordecillion"
+      }
+
+    } else if (options.number > 999999999999999999999999999999999999999999) {
+      options.number = options.number / 1000000000000000000000000000000000000000000
+
+      if (options.abbreviations) {
+        suffix = "Td"
+      } else {
+        suffix = "tredecillion"
+      }
+
+    } else if (options.number > 999999999999999999999999999999999999999) {
+      options.number = options.number / 1000000000000000000000000000000000000000
+
+      if (options.abbreviations) {
+        suffix = "Dd"
+      } else {
+        suffix = "duodecillion"
+      }
+
+    } else if (options.number > 999999999999999999999999999999999999) {
+      options.number = options.number / 1000000000000000000000000000000000000
+
+      if (options.abbreviations) {
+        suffix = "Ud"
+      } else {
+        suffix = "undecillion"
+      }
+
+    } else if (options.number > 999999999999999999999999999999999) {
+      options.number = options.number / 1000000000000000000000000000000000
+
+      if (options.abbreviations) {
+        suffix = "Dc"
+      } else {
+        suffix = "decillion"
+      }
+
+    } else if (options.number > 999999999999999999999999999999) {
+      options.number = options.number / 1000000000000000000000000000000
+
+      if (options.abbreviations) {
+        suffix = "No"
+      } else {
+        suffix = "nonillion"
+      }
+
+    } else if (options.number > 999999999999999999999999999) {
+      options.number = options.number / 1000000000000000000000000000
+
+      if (options.abbreviations) {
+        suffix = "Oc"
+      } else {
+        suffix = "octillion"
+      }
+
+    } else if (options.number > 999999999999999999999999) {
+      options.number = options.number / 1000000000000000000000000
+
+      if (options.abbreviations) {
+        suffix = "Sp"
+      } else {
+        suffix = "septillion"
+      }
+
+    } else if (options.number > 999999999999999999999) {
+      options.number = options.number / 1000000000000000000000
+
+      if (options.abbreviations) {
+        suffix = "Sx"
+      } else {
+        suffix = "sextillion"
+      }
+
+    } else if (options.number > 999999999999999999) {
+      options.number = options.number / 1000000000000000000
+
+      if (options.abbreviations) {
+        suffix = "Qi"
+      } else {
+        suffix = "quintillion"
+      }
+
+    } else if (options.number > 999999999999999) {
+      options.number = options.number / 1000000000000000
+
+      if (options.abbreviations) {
+        suffix = "Qa"
+      } else {
+        suffix = "quadrillion"
+      }
+
+    } else if (options.number > 999999999999) {
+      options.number = options.number / 1000000000000
+
+      if (options.abbreviations) {
+        suffix = "Tr"
+      } else {
+        suffix = "trillion"
+      }
+
+    } else if (options.number > 999999999) {
+      options.number = options.number / 1000000000
+
+      if (options.abbreviations) {
+        suffix = "Bi"
+      } else {
+        suffix = "billion"
+      }
+
+    } else if (options.number > 999999) {
+      options.number = options.number / 1000000
+
+      if (options.abbreviations) {
+        suffix = "Mi"
+      } else {
+        suffix = "million"
+      }
+
+    } else if (options.number > 999) {
+      options.number = options.number / 1000
+
+      if (options.abbreviations) {
+        suffix = "K"
+      } else {
+        suffix = "thousand"
+      }
+
+    }
+
     if (options.decimals == null) {
       options.decimals = 2
     }
 
-    var suffix = ""
-    if (options.number > 999999999999999999999999999999999999999999999999999) {
-      options.number = options.number / 1000000000000000000000000000000000000000000000000000
-      // suffix = " sexdecillion"
-      suffix = " Sxd"
-    } else if (options.number > 999999999999999999999999999999999999999999999999) {
-      options.number = options.number / 1000000000000000000000000000000000000000000000000
-      // suffix = " quindecillion"
-      suffix = " Qid"
-    } else if (options.number > 999999999999999999999999999999999999999999999) {
-      options.number = options.number / 1000000000000000000000000000000000000000000000
-      // suffix = " quattuordecillion"
-      suffix = " Qad"
-    } else if (options.number > 999999999999999999999999999999999999999999) {
-      options.number = options.number / 1000000000000000000000000000000000000000000
-      // suffix = " tredecillion"
-      suffix = " Td"
-    } else if (options.number > 999999999999999999999999999999999999999) {
-      options.number = options.number / 1000000000000000000000000000000000000000
-      // suffix = " duodecillion"
-      suffix = " Dd"
-    } else if (options.number > 999999999999999999999999999999999999) {
-      options.number = options.number / 1000000000000000000000000000000000000
-      // suffix = " undecillion"
-      suffix = " Ud"
-    } else if (options.number > 999999999999999999999999999999999) {
-      options.number = options.number / 1000000000000000000000000000000000
-      // suffix = " decillion"
-      suffix = " Dc"
-    } else if (options.number > 999999999999999999999999999999) {
-      options.number = options.number / 1000000000000000000000000000000
-      // suffix = " nonillion"
-      suffix = " No"
-    } else if (options.number > 999999999999999999999999999) {
-      options.number = options.number / 1000000000000000000000000000
-      // suffix = " octillion"
-      suffix = " Oc"
-    } else if (options.number > 999999999999999999999999) {
-      options.number = options.number / 1000000000000000000000000
-      // suffix = " septillion"
-      suffix = " Sp"
-    } else if (options.number > 999999999999999999999) {
-      options.number = options.number / 1000000000000000000000
-      // suffix = " sextillion"
-      suffix = " Sx"
-    } else if (options.number > 999999999999999999) {
-      options.number = options.number / 1000000000000000000
-      // suffix = " quintillion"
-      suffix = " Qi"
-    } else if (options.number > 999999999999999) {
-      options.number = options.number / 1000000000000000
-      // suffix = " quadrillion"
-      suffix = " Qa"
-    } else if (options.number > 999999999999) {
-      options.number = options.number / 1000000000000
-      // suffix = " trillion"
-      suffix = " Tr"
-    } else if (options.number > 999999999) {
-      options.number = options.number / 1000000000
-      // suffix = " billion"
-      suffix = " Bi"
-    } else if (options.number > 999999) {
-      options.number = options.number / 1000000
-      // suffix = " million"
-      suffix = " Mi"
-    } else if (options.number > 999) {
-      options.number = options.number / 1000
-      // suffix = " thousand"
-      suffix = " K"
-    } else if (options.number < 1000) {
-      options.decimals = 0
+    if (options.number < 1000) {
+      options.decimals = 2
     }
 
     var number = options.number.toFixed(options.decimals)
@@ -95,7 +184,7 @@ var suffix = (function() {
       }
     }
 
-    return number + suffix
+    return number + " " + suffix
 
   }
 

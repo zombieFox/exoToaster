@@ -78,7 +78,7 @@ var state = (function() {
               passed: false,
               restore: true,
               condition: {
-                processor: 6
+                processor: 4
               },
               cost: {
                 cycle: 2
@@ -95,7 +95,7 @@ var state = (function() {
               passed: false,
               restore: true,
               condition: {
-                processor: 12
+                processor: 8
               },
               cost: {
                 cycle: 4
@@ -112,10 +112,27 @@ var state = (function() {
               passed: false,
               restore: true,
               condition: {
-                processor: 18
+                processor: 12
               },
               cost: {
                 cycle: 8
+              }
+            },
+            active: {
+              level: 0,
+              passed: false,
+              restore: true
+            }
+          },
+          sonictoaster: {
+            open: {
+              passed: false,
+              restore: true,
+              condition: {
+                processor: 16
+              },
+              cost: {
+                cycle: 16
               }
             },
             active: {
@@ -129,10 +146,10 @@ var state = (function() {
               passed: false,
               restore: true,
               condition: {
-                processor: 24
+                processor: 20
               },
               cost: {
-                cycle: 16
+                cycle: 32
               }
             },
             active: {
@@ -146,10 +163,10 @@ var state = (function() {
               passed: false,
               restore: true,
               condition: {
-                processor: 30
+                processor: 24
               },
               cost: {
-                cycle: 32
+                cycle: 64
               }
             },
             active: {
@@ -163,10 +180,10 @@ var state = (function() {
               passed: false,
               restore: true,
               condition: {
-                processor: 36
+                processor: 28
               },
               cost: {
-                cycle: 64
+                cycle: 128
               }
             },
             active: {
@@ -180,7 +197,7 @@ var state = (function() {
               passed: false,
               restore: true,
               condition: {
-                processor: 32
+                processor: 24
               },
               cost: {
                 cycle: 32
@@ -214,6 +231,16 @@ var state = (function() {
           }
         },
         rockettoaster: {
+          open: {
+            passed: false,
+            restore: true
+          },
+          active: {
+            passed: false,
+            restore: true
+          }
+        },
+        sonictoaster: {
           open: {
             passed: false,
             restore: true
@@ -369,7 +396,7 @@ var state = (function() {
         min: 1000
       }
     },
-    plasmatoaster: {
+    sonictoaster: {
       unitmultiplier: 8,
       toastperunit: null,
       level: 0,
@@ -380,8 +407,33 @@ var state = (function() {
         toast: null
       }
     },
-    plasmatoasterspeed: {
+    sonictoasterspeed: {
       unitmultiplier: 8,
+      level: 0,
+      cost: {
+        constant: null,
+        difference: null,
+        toast: null
+      },
+      interval: {
+        starting: null,
+        current: null,
+        min: 1000
+      }
+    },
+    plasmatoaster: {
+      unitmultiplier: 16,
+      toastperunit: null,
+      level: 0,
+      efficiency: 0,
+      cost: {
+        constant: null,
+        difference: null,
+        toast: null
+      }
+    },
+    plasmatoasterspeed: {
+      unitmultiplier: 16,
       level: 0,
       cost: {
         constant: null,
@@ -395,7 +447,7 @@ var state = (function() {
       }
     },
     atomictoaster: {
-      unitmultiplier: 16,
+      unitmultiplier: 32,
       toastperunit: null,
       level: 0,
       efficiency: 0,
@@ -406,7 +458,7 @@ var state = (function() {
       }
     },
     atomictoasterspeed: {
-      unitmultiplier: 16,
+      unitmultiplier: 32,
       level: 0,
       cost: {
         constant: null,
@@ -420,7 +472,7 @@ var state = (function() {
       }
     },
     quantumtoaster: {
-      unitmultiplier: 32,
+      unitmultiplier: 64,
       toastperunit: null,
       level: 0,
       efficiency: 0,
@@ -431,7 +483,7 @@ var state = (function() {
       }
     },
     quantumtoasterspeed: {
-      unitmultiplier: 32,
+      unitmultiplier: 64,
       level: 0,
       cost: {
         constant: null,

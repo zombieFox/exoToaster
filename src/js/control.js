@@ -146,6 +146,38 @@ var control = (function() {
           }
         }
       }],
+      sonictoaster: [{
+        element: "[control=sonictoaster-level-increase1]",
+        type: "button",
+        func: function() {
+          sonictoaster.upgrade(1)
+        }
+      }, {
+        element: "[control=sonictoaster-level-increase10]",
+        type: "button",
+        func: function() {
+          sonictoaster.upgrade(10)
+        }
+      }, {
+        element: "[control=sonictoaster-level-increase100]",
+        type: "button",
+        func: function() {
+          sonictoaster.upgrade(100)
+        }
+      }, {
+        element: "[control=sonictoasterspeed-level-increase1]",
+        type: "button",
+        func: function() {
+          sonictoasterspeed.upgrade(1)
+          sonictoasterspeed.setIntervalCurrent()
+          render.disable.check()
+        },
+        disable: {
+          condition: function() {
+            return state.get.current().sonictoasterspeed.interval.current <= state.get.current().sonictoasterspeed.interval.min
+          }
+        }
+      }],
       plasmatoaster: [{
         element: "[control=plasmatoaster-level-increase1]",
         type: "button",

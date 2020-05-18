@@ -66,6 +66,11 @@ var events = (function() {
         open: ["strategy.rocket_toaster.data loaded"],
         active: ["rocket_toaster.data loaded"]
       },
+      sonictoaster: {
+        displayName: "Sonic Toaster",
+        open: ["strategy.sonic_toaster.data loaded"],
+        active: ["sonic_toaster.data loaded"]
+      },
       plasmatoaster: {
         displayName: "Plasma Toaster",
         open: ["strategy.plasma_toaster.data loaded"],
@@ -101,6 +106,8 @@ var events = (function() {
     "all.strategy.megatoaster.active",
     "all.strategy.rockettoaster.open",
     "all.strategy.rockettoaster.active",
+    "all.strategy.sonictoaster.open",
+    "all.strategy.sonictoaster.active",
     "all.strategy.plasmatoaster.open",
     "all.strategy.plasmatoaster.active",
     "all.strategy.atomictoaster.open",
@@ -115,6 +122,8 @@ var events = (function() {
     "all.megatoaster.active",
     "all.rockettoaster.open",
     "all.rockettoaster.active",
+    "all.sonictoaster.open",
+    "all.sonictoaster.active",
     "all.plasmatoaster.open",
     "all.plasmatoaster.active",
     "all.atomictoaster.open",
@@ -249,6 +258,27 @@ var events = (function() {
             return state.get.current().events.all.strategy.rockettoaster.active.level > 0
           },
           report: mod.strings.strategy.rockettoaster.active
+        }
+      },
+      sonictoaster: {
+        open: {
+          condition: function() {
+            return state.get.current().processor.level >= state.get.current().events.all.strategy.sonictoaster.open.condition.processor
+          },
+          report: mod.strings.strategy.sonictoaster.open,
+          func: function() {
+            strategy.render.card({
+              path: "all.strategy.sonictoaster",
+              name: "sonictoaster",
+              displayName: mod.strings.strategy.sonictoaster.displayName
+            })
+          }
+        },
+        active: {
+          condition: function() {
+            return state.get.current().events.all.strategy.sonictoaster.active.level > 0
+          },
+          report: mod.strings.strategy.sonictoaster.active
         }
       },
       plasmatoaster: {
@@ -412,6 +442,33 @@ var events = (function() {
             },
             interval: function() {
               return state.get.current().rockettoasterspeed.interval.current
+            }
+          })
+        }
+      }
+    },
+    sonictoaster: {
+      open: {
+        condition: function() {
+          return state.get.current().events.all.strategy.sonictoaster.active.passed
+        },
+        stage: "sonictoaster"
+      },
+      active: {
+        condition: function() {
+          return state.get.current().sonictoaster.level >= 1
+        },
+        func: function() {
+          helper.e("[stage=sonictoaster]").classList.add("active")
+          sonictoasterspeed.setCardMeterDuration()
+          tick.mod.set({
+            name: "sonictoaster",
+            func: function() {
+              toast.make(state.get.current().sonictoaster.level * (state.get.current().sonictoaster.toastperunit + state.get.current().sonictoaster.efficiency))
+              sonictoasterspeed.setCardMeterDuration()
+            },
+            interval: function() {
+              return state.get.current().sonictoasterspeed.interval.current
             }
           })
         }

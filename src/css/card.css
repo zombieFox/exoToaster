@@ -45,7 +45,7 @@
 }
 
 .card-body:not(:last-child):not(:only-child) {
-  border-bottom: var(--horizontal-rule-large);
+  border-bottom: var(--horizontal-rule-small);
 }
 
 .card-footer {
@@ -55,7 +55,7 @@
 }
 
 .card-footer:not(:last-child):not(:only-child) {
-  border-bottom: var(--horizontal-rule-large);
+  border-bottom: var(--horizontal-rule-small);
 }
 
 .card-meter {

@@ -1,0 +1,34 @@
+<div class="card is-hidden" stage="sonictoaster" tabindex="1">
+
+  <div class="card-header">
+    <p class="mb-0"><strong>Sonic Toasters</strong></p>
+  </div>
+
+  <div class="card-meter">
+    <div class="card-meter-progress"></div>
+  </div>
+
+  <div class="card-body">
+    <p class="mb-2">Unit count: <span readout="sonictoaster-level"></span></p>
+    <div class="form-group mb-2">
+      <button class="button button-line button-small" control="sonictoaster-level-increase1" tabindex="1">+1</button>
+      <button class="button button-line button-small" control="sonictoaster-level-increase10" tabindex="1">+10</button>
+      <button class="button button-line button-small" control="sonictoaster-level-increase100" tabindex="1">+100</button>
+    </div>
+    <p class="small muted">+1 cost <strong readout="sonictoaster-cost-toast"></strong> <abbr title="Toast matter">Tm</abbr></p>
+  </div>
+
+  <div class="card-body">
+    <p class="mb-2">Speed: <span readout="sonictoasterspeed-level"></span></p>
+    <div class="form-group mb-2">
+      <button class="button button-line button-small" control="sonictoasterspeed-level-increase1" tabindex="1">+1</button>
+    </div>
+    <p class="small muted">+1 cost <strong readout="sonictoasterspeed-cost-toast"></strong> <abbr title="Toast matter">Tm</abbr></p>
+  </div>
+
+  <div class="card-footer">
+    <p class="small muted">Toast per unit: <span readout="sonictoaster-toastperunit"></span></p>
+    <p class="small muted mb-0">Producing <span readout="sonictoaster-toast"></span> toast every <span readout="sonictoasterspeed-interval-current"></span>s</p>
+  </div>
+
+</div>

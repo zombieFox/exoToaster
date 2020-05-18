@@ -61,9 +61,11 @@ var Generator = function(name, type, multiplier) {
       report.render({
         type: "success",
         message: ["+" + suffix.add({
-          number: amount
+          number: amount,
+          abbreviations: true
         }) + " unit, " + suffix.add({
-          number: state.get.current()[this.name].level
+          number: state.get.current()[this.name].level,
+          abbreviations: true
         }) + " " + this.name + " online"],
         format: "normal"
       })
