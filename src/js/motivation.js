@@ -162,18 +162,24 @@ var motivation = (function() {
 
   var render = function(index) {
     var randomIndex = Math.round(Math.random() * (phaseMessage.toast.length - 1))
+
     if (index && index <= (phaseMessage.toast.length - 1) || index == 0) {
       randomIndex = index
     }
+
     report.render({
       type: "motivation",
       message: [phaseMessage.toast[randomIndex]],
       format: "normal"
     })
-    var motivationTime = Math.round(Math.random() * 125000)
-    // console.log("motivation in: " + Math.round(motivationTime / 1000) + "s")
+
+    var interval = Math.round(Math.random() * 125000)
+
+    // console.log("motivation in: " + Math.round(interval / 1000) + "s")
+
     clearInterval(nextMotivation)
-    nextMotivation = setInterval(render, motivationTime)
+
+    nextMotivation = setInterval(render, interval)
   }
 
   return {

@@ -43,58 +43,143 @@ var events = (function() {
   }
 
   mod.strings = {
+    consumer: {
+      start: {
+        type: "normal",
+        message: ["!-- warning --!", "toast matter stock reduced", "toast is being consumed", "!-- warning --!"],
+        format: "normal"
+      }
+    },
     processor: {
-      open: ["processor.data loaded"]
+      open: {
+        type: "system",
+        message: ["processor.data loaded"],
+        format: "normal"
+      }
     },
     cycle: {
-      open: ["instruction_cycles.data loaded"]
+      open: {
+        type: "system",
+        message: ["instruction_cycles.data loaded"],
+        format: "normal"
+      }
     },
     strategy: {
-      open: ["strategy.data loaded"],
+      open: {
+        type: "system",
+        message: ["strategy.data loaded"],
+        format: "normal"
+      },
       autotoaster: {
         displayName: "Auto Toaster",
-        open: ["strategy.auto_toaster.data loaded"],
-        active: ["auto_toaster.data loaded"]
+        open: {
+          type: "system",
+          message: ["strategy.auto_toaster.data loaded"],
+          format: "normal"
+        },
+        active: {
+          type: "system",
+          message: ["auto_toaster.data loaded"],
+          format: "normal"
+        }
       },
       megatoaster: {
         displayName: "Mega Toaster",
-        open: ["strategy.mega_toaster.data loaded"],
-        active: ["mega_toaster.data loaded"]
+        open: {
+          type: "system",
+          message: ["strategy.mega_toaster.data loaded"],
+          format: "normal"
+        },
+        active: {
+          type: "system",
+          message: ["mega_toaster.data loaded"],
+          format: "normal"
+        }
       },
       rockettoaster: {
         displayName: "Rocket Toaster",
-        open: ["strategy.rocket_toaster.data loaded"],
-        active: ["rocket_toaster.data loaded"]
+        open: {
+          type: "system",
+          message: ["strategy.rocket_toaster.data loaded"],
+          format: "normal"
+        },
+        active: {
+          type: "system",
+          message: ["rocket_toaster.data loaded"],
+          format: "normal"
+        }
       },
       sonictoaster: {
         displayName: "Sonic Toaster",
-        open: ["strategy.sonic_toaster.data loaded"],
-        active: ["sonic_toaster.data loaded"]
+        open: {
+          type: "system",
+          message: ["strategy.sonic_toaster.data loaded"],
+          format: "normal"
+        },
+        active: {
+          type: "system",
+          message: ["sonic_toaster.data loaded"],
+          format: "normal"
+        }
       },
       plasmatoaster: {
         displayName: "Plasma Toaster",
-        open: ["strategy.plasma_toaster.data loaded"],
-        active: ["plasma_toaster.data loaded"]
+        open: {
+          type: "system",
+          message: ["strategy.plasma_toaster.data loaded"],
+          format: "normal"
+        },
+        active: {
+          type: "system",
+          message: ["plasma_toaster.data loaded"],
+          format: "normal"
+        }
       },
       atomictoaster: {
         displayName: "Atomic Toaster",
-        open: ["strategy.atomic_toaster.data loaded"],
-        active: ["atomic_toaster.data loaded"]
+        open: {
+          type: "system",
+          message: ["strategy.atomic_toaster.data loaded"],
+          format: "normal"
+        },
+        active: {
+          type: "system",
+          message: ["atomic_toaster.data loaded"],
+          format: "normal"
+        }
       },
       quantumtoaster: {
         displayName: "Quantum Toaster",
-        open: ["strategy.quantum_toaster.data loaded"],
-        active: ["quantum_toaster.data loaded"]
+        open: {
+          type: "system",
+          message: ["strategy.quantum_toaster.data loaded"],
+          format: "normal"
+        },
+        active: {
+          type: "system",
+          message: ["quantum_toaster.data loaded"],
+          format: "normal"
+        }
       },
       unmotivated: {
         displayName: "Unmotivated",
-        open: ["strategy.unmotivated.data loaded"],
-        active: ["unmotivated.data loaded"]
+        open: {
+          type: "system",
+          message: ["strategy.unmotivated.data loaded"],
+          format: "normal"
+        },
+        active: {
+          type: "system",
+          message: ["unmotivated.data loaded"],
+          format: "normal"
+        }
       }
     }
   }
 
   mod.addresses = [
+    "all.consumer.start",
+    "all.consumer.stop",
     "all.processor.open",
     "all.cycle.open",
     "all.cycle.start",
@@ -134,10 +219,38 @@ var events = (function() {
   ]
 
   mod.all = {
+    consumer: {
+      start: {
+        condition: function() {
+          return state.get.current().toast.lifetime.current >= state.get.current().events.all.consumer.start.condition.toast
+        },
+        stage: "consumer",
+        report: mod.strings.consumer.start,
+        func: function() {
+          tick.mod.set({
+            name: "consumer",
+            func: function() {
+              consumer.mod.add()
+            },
+            interval: function() {
+              return consumer.mod.interval()
+            }
+          })
+        }
+      },
+      stop: {
+        condition: function() {
+          return state.get.current().events.all.consumer.stop.passed
+        },
+        func: function() {
+          tick.mod.remove("consumer")
+        }
+      }
+    },
     processor: {
       open: {
         condition: function() {
-          return state.get.current().toast.inventory.current >= state.get.current().processor.cost.toast
+          return state.get.current().toast.lifetime.current >= state.get.current().processor.cost.toast
         },
         stage: "processor",
         report: mod.strings.processor.open
@@ -168,11 +281,7 @@ var events = (function() {
               return state.get.current().cycle.interval.current
             }
           })
-          helper.setObject({
-            object: state.get.current(),
-            path: "events.all.cycle.stop.passed",
-            newValue: false
-          })
+          state.get.current().events.all.cycle.stop.passed = false
         }
       },
       stop: {
@@ -181,11 +290,7 @@ var events = (function() {
         },
         func: function() {
           tick.mod.remove("cycle")
-          helper.setObject({
-            object: state.get.current(),
-            path: "events.all.cycle.start.passed",
-            newValue: false
-          })
+          state.get.current().events.all.cycle.start.passed = false
         }
       }
     },
@@ -391,6 +496,9 @@ var events = (function() {
             }
           })
         }
+      },
+      efficiency1: {
+        
       }
     },
     megatoaster: {
@@ -566,9 +674,7 @@ var events = (function() {
   }
 
   mod.check = function() {
-
     var action = function functionName(path) {
-
       // get state data
       var stateData = helper.getObject({
         object: state.get.current(),
@@ -604,19 +710,15 @@ var events = (function() {
           }
         }
       }
-
     }
 
     mod.addresses.forEach(function(path, index) {
       action(path)
     })
-
   }
 
   mod.update = function() {
-
     var action = function functionName(path) {
-
       // get state data
       var stateData = helper.getObject({
         object: state.get.current(),
@@ -639,13 +741,11 @@ var events = (function() {
           eventData.func()
         }
       }
-
     }
 
     mod.addresses.forEach(function(path, index) {
       action(path)
     })
-
   }
 
   var render = {}
@@ -658,11 +758,11 @@ var events = (function() {
     helper.e("[stage=" + name + "]").classList.add("is-hidden")
   }
 
-  render.report = function(strings) {
+  render.report = function(data) {
     report.render({
-      type: "system",
-      message: strings,
-      format: "normal"
+      type: data.type,
+      message: data.message,
+      format: data.format
     })
   }
 

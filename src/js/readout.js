@@ -10,6 +10,12 @@ var readout = (function() {
       },
       suffix: true
     }, {
+      element: "[readout=consumer-current]",
+      value: function() {
+        return state.get.current().consumer.current
+      },
+      suffix: true
+    }, {
       element: "[readout=toast-lifetime-current]",
       value: function() {
         return state.get.current().toast.lifetime.current

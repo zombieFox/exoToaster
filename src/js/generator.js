@@ -1,4 +1,4 @@
-var Generator = function(name, type, multiplier) {
+var Generator = function(name, type, displayName) {
 
   this.debug = function() {
     console.log("name:", this.name)
@@ -16,6 +16,8 @@ var Generator = function(name, type, multiplier) {
   }
 
   this.name = name
+
+  this.displayName = displayName
 
   this.type = type
 
@@ -66,7 +68,7 @@ var Generator = function(name, type, multiplier) {
         }) + " unit, " + suffix.add({
           number: state.get.current()[this.name].level,
           abbreviations: true
-        }) + " " + this.name + " online"],
+        }) + " " + this.displayName + " online"],
         format: "normal"
       })
 
@@ -103,12 +105,10 @@ var Generator = function(name, type, multiplier) {
 
   this.setConstant = function() {
     state.get.current()[this.name].cost.constant = state.mod.formula.cost.constant(state.get.current()[this.name].unitmultiplier)
-
   }
 
   this.setDifference = function() {
     state.get.current()[this.name].cost.difference = state.mod.formula.cost.difference[this.type](state.get.current()[this.name].unitmultiplier)
-
   }
 
   this.setStartingCost = function() {

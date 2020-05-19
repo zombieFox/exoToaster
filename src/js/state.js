@@ -39,8 +39,15 @@ var state = (function() {
     },
     events: {
       all: {
-        toaster: {
-          open: {
+        consumer: {
+          start: {
+            condition: {
+              toast: 300
+            },
+            passed: false,
+            restore: true
+          },
+          stop: {
             passed: false,
             restore: true
           }
@@ -63,7 +70,7 @@ var state = (function() {
           stop: {
             passed: false,
             restore: true
-          },
+          }
         },
         strategy: {
           open: {
@@ -302,6 +309,9 @@ var state = (function() {
       inventory: {
         current: 0
       }
+    },
+    consumer: {
+      current: 0
     },
     processor: {
       unitmultiplier: 2,
