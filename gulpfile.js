@@ -101,18 +101,12 @@ const build = {
       }))
       .pipe(dest(path.build))
   },
-  // fonts: function() {
-  //   return src(path.src + '/fonts/**/*.*')
-  //     .pipe(dest(path.build + '/fonts'))
-  // },
-  // icons: function() {
-  //   return src(path.src + '/icons/**/*.*')
-  //     .pipe(dest(path.build + '/icons'))
-  // },
   css: function() {
     return src(cssFiles)
       .pipe(concat(filename.css))
-      .pipe(csso())
+      .pipe(csso({
+        restructure: false
+      }))
       .pipe(uglifycss({
         "uglyComments": true
       }))
@@ -141,22 +135,6 @@ const dev = {
         .pipe(dest(path.dev))
     })
   },
-  // fonts: function() {
-  //   watch(path.src + '/fonts/**/*.*', {
-  //     ignoreInitial: false
-  //   }, function() {
-  //     return src(path.src + '/fonts/**/*.*')
-  //       .pipe(dest(path.dev + '/fonts'))
-  //   })
-  // },
-  // icons: function() {
-  //   watch(path.src + '/icons/**/*.*', {
-  //     ignoreInitial: false
-  //   }, function() {
-  //     return src(path.src + '/icons/**/*.*')
-  //       .pipe(dest(path.dev + '/icons'))
-  //   })
-  // },
   css: function() {
     watch(cssFiles, {
       ignoreInitial: false

@@ -10,7 +10,7 @@
     "clean": "npm run clean-dev; npm run clean-build",
     "clean-dev": "rm -rf dev",
     "clean-build": "rm -rf build",
-    "deploy-gh-pages": "npm run clean-build; gulp build; gh-pages -d build/web"
+    "deploy-gh-pages": "npm run clean-build; gulp build; gh-pages -d build"
   },
   "repository": {
     "type": "git",
