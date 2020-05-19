@@ -2,20 +2,55 @@
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: 30% auto;
-  grid-template-rows: 100vh;
+  grid-gap: 2em;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80vh calc(20vh - 2em);
   grid-template-areas:
-    "report main";
+    "main"
+    "report";
+}
+
+@media (min-width: 700px) {
+  .layout {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 100vh;
+    grid-template-areas:
+      "report main";
+  }
+}
+
+@media (min-width: 1200px) {
+  .layout {
+    grid-template-columns: 30% auto;
+  }
 }
 
 .layout-report {
   grid-area: report;
   height: 100%;
+  width: 100vw;
   transition: background-color var(--layout-timing-extra-fast);
+}
+
+@media (min-width: 700px) {
+  .layout-report {
+    width: initial;
+  }
 }
 
 .layout-main {
   grid-area: main;
   height: 100%;
+  width: 100vw;
   transition: background-color var(--layout-timing-extra-fast);
+}
+
+@media (min-width: 700px) {
+  .layout-main {
+    width: initial;
+  }
 }

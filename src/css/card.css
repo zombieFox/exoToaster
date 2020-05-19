@@ -108,6 +108,10 @@
   animation-duration: var(--card-rockettoasterspeed-meter-duration);
 }
 
+[stage=sonictoaster].active .card-meter-progress {
+  animation-duration: var(--card-sonictoasterspeed-meter-duration);
+}
+
 [stage=plasmatoaster].active .card-meter-progress {
   animation-duration: var(--card-plasmatoasterspeed-meter-duration);
 }

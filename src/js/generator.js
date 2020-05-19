@@ -97,7 +97,7 @@ var Generator = function(name, type, multiplier) {
 
   this.setIntervalCurrent = function() {
     if (state.get.current()[this.name].interval) {
-      state.get.current()[this.name].interval.current = state.get.current()[this.name].interval.starting - (state.get.current()[this.name].level * 500)
+      state.get.current()[this.name].interval.current = state.get.current()[this.name].interval.starting - (state.get.current()[this.name].level * 1000)
     }
   }
 

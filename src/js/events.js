@@ -87,7 +87,7 @@ var events = (function() {
         active: ["quantum_toaster.data loaded"]
       },
       unmotivated: {
-        displayName: "Self-motivation",
+        displayName: "Unmotivated",
         open: ["strategy.unmotivated.data loaded"],
         active: ["unmotivated.data loaded"]
       }

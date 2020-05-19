@@ -1,7 +1,13 @@
 .report {
-  padding: 2em 2em 10vh 2em;
+  padding: 1em;
   height: 100%;
   overflow-y: auto;
+}
+
+@media (min-width: 700px) {
+  .report {
+    padding: 2em 2em 10vh 2em;
+  }
 }
 
 .report-message {
@@ -18,11 +24,17 @@
 }
 
 .report-message-type {
-  width: 6em;
+  width: 4em;
   text-align: center;
   flex-grow: 0;
   flex-shrink: 0;
   font-weight: 700;
+}
+
+@media (min-width: 1200px) {
+  .report-message-type {
+    width: 6em;
+  }
 }
 
 .report-message-text {
