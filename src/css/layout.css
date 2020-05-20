@@ -12,20 +12,29 @@
 
 @media (min-width: 700px) {
   .layout {
-    width: 100vw;
-    height: 100vh;
-    display: grid;
     grid-gap: 0;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 100vh;
     grid-template-areas:
       "report main";
   }
 }
 
+@media (min-width: 850px) {
+  .layout {
+    grid-template-columns: 2fr 3fr;
+  }
+}
+
 @media (min-width: 1200px) {
   .layout {
-    grid-template-columns: 30% auto;
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+@media (min-width: 1500px) {
+  .layout {
+    grid-template-columns: 3fr 7fr;
   }
 }
 

@@ -79,6 +79,11 @@ var readout = (function() {
       value: function() {
         return state.get.current().cycle.interval.current / 1000
       }
+    }, {
+      element: "[readout=cycle-maxmultiplier]",
+      value: function() {
+        return state.get.current().cycle.maxmultiplier
+      }
     }],
     autotoaster: [{
       element: "[readout=autotoaster-toast]",

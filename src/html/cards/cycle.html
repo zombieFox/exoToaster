@@ -1,7 +1,7 @@
 <div class="card is-hidden" stage="cycle" tabindex="1">
 
   <div class="card-header">
-    <p class="mb-0"><strong>Instruction cycles</strong></p>
+    <p class="mb-0"><strong>Instruction Cycles</strong></p>
   </div>
 
   <div class="card-meter">
@@ -12,12 +12,13 @@
     <p class="mb-0">Count: <strong readout="cycle-current"></strong> / <span readout="cycle-max"></span></p>
   </div>
 
-  <div class="card-header" stage="next-strategy">
-    <p class="small">Use instruction cycles to imagine ideas and solve problems</p>
+  <div class="card-header">
+    <p class="small">Use instruction cycles to solve problems</p>
   </div>
 
   <div class="card-footer">
-    <p class="small muted mb-0">Producing 1 cycle every <span readout="cycle-speed"></span>s</p>
+    <p class="small muted">Producing 1 cycle every <span readout="cycle-speed"></span>s</p>
+    <p class="small muted mb-0">Max cycles = processor cores x <span readout="cycle-maxmultiplier"></span></p>
   </div>
 
 </div>

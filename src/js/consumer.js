@@ -26,7 +26,7 @@ var consumer = (function() {
 
       report.render({
         type: "normal",
-        message: ["::: warning :::", amount + " toast matter consumed", "consumer unknown"],
+        message: [amount + " toast matter consumed", "consumer unknown"],
         format: "normal"
       })
     }
@@ -43,7 +43,7 @@ var consumer = (function() {
 
     var interval = helper.randomNumber(1, 60) * 1000
 
-    console.log("consumer in: " + Math.round(interval / 1000) + "s")
+    // console.log("consumer in: " + Math.round(interval / 1000) + "s")
 
     return interval
   }

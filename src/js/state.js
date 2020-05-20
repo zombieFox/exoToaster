@@ -221,7 +221,7 @@ var state = (function() {
               passed: false,
               restore: true,
               condition: {
-                processor: 10
+                processor: 15
               },
               cost: {
                 cycle: 120
@@ -238,7 +238,7 @@ var state = (function() {
               passed: false,
               restore: true,
               condition: {
-                processor: 12
+                processor: 22
               },
               cost: {
                 cycle: 120
@@ -359,6 +359,7 @@ var state = (function() {
     cycle: {
       current: 0,
       max: null,
+      maxmultiplier: 2,
       interval: {
         starting: mod.formula.interval(3),
         current: null,

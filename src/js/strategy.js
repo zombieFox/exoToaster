@@ -98,21 +98,25 @@ var strategy = (function() {
 
       var cardBody = helper.node("div|class:card-body,strategy:" + options.name)
 
-      var button = helper.node("button:Develop " + options.displayName + "|class:button button-line button-small mb-2,tabindex:1")
+      var paraIntro = helper.node("p:Develop new strategy|class:small muted")
+
+      var button = helper.node("button:" + options.displayName + "|class:button button-line button-small mb-2,tabindex:1")
 
       button.addEventListener("click", function() {
         mod.activate(options)
       })
 
-      var para = helper.node("p:Develop cost " + stateData.open.cost.cycle + " |class:small muted")
+      var paraCost = helper.node("p:Develop cost " + stateData.open.cost.cycle + " |class:small muted")
 
       var abbr = helper.node("abbr:Ic|title:Instruction cycles")
 
-      para.appendChild(abbr)
+      paraCost.appendChild(abbr)
+
+      cardBody.appendChild(paraIntro)
 
       cardBody.appendChild(button)
 
-      cardBody.appendChild(para)
+      cardBody.appendChild(paraCost)
 
       if (options.description != null) {
         cardBody.appendChild(helper.node("hr"))

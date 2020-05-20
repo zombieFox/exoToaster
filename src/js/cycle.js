@@ -19,7 +19,7 @@ var cycle = (function() {
   }
 
   mod.max = function() {
-    state.get.current().cycle.max = state.get.current().processor.level * 2
+    state.get.current().cycle.max = state.get.current().processor.level * state.get.current().cycle.maxmultiplier
   }
 
   mod.interval = {
