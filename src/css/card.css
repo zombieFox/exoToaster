@@ -38,10 +38,18 @@
   transition: background-color var(--layout-timing-extra-fast), border var(--layout-timing-extra-fast);
 }
 
+.card-header:not(:last-child):not(:only-child) {
+  border-bottom: var(--horizontal-rule-small);
+}
+
 .card-body {
   background-color: rgb(var(--theme-color-03));
   padding: 0.75em 1.25em;
   transition: background-color var(--layout-timing-extra-fast), border var(--layout-timing-extra-fast);
+}
+
+.card-body hr {
+  margin: calc(var(--form-wrap-space) * 0.5) 0;
 }
 
 .card-body:not(:last-child):not(:only-child) {

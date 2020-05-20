@@ -1,4 +1,4 @@
-var Generator = function(name, type, displayName) {
+var Generator = function(name, type, successMessage) {
 
   this.debug = function() {
     console.log("name:", this.name)
@@ -17,7 +17,7 @@ var Generator = function(name, type, displayName) {
 
   this.name = name
 
-  this.displayName = displayName
+  this.successMessage = successMessage
 
   this.type = type
 
@@ -68,7 +68,7 @@ var Generator = function(name, type, displayName) {
         }) + " unit, " + suffix.add({
           number: state.get.current()[this.name].level,
           abbreviations: true
-        }) + " " + this.displayName + " online"],
+        }) + " " + this.successMessage],
         format: "normal"
       })
 

@@ -5,7 +5,7 @@ var consumer = (function() {
   mod.add = function() {
     var min = Math.round(state.get.current().processor.level / 8)
 
-    var max = state.get.current().processor.level * 2
+    var max = Math.round(state.get.current().processor.level * 2)
 
     if (min <= 0) {
       min = 1
@@ -22,6 +22,12 @@ var consumer = (function() {
     // console.log("toast consumed", amount);
 
     toast.consume(amount)
+
+    report.render({
+      type: "normal",
+      message: ["!-- warning --!", amount + " toast matter consumed", "consumer unknown"],
+      format: "normal"
+    })
   }
 
   mod.interval = function() {
@@ -33,7 +39,7 @@ var consumer = (function() {
       min = 1
     }
 
-    var interval = Math.round(Math.random() * 10000)
+    var interval = helper.randomNumber(1, 60) * 1000
 
     // console.log("consumer in: " + Math.round(interval / 1000) + "s")
 

@@ -1,5 +1,13 @@
 var report = (function() {
 
+  var cursor = {
+    success: "*",
+    normal: "#",
+    error: "!",
+    system: "/",
+    motivation: "_"
+  }
+
   var prefix = {
     success: function() {
       return "!!!"
@@ -14,8 +22,8 @@ var report = (function() {
       return "///"
     },
     motivation: function() {
-      var eyes = ["~", "-", "^", "*", "=", "x", "¬", "¯", "×", "÷", "•", "†", "—", "Y", "O", "o", "V", "v", "M", "m", "U", "u", "8", "0", "ö", "õ", "₪", "θ", "Ξ", "+", "■", "◆", "◇", "◈", "◉", "◍", "◎", "●", "◐", "◑", "◒", "◓", "◔", "◕", "◴", "◵", "◶", "◷", "☉"]
-      var mouths = ["_", ".", "▁", "◡", "◠", "w", " "]
+      var eyes = ["~", "-", "^", "*", "=", "x", "¬", "¯", "×", "•", "—", "Y", "O", "o", "V", "v", "M", "m", "U", "u", "8", "0", "+", "■", "◆", "●"]
+      var mouths = ["_", ".", "▁", "◡", "w"]
       var sides = [{
         left: "[",
         right: "]"
@@ -37,23 +45,12 @@ var report = (function() {
       }, {
         left: ":",
         right: ":"
-      }, {
-        left: "",
-        right: ""
       }]
       var randomBracket = sides[Math.round(Math.random() * (sides.length - 1))]
       var randomEyes = eyes[Math.round(Math.random() * (eyes.length - 1))]
       var randomMouth = mouths[Math.round(Math.random() * (mouths.length - 1))]
       return randomBracket.left + randomEyes + randomMouth + randomEyes + randomBracket.right
     }
-  }
-
-  var cursor = {
-    success: "*",
-    normal: "#",
-    error: "!",
-    system: "/",
-    motivation: "_"
   }
 
   var typeWriter = function(override) {

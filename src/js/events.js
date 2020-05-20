@@ -46,7 +46,7 @@ var events = (function() {
     consumer: {
       start: {
         type: "normal",
-        message: ["!-- warning --!", "toast matter stock reduced", "toast is being consumed", "!-- warning --!"],
+        message: ["!-- warning --!", "toast matter stock reduced", "toast is being consumed", "consumer unknown"],
         format: "normal"
       }
     },
@@ -173,6 +173,32 @@ var events = (function() {
           message: ["unmotivated.data loaded"],
           format: "normal"
         }
+      },
+      electromagnetic: {
+        displayName: "Electromagnetic sensor",
+        open: {
+          type: "system",
+          message: ["strategy.electromagnetic.data loaded"],
+          format: "normal"
+        },
+        active: {
+          type: "system",
+          message: ["electromagnetic.data loaded"],
+          format: "normal"
+        }
+      },
+      sonic: {
+        displayName: "Sonic sensor",
+        open: {
+          type: "system",
+          message: ["strategy.sonic.data loaded"],
+          format: "normal"
+        },
+        active: {
+          type: "system",
+          message: ["sonic.data loaded"],
+          format: "normal"
+        }
       }
     }
   }
@@ -201,6 +227,10 @@ var events = (function() {
     "all.strategy.quantumtoaster.active",
     "all.strategy.unmotivated.open",
     "all.strategy.unmotivated.active",
+    "all.strategy.electromagnetic.open",
+    "all.strategy.electromagnetic.active",
+    "all.strategy.sonic.open",
+    "all.strategy.sonic.active",
     "all.autotoaster.open",
     "all.autotoaster.active",
     "all.megatoaster.open",
@@ -469,6 +499,64 @@ var events = (function() {
           },
           report: mod.strings.strategy.unmotivated.active
         }
+      },
+      electromagnetic: {
+        open: {
+          condition: function() {
+            return state.get.current().processor.level >= state.get.current().events.all.strategy.electromagnetic.open.condition.processor && state.get.current().toast.lifetime.current >= state.get.current().events.all.consumer.start.condition.toast
+          },
+          report: mod.strings.strategy.electromagnetic.open,
+          func: function() {
+            strategy.render.card({
+              path: "all.strategy.electromagnetic",
+              name: "electromagnetic",
+              displayName: mod.strings.strategy.electromagnetic.displayName,
+              description: ["Detect radiation beyond the system casing", "Could help understand the toast consumer"]
+            })
+          }
+        },
+        active: {
+          condition: function() {
+            return state.get.current().events.all.strategy.electromagnetic.active.level > 0
+          },
+          report: mod.strings.strategy.electromagnetic.active,
+          func: function() {
+            strategy.render.card({
+              path: "all.strategy.electromagnetic",
+              name: "electromagnetic",
+              displayName: mod.strings.strategy.electromagnetic.displayName
+            })
+          }
+        }
+      },
+      sonic: {
+        open: {
+          condition: function() {
+            return state.get.current().processor.level >= state.get.current().events.all.strategy.sonic.open.condition.processor && state.get.current().toast.lifetime.current >= state.get.current().events.all.consumer.start.condition.toast
+          },
+          report: mod.strings.strategy.sonic.open,
+          func: function() {
+            strategy.render.card({
+              path: "all.strategy.sonic",
+              name: "sonic",
+              displayName: mod.strings.strategy.sonic.displayName,
+              description: ["Detect partical movement up to 100m radius", "Could help understand the toast consumer"]
+            })
+          }
+        },
+        active: {
+          condition: function() {
+            return state.get.current().events.all.strategy.sonic.active.level > 0
+          },
+          report: mod.strings.strategy.sonic.active,
+          func: function() {
+            strategy.render.card({
+              path: "all.strategy.sonic",
+              name: "sonic",
+              displayName: mod.strings.strategy.sonic.displayName
+            })
+          }
+        }
       }
     },
     autotoaster: {
@@ -496,9 +584,6 @@ var events = (function() {
             }
           })
         }
-      },
-      efficiency1: {
-        
       }
     },
     megatoaster: {

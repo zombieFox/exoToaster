@@ -394,6 +394,13 @@ var readout = (function() {
         return state.get.current().quantumtoasterspeed.level
       },
       suffix: true
+    }],
+    strategy: [{
+      element: "[readout=strategy-next]",
+      value: function() {
+        return state.get.current().strategy.next
+      },
+      suffix: true
     }]
   }
 
@@ -405,7 +412,7 @@ var readout = (function() {
         var content = item.value()
 
         if (content != undefined) {
-          if (item.suffix) {
+          if (item.suffix && typeof content == "number") {
             content = suffix.add({
               number: content,
               abbreviations: true

@@ -215,6 +215,40 @@ var state = (function() {
               passed: false,
               restore: true
             }
+          },
+          electromagnetic: {
+            open: {
+              passed: false,
+              restore: true,
+              condition: {
+                processor: 10
+              },
+              cost: {
+                cycle: 120
+              }
+            },
+            active: {
+              level: 0,
+              passed: false,
+              restore: true
+            }
+          },
+          sonic: {
+            open: {
+              passed: false,
+              restore: true,
+              condition: {
+                processor: 12
+              },
+              cost: {
+                cycle: 120
+              }
+            },
+            active: {
+              level: 0,
+              passed: false,
+              restore: true
+            }
           }
         },
         autotoaster: {
@@ -505,6 +539,9 @@ var state = (function() {
         current: null,
         min: 1000
       }
+    },
+    strategy: {
+      next: null
     },
     theme: {
       accent: {

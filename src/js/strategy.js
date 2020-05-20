@@ -2,6 +2,33 @@ var strategy = (function() {
 
   var mod = {}
 
+  mod.next = function() {
+    var nextCycleMax = null
+
+    var allCostGreaterThanMax = []
+
+    var nextCycleMax
+
+    events.mod.addresses.forEach(function(path, index) {
+      var stateData = helper.getObject({
+        object: state.get.current(),
+        path: "events." + path
+      })
+
+      if (path.includes("strategy") && stateData.condition && stateData.condition.processor > state.get.current().processor.level) {
+        allCostGreaterThanMax.push(stateData.condition.processor)
+      }
+    })
+
+    if (allCostGreaterThanMax.length > 0) {
+      nextCycleMax = Math.min(...allCostGreaterThanMax)
+    } else {
+      nextCycleMax = false
+    }
+
+    state.get.current().strategy.next = nextCycleMax
+  }
+
   mod.activate = function(override) {
     var options = {
       path: null,
@@ -21,12 +48,14 @@ var strategy = (function() {
     if (state.get.current().cycle.current >= stateData.open.cost.cycle) {
       cycle.consume(stateData.open.cost.cycle)
 
+      // set strategy restore to false to not re render the card
       helper.setObject({
         object: state.get.current(),
         path: "events." + options.path + ".open.restore",
         newValue: false
       })
 
+      // increase strategy level
       helper.setObject({
         object: state.get.current(),
         path: "events." + options.path + ".active.level",
@@ -52,7 +81,8 @@ var strategy = (function() {
     var options = {
       path: null,
       name: null,
-      displayName: null
+      displayName: null,
+      description: null
     }
 
     if (override) {
@@ -84,6 +114,14 @@ var strategy = (function() {
 
       cardBody.appendChild(para)
 
+      if (options.description != null) {
+        cardBody.appendChild(helper.node("hr"))
+
+        options.description.forEach(function(item, index) {
+          cardBody.appendChild(helper.node("p:" + item + "|class:small"))
+        })
+      }
+
       helper.e("[stage=strategy]").appendChild(cardBody)
 
     }
@@ -93,9 +131,28 @@ var strategy = (function() {
     helper.e("[strategy=" + name + "]").remove()
   }
 
+  render.next = function() {
+    if (state.get.current().strategy.next) {
+      helper.e("[stage=next-strategy]").classList.remove("is-hidden")
+    } else {
+      helper.e("[stage=next-strategy]").classList.add("is-hidden")
+    }
+  }
+
+  var next = function() {
+    mod.next()
+    render.next()
+  }
+
+  var init = function() {
+    next()
+  }
+
   return {
     mod: mod,
-    render: render
+    render: render,
+    next: next,
+    init: init
   }
 
 })()

@@ -34,6 +34,7 @@ var control = (function() {
         func: function() {
           processor.upgrade(1)
           cycle.max()
+          strategy.next()
         }
       }, {
         element: "[control=processor-level-increase10]",
@@ -41,6 +42,7 @@ var control = (function() {
         func: function() {
           processor.upgrade(10)
           cycle.max()
+          strategy.next()
         }
       }, {
         element: "[control=processor-level-increase100]",
@@ -48,6 +50,7 @@ var control = (function() {
         func: function() {
           processor.upgrade(100)
           cycle.max()
+          strategy.next()
         }
       }],
       autotoaster: [{
