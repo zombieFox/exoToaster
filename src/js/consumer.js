@@ -3,31 +3,33 @@ var consumer = (function() {
   var mod = {}
 
   mod.add = function() {
-    var min = Math.round(state.get.current().processor.level / 8)
+    if (state.get.current().toast.inventory.current > 0) {
+      var min = Math.round(state.get.current().processor.level / 8)
 
-    var max = Math.round(state.get.current().processor.level * 2)
+      var max = Math.round(state.get.current().processor.level * 2)
 
-    if (min <= 0) {
-      min = 1
+      if (min <= 0) {
+        min = 1
+      }
+
+      var amount = helper.randomNumber(min, max)
+
+      if (amount > state.get.current().toast.inventory.current) {
+        amount = state.get.current().toast.inventory.current
+      }
+
+      state.get.current().consumer.current = state.get.current().consumer.current + amount
+
+      // console.log("toast consumed", amount);
+
+      toast.consume(amount)
+
+      report.render({
+        type: "normal",
+        message: ["::: warning :::", amount + " toast matter consumed", "consumer unknown"],
+        format: "normal"
+      })
     }
-
-    var amount = helper.randomNumber(min, max)
-
-    if (amount > state.get.current().toast.inventory.current) {
-      amount = state.get.current().toast.inventory.current
-    }
-
-    state.get.current().consumer.current = state.get.current().consumer.current + amount
-
-    // console.log("toast consumed", amount);
-
-    toast.consume(amount)
-
-    report.render({
-      type: "normal",
-      message: ["!-- warning --!", amount + " toast matter consumed", "consumer unknown"],
-      format: "normal"
-    })
   }
 
   mod.interval = function() {
@@ -41,7 +43,7 @@ var consumer = (function() {
 
     var interval = helper.randomNumber(1, 60) * 1000
 
-    // console.log("consumer in: " + Math.round(interval / 1000) + "s")
+    console.log("consumer in: " + Math.round(interval / 1000) + "s")
 
     return interval
   }

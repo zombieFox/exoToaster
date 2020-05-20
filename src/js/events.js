@@ -46,7 +46,7 @@ var events = (function() {
     consumer: {
       start: {
         type: "normal",
-        message: ["!-- warning --!", "toast matter stock reduced", "toast is being consumed", "consumer unknown"],
+        message: ["::: warning :::", "toast matter stock reduced", "toast is being consumed", "consumer unknown"],
         format: "normal"
       }
     },

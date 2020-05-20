@@ -4,7 +4,7 @@ var state = (function() {
 
   mod.formula = {
     toastPerUnit: function(number) {
-      return 1 * number * number
+      return Math.pow(number, 2)
     },
     cost: {
       constant: function(multiplier) {
@@ -20,7 +20,7 @@ var state = (function() {
       }
     },
     interval: function(number) {
-      return (number * 6) * 1000
+      return (number * 5) * 1000
     }
   }
 
