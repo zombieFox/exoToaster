@@ -77,7 +77,8 @@ var Generator = function(name, type, successMessage) {
       report.render({
         type: "error",
         message: [suffix.add({
-          number: priceDetails.cost.total
+          number: priceDetails.cost.total,
+          abbreviations: true,
         }) + " toast matter needed"],
         format: "normal"
       })
@@ -131,6 +132,18 @@ var Generator = function(name, type, successMessage) {
         helper.e("[stage=" + parentUnitName + "]").classList.add("active")
       }
     }
+  }
+
+  this.addEfficiency = function(amount) {
+    state.get.current()[this.name].efficiency = state.get.current()[this.name].efficiency + amount
+  }
+
+  this.removeEfficiency = function(amount) {
+    state.get.current()[this.name].efficiency = state.get.current()[this.name].efficiency - amount
+  }
+
+  this.resetEfficiency = function() {
+    state.get.current()[this.name].efficiency = 0
   }
 
   this.setToastperunit()

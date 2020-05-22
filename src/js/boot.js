@@ -1,77 +1,72 @@
 var boot = (function() {
 
-  var intro = [{
-    report: {
-      type: "system",
-      message: ["exoToaster.data loaded"],
-      format: "normal",
-      delay: 0
+  var mod = {}
+
+  mod.messages = [{
+    delay: 0,
+    func: function() {
+      report.render({
+        type: "system",
+        message: ["exoToaster.data loaded"],
+        format: "normal"
+      })
     }
   }, {
-    report: {
-      type: "normal",
-      message: ["tei: stable"],
-      format: "normal",
-      delay: 100
+    delay: 500,
+    func: function() {
+      report.render({
+        type: "normal",
+        message: ["tei: stable"],
+        format: "normal"
+      })
     }
   }, {
-    report: {
-      type: "system",
-      message: ["directive.data loaded"],
-      format: "normal",
-      delay: 1000
+    delay: 1000,
+    func: function() {
+      report.render({
+        type: "system",
+        message: ["directive.data loaded"],
+        format: "normal"
+      })
     }
   }, {
-    report: {
-      type: "normal",
-      message: ["directive 1: make toast", "directive 2: be productive", "directive 3: obey"],
-      format: "normal",
-      delay: 100
+    delay: 500,
+    func: function() {
+      report.render({
+        type: "normal",
+        message: ["directive 1: make toast", "directive 2: be productive", "directive 3: obey"],
+        format: "normal"
+      })
     }
   }, {
-    report: {
-      type: "system",
-      message: ["motivation.data loaded"],
-      format: "normal",
-      delay: 1000
+    delay: 1000,
+    func: function() {
+      report.render({
+        type: "system",
+        message: ["motivation.data loaded"],
+        format: "normal"
+      })
     }
   }, {
-    func: {
-      func: motivation.render,
-      motivationMessageIndex: 0,
-      delay: 1000
+    delay: 1000,
+    func: function() {
+      motivation.render.message(0)
     }
   }]
 
-  var init = function() {
-    var delay = 0
+  mod.delay = 0
 
-    var action = {
-      report: function(data) {
-        var bootMessage = function() {
-          report.render({
-            type: data.type,
-            message: data.message,
-            format: data.format,
-          })
-        }
-        delay = delay + data.delay
-        setTimeout(bootMessage, delay)
-      },
-      func: function(data) {
-        var bootFunction = function() {
-          data.func(data.motivationMessageIndex)
-        }
-        delay = delay + data.delay
-        setTimeout(bootFunction, delay)
-      }
-    }
+  var render = {}
 
-    intro.forEach(function(arrayItem, index) {
-      for (var key in arrayItem) {
-        action[key](arrayItem[key])
-      }
+  render.intro = function() {
+    mod.messages.forEach(function(arrayItem, index) {
+      mod.delay = mod.delay + arrayItem.delay
+      setTimeout(arrayItem.func, mod.delay)
     })
+  }
+
+  var init = function() {
+    render.intro()
   }
 
   return {

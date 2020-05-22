@@ -161,16 +161,16 @@ var events = (function() {
           format: "normal"
         }
       },
-      unmotivated: {
-        displayName: "Unmotivated",
+      motivation: {
+        displayName: "Toaster Motivation",
         open: {
           type: "system",
-          message: ["strategy.unmotivated.data loaded"],
+          message: ["strategy.motivation.data loaded"],
           format: "normal"
         },
         active: {
           type: "system",
-          message: ["unmotivated.data loaded"],
+          message: ["motivation.data loaded"],
           format: "normal"
         }
       },
@@ -225,8 +225,8 @@ var events = (function() {
     "all.strategy.atomictoaster.active",
     "all.strategy.quantumtoaster.open",
     "all.strategy.quantumtoaster.active",
-    "all.strategy.unmotivated.open",
-    "all.strategy.unmotivated.active",
+    "all.strategy.motivation.open",
+    "all.strategy.motivation.active",
     "all.strategy.electromagnetic.open",
     "all.strategy.electromagnetic.active",
     "all.strategy.sonic.open",
@@ -245,7 +245,7 @@ var events = (function() {
     "all.atomictoaster.active",
     "all.quantumtoaster.open",
     "all.quantumtoaster.active",
-    "all.unmotivated.open"
+    "all.motivation.open"
   ]
 
   mod.all = {
@@ -479,25 +479,25 @@ var events = (function() {
           report: mod.strings.strategy.quantumtoaster.active
         }
       },
-      unmotivated: {
+      motivation: {
         open: {
           condition: function() {
-            return state.get.current().processor.level >= state.get.current().events.all.strategy.unmotivated.open.condition.processor
+            return state.get.current().processor.level >= state.get.current().events.all.strategy.motivation.open.condition.processor
           },
-          report: mod.strings.strategy.unmotivated.open,
+          report: mod.strings.strategy.motivation.open,
           func: function() {
             strategy.render.card({
-              path: "all.strategy.unmotivated",
-              name: "unmotivated",
-              displayName: mod.strings.strategy.unmotivated.displayName
+              path: "all.strategy.motivation",
+              name: "motivation",
+              displayName: mod.strings.strategy.motivation.displayName
             })
           }
         },
         active: {
           condition: function() {
-            return state.get.current().events.all.strategy.unmotivated.active.level > 0
+            return state.get.current().events.all.strategy.motivation.active.level > 0
           },
-          report: mod.strings.strategy.unmotivated.active
+          report: mod.strings.strategy.motivation.active
         }
       },
       electromagnetic: {
@@ -748,12 +748,12 @@ var events = (function() {
         }
       }
     },
-    unmotivated: {
+    motivation: {
       open: {
         condition: function() {
-          return state.get.current().events.all.strategy.unmotivated.active.level >= 1
+          return state.get.current().events.all.strategy.motivation.active.level >= 1
         },
-        stage: "unmotivated"
+        stage: "motivation"
       }
     }
   }

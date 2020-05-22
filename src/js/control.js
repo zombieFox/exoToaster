@@ -22,10 +22,13 @@ var control = (function() {
           toast.make(state.get.current().processor.level)
         }
       }, {
-        element: "[control=toaster-motivate]",
+        element: "[control=toaster-motivation]",
         type: "button",
         func: function() {
-          motivation.render()
+          motivation.render.message()
+          motivation.mod.boost.add()
+          motivation.render.boost.meter()
+          motivation.render.boost.button()
         }
       }],
       processor: [{

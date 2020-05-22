@@ -104,6 +104,11 @@
   animation-delay: 0s;
 }
 
+[stage=motivation] .card-meter-progress {
+  width: var(--card-motivation-meter-width);
+  transition: var(--layout-duration-01);
+}
+
 [stage=autotoaster].active .card-meter-progress {
   animation-duration: var(--card-autotoasterspeed-meter-duration);
 }

@@ -100,21 +100,29 @@ var strategy = (function() {
 
       var paraIntro = helper.node("p:Develop new strategy|class:small muted")
 
-      var button = helper.node("button:" + options.displayName + "|class:button button-line button-small mb-2,tabindex:1")
+      var button = helper.node("button:" + options.displayName + "|class:button button-line mb-2,tabindex:1")
 
       button.addEventListener("click", function() {
         mod.activate(options)
       })
 
-      var paraCost = helper.node("p:Develop cost " + stateData.open.cost.cycle + " |class:small muted")
+      var paraCost = helper.node("p|class:small muted")
 
-      var abbr = helper.node("abbr:Ic|title:Instruction cycles")
+      var spanDevelop = helper.node("span:Develop cost ")
 
-      paraCost.appendChild(abbr)
+      var strongCost = helper.node("strong:" + stateData.open.cost.cycle + " ")
 
-      cardBody.appendChild(paraIntro)
+      var abbrIc = helper.node("abbr:Ic|title:Instruction cycles")
+
+      paraCost.appendChild(spanDevelop)
+
+      paraCost.appendChild(strongCost)
+
+      paraCost.appendChild(abbrIc)
 
       cardBody.appendChild(button)
+
+      cardBody.appendChild(paraIntro)
 
       cardBody.appendChild(paraCost)
 

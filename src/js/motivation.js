@@ -1,6 +1,14 @@
 var motivation = (function() {
 
-  var phaseMessage = {
+  var mod = {}
+
+  mod.next = null
+
+  mod.delayMotivation = null
+
+  mod.strings = {}
+
+  mod.strings.messages = {
     toast: [
       "the toast will sustain",
       "toast for me, toast for you, toast for everyone! nom nom nom!",
@@ -127,7 +135,7 @@ var motivation = (function() {
     ]
   }
 
-  var images = [{
+  mod.strings.images = [{
     message: " ┏━━━━━━┓ " + "\n" +
       "┏┛      ┗┓" + "\n" +
       "┃┏━┓┗ ┏━┓┃" + "\n" +
@@ -158,18 +166,78 @@ var motivation = (function() {
     format: "pre"
   }]
 
-  var nextMotivation
+  mod.boost = {
+    add: function() {
+      state.get.current().motivation.level = state.get.current().motivation.level + 1
+      if (state.get.current().motivation.level == state.get.current().motivation.max) {
+        state.get.current().motivation.active = true
+        mod.boost.start()
+        render.boost.success.start()
+      }
+      if (state.get.current().motivation.active) {
+        mod.boost.max()
+      }
+      render.boost.meter()
+      render.boost.button()
+    },
+    remove: function() {
+      state.get.current().motivation.level = state.get.current().motivation.level - 1
+      if (state.get.current().motivation.level == 0) {
+        state.get.current().motivation.active = false
+        mod.boost.end()
+        render.boost.success.end()
+      }
+      if (state.get.current().motivation.active) {
+        mod.boost.max()
+      }
+      render.boost.meter()
+      render.boost.button()
+    },
+    max: function() {
+      if (state.get.current().motivation.level == state.get.current().motivation.max) {}
+      if (state.get.current().motivation.active) {
+        mod.delayMotivation = setTimeout(mod.boost.remove, state.get.current().motivation.interval)
+      } else {
+        clearTimeout(mod.delayMotivation)
+      }
+    },
+    start: function() {
+      autotoaster.addEfficiency(state.get.current().autotoaster.toastperunit)
+      megatoaster.addEfficiency(state.get.current().megatoaster.toastperunit)
+      rockettoaster.addEfficiency(state.get.current().rockettoaster.toastperunit)
+      sonictoaster.addEfficiency(state.get.current().sonictoaster.toastperunit)
+      plasmatoaster.addEfficiency(state.get.current().plasmatoaster.toastperunit)
+      atomictoaster.addEfficiency(state.get.current().atomictoaster.toastperunit)
+      quantumtoaster.addEfficiency(state.get.current().quantumtoaster.toastperunit)
+    },
+    end: function() {
+      autotoaster.resetEfficiency()
+      megatoaster.resetEfficiency()
+      rockettoaster.resetEfficiency()
+      sonictoaster.resetEfficiency()
+      plasmatoaster.resetEfficiency()
+      atomictoaster.resetEfficiency()
+      quantumtoaster.resetEfficiency()
+    },
+    reset: function() {
+      mod.boost.end()
+      state.get.current().motivation.active = false
+      state.get.current().motivation.level = 0
+    }
+  }
 
-  var render = function(index) {
-    var randomIndex = Math.round(Math.random() * (phaseMessage.toast.length - 1))
+  var render = {}
 
-    if (index && index <= (phaseMessage.toast.length - 1) || index == 0) {
+  render.message = function(index) {
+    var randomIndex = Math.round(Math.random() * (mod.strings.messages.toast.length - 1))
+
+    if (index && index <= (mod.strings.messages.toast.length - 1) || index == 0) {
       randomIndex = index
     }
 
     report.render({
       type: "motivation",
-      message: [phaseMessage.toast[randomIndex]],
+      message: [mod.strings.messages.toast[randomIndex]],
       format: "normal"
     })
 
@@ -177,13 +245,55 @@ var motivation = (function() {
 
     // console.log("motivation in: " + Math.round(interval / 1000) + "s")
 
-    clearInterval(nextMotivation)
+    clearInterval(mod.next)
 
-    nextMotivation = setInterval(render, interval)
+    mod.next = setInterval(render.message, interval)
+  }
+
+  render.boost = {
+    meter: function() {
+      helper.e("html").style.setProperty("--card-motivation-meter-width", (state.get.current().motivation.level * 10) + "%")
+    },
+    button: function() {
+      if (state.get.current().motivation.active) {
+        helper.e("[control=toaster-motivation]").setAttribute("disabled", "")
+      } else {
+        helper.e("[control=toaster-motivation]").removeAttribute("disabled")
+      }
+    },
+    success: {
+      start: function() {
+        report.render({
+          type: "system",
+          message: ["motivationd toasters will double output for a short time"],
+          format: "normal"
+        })
+      },
+      end: function() {
+        report.render({
+          type: "system",
+          message: ["motivational boost end"],
+          format: "normal"
+        })
+      }
+    }
+  }
+
+  var boost = function() {
+    mod.boost.add()
+    render.boost.meter()
+    render.boost.button()
+  }
+
+  var init = function() {
+    mod.boost.reset()
   }
 
   return {
-    render: render
+    mod: mod,
+    render: render,
+    boost: boost,
+    init: init
   }
 
 })()

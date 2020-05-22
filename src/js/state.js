@@ -95,6 +95,11 @@ var state = (function() {
               level: 0,
               passed: false,
               restore: true
+            },
+            efficiency: {
+              level: 0,
+              passed: false,
+              restore: true
             }
           },
           megatoaster: {
@@ -199,7 +204,7 @@ var state = (function() {
               restore: true
             }
           },
-          unmotivated: {
+          motivation: {
             open: {
               passed: false,
               restore: true,
@@ -224,7 +229,7 @@ var state = (function() {
                 processor: 15
               },
               cost: {
-                cycle: 120
+                cycle: 256
               }
             },
             active: {
@@ -241,7 +246,7 @@ var state = (function() {
                 processor: 22
               },
               cost: {
-                cycle: 120
+                cycle: 256
               }
             },
             active: {
@@ -321,7 +326,7 @@ var state = (function() {
             restore: true
           }
         },
-        unmotivated: {
+        motivation: {
           open: {
             passed: false,
             restore: true
@@ -540,6 +545,12 @@ var state = (function() {
         current: null,
         min: 1000
       }
+    },
+    motivation: {
+      level: 0,
+      max: 10,
+      interval: 200,
+      active: false
     },
     strategy: {
       next: null
