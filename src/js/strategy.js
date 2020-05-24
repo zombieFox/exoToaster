@@ -98,8 +98,6 @@ var strategy = (function() {
 
       var cardBody = helper.node("div|class:card-body,strategy:" + options.name)
 
-      var paraIntro = helper.node("p:Develop new strategy|class:small muted")
-
       var button = helper.node("button:" + options.displayName + "|class:button button-line mb-2,tabindex:1")
 
       button.addEventListener("click", function() {
@@ -122,17 +120,13 @@ var strategy = (function() {
 
       cardBody.appendChild(button)
 
-      cardBody.appendChild(paraIntro)
-
-      cardBody.appendChild(paraCost)
-
       if (options.description != null) {
-        cardBody.appendChild(helper.node("hr"))
-
         options.description.forEach(function(item, index) {
           cardBody.appendChild(helper.node("p:" + item + "|class:small"))
         })
       }
+
+      cardBody.appendChild(paraCost)
 
       helper.e("[stage=strategy]").appendChild(cardBody)
 

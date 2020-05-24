@@ -8,8 +8,8 @@
   animation-iteration-count: 1;
   animation-timing-function: ease-in-out;
   animation-fill-mode: backwards;
-  transform-origin: top center;
   animation-delay: 0s;
+  transform-origin: top center;
   transition: box-shadow var(--layout-timing-extra-fast);
 }
 
@@ -36,10 +36,6 @@
   background-color: rgb(var(--theme-color-04));
   padding: 0.75em 1.25em;
   transition: background-color var(--layout-timing-extra-fast), border var(--layout-timing-extra-fast);
-}
-
-.card-header:not(:last-child):not(:only-child) {
-  border-bottom: var(--horizontal-rule-small);
 }
 
 .card-body {

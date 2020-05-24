@@ -162,7 +162,7 @@ var events = (function() {
         }
       },
       motivation: {
-        displayName: "Toaster Motivation",
+        displayName: "Motivation",
         open: {
           type: "system",
           message: ["strategy.motivation.data loaded"],
@@ -576,7 +576,7 @@ var events = (function() {
           tick.mod.set({
             name: "autotoaster",
             func: function() {
-              toast.make(state.get.current().autotoaster.level * (state.get.current().autotoaster.toastperunit + state.get.current().autotoaster.efficiency))
+              toast.make(autotoaster.getTotalOutput())
               autotoasterspeed.setCardMeterDuration()
             },
             interval: function() {
@@ -603,7 +603,7 @@ var events = (function() {
           tick.mod.set({
             name: "megatoaster",
             func: function() {
-              toast.make(state.get.current().megatoaster.level * (state.get.current().megatoaster.toastperunit + state.get.current().megatoaster.efficiency))
+              toast.make(megatoaster.getTotalOutput())
               megatoasterspeed.setCardMeterDuration()
             },
             interval: function() {
@@ -630,7 +630,7 @@ var events = (function() {
           tick.mod.set({
             name: "rockettoaster",
             func: function() {
-              toast.make(state.get.current().rockettoaster.level * (state.get.current().rockettoaster.toastperunit + state.get.current().rockettoaster.efficiency))
+              toast.make(rockettoaster.getTotalOutput())
               rockettoasterspeed.setCardMeterDuration()
             },
             interval: function() {
@@ -657,7 +657,7 @@ var events = (function() {
           tick.mod.set({
             name: "sonictoaster",
             func: function() {
-              toast.make(state.get.current().sonictoaster.level * (state.get.current().sonictoaster.toastperunit + state.get.current().sonictoaster.efficiency))
+              toast.make(sonictoaster.getTotalOutput())
               sonictoasterspeed.setCardMeterDuration()
             },
             interval: function() {
@@ -684,7 +684,7 @@ var events = (function() {
           tick.mod.set({
             name: "plasmatoaster",
             func: function() {
-              toast.make(state.get.current().plasmatoaster.level * (state.get.current().plasmatoaster.toastperunit + state.get.current().plasmatoaster.efficiency))
+              toast.make(plasmatoaster.getTotalOutput())
               plasmatoasterspeed.setCardMeterDuration()
             },
             interval: function() {
@@ -711,7 +711,7 @@ var events = (function() {
           tick.mod.set({
             name: "atomictoaster",
             func: function() {
-              toast.make(state.get.current().atomictoaster.level * (state.get.current().atomictoaster.toastperunit + state.get.current().atomictoaster.efficiency))
+              toast.make(atomictoaster.getTotalOutput())
               atomictoasterspeed.setCardMeterDuration()
             },
             interval: function() {
@@ -738,7 +738,7 @@ var events = (function() {
           tick.mod.set({
             name: "quantumtoaster",
             func: function() {
-              toast.make(state.get.current().quantumtoaster.level * (state.get.current().quantumtoaster.toastperunit + state.get.current().quantumtoaster.efficiency))
+              toast.make(quantumtoaster.getTotalOutput())
               quantumtoasterspeed.setCardMeterDuration()
             },
             interval: function() {

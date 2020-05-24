@@ -202,25 +202,24 @@ var motivation = (function() {
       }
     },
     start: function() {
-      autotoaster.addEfficiency(state.get.current().autotoaster.toastperunit)
-      megatoaster.addEfficiency(state.get.current().megatoaster.toastperunit)
-      rockettoaster.addEfficiency(state.get.current().rockettoaster.toastperunit)
-      sonictoaster.addEfficiency(state.get.current().sonictoaster.toastperunit)
-      plasmatoaster.addEfficiency(state.get.current().plasmatoaster.toastperunit)
-      atomictoaster.addEfficiency(state.get.current().atomictoaster.toastperunit)
-      quantumtoaster.addEfficiency(state.get.current().quantumtoaster.toastperunit)
+      autotoaster.setMotivation(2)
+      megatoaster.setMotivation(2)
+      rockettoaster.setMotivation(2)
+      sonictoaster.setMotivation(2)
+      plasmatoaster.setMotivation(2)
+      atomictoaster.setMotivation(2)
+      quantumtoaster.setMotivation(2)
     },
     end: function() {
-      autotoaster.resetEfficiency()
-      megatoaster.resetEfficiency()
-      rockettoaster.resetEfficiency()
-      sonictoaster.resetEfficiency()
-      plasmatoaster.resetEfficiency()
-      atomictoaster.resetEfficiency()
-      quantumtoaster.resetEfficiency()
+      autotoaster.resetMotivation()
+      megatoaster.resetMotivation()
+      rockettoaster.resetMotivation()
+      sonictoaster.resetMotivation()
+      plasmatoaster.resetMotivation()
+      atomictoaster.resetMotivation()
+      quantumtoaster.resetMotivation()
     },
     reset: function() {
-      mod.boost.end()
       state.get.current().motivation.active = false
       state.get.current().motivation.level = 0
     }

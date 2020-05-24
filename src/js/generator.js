@@ -134,6 +134,21 @@ var Generator = function(name, type, successMessage) {
     }
   }
 
+  this.getToastperunit = function() {
+    var toastperunit = state.get.current()[this.name].toastperunit
+    var efficiency = state.get.current()[this.name].efficiency
+    var motivation = state.get.current()[this.name].motivation
+    return (toastperunit * efficiency) * motivation
+  }
+
+  this.getTotalOutput = function() {
+    var level = state.get.current()[this.name].level
+    var toastperunit = state.get.current()[this.name].toastperunit
+    var efficiency = state.get.current()[this.name].efficiency
+    var motivation = state.get.current()[this.name].motivation
+    return (level * (toastperunit * efficiency)) * motivation
+  }
+
   this.addEfficiency = function(amount) {
     state.get.current()[this.name].efficiency = state.get.current()[this.name].efficiency + amount
   }
@@ -143,7 +158,21 @@ var Generator = function(name, type, successMessage) {
   }
 
   this.resetEfficiency = function() {
-    state.get.current()[this.name].efficiency = 0
+    state.get.current()[this.name].efficiency = 1
+  }
+
+  this.setMotivation = function(amount) {
+    state.get.current()[this.name].motivation = amount
+  }
+
+  this.resetMotivation = function() {
+    state.get.current()[this.name].motivation = 1
+  }
+
+  this.getToastPerSec = function() {
+    var count = this.getTotalOutput()
+    var seconds = (state.get.current()[this.name + "speed"].interval.starting / 1000) - state.get.current()[this.name + "speed"].level
+    return count / seconds
   }
 
   this.setToastperunit()

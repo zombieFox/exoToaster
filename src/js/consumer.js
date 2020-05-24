@@ -20,7 +20,7 @@ var consumer = (function() {
 
       state.get.current().consumer.current = state.get.current().consumer.current + amount
 
-      // console.log("toast consumed", amount);
+      // console.log("toast consumed", amount)
 
       toast.consume(amount)
 

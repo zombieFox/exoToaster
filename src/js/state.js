@@ -95,11 +95,6 @@ var state = (function() {
               level: 0,
               passed: false,
               restore: true
-            },
-            efficiency: {
-              level: 0,
-              passed: false,
-              restore: true
             }
           },
           megatoaster: {
@@ -373,9 +368,10 @@ var state = (function() {
     },
     autotoaster: {
       unitmultiplier: 1,
-      toastperunit: null,
       level: 0,
-      efficiency: 0,
+      toastperunit: null,
+      efficiency: 1,
+      motivation: 1,
       cost: {
         constant: null,
         difference: null,
@@ -398,9 +394,10 @@ var state = (function() {
     },
     megatoaster: {
       unitmultiplier: 2,
-      toastperunit: null,
       level: 0,
-      efficiency: 0,
+      toastperunit: null,
+      efficiency: 1,
+      motivation: 1,
       cost: {
         constant: null,
         difference: null,
@@ -423,9 +420,10 @@ var state = (function() {
     },
     rockettoaster: {
       unitmultiplier: 4,
-      toastperunit: null,
       level: 0,
-      efficiency: 0,
+      toastperunit: null,
+      efficiency: 1,
+      motivation: 1,
       cost: {
         constant: null,
         difference: null,
@@ -448,9 +446,10 @@ var state = (function() {
     },
     sonictoaster: {
       unitmultiplier: 8,
-      toastperunit: null,
       level: 0,
-      efficiency: 0,
+      toastperunit: null,
+      efficiency: 1,
+      motivation: 1,
       cost: {
         constant: null,
         difference: null,
@@ -473,9 +472,10 @@ var state = (function() {
     },
     plasmatoaster: {
       unitmultiplier: 16,
-      toastperunit: null,
       level: 0,
-      efficiency: 0,
+      toastperunit: null,
+      efficiency: 1,
+      motivation: 1,
       cost: {
         constant: null,
         difference: null,
@@ -498,9 +498,10 @@ var state = (function() {
     },
     atomictoaster: {
       unitmultiplier: 32,
-      toastperunit: null,
       level: 0,
-      efficiency: 0,
+      toastperunit: null,
+      efficiency: 1,
+      motivation: 1,
       cost: {
         constant: null,
         difference: null,
@@ -523,9 +524,10 @@ var state = (function() {
     },
     quantumtoaster: {
       unitmultiplier: 64,
-      toastperunit: null,
       level: 0,
-      efficiency: 0,
+      toastperunit: null,
+      efficiency: 1,
+      motivation: 1,
       cost: {
         constant: null,
         difference: null,

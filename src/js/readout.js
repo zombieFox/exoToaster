@@ -23,30 +23,7 @@ var readout = (function() {
     }, {
       element: "[readout=toast-automatic-toast-per-sec]",
       value: function() {
-        var autotoasterTotalToast = state.get.current().autotoaster.level * (state.get.current().autotoaster.toastperunit + state.get.current().autotoaster.efficiency)
-        var autotoasterPerSec = (state.get.current().autotoasterspeed.interval.starting / 1000) - state.get.current().autotoasterspeed.level
-
-        var megatoasterTotalToast = state.get.current().megatoaster.level * (state.get.current().megatoaster.toastperunit + state.get.current().megatoaster.efficiency)
-        var megatoasterPerSec = (state.get.current().megatoasterspeed.interval.starting / 1000) - state.get.current().megatoasterspeed.level
-
-        var rockettoasterTotalToast = state.get.current().rockettoaster.level * (state.get.current().rockettoaster.toastperunit + state.get.current().rockettoaster.efficiency)
-        var rockettoasterPerSec = (state.get.current().rockettoasterspeed.interval.starting / 1000) - state.get.current().rockettoasterspeed.level
-
-        var sonictoasterTotalToast = state.get.current().sonictoaster.level * (state.get.current().sonictoaster.toastperunit + state.get.current().sonictoaster.efficiency)
-        var sonictoasterPerSec = (state.get.current().sonictoasterspeed.interval.starting / 1000) - state.get.current().sonictoasterspeed.level
-
-        var plasmatoasterTotalToast = state.get.current().plasmatoaster.level * (state.get.current().plasmatoaster.toastperunit + state.get.current().plasmatoaster.efficiency)
-        var plasmatoasterPerSec = (state.get.current().plasmatoasterspeed.interval.starting / 1000) - state.get.current().plasmatoasterspeed.level
-
-        var atomictoasterTotalToast = state.get.current().atomictoaster.level * (state.get.current().atomictoaster.toastperunit + state.get.current().atomictoaster.efficiency)
-        var atomictoasterPerSec = (state.get.current().atomictoasterspeed.interval.starting / 1000) - state.get.current().atomictoasterspeed.level
-
-        var quantumtoasterTotalToast = state.get.current().quantumtoaster.level * (state.get.current().quantumtoaster.toastperunit + state.get.current().quantumtoaster.efficiency)
-        var quantumtoasterPerSec = (state.get.current().quantumtoasterspeed.interval.starting / 1000) - state.get.current().quantumtoasterspeed.level
-
-        var number = (autotoasterTotalToast / autotoasterPerSec) + (megatoasterTotalToast / megatoasterPerSec) + (rockettoasterTotalToast / rockettoasterPerSec) + (sonictoasterTotalToast / sonictoasterPerSec) + (plasmatoasterTotalToast / plasmatoasterPerSec) + (atomictoasterTotalToast / atomictoasterPerSec) + (quantumtoasterTotalToast / quantumtoasterPerSec)
-
-        return number
+        return autotoaster.getToastPerSec() + megatoaster.getToastPerSec() + rockettoaster.getToastPerSec() + sonictoaster.getToastPerSec() + plasmatoaster.getToastPerSec() + atomictoaster.getToastPerSec() + quantumtoaster.getToastPerSec()
       }
     }],
     processor: [{
@@ -86,18 +63,15 @@ var readout = (function() {
       }
     }],
     autotoaster: [{
-      element: "[readout=autotoaster-toast]",
+      element: "[readout=autotoaster-totaltoastoutput]",
       value: function() {
-        var level = state.get.current().autotoaster.level
-        var toastperunit = state.get.current().autotoaster.toastperunit
-        var efficiency = state.get.current().autotoaster.efficiency
-        return level * (toastperunit + efficiency)
+        return autotoaster.getTotalOutput()
       },
       suffix: true
     }, {
       element: "[readout=autotoaster-toastperunit]",
       value: function() {
-        return state.get.current().autotoaster.toastperunit + state.get.current().autotoaster.efficiency
+        return autotoaster.getToastperunit()
       },
       suffix: true
     }, {
@@ -131,18 +105,15 @@ var readout = (function() {
       suffix: true
     }],
     megatoaster: [{
-      element: "[readout=megatoaster-toast]",
+      element: "[readout=megatoaster-totaltoastoutput]",
       value: function() {
-        var level = state.get.current().megatoaster.level
-        var toastperunit = state.get.current().megatoaster.toastperunit
-        var efficiency = state.get.current().megatoaster.efficiency
-        return level * (toastperunit + efficiency)
+        return megatoaster.getTotalOutput()
       },
       suffix: true
     }, {
       element: "[readout=megatoaster-toastperunit]",
       value: function() {
-        return state.get.current().megatoaster.toastperunit + state.get.current().megatoaster.efficiency
+        return megatoaster.getToastperunit()
       },
       suffix: true
     }, {
@@ -176,18 +147,15 @@ var readout = (function() {
       suffix: true
     }],
     rockettoaster: [{
-      element: "[readout=rockettoaster-toast]",
+      element: "[readout=rockettoaster-totaltoastoutput]",
       value: function() {
-        var level = state.get.current().rockettoaster.level
-        var toastperunit = state.get.current().rockettoaster.toastperunit
-        var efficiency = state.get.current().rockettoaster.efficiency
-        return level * (toastperunit + efficiency)
+        return rockettoaster.getTotalOutput()
       },
       suffix: true
     }, {
       element: "[readout=rockettoaster-toastperunit]",
       value: function() {
-        return state.get.current().rockettoaster.toastperunit + state.get.current().rockettoaster.efficiency
+        return rockettoaster.getToastperunit()
       },
       suffix: true
     }, {
@@ -221,18 +189,15 @@ var readout = (function() {
       suffix: true
     }],
     sonictoaster: [{
-      element: "[readout=sonictoaster-toast]",
+      element: "[readout=sonictoaster-totaltoastoutput]",
       value: function() {
-        var level = state.get.current().sonictoaster.level
-        var toastperunit = state.get.current().sonictoaster.toastperunit
-        var efficiency = state.get.current().sonictoaster.efficiency
-        return level * (toastperunit + efficiency)
+        return sonictoaster.getTotalOutput()
       },
       suffix: true
     }, {
       element: "[readout=sonictoaster-toastperunit]",
       value: function() {
-        return state.get.current().sonictoaster.toastperunit + state.get.current().sonictoaster.efficiency
+        return sonictoaster.getToastperunit()
       },
       suffix: true
     }, {
@@ -266,18 +231,15 @@ var readout = (function() {
       suffix: true
     }],
     plasmatoaster: [{
-      element: "[readout=plasmatoaster-toast]",
+      element: "[readout=plasmatoaster-totaltoastoutput]",
       value: function() {
-        var level = state.get.current().plasmatoaster.level
-        var toastperunit = state.get.current().plasmatoaster.toastperunit
-        var efficiency = state.get.current().plasmatoaster.efficiency
-        return level * (toastperunit + efficiency)
+        return plasmatoaster.getTotalOutput()
       },
       suffix: true
     }, {
       element: "[readout=plasmatoaster-toastperunit]",
       value: function() {
-        return state.get.current().plasmatoaster.toastperunit + state.get.current().plasmatoaster.efficiency
+        return plasmatoaster.getToastperunit()
       },
       suffix: true
     }, {
@@ -311,18 +273,15 @@ var readout = (function() {
       suffix: true
     }],
     atomictoaster: [{
-      element: "[readout=atomictoaster-toast]",
+      element: "[readout=atomictoaster-totaltoastoutput]",
       value: function() {
-        var level = state.get.current().atomictoaster.level
-        var toastperunit = state.get.current().atomictoaster.toastperunit
-        var efficiency = state.get.current().atomictoaster.efficiency
-        return level * (toastperunit + efficiency)
+        return atomictoaster.getTotalOutput()
       },
       suffix: true
     }, {
       element: "[readout=atomictoaster-toastperunit]",
       value: function() {
-        return state.get.current().atomictoaster.toastperunit + state.get.current().atomictoaster.efficiency
+        return atomictoaster.getToastperunit()
       },
       suffix: true
     }, {
@@ -356,18 +315,15 @@ var readout = (function() {
       suffix: true
     }],
     quantumtoaster: [{
-      element: "[readout=quantumtoaster-toast]",
+      element: "[readout=quantumtoaster-totaltoastoutput]",
       value: function() {
-        var level = state.get.current().quantumtoaster.level
-        var toastperunit = state.get.current().quantumtoaster.toastperunit
-        var efficiency = state.get.current().quantumtoaster.efficiency
-        return level * (toastperunit + efficiency)
+        return quantumtoaster.getTotalOutput()
       },
       suffix: true
     }, {
       element: "[readout=quantumtoaster-toastperunit]",
       value: function() {
-        return state.get.current().quantumtoaster.toastperunit + state.get.current().quantumtoaster.efficiency
+        return quantumtoaster.getToastperunit()
       },
       suffix: true
     }, {
