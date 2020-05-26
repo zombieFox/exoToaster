@@ -3,151 +3,93 @@ var upgrade = (function() {
   var mod = {}
 
   mod.formula = {
-    level: function(number) {
-      return (Math.pow(number, 2) * 16)
+    speed: {
+      milestone: function(number) {
+        return Math.pow(number + 2, 3)
+      }
     },
-    cost: function(number) {
-      return (Math.pow(number, 2) * 4)
+    cost: {
+      efficiency: function(number) {
+        return (Math.pow(number, 2) * 8)
+      },
+      speed: function(number) {
+        return number * 8
+      }
     }
   }
 
   mod.template = {
-    autotoaster: function(level) {
+    efficiency: function(name, func) {
       return {
-        name: "Efficiency Boost",
-        level: level,
-        description: "Boost each units efficiency with spare paperclips",
+        level: state.get.current()[name].efficiency,
+        name: string.mod.upgrade.efficiency,
+        description: string.mod.upgrade[name].efficiency,
+        milestone: state.get.current()[name].milestone.efficiency,
         prerequisite: function() {
-          return state.get.current().autotoaster.efficiency == (this.level - 1) && state.get.current().autotoaster.level > mod.formula.level(this.level)
+          return state.get.current()[name].efficiency <= 10 && state.get.current()[name].efficiency == (this.level) && state.get.current()[name].level > this.milestone
         },
         cost: function() {
-          return mod.formula.cost(this.level)
+          return mod.formula.cost.efficiency(state.get.current()[name].efficiency + 1)
         },
-        target: "[stage=autotoaster]",
+        target: "[stage=" + name + "]",
         bonus: function() {
-          autotoaster.addEfficiency(1)
+          func(1)
+          state.get.current()[name].milestone.efficiency = state.get.current()[name].milestone.efficiency * 2
+          this.level = state.get.current()[name].efficiency
+          this.milestone = state.get.current()[name].milestone.efficiency
         },
         live: false
       }
     },
-    megatoaster: function(level) {
+    speed: function(name, milestone, speed, func) {
       return {
-        name: "Efficiency Boost",
-        level: level,
-        description: "Boost each units efficiency with leftover cookies",
+        milestone: milestone,
+        speed: speed,
+        name: string.mod.upgrade.speed,
+        description: string.mod.upgrade[name].speed,
         prerequisite: function() {
-          return state.get.current().megatoaster.efficiency == (this.level - 1) && state.get.current().megatoaster.level > mod.formula.level(this.level)
+          return state.get.current()[name].level > 1 && state.get.current()[name].level > milestone && state.get.current()[name].speed == speed
         },
         cost: function() {
-          return mod.formula.cost(this.level)
+          return mod.formula.cost.speed(state.get.current()[name].speed + 1)
         },
-        target: "[stage=megatoaster]",
+        target: "[stage=" + name + "]",
         bonus: function() {
-          megatoaster.addEfficiency(1)
-        },
-        live: false
-      }
-    },
-    rockettoaster: function(level) {
-      return {
-        name: "Efficiency Boost",
-        level: level,
-        description: "Boost each units efficiency with aviation turbine fuel",
-        prerequisite: function() {
-          return state.get.current().rockettoaster.efficiency == (this.level - 1) && state.get.current().rockettoaster.level > mod.formula.level(this.level)
-        },
-        cost: function() {
-          return mod.formula.cost(this.level)
-        },
-        target: "[stage=rockettoaster]",
-        bonus: function() {
-          rockettoaster.addEfficiency(1)
-        },
-        live: false
-      }
-    },
-    sonictoaster: function(level) {
-      return {
-        name: "Efficiency Boost",
-        level: level,
-        description: "Boost each units efficiency with ultrasound amplifiers",
-        prerequisite: function() {
-          return state.get.current().sonictoaster.efficiency == (this.level - 1) && state.get.current().sonictoaster.level > mod.formula.level(this.level)
-        },
-        cost: function() {
-          return mod.formula.cost(this.level)
-        },
-        target: "[stage=sonictoaster]",
-        bonus: function() {
-          sonictoaster.addEfficiency(1)
-        },
-        live: false
-      }
-    },
-    plasmatoaster: function(level) {
-      return {
-        name: "Efficiency Boost",
-        level: level,
-        description: "Boost each units efficiency with ionized gases",
-        prerequisite: function() {
-          return state.get.current().plasmatoaster.efficiency == (this.level - 1) && state.get.current().plasmatoaster.level > mod.formula.level(this.level)
-        },
-        cost: function() {
-          return mod.formula.cost(this.level)
-        },
-        target: "[stage=plasmatoaster]",
-        bonus: function() {
-          plasmatoaster.addEfficiency(1)
-        },
-        live: false
-      }
-    },
-    atomictoaster: function(level) {
-      return {
-        name: "Efficiency Boost",
-        level: level,
-        description: "Boost each units efficiency with powerful electromagnets and particle energisers",
-        prerequisite: function() {
-          return state.get.current().atomictoaster.efficiency == (this.level - 1) && state.get.current().atomictoaster.level > mod.formula.level(this.level)
-        },
-        cost: function() {
-          return mod.formula.cost(this.level)
-        },
-        target: "[stage=atomictoaster]",
-        bonus: function() {
-          atomictoaster.addEfficiency(1)
-        },
-        live: false
-      }
-    },
-    quantumtoaster: function(level) {
-      return {
-        name: "Efficiency Boost",
-        level: level,
-        description: "Boost each units efficiency with rubber bands",
-        prerequisite: function() {
-          return state.get.current().quantumtoaster.efficiency == (this.level - 1) && state.get.current().quantumtoaster.level > mod.formula.level(this.level)
-        },
-        cost: function() {
-          return mod.formula.cost(this.level)
-        },
-        target: "[stage=quantumtoaster]",
-        bonus: function() {
-          quantumtoaster.addEfficiency(1)
+          func(1)
         },
         live: false
       }
     }
   }
 
-  mod.all = {
-    autotoaster: [mod.template.autotoaster(2), mod.template.autotoaster(3), mod.template.autotoaster(4)],
-    megatoaster: [mod.template.megatoaster(2), mod.template.megatoaster(3), mod.template.megatoaster(4)],
-    rockettoaster: [mod.template.rockettoaster(2), mod.template.rockettoaster(3), mod.template.rockettoaster(4)],
-    sonictoaster: [mod.template.sonictoaster(2), mod.template.sonictoaster(3), mod.template.sonictoaster(4)],
-    plasmatoaster: [mod.template.plasmatoaster(2), mod.template.plasmatoaster(3), mod.template.plasmatoaster(4)],
-    atomictoaster: [mod.template.atomictoaster(2), mod.template.atomictoaster(3), mod.template.atomictoaster(4)],
-    quantumtoaster: [mod.template.quantumtoaster(2), mod.template.quantumtoaster(3), mod.template.quantumtoaster(4)]
+  mod.all = {}
+
+  mod.add = function() {
+    mod.all.autotoaster = []
+    mod.all.megatoaster = []
+    mod.all.rockettoaster = []
+    mod.all.sonictoaster = []
+    mod.all.plasmatoaster = []
+    mod.all.atomictoaster = []
+    mod.all.quantumtoaster = []
+
+    mod.all.autotoaster.push(mod.template.efficiency("autotoaster", autotoaster.efficiency.add))
+    mod.all.megatoaster.push(mod.template.efficiency("megatoaster", megatoaster.efficiency.add))
+    mod.all.rockettoaster.push(mod.template.efficiency("rockettoaster", rockettoaster.efficiency.add))
+    mod.all.sonictoaster.push(mod.template.efficiency("sonictoaster", sonictoaster.efficiency.add))
+    mod.all.plasmatoaster.push(mod.template.efficiency("plasmatoaster", plasmatoaster.efficiency.add))
+    mod.all.atomictoaster.push(mod.template.efficiency("atomictoaster", atomictoaster.efficiency.add))
+    mod.all.quantumtoaster.push(mod.template.efficiency("quantumtoaster", quantumtoaster.efficiency.add))
+
+    for (var i = 0; i <= 6; i++) {
+      mod.all.autotoaster.push(mod.template.speed("autotoaster", mod.formula.speed.milestone(i), i, autotoaster.speed.add))
+      mod.all.megatoaster.push(mod.template.speed("megatoaster", mod.formula.speed.milestone(i), i, megatoaster.speed.add))
+      mod.all.rockettoaster.push(mod.template.speed("rockettoaster", mod.formula.speed.milestone(i), i, rockettoaster.speed.add))
+      mod.all.sonictoaster.push(mod.template.speed("sonictoaster", mod.formula.speed.milestone(i), i, sonictoaster.speed.add))
+      mod.all.plasmatoaster.push(mod.template.speed("plasmatoaster", mod.formula.speed.milestone(i), i, plasmatoaster.speed.add))
+      mod.all.atomictoaster.push(mod.template.speed("atomictoaster", mod.formula.speed.milestone(i), i, atomictoaster.speed.add))
+      mod.all.quantumtoaster.push(mod.template.speed("quantumtoaster", mod.formula.speed.milestone(i), i, quantumtoaster.speed.add))
+    }
   }
 
   mod.check = function() {
@@ -163,7 +105,7 @@ var upgrade = (function() {
     }
   }
 
-  mod.purchase = function(unit, perk) {
+  mod.purchase = function(perk, cardBody) {
 
     if (state.get.current().cycle.current >= perk.cost()) {
 
@@ -171,7 +113,7 @@ var upgrade = (function() {
 
       perk.bonus()
 
-      render.item.remove(unit, perk)
+      render.item.remove(perk, cardBody)
 
     } else {
 
@@ -194,11 +136,7 @@ var upgrade = (function() {
 
       var paraDescription = helper.node("p:" + perk.description + "|class:small muted")
 
-      var button = helper.node("button:" + perk.name + " " + perk.level + "|class:button button-line button-small mb-2,tabindex:1")
-
-      button.addEventListener("click", function() {
-        mod.purchase(unit, perk)
-      })
+      var button = helper.node("button:" + perk.name + "|class:button button-line button-small mb-2,tabindex:1")
 
       var paraCost = helper.node("p|class:small muted")
 
@@ -222,22 +160,26 @@ var upgrade = (function() {
 
       var target = helper.e(perk.target + " [stage=upgrade]")
 
+      button.addEventListener("click", function() {
+        mod.purchase(perk, cardBody)
+      })
+
       target.appendChild(cardBody)
     },
-    remove: function(unit, perk) {
-      helper.e("[stage=" + unit + "-" + perk.name.replace(" ", "-").toLowerCase() + "-" + perk.level + "]").remove()
+    remove: function(perk, cardBody) {
+      cardBody.remove()
       perk.live = false
     }
   }
 
   var init = function() {
-
+    mod.add()
     tick.mod.set({
       name: "upgrade",
       func: function() {
         mod.check()
       },
-      interval: 1000
+      interval: 2000
     })
 
   }

@@ -11,26 +11,18 @@
   <div class="card-body">
     <p class="mb-2">Unit count: <span readout="atomictoaster-level"></span></p>
     <div class="form-group mb-2">
-      <button class="button button-line button-small" control="atomictoaster-level-increase1" tabindex="1">+1</button>
-      <button class="button button-line button-small" control="atomictoaster-level-increase10" tabindex="1">+10</button>
-      <button class="button button-line button-small" control="atomictoaster-level-increase100" tabindex="1">+100</button>
+      <button class="button button-line button-small" control="atomictoaster-level-add1" tabindex="1">+1</button>
+      <button class="button button-line button-small" control="atomictoaster-level-add10" tabindex="1">+10</button>
+      <button class="button button-line button-small" control="atomictoaster-level-add100" tabindex="1">+100</button>
     </div>
     <p class="small muted">+1 cost <strong readout="atomictoaster-cost-toast"></strong> <abbr title="Toast matter">Tm</abbr></p>
-  </div>
-
-  <div class="card-body">
-    <p class="mb-2">Speed: <span readout="atomictoasterspeed-level"></span></p>
-    <div class="form-group mb-2">
-      <button class="button button-line button-small" control="atomictoasterspeed-level-increase1" tabindex="1">+1</button>
-    </div>
-    <p class="small muted">+1 cost <strong readout="atomictoasterspeed-cost-toast"></strong> <abbr title="Toast matter">Tm</abbr></p>
   </div>
 
   <div stage="upgrade"></div>
 
   <div class="card-footer">
-    <p class="small muted">Toast per unit: <span readout="atomictoaster-toastperunit"></span></p>
-    <p class="small muted mb-0">Producing <span readout="atomictoaster-totaltoastoutput"></span> toast every <span readout="atomictoasterspeed-interval-current"></span>s</p>
+    <p class="small muted">Toast per unit: <span readout="atomictoaster-output-unit"></span></p>
+    <p class="small muted mb-0">Producing <span readout="atomictoaster-output-total"></span> toast every <span readout="atomictoaster-interval"></span>s</p>
   </div>
 
 </div>

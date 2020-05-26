@@ -2,11 +2,12 @@
   height: 100%;
   position: relative;
   overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .main-header {
   background-color: rgba(var(--background-color-theme), 0.9);
-  padding: 2em;
+  padding: var(--layout-padding);
   position: sticky;
   top: 0;
   z-index: var(--z-index-header);
@@ -14,7 +15,7 @@
 }
 
 .main-body {
-  padding: 2em 2em 50vh 2em;
+  padding: var(--layout-padding) var(--layout-padding) 50vh var(--layout-padding);
   z-index: 1;
   display: grid;
   grid-template-columns: 1fr;

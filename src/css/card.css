@@ -106,29 +106,29 @@
 }
 
 [stage=autotoaster].active .card-meter-progress {
-  animation-duration: var(--card-autotoasterspeed-meter-duration);
+  animation-duration: var(--card-autotoaster-interval);
 }
 
 [stage=megatoaster].active .card-meter-progress {
-  animation-duration: var(--card-megatoasterspeed-meter-duration);
+  animation-duration: var(--card-megatoaster-interval);
 }
 
 [stage=rockettoaster].active .card-meter-progress {
-  animation-duration: var(--card-rockettoasterspeed-meter-duration);
+  animation-duration: var(--card-rockettoaster-interval);
 }
 
 [stage=sonictoaster].active .card-meter-progress {
-  animation-duration: var(--card-sonictoasterspeed-meter-duration);
+  animation-duration: var(--card-sonictoaster-interval);
 }
 
 [stage=plasmatoaster].active .card-meter-progress {
-  animation-duration: var(--card-plasmatoasterspeed-meter-duration);
+  animation-duration: var(--card-plasmatoaster-interval);
 }
 
 [stage=atomictoaster].active .card-meter-progress {
-  animation-duration: var(--card-atomictoasterspeed-meter-duration);
+  animation-duration: var(--card-atomictoaster-interval);
 }
 
 [stage=quantumtoaster].active .card-meter-progress {
-  animation-duration: var(--card-quantumtoasterspeed-meter-duration);
+  animation-duration: var(--card-quantumtoaster-interval);
 }

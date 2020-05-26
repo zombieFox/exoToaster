@@ -348,8 +348,7 @@ var state = (function() {
       current: 0
     },
     processor: {
-      unitmultiplier: 2,
-      level: 1,
+      level: null,
       cost: {
         constant: null,
         difference: null,
@@ -366,186 +365,159 @@ var state = (function() {
         min: 1000
       }
     },
-    autotoaster: {
-      unitmultiplier: 1,
-      level: 0,
-      toastperunit: null,
-      efficiency: 1,
-      motivation: 1,
+    speed: {
+      level: null,
       cost: {
         constant: null,
         difference: null,
         toast: null
       }
     },
-    autotoasterspeed: {
-      unitmultiplier: 1,
-      level: 0,
+    autotoaster: {
+      level: null,
+      toastperunit: null,
+      efficiency: null,
+      motivation: null,
+      milestone: {
+        efficiency: null
+      },
+      speed: null,
+      interval: null,
+      output: {
+        unit: null,
+        total: null,
+        persec: null
+      },
       cost: {
         constant: null,
         difference: null,
         toast: null
-      },
-      interval: {
-        starting: null,
-        current: null,
-        min: 1000
       }
     },
     megatoaster: {
-      unitmultiplier: 2,
-      level: 0,
+      level: null,
       toastperunit: null,
-      efficiency: 1,
-      motivation: 1,
-      cost: {
-        constant: null,
-        difference: null,
-        toast: null
-      }
-    },
-    megatoasterspeed: {
-      unitmultiplier: 2,
-      level: 0,
-      cost: {
-        constant: null,
-        difference: null,
-        toast: null
+      efficiency: null,
+      motivation: null,
+      milestone: {
+        efficiency: null
       },
-      interval: {
-        starting: null,
-        current: null,
-        min: 1000
+      speed: null,
+      interval: null,
+      output: {
+        unit: null,
+        total: null,
+        persec: null
+      },
+      cost: {
+        constant: null,
+        difference: null,
+        toast: null
       }
     },
     rockettoaster: {
-      unitmultiplier: 4,
-      level: 0,
+      level: null,
       toastperunit: null,
-      efficiency: 1,
-      motivation: 1,
-      cost: {
-        constant: null,
-        difference: null,
-        toast: null
-      }
-    },
-    rockettoasterspeed: {
-      unitmultiplier: 4,
-      level: 0,
-      cost: {
-        constant: null,
-        difference: null,
-        toast: null
+      efficiency: null,
+      motivation: null,
+      milestone: {
+        efficiency: null
       },
-      interval: {
-        starting: null,
-        current: null,
-        min: 1000
+      speed: null,
+      interval: null,
+      output: {
+        unit: null,
+        total: null,
+        persec: null
+      },
+      cost: {
+        constant: null,
+        difference: null,
+        toast: null
       }
     },
     sonictoaster: {
-      unitmultiplier: 8,
-      level: 0,
+      level: null,
       toastperunit: null,
-      efficiency: 1,
-      motivation: 1,
-      cost: {
-        constant: null,
-        difference: null,
-        toast: null
-      }
-    },
-    sonictoasterspeed: {
-      unitmultiplier: 8,
-      level: 0,
-      cost: {
-        constant: null,
-        difference: null,
-        toast: null
+      efficiency: null,
+      motivation: null,
+      milestone: {
+        efficiency: null
       },
-      interval: {
-        starting: null,
-        current: null,
-        min: 1000
+      speed: null,
+      interval: null,
+      output: {
+        unit: null,
+        total: null,
+        persec: null
+      },
+      cost: {
+        constant: null,
+        difference: null,
+        toast: null
       }
     },
     plasmatoaster: {
-      unitmultiplier: 16,
-      level: 0,
+      level: null,
       toastperunit: null,
-      efficiency: 1,
-      motivation: 1,
-      cost: {
-        constant: null,
-        difference: null,
-        toast: null
-      }
-    },
-    plasmatoasterspeed: {
-      unitmultiplier: 16,
-      level: 0,
-      cost: {
-        constant: null,
-        difference: null,
-        toast: null
+      efficiency: null,
+      motivation: null,
+      milestone: {
+        efficiency: null
       },
-      interval: {
-        starting: null,
-        current: null,
-        min: 1000
+      speed: null,
+      interval: null,
+      output: {
+        unit: null,
+        total: null,
+        persec: null
+      },
+      cost: {
+        constant: null,
+        difference: null,
+        toast: null
       }
     },
     atomictoaster: {
-      unitmultiplier: 32,
-      level: 0,
+      level: null,
       toastperunit: null,
-      efficiency: 1,
-      motivation: 1,
-      cost: {
-        constant: null,
-        difference: null,
-        toast: null
-      }
-    },
-    atomictoasterspeed: {
-      unitmultiplier: 32,
-      level: 0,
-      cost: {
-        constant: null,
-        difference: null,
-        toast: null
+      efficiency: null,
+      motivation: null,
+      milestone: {
+        efficiency: null
       },
-      interval: {
-        starting: null,
-        current: null,
-        min: 1000
+      speed: null,
+      interval: null,
+      output: {
+        unit: null,
+        total: null,
+        persec: null
+      },
+      cost: {
+        constant: null,
+        difference: null,
+        toast: null
       }
     },
     quantumtoaster: {
-      unitmultiplier: 64,
-      level: 0,
+      level: null,
       toastperunit: null,
-      efficiency: 1,
-      motivation: 1,
-      cost: {
-        constant: null,
-        difference: null,
-        toast: null
-      }
-    },
-    quantumtoasterspeed: {
-      unitmultiplier: 64,
-      level: 0,
-      cost: {
-        constant: null,
-        difference: null,
-        toast: null
+      efficiency: null,
+      motivation: null,
+      milestone: {
+        efficiency: null
       },
-      interval: {
-        starting: null,
-        current: null,
-        min: 1000
+      speed: null,
+      interval: null,
+      output: {
+        unit: null,
+        total: null,
+        persec: null
+      },
+      cost: {
+        constant: null,
+        difference: null,
+        toast: null
       }
     },
     motivation: {

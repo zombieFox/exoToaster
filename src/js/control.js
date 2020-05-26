@@ -32,252 +32,161 @@ var control = (function() {
         }
       }],
       processor: [{
-        element: "[control=processor-level-increase1]",
+        element: "[control=processor-level-add1]",
         type: "button",
         func: function() {
-          processor.upgrade(1)
+          processor.add(1)
           cycle.max()
           strategy.next()
         }
       }, {
-        element: "[control=processor-level-increase10]",
+        element: "[control=processor-level-add10]",
         type: "button",
         func: function() {
-          processor.upgrade(10)
+          processor.add(10)
           cycle.max()
           strategy.next()
         }
       }, {
-        element: "[control=processor-level-increase100]",
+        element: "[control=processor-level-add100]",
         type: "button",
         func: function() {
-          processor.upgrade(100)
+          processor.add(100)
           cycle.max()
           strategy.next()
         }
       }],
       autotoaster: [{
-        element: "[control=autotoaster-level-increase1]",
+        element: "[control=autotoaster-level-add1]",
         type: "button",
         func: function() {
-          autotoaster.upgrade(1)
+          autotoaster.add(1)
         }
       }, {
-        element: "[control=autotoaster-level-increase10]",
+        element: "[control=autotoaster-level-add10]",
         type: "button",
         func: function() {
-          autotoaster.upgrade(10)
+          autotoaster.add(10)
         }
       }, {
-        element: "[control=autotoaster-level-increase100]",
+        element: "[control=autotoaster-level-add100]",
         type: "button",
         func: function() {
-          autotoaster.upgrade(100)
-        }
-      }, {
-        element: "[control=autotoasterspeed-level-increase1]",
-        type: "button",
-        func: function() {
-          autotoasterspeed.upgrade(1)
-          autotoasterspeed.setIntervalCurrent()
-          render.disable.check()
-        },
-        disable: {
-          condition: function() {
-            return state.get.current().autotoasterspeed.interval.current <= state.get.current().autotoasterspeed.interval.min
-          }
+          autotoaster.add(100)
         }
       }],
       megatoaster: [{
-        element: "[control=megatoaster-level-increase1]",
+        element: "[control=megatoaster-level-add1]",
         type: "button",
         func: function() {
-          megatoaster.upgrade(1)
+          megatoaster.add(1)
         }
       }, {
-        element: "[control=megatoaster-level-increase10]",
+        element: "[control=megatoaster-level-add10]",
         type: "button",
         func: function() {
-          megatoaster.upgrade(10)
+          megatoaster.add(10)
         }
       }, {
-        element: "[control=megatoaster-level-increase100]",
+        element: "[control=megatoaster-level-add100]",
         type: "button",
         func: function() {
-          megatoaster.upgrade(100)
-        }
-      }, {
-        element: "[control=megatoasterspeed-level-increase1]",
-        type: "button",
-        func: function() {
-          megatoasterspeed.upgrade(1)
-          megatoasterspeed.setIntervalCurrent()
-          render.disable.check()
-        },
-        disable: {
-          condition: function() {
-            return state.get.current().megatoasterspeed.interval.current <= state.get.current().megatoasterspeed.interval.min
-          }
+          megatoaster.add(100)
         }
       }],
       rockettoaster: [{
-        element: "[control=rockettoaster-level-increase1]",
+        element: "[control=rockettoaster-level-add1]",
         type: "button",
         func: function() {
-          rockettoaster.upgrade(1)
+          rockettoaster.add(1)
         }
       }, {
-        element: "[control=rockettoaster-level-increase10]",
+        element: "[control=rockettoaster-level-add10]",
         type: "button",
         func: function() {
-          rockettoaster.upgrade(10)
+          rockettoaster.add(10)
         }
       }, {
-        element: "[control=rockettoaster-level-increase100]",
+        element: "[control=rockettoaster-level-add100]",
         type: "button",
         func: function() {
-          rockettoaster.upgrade(100)
-        }
-      }, {
-        element: "[control=rockettoasterspeed-level-increase1]",
-        type: "button",
-        func: function() {
-          rockettoasterspeed.upgrade(1)
-          rockettoasterspeed.setIntervalCurrent()
-          render.disable.check()
-        },
-        disable: {
-          condition: function() {
-            return state.get.current().rockettoasterspeed.interval.current <= state.get.current().rockettoasterspeed.interval.min
-          }
+          rockettoaster.add(100)
         }
       }],
       sonictoaster: [{
-        element: "[control=sonictoaster-level-increase1]",
+        element: "[control=sonictoaster-level-add1]",
         type: "button",
         func: function() {
-          sonictoaster.upgrade(1)
+          sonictoaster.add(1)
         }
       }, {
-        element: "[control=sonictoaster-level-increase10]",
+        element: "[control=sonictoaster-level-add10]",
         type: "button",
         func: function() {
-          sonictoaster.upgrade(10)
+          sonictoaster.add(10)
         }
       }, {
-        element: "[control=sonictoaster-level-increase100]",
+        element: "[control=sonictoaster-level-add100]",
         type: "button",
         func: function() {
-          sonictoaster.upgrade(100)
-        }
-      }, {
-        element: "[control=sonictoasterspeed-level-increase1]",
-        type: "button",
-        func: function() {
-          sonictoasterspeed.upgrade(1)
-          sonictoasterspeed.setIntervalCurrent()
-          render.disable.check()
-        },
-        disable: {
-          condition: function() {
-            return state.get.current().sonictoasterspeed.interval.current <= state.get.current().sonictoasterspeed.interval.min
-          }
+          sonictoaster.add(100)
         }
       }],
       plasmatoaster: [{
-        element: "[control=plasmatoaster-level-increase1]",
+        element: "[control=plasmatoaster-level-add1]",
         type: "button",
         func: function() {
-          plasmatoaster.upgrade(1)
+          plasmatoaster.add(1)
         }
       }, {
-        element: "[control=plasmatoaster-level-increase10]",
+        element: "[control=plasmatoaster-level-add10]",
         type: "button",
         func: function() {
-          plasmatoaster.upgrade(10)
+          plasmatoaster.add(10)
         }
       }, {
-        element: "[control=plasmatoaster-level-increase100]",
+        element: "[control=plasmatoaster-level-add100]",
         type: "button",
         func: function() {
-          plasmatoaster.upgrade(100)
-        }
-      }, {
-        element: "[control=plasmatoasterspeed-level-increase1]",
-        type: "button",
-        func: function() {
-          plasmatoasterspeed.upgrade(1)
-          plasmatoasterspeed.setIntervalCurrent()
-          render.disable.check()
-        },
-        disable: {
-          condition: function() {
-            return state.get.current().plasmatoasterspeed.interval.current <= state.get.current().plasmatoasterspeed.interval.min
-          }
+          plasmatoaster.add(100)
         }
       }],
       atomictoaster: [{
-        element: "[control=atomictoaster-level-increase1]",
+        element: "[control=atomictoaster-level-add1]",
         type: "button",
         func: function() {
-          atomictoaster.upgrade(1)
+          atomictoaster.add(1)
         }
       }, {
-        element: "[control=atomictoaster-level-increase10]",
+        element: "[control=atomictoaster-level-add10]",
         type: "button",
         func: function() {
-          atomictoaster.upgrade(10)
+          atomictoaster.add(10)
         }
       }, {
-        element: "[control=atomictoaster-level-increase100]",
+        element: "[control=atomictoaster-level-add100]",
         type: "button",
         func: function() {
-          atomictoaster.upgrade(100)
-        }
-      }, {
-        element: "[control=atomictoasterspeed-level-increase1]",
-        type: "button",
-        func: function() {
-          atomictoasterspeed.upgrade(1)
-          atomictoasterspeed.setIntervalCurrent()
-          render.disable.check()
-        },
-        disable: {
-          condition: function() {
-            return state.get.current().atomictoasterspeed.interval.current <= state.get.current().atomictoasterspeed.interval.min
-          }
+          atomictoaster.add(100)
         }
       }],
       quantumtoaster: [{
-        element: "[control=quantumtoaster-level-increase1]",
+        element: "[control=quantumtoaster-level-add1]",
         type: "button",
         func: function() {
-          quantumtoaster.upgrade(1)
+          quantumtoaster.add(1)
         }
       }, {
-        element: "[control=quantumtoaster-level-increase10]",
+        element: "[control=quantumtoaster-level-add10]",
         type: "button",
         func: function() {
-          quantumtoaster.upgrade(10)
+          quantumtoaster.add(10)
         }
       }, {
-        element: "[control=quantumtoaster-level-increase100]",
+        element: "[control=quantumtoaster-level-add100]",
         type: "button",
         func: function() {
-          quantumtoaster.upgrade(100)
-        }
-      }, {
-        element: "[control=quantumtoasterspeed-level-increase1]",
-        type: "button",
-        func: function() {
-          quantumtoasterspeed.upgrade(1)
-          quantumtoasterspeed.setIntervalCurrent()
-          render.disable.check()
-        },
-        disable: {
-          condition: function() {
-            return state.get.current().quantumtoasterspeed.interval.current <= state.get.current().quantumtoasterspeed.interval.min
-          }
+          quantumtoaster.add(100)
         }
       }]
     },

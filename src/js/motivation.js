@@ -202,22 +202,22 @@ var motivation = (function() {
       }
     },
     start: function() {
-      autotoaster.setMotivation(2)
-      megatoaster.setMotivation(2)
-      rockettoaster.setMotivation(2)
-      sonictoaster.setMotivation(2)
-      plasmatoaster.setMotivation(2)
-      atomictoaster.setMotivation(2)
-      quantumtoaster.setMotivation(2)
+      autotoaster.motivation.add(1)
+      megatoaster.motivation.add(1)
+      rockettoaster.motivation.add(1)
+      sonictoaster.motivation.add(1)
+      plasmatoaster.motivation.add(1)
+      atomictoaster.motivation.add(1)
+      quantumtoaster.motivation.add(1)
     },
     end: function() {
-      autotoaster.resetMotivation()
-      megatoaster.resetMotivation()
-      rockettoaster.resetMotivation()
-      sonictoaster.resetMotivation()
-      plasmatoaster.resetMotivation()
-      atomictoaster.resetMotivation()
-      quantumtoaster.resetMotivation()
+      autotoaster.motivation.reset()
+      megatoaster.motivation.reset()
+      rockettoaster.motivation.reset()
+      sonictoaster.motivation.reset()
+      plasmatoaster.motivation.reset()
+      atomictoaster.motivation.reset()
+      quantumtoaster.motivation.reset()
     },
     reset: function() {
       state.get.current().motivation.active = false

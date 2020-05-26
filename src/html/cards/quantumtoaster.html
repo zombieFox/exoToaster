@@ -11,26 +11,18 @@
   <div class="card-body">
     <p class="mb-2">Unit count: <span readout="quantumtoaster-level"></span></p>
     <div class="form-group mb-2">
-      <button class="button button-line button-small" control="quantumtoaster-level-increase1" tabindex="1">+1</button>
-      <button class="button button-line button-small" control="quantumtoaster-level-increase10" tabindex="1">+10</button>
-      <button class="button button-line button-small" control="quantumtoaster-level-increase100" tabindex="1">+100</button>
+      <button class="button button-line button-small" control="quantumtoaster-level-add1" tabindex="1">+1</button>
+      <button class="button button-line button-small" control="quantumtoaster-level-add10" tabindex="1">+10</button>
+      <button class="button button-line button-small" control="quantumtoaster-level-add100" tabindex="1">+100</button>
     </div>
     <p class="small muted">+1 cost <strong readout="quantumtoaster-cost-toast"></strong> <abbr title="Toast matter">Tm</abbr></p>
-  </div>
-
-  <div class="card-body">
-    <p class="mb-2">Speed: <span readout="quantumtoasterspeed-level"></span></p>
-    <div class="form-group mb-2">
-      <button class="button button-line button-small" control="quantumtoasterspeed-level-increase1" tabindex="1">+1</button>
-    </div>
-    <p class="small muted">+1 cost <strong readout="quantumtoasterspeed-cost-toast"></strong> <abbr title="Toast matter">Tm</abbr></p>
   </div>
 
   <div stage="upgrade"></div>
 
   <div class="card-footer">
-    <p class="small muted">Toast per unit: <span readout="quantumtoaster-toastperunit"></span></p>
-    <p class="small muted mb-0">Producing <span readout="quantumtoaster-totaltoastoutput"></span> toast every <span readout="quantumtoasterspeed-interval-current"></span>s</p>
+    <p class="small muted">Toast per unit: <span readout="quantumtoaster-output-unit"></span></p>
+    <p class="small muted mb-0">Producing <span readout="quantumtoaster-output-total"></span> toast every <span readout="quantumtoaster-interval"></span>s</p>
   </div>
 
 </div>

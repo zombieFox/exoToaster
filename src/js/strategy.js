@@ -32,8 +32,7 @@ var strategy = (function() {
   mod.activate = function(override) {
     var options = {
       path: null,
-      name: null,
-      displayName: null
+      unit: null
     }
 
     if (override) {
@@ -65,7 +64,7 @@ var strategy = (function() {
         }) + 1
       })
 
-      render.remove(options.name)
+      render.remove(options.unit)
     } else {
       report.render({
         type: "error",
@@ -80,8 +79,8 @@ var strategy = (function() {
   render.card = function(override) {
     var options = {
       path: null,
+      unit: null,
       name: null,
-      displayName: null,
       description: null
     }
 
@@ -96,9 +95,9 @@ var strategy = (function() {
 
     if (stateData.open.restore) {
 
-      var cardBody = helper.node("div|class:card-body,strategy:" + options.name)
+      var cardBody = helper.node("div|class:card-body,strategy:" + options.unit)
 
-      var button = helper.node("button:" + options.displayName + "|class:button button-line mb-2,tabindex:1")
+      var button = helper.node("button:" + options.name + "|class:button button-line mb-2,tabindex:1")
 
       button.addEventListener("click", function() {
         mod.activate(options)
@@ -133,8 +132,8 @@ var strategy = (function() {
     }
   }
 
-  render.remove = function(name) {
-    helper.e("[strategy=" + name + "]").remove()
+  render.remove = function(unit) {
+    helper.e("[strategy=" + unit + "]").remove()
   }
 
   render.next = function() {

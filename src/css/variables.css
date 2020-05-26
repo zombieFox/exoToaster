@@ -86,6 +86,7 @@
                                                         0 calc(var(--theme-shadow-size-large) * calc(calc(var(--theme-shadow-offset-y) * -1) * 16)) calc(var(--theme-shadow-size-large) * calc(var(--theme-shadow-blur) * 32)) rgba(0, 0, 0, calc(var(--theme-shadow-size-large) * calc(var(--theme-shadow-opacity) * 4)));
   /* layout */
   --layout-line-width:                                  0.2em;
+  --layout-padding:                                     2em;
   --layout-duration-01:                                 0.1s;
   --layout-duration-02:                                 0.2s;
   --layout-duration-03:                                 0.3s;
@@ -371,5 +372,12 @@
   :root {
     /* theme */
     --theme-root-font-size:                             16px;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    /* layout */
+    --layout-padding:                                   3em;
   }
 }

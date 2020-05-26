@@ -184,7 +184,11 @@ var suffix = (function() {
       }
     }
 
-    return number + " " + suffix
+    if (suffix) {
+      return number + " " + suffix
+    } else {
+      return number
+    }
 
   }
 

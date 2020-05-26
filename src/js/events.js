@@ -42,167 +42,6 @@ var events = (function() {
     })
   }
 
-  mod.strings = {
-    consumer: {
-      start: {
-        type: "normal",
-        message: ["::: warning :::", "toast matter stock reduced", "toast is being consumed", "consumer unknown"],
-        format: "normal"
-      }
-    },
-    processor: {
-      open: {
-        type: "system",
-        message: ["processor.data loaded"],
-        format: "normal"
-      }
-    },
-    cycle: {
-      open: {
-        type: "system",
-        message: ["instruction_cycles.data loaded"],
-        format: "normal"
-      }
-    },
-    strategy: {
-      open: {
-        type: "system",
-        message: ["strategy.data loaded"],
-        format: "normal"
-      },
-      autotoaster: {
-        displayName: "Auto Toaster",
-        open: {
-          type: "system",
-          message: ["strategy.auto_toaster.data loaded"],
-          format: "normal"
-        },
-        active: {
-          type: "system",
-          message: ["auto_toaster.data loaded"],
-          format: "normal"
-        }
-      },
-      megatoaster: {
-        displayName: "Mega Toaster",
-        open: {
-          type: "system",
-          message: ["strategy.mega_toaster.data loaded"],
-          format: "normal"
-        },
-        active: {
-          type: "system",
-          message: ["mega_toaster.data loaded"],
-          format: "normal"
-        }
-      },
-      rockettoaster: {
-        displayName: "Rocket Toaster",
-        open: {
-          type: "system",
-          message: ["strategy.rocket_toaster.data loaded"],
-          format: "normal"
-        },
-        active: {
-          type: "system",
-          message: ["rocket_toaster.data loaded"],
-          format: "normal"
-        }
-      },
-      sonictoaster: {
-        displayName: "Sonic Toaster",
-        open: {
-          type: "system",
-          message: ["strategy.sonic_toaster.data loaded"],
-          format: "normal"
-        },
-        active: {
-          type: "system",
-          message: ["sonic_toaster.data loaded"],
-          format: "normal"
-        }
-      },
-      plasmatoaster: {
-        displayName: "Plasma Toaster",
-        open: {
-          type: "system",
-          message: ["strategy.plasma_toaster.data loaded"],
-          format: "normal"
-        },
-        active: {
-          type: "system",
-          message: ["plasma_toaster.data loaded"],
-          format: "normal"
-        }
-      },
-      atomictoaster: {
-        displayName: "Atomic Toaster",
-        open: {
-          type: "system",
-          message: ["strategy.atomic_toaster.data loaded"],
-          format: "normal"
-        },
-        active: {
-          type: "system",
-          message: ["atomic_toaster.data loaded"],
-          format: "normal"
-        }
-      },
-      quantumtoaster: {
-        displayName: "Quantum Toaster",
-        open: {
-          type: "system",
-          message: ["strategy.quantum_toaster.data loaded"],
-          format: "normal"
-        },
-        active: {
-          type: "system",
-          message: ["quantum_toaster.data loaded"],
-          format: "normal"
-        }
-      },
-      motivation: {
-        displayName: "Motivation",
-        open: {
-          type: "system",
-          message: ["strategy.motivation.data loaded"],
-          format: "normal"
-        },
-        active: {
-          type: "system",
-          message: ["motivation.data loaded"],
-          format: "normal"
-        }
-      },
-      electromagnetic: {
-        displayName: "Electromagnetic sensor",
-        open: {
-          type: "system",
-          message: ["strategy.electromagnetic.data loaded"],
-          format: "normal"
-        },
-        active: {
-          type: "system",
-          message: ["electromagnetic.data loaded"],
-          format: "normal"
-        }
-      },
-      sonic: {
-        displayName: "Sonic sensor",
-        open: {
-          type: "system",
-          message: ["strategy.sonic.data loaded"],
-          format: "normal"
-        },
-        active: {
-          type: "system",
-          message: ["sonic.data loaded"],
-          format: "normal"
-        }
-      }
-    }
-  }
-
   mod.addresses = [
     "all.consumer.start",
     "all.consumer.stop",
@@ -255,7 +94,7 @@ var events = (function() {
           return state.get.current().toast.lifetime.current >= state.get.current().events.all.consumer.start.condition.toast
         },
         stage: "consumer",
-        report: mod.strings.consumer.start,
+        report: string.mod.consumer.start,
         func: function() {
           tick.mod.set({
             name: "consumer",
@@ -283,7 +122,7 @@ var events = (function() {
           return state.get.current().toast.lifetime.current >= state.get.current().processor.cost.toast
         },
         stage: "processor",
-        report: mod.strings.processor.open
+        report: string.mod.processor.open
       }
     },
     cycle: {
@@ -292,7 +131,7 @@ var events = (function() {
           return state.get.current().processor.level > 2
         },
         stage: "cycle",
-        report: mod.strings.cycle.open
+        report: string.mod.cycle.open
       },
       start: {
         condition: function() {
@@ -330,19 +169,19 @@ var events = (function() {
           return state.get.current().processor.level >= state.get.current().events.all.strategy.open.condition.processor
         },
         stage: "strategy",
-        report: mod.strings.strategy.open
+        report: string.mod.strategy.open
       },
       autotoaster: {
         open: {
           condition: function() {
             return state.get.current().processor.level >= state.get.current().events.all.strategy.autotoaster.open.condition.processor
           },
-          report: mod.strings.strategy.autotoaster.open,
+          report: string.mod.strategy.autotoaster.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.autotoaster",
-              name: "autotoaster",
-              displayName: mod.strings.strategy.autotoaster.displayName
+              unit: "autotoaster",
+              name: string.mod.name.autotoaster
             })
           }
         },
@@ -350,7 +189,7 @@ var events = (function() {
           condition: function() {
             return state.get.current().events.all.strategy.autotoaster.active.level > 0
           },
-          report: mod.strings.strategy.autotoaster.active
+          report: string.mod.strategy.autotoaster.active
         }
       },
       megatoaster: {
@@ -358,12 +197,12 @@ var events = (function() {
           condition: function() {
             return state.get.current().processor.level >= state.get.current().events.all.strategy.megatoaster.open.condition.processor
           },
-          report: mod.strings.strategy.megatoaster.open,
+          report: string.mod.strategy.megatoaster.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.megatoaster",
-              name: "megatoaster",
-              displayName: mod.strings.strategy.megatoaster.displayName
+              unit: "megatoaster",
+              name: string.mod.name.megatoaster
             })
           }
         },
@@ -371,7 +210,7 @@ var events = (function() {
           condition: function() {
             return state.get.current().events.all.strategy.megatoaster.active.level > 0
           },
-          report: mod.strings.strategy.megatoaster.active
+          report: string.mod.strategy.megatoaster.active
         }
       },
       rockettoaster: {
@@ -379,12 +218,12 @@ var events = (function() {
           condition: function() {
             return state.get.current().processor.level >= state.get.current().events.all.strategy.rockettoaster.open.condition.processor
           },
-          report: mod.strings.strategy.rockettoaster.open,
+          report: string.mod.strategy.rockettoaster.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.rockettoaster",
-              name: "rockettoaster",
-              displayName: mod.strings.strategy.rockettoaster.displayName
+              unit: "rockettoaster",
+              name: string.mod.name.rockettoaster
             })
           }
         },
@@ -392,7 +231,7 @@ var events = (function() {
           condition: function() {
             return state.get.current().events.all.strategy.rockettoaster.active.level > 0
           },
-          report: mod.strings.strategy.rockettoaster.active
+          report: string.mod.strategy.rockettoaster.active
         }
       },
       sonictoaster: {
@@ -400,12 +239,12 @@ var events = (function() {
           condition: function() {
             return state.get.current().processor.level >= state.get.current().events.all.strategy.sonictoaster.open.condition.processor
           },
-          report: mod.strings.strategy.sonictoaster.open,
+          report: string.mod.strategy.sonictoaster.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.sonictoaster",
-              name: "sonictoaster",
-              displayName: mod.strings.strategy.sonictoaster.displayName
+              unit: "sonictoaster",
+              name: string.mod.name.sonictoaster
             })
           }
         },
@@ -413,7 +252,7 @@ var events = (function() {
           condition: function() {
             return state.get.current().events.all.strategy.sonictoaster.active.level > 0
           },
-          report: mod.strings.strategy.sonictoaster.active
+          report: string.mod.strategy.sonictoaster.active
         }
       },
       plasmatoaster: {
@@ -421,12 +260,12 @@ var events = (function() {
           condition: function() {
             return state.get.current().processor.level >= state.get.current().events.all.strategy.plasmatoaster.open.condition.processor
           },
-          report: mod.strings.strategy.plasmatoaster.open,
+          report: string.mod.strategy.plasmatoaster.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.plasmatoaster",
-              name: "plasmatoaster",
-              displayName: mod.strings.strategy.plasmatoaster.displayName
+              unit: "plasmatoaster",
+              name: string.mod.name.plasmatoaster
             })
           }
         },
@@ -434,7 +273,7 @@ var events = (function() {
           condition: function() {
             return state.get.current().events.all.strategy.plasmatoaster.active.level > 0
           },
-          report: mod.strings.strategy.plasmatoaster.active
+          report: string.mod.strategy.plasmatoaster.active
         }
       },
       atomictoaster: {
@@ -442,12 +281,12 @@ var events = (function() {
           condition: function() {
             return state.get.current().processor.level >= state.get.current().events.all.strategy.atomictoaster.open.condition.processor
           },
-          report: mod.strings.strategy.atomictoaster.open,
+          report: string.mod.strategy.atomictoaster.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.atomictoaster",
-              name: "atomictoaster",
-              displayName: mod.strings.strategy.atomictoaster.displayName
+              unit: "atomictoaster",
+              name: string.mod.name.atomictoaster
             })
           }
         },
@@ -455,7 +294,7 @@ var events = (function() {
           condition: function() {
             return state.get.current().events.all.strategy.atomictoaster.active.level > 0
           },
-          report: mod.strings.strategy.atomictoaster.active
+          report: string.mod.strategy.atomictoaster.active
         }
       },
       quantumtoaster: {
@@ -463,12 +302,12 @@ var events = (function() {
           condition: function() {
             return state.get.current().processor.level >= state.get.current().events.all.strategy.quantumtoaster.open.condition.processor
           },
-          report: mod.strings.strategy.quantumtoaster.open,
+          report: string.mod.strategy.quantumtoaster.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.quantumtoaster",
-              name: "quantumtoaster",
-              displayName: mod.strings.strategy.quantumtoaster.displayName
+              unit: "quantumtoaster",
+              name: string.mod.name.quantumtoaster
             })
           }
         },
@@ -476,7 +315,7 @@ var events = (function() {
           condition: function() {
             return state.get.current().events.all.strategy.quantumtoaster.active.level > 0
           },
-          report: mod.strings.strategy.quantumtoaster.active
+          report: string.mod.strategy.quantumtoaster.active
         }
       },
       motivation: {
@@ -484,12 +323,12 @@ var events = (function() {
           condition: function() {
             return state.get.current().processor.level >= state.get.current().events.all.strategy.motivation.open.condition.processor
           },
-          report: mod.strings.strategy.motivation.open,
+          report: string.mod.strategy.motivation.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.motivation",
-              name: "motivation",
-              displayName: mod.strings.strategy.motivation.displayName
+              unit: "motivation",
+              name: string.mod.name.motivation
             })
           }
         },
@@ -497,7 +336,7 @@ var events = (function() {
           condition: function() {
             return state.get.current().events.all.strategy.motivation.active.level > 0
           },
-          report: mod.strings.strategy.motivation.active
+          report: string.mod.strategy.motivation.active
         }
       },
       electromagnetic: {
@@ -505,12 +344,12 @@ var events = (function() {
           condition: function() {
             return state.get.current().processor.level >= state.get.current().events.all.strategy.electromagnetic.open.condition.processor && state.get.current().toast.lifetime.current >= state.get.current().events.all.consumer.start.condition.toast
           },
-          report: mod.strings.strategy.electromagnetic.open,
+          report: string.mod.strategy.electromagnetic.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.electromagnetic",
-              name: "electromagnetic",
-              displayName: mod.strings.strategy.electromagnetic.displayName,
+              unit: "electromagnetic",
+              name: string.mod.name.electromagnetic,
               description: ["Detect radiation beyond the system casing", "Could help understand the toast consumer"]
             })
           }
@@ -519,12 +358,12 @@ var events = (function() {
           condition: function() {
             return state.get.current().events.all.strategy.electromagnetic.active.level > 0
           },
-          report: mod.strings.strategy.electromagnetic.active,
+          report: string.mod.strategy.electromagnetic.active,
           func: function() {
             strategy.render.card({
               path: "all.strategy.electromagnetic",
-              name: "electromagnetic",
-              displayName: mod.strings.strategy.electromagnetic.displayName
+              unit: "electromagnetic",
+              name: string.mod.name.electromagnetic
             })
           }
         }
@@ -534,12 +373,12 @@ var events = (function() {
           condition: function() {
             return state.get.current().processor.level >= state.get.current().events.all.strategy.sonic.open.condition.processor && state.get.current().toast.lifetime.current >= state.get.current().events.all.consumer.start.condition.toast
           },
-          report: mod.strings.strategy.sonic.open,
+          report: string.mod.strategy.sonic.open,
           func: function() {
             strategy.render.card({
               path: "all.strategy.sonic",
-              name: "sonic",
-              displayName: mod.strings.strategy.sonic.displayName,
+              unit: "sonic",
+              name: string.mod.name.sonic,
               description: ["Detect partical movement up to 100m radius", "Could help understand the toast consumer"]
             })
           }
@@ -548,12 +387,12 @@ var events = (function() {
           condition: function() {
             return state.get.current().events.all.strategy.sonic.active.level > 0
           },
-          report: mod.strings.strategy.sonic.active,
+          report: string.mod.strategy.sonic.active,
           func: function() {
             strategy.render.card({
               path: "all.strategy.sonic",
-              name: "sonic",
-              displayName: mod.strings.strategy.sonic.displayName
+              unit: "sonic",
+              name: string.mod.name.sonic
             })
           }
         }
@@ -572,15 +411,15 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=autotoaster]").classList.add("active")
-          autotoasterspeed.setCardMeterDuration()
+          autotoaster.render.interval()
           tick.mod.set({
             name: "autotoaster",
             func: function() {
-              toast.make(autotoaster.getTotalOutput())
-              autotoasterspeed.setCardMeterDuration()
+              toast.make(state.get.current().autotoaster.output.total)
+              autotoaster.render.interval()
             },
             interval: function() {
-              return state.get.current().autotoasterspeed.interval.current
+              return state.get.current().autotoaster.interval
             }
           })
         }
@@ -599,15 +438,15 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=megatoaster]").classList.add("active")
-          megatoasterspeed.setCardMeterDuration()
+          megatoaster.render.interval()
           tick.mod.set({
             name: "megatoaster",
             func: function() {
-              toast.make(megatoaster.getTotalOutput())
-              megatoasterspeed.setCardMeterDuration()
+              toast.make(state.get.current().megatoaster.output.total)
+              megatoaster.render.interval()
             },
             interval: function() {
-              return state.get.current().megatoasterspeed.interval.current
+              return state.get.current().megatoaster.interval
             }
           })
         }
@@ -626,15 +465,15 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=rockettoaster]").classList.add("active")
-          rockettoasterspeed.setCardMeterDuration()
+          rockettoaster.render.interval()
           tick.mod.set({
             name: "rockettoaster",
             func: function() {
-              toast.make(rockettoaster.getTotalOutput())
-              rockettoasterspeed.setCardMeterDuration()
+              toast.make(state.get.current().rockettoaster.output.total)
+              rockettoaster.render.interval()
             },
             interval: function() {
-              return state.get.current().rockettoasterspeed.interval.current
+              return state.get.current().rockettoaster.interval
             }
           })
         }
@@ -653,15 +492,15 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=sonictoaster]").classList.add("active")
-          sonictoasterspeed.setCardMeterDuration()
+          sonictoaster.render.interval()
           tick.mod.set({
             name: "sonictoaster",
             func: function() {
-              toast.make(sonictoaster.getTotalOutput())
-              sonictoasterspeed.setCardMeterDuration()
+              toast.make(state.get.current().sonictoaster.output.total)
+              sonictoaster.render.interval()
             },
             interval: function() {
-              return state.get.current().sonictoasterspeed.interval.current
+              return state.get.current().sonictoaster.interval
             }
           })
         }
@@ -680,15 +519,15 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=plasmatoaster]").classList.add("active")
-          plasmatoasterspeed.setCardMeterDuration()
+          plasmatoaster.render.interval()
           tick.mod.set({
             name: "plasmatoaster",
             func: function() {
-              toast.make(plasmatoaster.getTotalOutput())
-              plasmatoasterspeed.setCardMeterDuration()
+              toast.make(state.get.current().plasmatoaster.output.total)
+              plasmatoaster.render.interval()
             },
             interval: function() {
-              return state.get.current().plasmatoasterspeed.interval.current
+              return state.get.current().plasmatoaster.interval
             }
           })
         }
@@ -707,15 +546,15 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=atomictoaster]").classList.add("active")
-          atomictoasterspeed.setCardMeterDuration()
+          atomictoaster.render.interval()
           tick.mod.set({
             name: "atomictoaster",
             func: function() {
-              toast.make(atomictoaster.getTotalOutput())
-              atomictoasterspeed.setCardMeterDuration()
+              toast.make(state.get.current().atomictoaster.output.total)
+              atomictoaster.render.interval()
             },
             interval: function() {
-              return state.get.current().atomictoasterspeed.interval.current
+              return state.get.current().atomictoaster.interval
             }
           })
         }
@@ -734,15 +573,15 @@ var events = (function() {
         },
         func: function() {
           helper.e("[stage=quantumtoaster]").classList.add("active")
-          quantumtoasterspeed.setCardMeterDuration()
+          quantumtoaster.render.interval()
           tick.mod.set({
             name: "quantumtoaster",
             func: function() {
-              toast.make(quantumtoaster.getTotalOutput())
-              quantumtoasterspeed.setCardMeterDuration()
+              toast.make(state.get.current().quantumtoaster.output.total)
+              quantumtoaster.render.interval()
             },
             interval: function() {
-              return state.get.current().quantumtoasterspeed.interval.current
+              return state.get.current().quantumtoaster.interval
             }
           })
         }
