@@ -12,7 +12,7 @@ var consumer = (function() {
         min = 1
       }
 
-      // console.log(min, max);
+      // console.log(min, max)
 
       var amount = helper.randomNumber(min, max)
 

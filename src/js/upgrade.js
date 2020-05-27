@@ -2,123 +2,173 @@ var upgrade = (function() {
 
   var mod = {}
 
-  mod.formula = {
-    speed: {
-      milestone: function(number) {
-        return Math.pow(number + 2, 3)
+  mod.activeUpgradeCount = {}
+
+  mod.onscreen = function() {
+    for (var unit in state.get.current().upgrade) {
+      for (var stat in state.get.current().upgrade[unit]) {
+        state.get.current().upgrade[unit][stat].forEach(function(perk, index) {
+
+          perk.onscreen = false
+
+        })
       }
-    },
-    cost: {
-      efficiency: function(number) {
-        return (Math.pow(number, 2) * 8)
-      },
-      speed: function(number) {
-        return number * 8
-      }
-    }
-  }
-
-  mod.template = {
-    efficiency: function(name, func) {
-      return {
-        level: state.get.current()[name].efficiency,
-        buttonText: string.mod.upgrade.efficiency,
-        description: string.mod.upgrade[name].efficiency,
-        milestone: state.get.current()[name].milestone.efficiency,
-        prerequisite: function() {
-          return state.get.current()[name].efficiency <= 10 && state.get.current()[name].efficiency == (this.level) && state.get.current()[name].level > this.milestone
-        },
-        cost: function() {
-          return mod.formula.cost.efficiency(state.get.current()[name].efficiency + 1)
-        },
-        target: "[stage=" + name + "]",
-        bonus: function() {
-          func(1)
-          state.get.current()[name].milestone.efficiency = state.get.current()[name].milestone.efficiency * 2
-          this.level = state.get.current()[name].efficiency
-          this.milestone = state.get.current()[name].milestone.efficiency
-        },
-        live: false
-      }
-    },
-    speed: function(name, milestone, speed, func) {
-      return {
-        milestone: milestone,
-        buttonText: string.mod.upgrade.speed,
-        description: string.mod.upgrade[name].speed,
-        prerequisite: function() {
-          return state.get.current()[name].level > 1 && state.get.current()[name].level > milestone && state.get.current()[name].speed == speed
-        },
-        cost: function() {
-          return mod.formula.cost.speed(state.get.current()[name].speed + 1)
-        },
-        target: "[stage=" + name + "]",
-        bonus: function() {
-          func(1)
-        },
-        live: false
-      }
-    }
-  }
-
-  mod.all = {}
-
-  mod.add = function() {
-    mod.all.autotoaster = []
-    mod.all.megatoaster = []
-    mod.all.rockettoaster = []
-    mod.all.sonictoaster = []
-    mod.all.plasmatoaster = []
-    mod.all.atomictoaster = []
-    mod.all.quantumtoaster = []
-
-    mod.all.autotoaster.push(mod.template.efficiency("autotoaster", autotoaster.efficiency.add))
-    mod.all.megatoaster.push(mod.template.efficiency("megatoaster", megatoaster.efficiency.add))
-    mod.all.rockettoaster.push(mod.template.efficiency("rockettoaster", rockettoaster.efficiency.add))
-    mod.all.sonictoaster.push(mod.template.efficiency("sonictoaster", sonictoaster.efficiency.add))
-    mod.all.plasmatoaster.push(mod.template.efficiency("plasmatoaster", plasmatoaster.efficiency.add))
-    mod.all.atomictoaster.push(mod.template.efficiency("atomictoaster", atomictoaster.efficiency.add))
-    mod.all.quantumtoaster.push(mod.template.efficiency("quantumtoaster", quantumtoaster.efficiency.add))
-
-    for (var i = 0; i <= 6; i++) {
-      mod.all.autotoaster.push(mod.template.speed("autotoaster", mod.formula.speed.milestone(i), i, autotoaster.speed.add))
-      mod.all.megatoaster.push(mod.template.speed("megatoaster", mod.formula.speed.milestone(i), i, megatoaster.speed.add))
-      mod.all.rockettoaster.push(mod.template.speed("rockettoaster", mod.formula.speed.milestone(i), i, rockettoaster.speed.add))
-      mod.all.sonictoaster.push(mod.template.speed("sonictoaster", mod.formula.speed.milestone(i), i, sonictoaster.speed.add))
-      mod.all.plasmatoaster.push(mod.template.speed("plasmatoaster", mod.formula.speed.milestone(i), i, plasmatoaster.speed.add))
-      mod.all.atomictoaster.push(mod.template.speed("atomictoaster", mod.formula.speed.milestone(i), i, atomictoaster.speed.add))
-      mod.all.quantumtoaster.push(mod.template.speed("quantumtoaster", mod.formula.speed.milestone(i), i, quantumtoaster.speed.add))
     }
   }
 
   mod.check = function() {
-    for (var unit in mod.all) {
-      mod.all[unit].forEach(function(perk, index) {
+    for (var unit in state.get.current().upgrade) {
 
-        if (perk.prerequisite() && !perk.live) {
-          perk.live = true
-          render.item.add(unit, perk)
-        }
+      mod.activeUpgradeCount[unit] = {}
 
-      })
+      for (var stat in state.get.current().upgrade[unit]) {
+
+        mod.activeUpgradeCount[unit][stat] = 0
+
+        state.get.current().upgrade[unit][stat].forEach(function(perk, index) {
+
+          var condition
+
+          switch (perk.comparisonOperators) {
+
+            case "greater":
+
+              condition = helper.getObject({
+                object: state.get.current(),
+                path: perk.check
+              }) > perk.condition
+              break
+
+            case "less":
+
+              condition = helper.getObject({
+                object: state.get.current(),
+                path: perk.check
+              }) < perk.condition
+              break
+
+            case "equal":
+
+              condition = helper.getObject({
+                object: state.get.current(),
+                path: perk.check
+              }) == perk.condition
+              break
+          }
+
+          if (condition && !perk.onscreen && !perk.passed) {
+            if (mod.activeUpgradeCount[unit][stat] < 1) {
+              perk.onscreen = true
+              render.item.add(unit, perk)
+            }
+          }
+
+          if (perk.onscreen) {
+            mod.activeUpgradeCount[unit][stat]++
+          }
+
+        })
+      }
     }
   }
 
-  mod.purchase = function(perk, cardBody) {
+  mod.purchase = function(perk) {
+    var currency
 
-    if (state.get.current().cycle.current >= perk.cost()) {
+    switch (perk.currency) {
+      case "cycle":
+        currency = state.get.current().cycle.current
+        break
+      case "toast":
+        currency = state.get.current().toast.inventory.current
+        break
+    }
 
-      cycle.consume(perk.cost())
+    if (currency >= perk.cost) {
 
-      perk.bonus()
+      switch (perk.currency) {
+        case "cycle":
+          cycle.consume(perk.cost)
+          break
+        case "toast":
+          toast.consume(perk.cost)
+          break
+      }
 
-      render.item.remove(perk, cardBody)
+      switch (perk.success) {
+        case "add":
+          helper.setObject({
+            object: state.get.current(),
+            path: perk.targetValue,
+            newValue: helper.getObject({
+              object: state.get.current(),
+              path: perk.targetValue
+            }) + perk.bonus
+          })
+          break
+        case "remove":
+          helper.setObject({
+            object: state.get.current(),
+            path: perk.targetValue,
+            newValue: helper.getObject({
+              object: state.get.current(),
+              path: perk.targetValue
+            }) - perk.bonus
+          })
+          break
+      }
+
+      perk.passed = true
+      perk.onscreen = false
+
+
+      switch (perk.targetStage) {
+        case "autotoaster":
+          autotoaster.set.interval()
+          autotoaster.set.output()
+          break
+        case "megatoaster":
+          megatoaster.set.interval()
+          megatoaster.set.output()
+          break
+        case "rockettoaster":
+          rockettoaster.set.interval()
+          rockettoaster.set.output()
+          break
+        case "sonictoaster":
+          sonictoaster.set.interval()
+          sonictoaster.set.output()
+          break
+        case "plasmatoaster":
+          plasmatoaster.set.interval()
+          plasmatoaster.set.output()
+          break
+        case "atomictoaster":
+          atomictoaster.set.interval()
+          atomictoaster.set.output()
+          break
+        case "quantumtoaster":
+          quantumtoaster.set.interval()
+          quantumtoaster.set.output()
+          break
+      }
 
     } else {
 
+      var message
+
+      switch (perk.currency) {
+        case "cycle":
+          message = [perk.cost + " instruction cycles needed"]
+          break
+        case "toast":
+          message = [perk.cost + " toast matter needed"]
+          break
+      }
+
       report.render({
         type: "error",
-        message: [perk.cost() + " instruction cycles needed"],
+        message: message,
         format: "normal"
       })
 
@@ -133,15 +183,24 @@ var upgrade = (function() {
 
       var paraDescription = helper.node("p:" + perk.description + "|class:small muted")
 
-      var button = helper.node("button:" + perk.buttonText + "|class:button button-line button-small mb-2,tabindex:1")
+      var button = helper.node("button:" + perk.name + "|class:button button-line button-small mb-2,tabindex:1")
 
       var paraCost = helper.node("p|class:small muted")
 
       var spanDevelop = helper.node("span:Develop cost ")
 
-      var strongCost = helper.node("strong:" + perk.cost() + " ")
+      var strongCost = helper.node("strong:" + perk.cost + " ")
 
-      var abbrIc = helper.node("abbr:Ic|title:Instruction cycles")
+      var abbrIc
+
+      switch (perk.currency) {
+        case "cycle":
+          abbrIc = helper.node("abbr:Ic|title:Instruction cycles")
+          break
+        case "toast":
+          abbrIc = helper.node("abbr:Tm|title:Toast matter")
+          break
+      }
 
       paraCost.appendChild(spanDevelop)
 
@@ -155,30 +214,24 @@ var upgrade = (function() {
 
       cardBody.appendChild(paraCost)
 
-      var target = helper.e(perk.target + " [stage=upgrade]")
+      var target = helper.e("[stage=" + perk.targetStage + "] [stage=upgrade]")
 
       button.addEventListener("click", function() {
-        mod.purchase(perk, cardBody)
+        mod.purchase(perk)
+        render.item.remove(perk, cardBody)
       })
 
       target.appendChild(cardBody)
     },
     remove: function(perk, cardBody) {
-      cardBody.remove()
-      perk.live = false
+      if (!perk.onscreen && cardBody) {
+        cardBody.remove()
+      }
     }
   }
 
   var init = function() {
-    mod.add()
-    tick.mod.set({
-      name: "upgrade",
-      func: function() {
-        mod.check()
-      },
-      interval: 2000
-    })
-
+    mod.onscreen()
   }
 
   return {

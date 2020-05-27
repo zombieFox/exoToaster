@@ -91,7 +91,15 @@ const jsFiles = [
   path.src + '/js/init.js'
 ]
 
+const assetFiles = [
+  path.src + '/assets/favicon.svg'
+]
+
 const build = {
+  assets: function() {
+    return src(assetFiles)
+      .pipe(dest(path.build + '/assets'))
+  },
   html: function() {
     return src(path.src + '/index.html')
       .pipe(fileinclude({
@@ -127,6 +135,14 @@ const build = {
 }
 
 const dev = {
+  assets: function() {
+    watch(assetFiles, {
+      ignoreInitial: false
+    }, function() {
+      return src(assetFiles)
+        .pipe(dest(path.dev + '/assets'))
+    })
+  },
   html: function() {
     watch(path.src + '/**/*.html', {
       ignoreInitial: false
@@ -157,5 +173,5 @@ const dev = {
   }
 }
 
-exports.dev = parallel(dev.html, dev.css, dev.js)
-exports.build = parallel(build.html, build.css, build.js)
+exports.dev = parallel(dev.assets, dev.html, dev.css, dev.js)
+exports.build = parallel(build.assets, build.html, build.css, build.js)

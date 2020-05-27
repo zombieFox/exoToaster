@@ -7,7 +7,7 @@
 
 .main-header {
   background-color: rgba(var(--background-color-theme), 0.9);
-  padding: var(--layout-padding);
+  padding: var(--layout-padding) var(--layout-padding) calc(var(--layout-padding) / 2) var(--layout-padding);
   position: sticky;
   top: 0;
   z-index: var(--z-index-header);
@@ -15,7 +15,7 @@
 }
 
 .main-body {
-  padding: var(--layout-padding) var(--layout-padding) 50vh var(--layout-padding);
+  padding: calc(var(--layout-padding) / 2) var(--layout-padding) 50vh var(--layout-padding);
   z-index: 1;
   display: grid;
   grid-template-columns: 1fr;

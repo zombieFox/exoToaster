@@ -65,7 +65,7 @@ var menu = (function() {
     }
   }
 
-  render = {}
+  var render = {}
 
   render.panel = function() {
     if (state.get.current().menu) {

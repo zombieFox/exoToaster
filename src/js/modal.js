@@ -151,7 +151,9 @@ var modal = (function() {
       getComputedStyle(modal).opacity
       modal.classList.remove("is-transparent")
       modal.classList.add("is-opaque")
-      modalHeading.focus(this)
+      if(options.heading != null) {
+        modalHeading.focus(this)
+      }
     }
     if (previousModal != null) {
       render.close()

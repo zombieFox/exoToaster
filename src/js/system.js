@@ -54,6 +54,19 @@ var System = function(name, type, multiplier) {
     difference: this.state().cost.difference
   })
 
+  // add
+  this.add = function(amount) {
+    var priceDetails = this.cost.get(amount)
+    if (state.get.current().toast.inventory.current >= priceDetails.cost.total) {
+      toast.consume(priceDetails.cost.total)
+      this.level.add(amount)
+      this.cost.increase(priceDetails)
+      report.render(string.mod[this.name].success(amount))
+    } else {
+      report.render(string.mod[this.name].fail(priceDetails.cost.total))
+    }
+  }
+
   // level
   this.level = {
     add: null,
@@ -67,18 +80,6 @@ var System = function(name, type, multiplier) {
   this.level.remove = function(amount) {
     this.state().level = this.state().level - amount
   }.bind(this)
-
-  this.add = function(amount) {
-    var priceDetails = this.cost.get(amount)
-    if (state.get.current().toast.inventory.current >= priceDetails.cost.total) {
-      toast.consume(priceDetails.cost.total)
-      this.level.add(amount)
-      this.cost.increase(priceDetails)
-      report.render(string.mod[this.name].success(amount))
-    } else {
-      report.render(string.mod[this.name].fail(priceDetails.cost.total))
-    }
-  }
 
   // cost
   this.cost = {

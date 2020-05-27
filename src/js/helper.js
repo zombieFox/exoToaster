@@ -10,11 +10,9 @@ var helper = (function() {
 
   var applyOptions = function(options, override) {
     if (options && override) {
-      if (override) {
-        for (var key in override) {
-          if (key in options) {
-            options[key] = override[key]
-          }
+      for (var key in override) {
+        if (key in options) {
+          options[key] = override[key]
         }
       }
       return options
@@ -48,7 +46,7 @@ var helper = (function() {
       newValue: null
     }
     if (override) {
-      var options = applyOptions(options, override)
+      options = applyOptions(options, override)
     }
     var address = _makeAddress(options.path)
     var _setData = function() {
@@ -83,7 +81,7 @@ var helper = (function() {
       path: null
     }
     if (override) {
-      var options = applyOptions(options, override)
+      options = applyOptions(options, override)
     }
     var address = _makeAddress(options.path)
     var _getData = function() {

@@ -72,8 +72,6 @@ var Generator = function(name, type, multiplier) {
 
     this.state().motivation = 1
 
-    this.state().milestone.efficiency = 50
-
     this.state().speed = 0
 
     this.state().interval = this.get.interval()

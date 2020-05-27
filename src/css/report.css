@@ -6,7 +6,7 @@
 
 @media (min-width: 700px) {
   .report {
-    padding: var(--layout-padding) var(--layout-padding) 10vh var(--layout-padding);
+    padding: var(--layout-padding) var(--layout-padding) 10vh calc(var(--layout-padding) / 2);
   }
 }
 

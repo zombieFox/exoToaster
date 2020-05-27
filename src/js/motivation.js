@@ -167,61 +167,64 @@ var motivation = (function() {
   }]
 
   mod.boost = {
+    count: function() {
+      state.get.current().motivation.count = state.get.current().motivation.count + 1
+    },
     add: function() {
-      state.get.current().motivation.level = state.get.current().motivation.level + 1
-      if (state.get.current().motivation.level == state.get.current().motivation.max) {
-        state.get.current().motivation.active = true
+      state.get.current().motivation.step = state.get.current().motivation.step + 1
+      if (state.get.current().motivation.step == state.get.current().motivation.max) {
+        state.get.current().motivation.running = true
         mod.boost.start()
         render.boost.success.start()
       }
-      if (state.get.current().motivation.active) {
+      if (state.get.current().motivation.running) {
         mod.boost.max()
       }
       render.boost.meter()
       render.boost.button()
     },
     remove: function() {
-      state.get.current().motivation.level = state.get.current().motivation.level - 1
-      if (state.get.current().motivation.level == 0) {
-        state.get.current().motivation.active = false
+      state.get.current().motivation.step = state.get.current().motivation.step - 1
+      if (state.get.current().motivation.step == 0) {
+        state.get.current().motivation.running = false
         mod.boost.end()
         render.boost.success.end()
       }
-      if (state.get.current().motivation.active) {
+      if (state.get.current().motivation.running) {
         mod.boost.max()
       }
       render.boost.meter()
       render.boost.button()
     },
     max: function() {
-      if (state.get.current().motivation.level == state.get.current().motivation.max) {}
-      if (state.get.current().motivation.active) {
+      if (state.get.current().motivation.running) {
         mod.delayMotivation = setTimeout(mod.boost.remove, state.get.current().motivation.interval)
       } else {
         clearTimeout(mod.delayMotivation)
       }
     },
     start: function() {
-      autotoaster.motivation.add(1)
-      megatoaster.motivation.add(1)
-      rockettoaster.motivation.add(1)
-      sonictoaster.motivation.add(1)
-      plasmatoaster.motivation.add(1)
-      atomictoaster.motivation.add(1)
-      quantumtoaster.motivation.add(1)
+      mod.boost.count()
+      autotoaster.motivation.add(state.get.current().motivation.level)
+      megatoaster.motivation.add(state.get.current().motivation.level)
+      rockettoaster.motivation.add(state.get.current().motivation.level)
+      sonictoaster.motivation.add(state.get.current().motivation.level)
+      plasmatoaster.motivation.add(state.get.current().motivation.level)
+      atomictoaster.motivation.add(state.get.current().motivation.level)
+      quantumtoaster.motivation.add(state.get.current().motivation.level)
     },
     end: function() {
-      autotoaster.motivation.reset()
-      megatoaster.motivation.reset()
-      rockettoaster.motivation.reset()
-      sonictoaster.motivation.reset()
-      plasmatoaster.motivation.reset()
-      atomictoaster.motivation.reset()
-      quantumtoaster.motivation.reset()
+      autotoaster.motivation.remove(state.get.current().motivation.level)
+      megatoaster.motivation.remove(state.get.current().motivation.level)
+      rockettoaster.motivation.remove(state.get.current().motivation.level)
+      sonictoaster.motivation.remove(state.get.current().motivation.level)
+      plasmatoaster.motivation.remove(state.get.current().motivation.level)
+      atomictoaster.motivation.remove(state.get.current().motivation.level)
+      quantumtoaster.motivation.remove(state.get.current().motivation.level)
     },
     reset: function() {
-      state.get.current().motivation.active = false
-      state.get.current().motivation.level = 0
+      state.get.current().motivation.running = false
+      state.get.current().motivation.step = 0
     }
   }
 
@@ -251,29 +254,21 @@ var motivation = (function() {
 
   render.boost = {
     meter: function() {
-      helper.e("html").style.setProperty("--card-motivation-meter-width", (state.get.current().motivation.level * 10) + "%")
+      helper.e("html").style.setProperty("--card-motivation-meter-width", (state.get.current().motivation.step * 10) + "%")
     },
     button: function() {
-      if (state.get.current().motivation.active) {
-        helper.e("[control=toaster-motivation]").setAttribute("disabled", "")
+      if (state.get.current().motivation.running) {
+        helper.e("[control=motivation]").setAttribute("disabled", "")
       } else {
-        helper.e("[control=toaster-motivation]").removeAttribute("disabled")
+        helper.e("[control=motivation]").removeAttribute("disabled")
       }
     },
     success: {
       start: function() {
-        report.render({
-          type: "system",
-          message: ["motivationd toasters will double output for a short time"],
-          format: "normal"
-        })
+        report.render(string.mod.motivation.start)
       },
       end: function() {
-        report.render({
-          type: "system",
-          message: ["motivational boost end"],
-          format: "normal"
-        })
+        report.render(string.mod.motivation.end)
       }
     }
   }
@@ -283,6 +278,7 @@ var motivation = (function() {
     render.boost.meter()
     render.boost.button()
   }
+
 
   var init = function() {
     mod.boost.reset()

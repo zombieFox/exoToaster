@@ -21,15 +21,6 @@ var control = (function() {
         func: function() {
           toast.make(state.get.current().processor.level)
         }
-      }, {
-        element: "[control=toaster-motivation]",
-        type: "button",
-        func: function() {
-          motivation.render.message()
-          motivation.mod.boost.add()
-          motivation.render.boost.meter()
-          motivation.render.boost.button()
-        }
       }],
       processor: [{
         element: "[control=processor-level-add1]",
@@ -56,6 +47,54 @@ var control = (function() {
           strategy.next()
         }
       }],
+      electromagnetic: [{
+        element: "[control=electromagnetic-level-add1]",
+        type: "button",
+        func: function() {
+          electromagnetic.add(1)
+        }
+      }, {
+        element: "[control=electromagnetic-level-add10]",
+        type: "button",
+        func: function() {
+          electromagnetic.add(10)
+        }
+      }, {
+        element: "[control=electromagnetic-level-add100]",
+        type: "button",
+        func: function() {
+          electromagnetic.add(100)
+        }
+      }],
+      sonic: [{
+        element: "[control=sonic-level-add1]",
+        type: "button",
+        func: function() {
+          sonic.add(1)
+        }
+      }, {
+        element: "[control=sonic-level-add10]",
+        type: "button",
+        func: function() {
+          sonic.add(10)
+        }
+      }, {
+        element: "[control=sonic-level-add100]",
+        type: "button",
+        func: function() {
+          sonic.add(100)
+        }
+      }],
+      motivation: [{
+        element: "[control=motivation]",
+        type: "button",
+        func: function() {
+          motivation.render.message()
+          motivation.mod.boost.add()
+          motivation.render.boost.meter()
+          motivation.render.boost.button()
+        }
+      }],
       autotoaster: [{
         element: "[control=autotoaster-level-add1]",
         type: "button",
@@ -73,6 +112,12 @@ var control = (function() {
         type: "button",
         func: function() {
           autotoaster.add(100)
+        }
+      }, {
+        element: "[control=autotoaster-level-add1000]",
+        type: "button",
+        func: function() {
+          autotoaster.add(1000)
         }
       }],
       megatoaster: [{
@@ -93,6 +138,12 @@ var control = (function() {
         func: function() {
           megatoaster.add(100)
         }
+      }, {
+        element: "[control=megatoaster-level-add1000]",
+        type: "button",
+        func: function() {
+          megatoaster.add(1000)
+        }
       }],
       rockettoaster: [{
         element: "[control=rockettoaster-level-add1]",
@@ -111,6 +162,12 @@ var control = (function() {
         type: "button",
         func: function() {
           rockettoaster.add(100)
+        }
+      }, {
+        element: "[control=rockettoaster-level-add1000]",
+        type: "button",
+        func: function() {
+          rockettoaster.add(1000)
         }
       }],
       sonictoaster: [{
@@ -131,6 +188,12 @@ var control = (function() {
         func: function() {
           sonictoaster.add(100)
         }
+      }, {
+        element: "[control=sonictoaster-level-add1000]",
+        type: "button",
+        func: function() {
+          sonictoaster.add(1000)
+        }
       }],
       plasmatoaster: [{
         element: "[control=plasmatoaster-level-add1]",
@@ -149,6 +212,12 @@ var control = (function() {
         type: "button",
         func: function() {
           plasmatoaster.add(100)
+        }
+      }, {
+        element: "[control=plasmatoaster-level-add1000]",
+        type: "button",
+        func: function() {
+          plasmatoaster.add(1000)
         }
       }],
       atomictoaster: [{
@@ -169,6 +238,12 @@ var control = (function() {
         func: function() {
           atomictoaster.add(100)
         }
+      }, {
+        element: "[control=atomictoaster-level-add1000]",
+        type: "button",
+        func: function() {
+          atomictoaster.add(1000)
+        }
       }],
       quantumtoaster: [{
         element: "[control=quantumtoaster-level-add1]",
@@ -188,12 +263,18 @@ var control = (function() {
         func: function() {
           quantumtoaster.add(100)
         }
+      }, {
+        element: "[control=quantumtoaster-level-add1000]",
+        type: "button",
+        func: function() {
+          quantumtoaster.add(1000)
+        }
       }]
     },
     all: function() {
       var allGameControls = []
-      for (key1 in mod.game.controls) {
-        mod.game.controls[key1].forEach(function(arrayItem, index) {
+      for (var key in mod.game.controls) {
+        mod.game.controls[key].forEach(function(arrayItem, index) {
           allGameControls.push(arrayItem)
         })
       }
@@ -1945,8 +2026,8 @@ var control = (function() {
     },
     all: function() {
       var allMenuControls = []
-      for (key1 in mod.menu.controls) {
-        for (key2 in mod.menu.controls[key1]) {
+      for (var key1 in mod.menu.controls) {
+        for (var key2 in mod.menu.controls[key1]) {
           mod.menu.controls[key1][key2].forEach(function(arrayItem, index) {
             allMenuControls.push(arrayItem)
           })
@@ -2091,11 +2172,11 @@ var control = (function() {
     if (object.valueModify) {
       for (var key in object.valueModify) {
         helper.e(object.element).addEventListener(bind.control.eventType[object.type], function(event) {
-          var _update = function() {
+          var update = function() {
             render.update.control.menu(object)
           }
           clearTimeout(bind.control.timer.inputUpdate)
-          bind.control.timer.inputUpdate = setTimeout(_update, 1000)
+          bind.control.timer.inputUpdate = setTimeout(update, 1000)
         })
       }
     }

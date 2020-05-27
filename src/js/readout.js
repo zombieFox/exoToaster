@@ -19,12 +19,14 @@ var readout = (function() {
       element: "[readout=toast-lifetime-current]",
       value: function() {
         return state.get.current().toast.lifetime.current
-      }
+      },
+      suffix: true
     }, {
       element: "[readout=toast-output-persec]",
       value: function() {
         return state.get.current().autotoaster.output.persec + state.get.current().megatoaster.output.persec + state.get.current().rockettoaster.output.persec + state.get.current().sonictoaster.output.persec + state.get.current().plasmatoaster.output.persec + state.get.current().atomictoaster.output.persec + state.get.current().quantumtoaster.output.persec
-      }
+      },
+      suffix: true
     }],
     processor: [{
       element: "[readout=processor-level]",
@@ -61,6 +63,39 @@ var readout = (function() {
       value: function() {
         return state.get.current().cycle.maxmultiplier
       }
+    }],
+    electromagnetic: [{
+      element: "[readout=electromagnetic-level]",
+      value: function() {
+        return state.get.current().electromagnetic.level
+      },
+      suffix: true
+    }, {
+      element: "[readout=electromagnetic-cost-toast]",
+      value: function() {
+        return state.get.current().electromagnetic.cost.toast
+      },
+      suffix: true
+    }],
+    sonic: [{
+      element: "[readout=sonic-level]",
+      value: function() {
+        return state.get.current().sonic.level
+      },
+      suffix: true
+    }, {
+      element: "[readout=sonic-cost-toast]",
+      value: function() {
+        return state.get.current().sonic.cost.toast
+      },
+      suffix: true
+    }],
+    motivation: [{
+      element: "[readout=motivation-bonus]",
+      value: function() {
+        return state.get.current().motivation.level + 1
+      },
+      suffix: true
     }],
     autotoaster: [{
       element: "[readout=autotoaster-level]",

@@ -31,14 +31,14 @@ var toast = (function() {
   }
 
   var make = function(amount) {
-    if (amount != null && amount != undefined && typeof amount == "number") {
+    if (typeof amount == "number") {
       mod.add.lifetime(amount)
       mod.add.inventory(amount)
     }
   }
 
   var consume = function(amount) {
-    if (amount != null && amount != undefined && typeof amount == "number") {
+    if (typeof amount == "number") {
       mod.remove.inventory(amount)
     }
   }

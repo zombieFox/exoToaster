@@ -34,8 +34,8 @@ var state = (function() {
   }
 
   mod.current = {
-    autosave: {
-      interval: 1000
+    background: {
+      interval: 2000
     },
     events: {
       all: {
@@ -53,6 +53,18 @@ var state = (function() {
           }
         },
         processor: {
+          open: {
+            passed: false,
+            restore: true
+          }
+        },
+        electromagnetic: {
+          open: {
+            passed: false,
+            restore: true
+          }
+        },
+        sonic: {
           open: {
             passed: false,
             restore: true
@@ -221,10 +233,10 @@ var state = (function() {
               passed: false,
               restore: true,
               condition: {
-                processor: 15
+                processor: 16
               },
               cost: {
-                cycle: 256
+                cycle: 128
               }
             },
             active: {
@@ -238,10 +250,10 @@ var state = (function() {
               passed: false,
               restore: true,
               condition: {
-                processor: 22
+                processor: 24
               },
               cost: {
-                cycle: 256
+                cycle: 128
               }
             },
             active: {
@@ -327,14 +339,10 @@ var state = (function() {
             restore: true
           }
         }
-      },
-      interval: 500
+      }
     },
     readout: {
-      interval: 100
-    },
-    tick: {
-      interval: 300
+      interval: 150
     },
     toast: {
       lifetime: {
@@ -348,6 +356,22 @@ var state = (function() {
       current: 0
     },
     processor: {
+      level: null,
+      cost: {
+        constant: null,
+        difference: null,
+        toast: null
+      }
+    },
+    electromagnetic: {
+      level: null,
+      cost: {
+        constant: null,
+        difference: null,
+        toast: null
+      }
+    },
+    sonic: {
       level: null,
       cost: {
         constant: null,
@@ -378,9 +402,6 @@ var state = (function() {
       toastperunit: null,
       efficiency: null,
       motivation: null,
-      milestone: {
-        efficiency: null
-      },
       speed: null,
       interval: null,
       output: {
@@ -399,9 +420,6 @@ var state = (function() {
       toastperunit: null,
       efficiency: null,
       motivation: null,
-      milestone: {
-        efficiency: null
-      },
       speed: null,
       interval: null,
       output: {
@@ -420,9 +438,6 @@ var state = (function() {
       toastperunit: null,
       efficiency: null,
       motivation: null,
-      milestone: {
-        efficiency: null
-      },
       speed: null,
       interval: null,
       output: {
@@ -441,9 +456,6 @@ var state = (function() {
       toastperunit: null,
       efficiency: null,
       motivation: null,
-      milestone: {
-        efficiency: null
-      },
       speed: null,
       interval: null,
       output: {
@@ -462,9 +474,6 @@ var state = (function() {
       toastperunit: null,
       efficiency: null,
       motivation: null,
-      milestone: {
-        efficiency: null
-      },
       speed: null,
       interval: null,
       output: {
@@ -483,9 +492,6 @@ var state = (function() {
       toastperunit: null,
       efficiency: null,
       motivation: null,
-      milestone: {
-        efficiency: null
-      },
       speed: null,
       interval: null,
       output: {
@@ -504,9 +510,6 @@ var state = (function() {
       toastperunit: null,
       efficiency: null,
       motivation: null,
-      milestone: {
-        efficiency: null
-      },
       speed: null,
       interval: null,
       output: {
@@ -521,13 +524,1211 @@ var state = (function() {
       }
     },
     motivation: {
-      level: 0,
+      level: 1,
+      step: 0,
       max: 10,
-      interval: 200,
-      active: false
+      count: 0,
+      running: false,
+      interval: 200
     },
     strategy: {
       next: null
+    },
+    upgrade: {
+      autotoaster: {
+        efficiency: [{
+          name: string.mod.upgrade.rockettoaster.efficiency.name,
+          description: string.mod.upgrade.autotoaster.efficiency.description,
+          targetValue: "autotoaster.efficiency",
+          targetStage: "autotoaster",
+          check: "autotoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.autotoaster.efficiency.name,
+          description: string.mod.upgrade.autotoaster.efficiency.description,
+          targetValue: "autotoaster.efficiency",
+          targetStage: "autotoaster",
+          check: "autotoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.autotoaster.efficiency.name,
+          description: string.mod.upgrade.autotoaster.efficiency.description,
+          targetValue: "autotoaster.efficiency",
+          targetStage: "autotoaster",
+          check: "autotoaster.level",
+          comparisonOperators: "greater",
+          condition: 400,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.autotoaster.efficiency.name,
+          description: string.mod.upgrade.autotoaster.efficiency.description,
+          targetValue: "autotoaster.efficiency",
+          targetStage: "autotoaster",
+          check: "autotoaster.level",
+          comparisonOperators: "greater",
+          condition: 800,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 64,
+          onscreen: false,
+          passed: false
+        }],
+        speed: [{
+          name: string.mod.upgrade.autotoaster.speed.name,
+          description: string.mod.upgrade.autotoaster.speed.description,
+          targetValue: "autotoaster.speed",
+          targetStage: "autotoaster",
+          check: "autotoaster.level",
+          comparisonOperators: "greater",
+          condition: 50,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.autotoaster.speed.name,
+          description: string.mod.upgrade.autotoaster.speed.description,
+          targetValue: "autotoaster.speed",
+          targetStage: "autotoaster",
+          check: "autotoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.autotoaster.speed.name,
+          description: string.mod.upgrade.autotoaster.speed.description,
+          targetValue: "autotoaster.speed",
+          targetStage: "autotoaster",
+          check: "autotoaster.level",
+          comparisonOperators: "greater",
+          condition: 150,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 24,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.autotoaster.speed.name,
+          description: string.mod.upgrade.autotoaster.speed.description,
+          targetValue: "autotoaster.speed",
+          targetStage: "autotoaster",
+          check: "autotoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.autotoaster.speed.name,
+          description: string.mod.upgrade.autotoaster.speed.description,
+          targetValue: "autotoaster.speed",
+          targetStage: "autotoaster",
+          check: "autotoaster.level",
+          comparisonOperators: "greater",
+          condition: 250,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 40,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.autotoaster.speed.name,
+          description: string.mod.upgrade.autotoaster.speed.description,
+          targetValue: "autotoaster.speed",
+          targetStage: "autotoaster",
+          check: "autotoaster.level",
+          comparisonOperators: "greater",
+          condition: 300,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 48,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.autotoaster.speed.name,
+          description: string.mod.upgrade.autotoaster.speed.description,
+          targetValue: "autotoaster.speed",
+          targetStage: "autotoaster",
+          check: "autotoaster.level",
+          comparisonOperators: "greater",
+          condition: 350,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 56,
+          onscreen: false,
+          passed: false
+        }]
+      },
+      megatoaster: {
+        efficiency: [{
+          name: string.mod.upgrade.megatoaster.efficiency.name,
+          description: string.mod.upgrade.megatoaster.efficiency.description,
+          targetValue: "megatoaster.efficiency",
+          targetStage: "megatoaster",
+          check: "megatoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.megatoaster.efficiency.name,
+          description: string.mod.upgrade.megatoaster.efficiency.description,
+          targetValue: "megatoaster.efficiency",
+          targetStage: "megatoaster",
+          check: "megatoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.megatoaster.efficiency.name,
+          description: string.mod.upgrade.megatoaster.efficiency.description,
+          targetValue: "megatoaster.efficiency",
+          targetStage: "megatoaster",
+          check: "megatoaster.level",
+          comparisonOperators: "greater",
+          condition: 400,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.megatoaster.efficiency.name,
+          description: string.mod.upgrade.megatoaster.efficiency.description,
+          targetValue: "megatoaster.efficiency",
+          targetStage: "megatoaster",
+          check: "megatoaster.level",
+          comparisonOperators: "greater",
+          condition: 800,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 64,
+          onscreen: false,
+          passed: false
+        }],
+        speed: [{
+          name: string.mod.upgrade.megatoaster.speed.name,
+          description: string.mod.upgrade.megatoaster.speed.description,
+          targetValue: "megatoaster.speed",
+          targetStage: "megatoaster",
+          check: "megatoaster.level",
+          comparisonOperators: "greater",
+          condition: 50,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.megatoaster.speed.name,
+          description: string.mod.upgrade.megatoaster.speed.description,
+          targetValue: "megatoaster.speed",
+          targetStage: "megatoaster",
+          check: "megatoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.megatoaster.speed.name,
+          description: string.mod.upgrade.megatoaster.speed.description,
+          targetValue: "megatoaster.speed",
+          targetStage: "megatoaster",
+          check: "megatoaster.level",
+          comparisonOperators: "greater",
+          condition: 150,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 24,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.megatoaster.speed.name,
+          description: string.mod.upgrade.megatoaster.speed.description,
+          targetValue: "megatoaster.speed",
+          targetStage: "megatoaster",
+          check: "megatoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.megatoaster.speed.name,
+          description: string.mod.upgrade.megatoaster.speed.description,
+          targetValue: "megatoaster.speed",
+          targetStage: "megatoaster",
+          check: "megatoaster.level",
+          comparisonOperators: "greater",
+          condition: 250,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 40,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.megatoaster.speed.name,
+          description: string.mod.upgrade.megatoaster.speed.description,
+          targetValue: "megatoaster.speed",
+          targetStage: "megatoaster",
+          check: "megatoaster.level",
+          comparisonOperators: "greater",
+          condition: 300,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 48,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.megatoaster.speed.name,
+          description: string.mod.upgrade.megatoaster.speed.description,
+          targetValue: "megatoaster.speed",
+          targetStage: "megatoaster",
+          check: "megatoaster.level",
+          comparisonOperators: "greater",
+          condition: 350,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 56,
+          onscreen: false,
+          passed: false
+        }]
+      },
+      rockettoaster: {
+        efficiency: [{
+          name: string.mod.upgrade.rockettoaster.efficiency.name,
+          description: string.mod.upgrade.rockettoaster.efficiency.description,
+          targetValue: "rockettoaster.efficiency",
+          targetStage: "rockettoaster",
+          check: "rockettoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.rockettoaster.efficiency.name,
+          description: string.mod.upgrade.rockettoaster.efficiency.description,
+          targetValue: "rockettoaster.efficiency",
+          targetStage: "rockettoaster",
+          check: "rockettoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.rockettoaster.efficiency.name,
+          description: string.mod.upgrade.rockettoaster.efficiency.description,
+          targetValue: "rockettoaster.efficiency",
+          targetStage: "rockettoaster",
+          check: "rockettoaster.level",
+          comparisonOperators: "greater",
+          condition: 400,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.rockettoaster.efficiency.name,
+          description: string.mod.upgrade.rockettoaster.efficiency.description,
+          targetValue: "rockettoaster.efficiency",
+          targetStage: "rockettoaster",
+          check: "rockettoaster.level",
+          comparisonOperators: "greater",
+          condition: 800,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 64,
+          onscreen: false,
+          passed: false
+        }],
+        speed: [{
+          name: string.mod.upgrade.rockettoaster.speed.name,
+          description: string.mod.upgrade.rockettoaster.speed.description,
+          targetValue: "rockettoaster.speed",
+          targetStage: "rockettoaster",
+          check: "rockettoaster.level",
+          comparisonOperators: "greater",
+          condition: 50,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.rockettoaster.speed.name,
+          description: string.mod.upgrade.rockettoaster.speed.description,
+          targetValue: "rockettoaster.speed",
+          targetStage: "rockettoaster",
+          check: "rockettoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.rockettoaster.speed.name,
+          description: string.mod.upgrade.rockettoaster.speed.description,
+          targetValue: "rockettoaster.speed",
+          targetStage: "rockettoaster",
+          check: "rockettoaster.level",
+          comparisonOperators: "greater",
+          condition: 150,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 24,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.rockettoaster.speed.name,
+          description: string.mod.upgrade.rockettoaster.speed.description,
+          targetValue: "rockettoaster.speed",
+          targetStage: "rockettoaster",
+          check: "rockettoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.rockettoaster.speed.name,
+          description: string.mod.upgrade.rockettoaster.speed.description,
+          targetValue: "rockettoaster.speed",
+          targetStage: "rockettoaster",
+          check: "rockettoaster.level",
+          comparisonOperators: "greater",
+          condition: 250,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 40,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.rockettoaster.speed.name,
+          description: string.mod.upgrade.rockettoaster.speed.description,
+          targetValue: "rockettoaster.speed",
+          targetStage: "rockettoaster",
+          check: "rockettoaster.level",
+          comparisonOperators: "greater",
+          condition: 300,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 48,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.rockettoaster.speed.name,
+          description: string.mod.upgrade.rockettoaster.speed.description,
+          targetValue: "rockettoaster.speed",
+          targetStage: "rockettoaster",
+          check: "rockettoaster.level",
+          comparisonOperators: "greater",
+          condition: 350,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 56,
+          onscreen: false,
+          passed: false
+        }]
+      },
+      sonictoaster: {
+        efficiency: [{
+          name: string.mod.upgrade.sonictoaster.efficiency.name,
+          description: string.mod.upgrade.sonictoaster.efficiency.description,
+          targetValue: "sonictoaster.efficiency",
+          targetStage: "sonictoaster",
+          check: "sonictoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.sonictoaster.efficiency.name,
+          description: string.mod.upgrade.sonictoaster.efficiency.description,
+          targetValue: "sonictoaster.efficiency",
+          targetStage: "sonictoaster",
+          check: "sonictoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.sonictoaster.efficiency.name,
+          description: string.mod.upgrade.sonictoaster.efficiency.description,
+          targetValue: "sonictoaster.efficiency",
+          targetStage: "sonictoaster",
+          check: "sonictoaster.level",
+          comparisonOperators: "greater",
+          condition: 400,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.sonictoaster.efficiency.name,
+          description: string.mod.upgrade.sonictoaster.efficiency.description,
+          targetValue: "sonictoaster.efficiency",
+          targetStage: "sonictoaster",
+          check: "sonictoaster.level",
+          comparisonOperators: "greater",
+          condition: 800,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 64,
+          onscreen: false,
+          passed: false
+        }],
+        speed: [{
+          name: string.mod.upgrade.sonictoaster.speed.name,
+          description: string.mod.upgrade.sonictoaster.speed.description,
+          targetValue: "sonictoaster.speed",
+          targetStage: "sonictoaster",
+          check: "sonictoaster.level",
+          comparisonOperators: "greater",
+          condition: 50,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.sonictoaster.speed.name,
+          description: string.mod.upgrade.sonictoaster.speed.description,
+          targetValue: "sonictoaster.speed",
+          targetStage: "sonictoaster",
+          check: "sonictoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.sonictoaster.speed.name,
+          description: string.mod.upgrade.sonictoaster.speed.description,
+          targetValue: "sonictoaster.speed",
+          targetStage: "sonictoaster",
+          check: "sonictoaster.level",
+          comparisonOperators: "greater",
+          condition: 150,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 24,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.sonictoaster.speed.name,
+          description: string.mod.upgrade.sonictoaster.speed.description,
+          targetValue: "sonictoaster.speed",
+          targetStage: "sonictoaster",
+          check: "sonictoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.sonictoaster.speed.name,
+          description: string.mod.upgrade.sonictoaster.speed.description,
+          targetValue: "sonictoaster.speed",
+          targetStage: "sonictoaster",
+          check: "sonictoaster.level",
+          comparisonOperators: "greater",
+          condition: 250,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 40,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.sonictoaster.speed.name,
+          description: string.mod.upgrade.sonictoaster.speed.description,
+          targetValue: "sonictoaster.speed",
+          targetStage: "sonictoaster",
+          check: "sonictoaster.level",
+          comparisonOperators: "greater",
+          condition: 300,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 48,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.sonictoaster.speed.name,
+          description: string.mod.upgrade.sonictoaster.speed.description,
+          targetValue: "sonictoaster.speed",
+          targetStage: "sonictoaster",
+          check: "sonictoaster.level",
+          comparisonOperators: "greater",
+          condition: 350,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 56,
+          onscreen: false,
+          passed: false
+        }]
+      },
+      plasmatoaster: {
+        efficiency: [{
+          name: string.mod.upgrade.plasmatoaster.efficiency.name,
+          description: string.mod.upgrade.plasmatoaster.efficiency.description,
+          targetValue: "plasmatoaster.efficiency",
+          targetStage: "plasmatoaster",
+          check: "plasmatoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.plasmatoaster.efficiency.name,
+          description: string.mod.upgrade.plasmatoaster.efficiency.description,
+          targetValue: "plasmatoaster.efficiency",
+          targetStage: "plasmatoaster",
+          check: "plasmatoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.plasmatoaster.efficiency.name,
+          description: string.mod.upgrade.plasmatoaster.efficiency.description,
+          targetValue: "plasmatoaster.efficiency",
+          targetStage: "plasmatoaster",
+          check: "plasmatoaster.level",
+          comparisonOperators: "greater",
+          condition: 400,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.plasmatoaster.efficiency.name,
+          description: string.mod.upgrade.plasmatoaster.efficiency.description,
+          targetValue: "plasmatoaster.efficiency",
+          targetStage: "plasmatoaster",
+          check: "plasmatoaster.level",
+          comparisonOperators: "greater",
+          condition: 800,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 64,
+          onscreen: false,
+          passed: false
+        }],
+        speed: [{
+          name: string.mod.upgrade.plasmatoaster.speed.name,
+          description: string.mod.upgrade.plasmatoaster.speed.description,
+          targetValue: "plasmatoaster.speed",
+          targetStage: "plasmatoaster",
+          check: "plasmatoaster.level",
+          comparisonOperators: "greater",
+          condition: 50,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.plasmatoaster.speed.name,
+          description: string.mod.upgrade.plasmatoaster.speed.description,
+          targetValue: "plasmatoaster.speed",
+          targetStage: "plasmatoaster",
+          check: "plasmatoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.plasmatoaster.speed.name,
+          description: string.mod.upgrade.plasmatoaster.speed.description,
+          targetValue: "plasmatoaster.speed",
+          targetStage: "plasmatoaster",
+          check: "plasmatoaster.level",
+          comparisonOperators: "greater",
+          condition: 150,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 24,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.plasmatoaster.speed.name,
+          description: string.mod.upgrade.plasmatoaster.speed.description,
+          targetValue: "plasmatoaster.speed",
+          targetStage: "plasmatoaster",
+          check: "plasmatoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.plasmatoaster.speed.name,
+          description: string.mod.upgrade.plasmatoaster.speed.description,
+          targetValue: "plasmatoaster.speed",
+          targetStage: "plasmatoaster",
+          check: "plasmatoaster.level",
+          comparisonOperators: "greater",
+          condition: 250,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 40,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.plasmatoaster.speed.name,
+          description: string.mod.upgrade.plasmatoaster.speed.description,
+          targetValue: "plasmatoaster.speed",
+          targetStage: "plasmatoaster",
+          check: "plasmatoaster.level",
+          comparisonOperators: "greater",
+          condition: 300,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 48,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.plasmatoaster.speed.name,
+          description: string.mod.upgrade.plasmatoaster.speed.description,
+          targetValue: "plasmatoaster.speed",
+          targetStage: "plasmatoaster",
+          check: "plasmatoaster.level",
+          comparisonOperators: "greater",
+          condition: 350,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 56,
+          onscreen: false,
+          passed: false
+        }]
+      },
+      atomictoaster: {
+        efficiency: [{
+          name: string.mod.upgrade.atomictoaster.efficiency.name,
+          description: string.mod.upgrade.atomictoaster.efficiency.description,
+          targetValue: "atomictoaster.efficiency",
+          targetStage: "atomictoaster",
+          check: "atomictoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.atomictoaster.efficiency.name,
+          description: string.mod.upgrade.atomictoaster.efficiency.description,
+          targetValue: "atomictoaster.efficiency",
+          targetStage: "atomictoaster",
+          check: "atomictoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.atomictoaster.efficiency.name,
+          description: string.mod.upgrade.atomictoaster.efficiency.description,
+          targetValue: "atomictoaster.efficiency",
+          targetStage: "atomictoaster",
+          check: "atomictoaster.level",
+          comparisonOperators: "greater",
+          condition: 400,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.atomictoaster.efficiency.name,
+          description: string.mod.upgrade.atomictoaster.efficiency.description,
+          targetValue: "atomictoaster.efficiency",
+          targetStage: "atomictoaster",
+          check: "atomictoaster.level",
+          comparisonOperators: "greater",
+          condition: 800,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 64,
+          onscreen: false,
+          passed: false
+        }],
+        speed: [{
+          name: string.mod.upgrade.atomictoaster.speed.name,
+          description: string.mod.upgrade.atomictoaster.speed.description,
+          targetValue: "atomictoaster.speed",
+          targetStage: "atomictoaster",
+          check: "atomictoaster.level",
+          comparisonOperators: "greater",
+          condition: 50,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.atomictoaster.speed.name,
+          description: string.mod.upgrade.atomictoaster.speed.description,
+          targetValue: "atomictoaster.speed",
+          targetStage: "atomictoaster",
+          check: "atomictoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.atomictoaster.speed.name,
+          description: string.mod.upgrade.atomictoaster.speed.description,
+          targetValue: "atomictoaster.speed",
+          targetStage: "atomictoaster",
+          check: "atomictoaster.level",
+          comparisonOperators: "greater",
+          condition: 150,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 24,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.atomictoaster.speed.name,
+          description: string.mod.upgrade.atomictoaster.speed.description,
+          targetValue: "atomictoaster.speed",
+          targetStage: "atomictoaster",
+          check: "atomictoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.atomictoaster.speed.name,
+          description: string.mod.upgrade.atomictoaster.speed.description,
+          targetValue: "atomictoaster.speed",
+          targetStage: "atomictoaster",
+          check: "atomictoaster.level",
+          comparisonOperators: "greater",
+          condition: 250,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 40,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.atomictoaster.speed.name,
+          description: string.mod.upgrade.atomictoaster.speed.description,
+          targetValue: "atomictoaster.speed",
+          targetStage: "atomictoaster",
+          check: "atomictoaster.level",
+          comparisonOperators: "greater",
+          condition: 300,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 48,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.atomictoaster.speed.name,
+          description: string.mod.upgrade.atomictoaster.speed.description,
+          targetValue: "atomictoaster.speed",
+          targetStage: "atomictoaster",
+          check: "atomictoaster.level",
+          comparisonOperators: "greater",
+          condition: 350,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 56,
+          onscreen: false,
+          passed: false
+        }]
+      },
+      quantumtoaster: {
+        efficiency: [{
+          name: string.mod.upgrade.quantumtoaster.efficiency.name,
+          description: string.mod.upgrade.quantumtoaster.efficiency.description,
+          targetValue: "quantumtoaster.efficiency",
+          targetStage: "quantumtoaster",
+          check: "quantumtoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.quantumtoaster.efficiency.name,
+          description: string.mod.upgrade.quantumtoaster.efficiency.description,
+          targetValue: "quantumtoaster.efficiency",
+          targetStage: "quantumtoaster",
+          check: "quantumtoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.quantumtoaster.efficiency.name,
+          description: string.mod.upgrade.quantumtoaster.efficiency.description,
+          targetValue: "quantumtoaster.efficiency",
+          targetStage: "quantumtoaster",
+          check: "quantumtoaster.level",
+          comparisonOperators: "greater",
+          condition: 400,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.quantumtoaster.efficiency.name,
+          description: string.mod.upgrade.quantumtoaster.efficiency.description,
+          targetValue: "quantumtoaster.efficiency",
+          targetStage: "quantumtoaster",
+          check: "quantumtoaster.level",
+          comparisonOperators: "greater",
+          condition: 800,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 64,
+          onscreen: false,
+          passed: false
+        }],
+        speed: [{
+          name: string.mod.upgrade.quantumtoaster.speed.name,
+          description: string.mod.upgrade.quantumtoaster.speed.description,
+          targetValue: "quantumtoaster.speed",
+          targetStage: "quantumtoaster",
+          check: "quantumtoaster.level",
+          comparisonOperators: "greater",
+          condition: 50,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 8,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.quantumtoaster.speed.name,
+          description: string.mod.upgrade.quantumtoaster.speed.description,
+          targetValue: "quantumtoaster.speed",
+          targetStage: "quantumtoaster",
+          check: "quantumtoaster.level",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 16,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.quantumtoaster.speed.name,
+          description: string.mod.upgrade.quantumtoaster.speed.description,
+          targetValue: "quantumtoaster.speed",
+          targetStage: "quantumtoaster",
+          check: "quantumtoaster.level",
+          comparisonOperators: "greater",
+          condition: 150,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 24,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.quantumtoaster.speed.name,
+          description: string.mod.upgrade.quantumtoaster.speed.description,
+          targetValue: "quantumtoaster.speed",
+          targetStage: "quantumtoaster",
+          check: "quantumtoaster.level",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.quantumtoaster.speed.name,
+          description: string.mod.upgrade.quantumtoaster.speed.description,
+          targetValue: "quantumtoaster.speed",
+          targetStage: "quantumtoaster",
+          check: "quantumtoaster.level",
+          comparisonOperators: "greater",
+          condition: 250,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 40,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.quantumtoaster.speed.name,
+          description: string.mod.upgrade.quantumtoaster.speed.description,
+          targetValue: "quantumtoaster.speed",
+          targetStage: "quantumtoaster",
+          check: "quantumtoaster.level",
+          comparisonOperators: "greater",
+          condition: 300,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 48,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.quantumtoaster.speed.name,
+          description: string.mod.upgrade.quantumtoaster.speed.description,
+          targetValue: "quantumtoaster.speed",
+          targetStage: "quantumtoaster",
+          check: "quantumtoaster.level",
+          comparisonOperators: "greater",
+          condition: 350,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 56,
+          onscreen: false,
+          passed: false
+        }]
+      },
+      motivation: {
+        level: [{
+          name: string.mod.upgrade.motivation.level.name,
+          description: string.mod.upgrade.motivation.level.description,
+          targetValue: "motivation.level",
+          targetStage: "motivation",
+          check: "motivation.count",
+          comparisonOperators: "greater",
+          condition: 50,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 32,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.motivation.level.name,
+          description: string.mod.upgrade.motivation.level.description,
+          targetValue: "motivation.level",
+          targetStage: "motivation",
+          check: "motivation.count",
+          comparisonOperators: "greater",
+          condition: 100,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 64,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.motivation.level.name,
+          description: string.mod.upgrade.motivation.level.description,
+          targetValue: "motivation.level",
+          targetStage: "motivation",
+          check: "motivation.count",
+          comparisonOperators: "greater",
+          condition: 200,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 128,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.motivation.level.name,
+          description: string.mod.upgrade.motivation.level.description,
+          targetValue: "motivation.level",
+          targetStage: "motivation",
+          check: "motivation.count",
+          comparisonOperators: "greater",
+          condition: 400,
+          success: "add",
+          bonus: 1,
+          currency: "cycle",
+          cost: 256,
+          onscreen: false,
+          passed: false
+        }],
+        interval: [{
+          name: string.mod.upgrade.motivation.interval.name,
+          description: string.mod.upgrade.motivation.interval.description,
+          targetValue: "motivation.interval",
+          targetStage: "motivation",
+          check: "motivation.level",
+          comparisonOperators: "greater",
+          condition: 3,
+          success: "add",
+          bonus: 200,
+          currency: "cycle",
+          cost: 256,
+          onscreen: false,
+          passed: false
+        }, {
+          name: string.mod.upgrade.motivation.interval.name,
+          description: string.mod.upgrade.motivation.interval.description,
+          targetValue: "motivation.interval",
+          targetStage: "motivation",
+          check: "motivation.level",
+          comparisonOperators: "greater",
+          condition: 4,
+          success: "add",
+          bonus: 200,
+          currency: "cycle",
+          cost: 256,
+          onscreen: false,
+          passed: false
+        }]
+      }
     },
     theme: {
       accent: {

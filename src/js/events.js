@@ -6,21 +6,13 @@ var events = (function() {
     var all = [{
       func: function() {
         tick.mod.set({
-          name: "autosave",
-          func: function() {
-            data.save()
-          },
-          interval: state.get.current().autosave.interval
-        })
-      }
-    }, {
-      func: function() {
-        tick.mod.set({
-          name: "events",
+          name: "background",
           func: function() {
             mod.check()
+            upgrade.mod.check()
+            data.save()
           },
-          interval: state.get.current().events.interval
+          interval: state.get.current().background.interval
         })
       }
     }, {
@@ -84,6 +76,8 @@ var events = (function() {
     "all.atomictoaster.active",
     "all.quantumtoaster.open",
     "all.quantumtoaster.active",
+    "all.electromagnetic.open",
+    "all.sonic.open",
     "all.motivation.open"
   ]
 
@@ -601,6 +595,22 @@ var events = (function() {
           return state.get.current().events.all.strategy.motivation.active.level >= 1
         },
         stage: "motivation"
+      }
+    },
+    electromagnetic: {
+      open: {
+        condition: function() {
+          return state.get.current().events.all.strategy.electromagnetic.active.level >= 1
+        },
+        stage: "electromagnetic"
+      }
+    },
+    sonic: {
+      open: {
+        condition: function() {
+          return state.get.current().events.all.strategy.sonic.active.level >= 1
+        },
+        stage: "sonic"
       }
     }
   }

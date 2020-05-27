@@ -183,7 +183,7 @@ var string = (function() {
         message: ["electromagnetic.data > ready"],
         format: "normal"
       },
-      description: ["Detect radiation beyond the system casing", "Could help understand the toast consumer"]
+      description: ["Detect radiation beyond the system casing", "Will help identify the toast consumer"]
     },
     sonic: {
       open: {
@@ -196,40 +196,90 @@ var string = (function() {
         message: ["sonic.data > ready"],
         format: "normal"
       },
-      description: ["Detect partical movement up to 100m radius", "Could help understand the toast consumer"]
+      description: ["Detect, track, and identify particles", "Will help identify the toast consumer"]
     }
   }
 
   mod.upgrade = {
-    efficiency: "Efficiency upgrade",
-    speed: "Speed upgrade",
+    motivation: {
+      level: {
+        name: "Motivation upgrade",
+        description: "Increase motivation bonuse"
+      },
+      interval: {
+        name: "Speed upgrade",
+        description: "Extend the duration of the motivation affect"
+      }
+    },
     autotoaster: {
-      efficiency: "Boost each units efficiency with spare paperclips",
-      speed: "Boost each units speed with spare paperclips"
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: "Boost each units efficiency with spare paperclips"
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: "Boost each units speed with spare paperclips"
+      }
     },
     megatoaster: {
-      efficiency: "Boost each units efficiency with leftover cookies",
-      speed: "Boost each units speed with leftover cookies"
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: "Boost each units efficiency with leftover cookies"
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: "Boost each units speed with leftover cookies"
+      }
     },
     rockettoaster: {
-      efficiency: "Boost each units efficiency with aviation turbine fuel",
-      speed: "Boost each units speed with aviation turbine fuel"
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: "Boost each units efficiency with aviation turbine fuel"
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: "Boost each units speed with aviation turbine fuel"
+      }
     },
     sonictoaster: {
-      efficiency: "Boost each units efficiency with ultrasound amplifiers",
-      speed: "Boost each units speed with ultrasound amplifiers"
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: "Boost each units efficiency with ultrasound amplifiers"
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: "Boost each units speed with ultrasound amplifiers"
+      }
     },
     plasmatoaster: {
-      efficiency: "Boost each units efficiency with ionized gases and laser pointers",
-      speed: "Boost each units speed with ionized gases and laser pointers"
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: "Boost each units efficiency with ionized gases and laser pointers"
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: "Boost each units speed with ionized gases and laser pointers"
+      }
     },
     atomictoaster: {
-      efficiency: "Boost each units efficiency with powerful electromagnets and particle energisers",
-      speed: "Boost each units speed with powerful electromagnets and particle energisers"
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: "Boost each units efficiency with powerful electromagnets and particle energisers"
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: "Boost each units speed with powerful electromagnets and particle energisers"
+      }
     },
     quantumtoaster: {
-      efficiency: "Boost each units efficiency with rubber bands",
-      speed: "Boost each units speed with rubber bands"
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: "Boost each units efficiency with rubber bands"
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: "Boost each units speed with rubber bands"
+      }
     }
   }
 
@@ -256,6 +306,19 @@ var string = (function() {
         }) + " toast matter needed"],
         format: "normal"
       }
+    }
+  }
+
+  mod.motivation = {
+    start: {
+      type: "system",
+      message: ["motivationd toasters will double output for a short time"],
+      format: "normal"
+    },
+    end: {
+      type: "system",
+      message: ["motivational boost end"],
+      format: "normal"
     }
   }
 
@@ -426,6 +489,58 @@ var string = (function() {
           number: state.get.current().quantumtoaster.level,
           abbreviations: true
         }) + " quantum toasters coalescing"],
+        format: "normal"
+      }
+    },
+    fail: function(amount) {
+      return {
+        type: "error",
+        message: [suffix.add({
+          number: amount,
+          abbreviations: true,
+        }) + " toast matter needed"],
+        format: "normal"
+      }
+    }
+  }
+
+  mod.electromagnetic = {
+    success: function(amount) {
+      return {
+        type: "success",
+        message: ["+" + suffix.add({
+          number: amount,
+          abbreviations: true
+        }) + " unit, " + suffix.add({
+          number: state.get.current().electromagnetic.level,
+          abbreviations: true
+        }) + " electromagnetic sensor resolution increased"],
+        format: "normal"
+      }
+    },
+    fail: function(amount) {
+      return {
+        type: "error",
+        message: [suffix.add({
+          number: amount,
+          abbreviations: true,
+        }) + " toast matter needed"],
+        format: "normal"
+      }
+    }
+  }
+
+  mod.sonic = {
+    success: function(amount) {
+      return {
+        type: "success",
+        message: ["+" + suffix.add({
+          number: amount,
+          abbreviations: true
+        }) + " unit, " + suffix.add({
+          number: state.get.current().sonic.level,
+          abbreviations: true
+        }) + " sonic sensor resolution increased"],
         format: "normal"
       }
     },

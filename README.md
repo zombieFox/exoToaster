@@ -11,3 +11,6 @@ An incremental game
 | o ◡ o || | x _ x || |   ~   || | o ◡ o || | o ◡ o || | o ◡ < ||
 '-------'` '-------'` '-------'` '-------'` '-------'` '-------'`
 ```
+
+### This game is still in development
+Building the project with `npm run build` may not work while development is ongoing
