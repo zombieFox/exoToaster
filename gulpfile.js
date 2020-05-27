@@ -10,7 +10,7 @@ const csso = require('gulp-csso');
 
 const concat = require('gulp-concat');
 
-const uglify = require('gulp-uglify');
+const uglifyjs = require('gulp-uglify-es').default;
 
 const uglifycss = require('gulp-uglifycss');
 
@@ -118,7 +118,7 @@ const build = {
   },
   js: function() {
     return src(jsFiles)
-      .pipe(uglify())
+      .pipe(uglifyjs())
       .pipe(concat(filename.js))
       .pipe(dest(path.build + '/js', {
         sourcemaps: '.'

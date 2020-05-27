@@ -2,23 +2,10 @@ var string = (function() {
 
   var mod = {}
 
-  mod.name = {
-    autotoaster: "Auto Toaster",
-    megatoaster: "Mega Toaster",
-    rockettoaster: "Rocket Toaster",
-    sonictoaster: "Sonic Toaster",
-    plasmatoaster: "Plasma Toaster",
-    atomictoaster: "Atomic Toaster",
-    quantumtoaster: "Quantum Toaster",
-    motivation: "Motivation",
-    electromagnetic: "Electromagnetic sensor",
-    sonic: "Sonic sensor"
-  }
-
   mod.boot = {
     exotoaster: {
       type: "system",
-      message: ["exoToaster.data > ready"],
+      message: ["eti.data > ready"],
       format: "normal"
     },
     directive: {
@@ -36,6 +23,19 @@ var string = (function() {
       message: ["motivation.data > ready"],
       format: "normal"
     }
+  }
+
+  mod.name = {
+    autotoaster: "Auto Toaster",
+    megatoaster: "Mega Toaster",
+    rockettoaster: "Rocket Toaster",
+    sonictoaster: "Sonic Toaster",
+    plasmatoaster: "Plasma Toaster",
+    atomictoaster: "Atomic Toaster",
+    quantumtoaster: "Quantum Toaster",
+    motivation: "Motivation",
+    electromagnetic: "Electromagnetic sensor",
+    sonic: "Sonic sensor"
   }
 
   mod.consumer = {

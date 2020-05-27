@@ -22,7 +22,7 @@ var upgrade = (function() {
     efficiency: function(name, func) {
       return {
         level: state.get.current()[name].efficiency,
-        name: string.mod.upgrade.efficiency,
+        buttonText: string.mod.upgrade.efficiency,
         description: string.mod.upgrade[name].efficiency,
         milestone: state.get.current()[name].milestone.efficiency,
         prerequisite: function() {
@@ -44,8 +44,7 @@ var upgrade = (function() {
     speed: function(name, milestone, speed, func) {
       return {
         milestone: milestone,
-        speed: speed,
-        name: string.mod.upgrade.speed,
+        buttonText: string.mod.upgrade.speed,
         description: string.mod.upgrade[name].speed,
         prerequisite: function() {
           return state.get.current()[name].level > 1 && state.get.current()[name].level > milestone && state.get.current()[name].speed == speed
@@ -130,13 +129,11 @@ var upgrade = (function() {
 
   render.item = {
     add: function(unit, perk) {
-      var stageName = unit + "-" + perk.name.replace(" ", "-").toLowerCase() + "-" + perk.level
-
-      var cardBody = helper.node("div|class:card-body,stage:" + stageName)
+      var cardBody = helper.node("div|class:card-body")
 
       var paraDescription = helper.node("p:" + perk.description + "|class:small muted")
 
-      var button = helper.node("button:" + perk.name + "|class:button button-line button-small mb-2,tabindex:1")
+      var button = helper.node("button:" + perk.buttonText + "|class:button button-line button-small mb-2,tabindex:1")
 
       var paraCost = helper.node("p|class:small muted")
 

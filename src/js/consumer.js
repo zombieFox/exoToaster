@@ -4,13 +4,15 @@ var consumer = (function() {
 
   mod.add = function() {
     if (state.get.current().toast.inventory.current > 0) {
-      var min = Math.round(state.get.current().processor.level / 8)
+      var min = state.get.current().processor.level
 
-      var max = Math.round(state.get.current().processor.level * 2)
+      var max = Math.round(state.get.current().processor.level * 10)
 
       if (min <= 0) {
         min = 1
       }
+
+      // console.log(min, max);
 
       var amount = helper.randomNumber(min, max)
 
