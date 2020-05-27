@@ -21,6 +21,15 @@ var toast = (function() {
     }
   }
 
+  mod.clear = {
+    inventory: function(amount) {
+      state.get.current().toast.inventory.current = 0
+    },
+    lifetime: function(amount) {
+      state.get.current().toast.lifetime.current = 0
+    }
+  }
+
   var make = function(amount) {
     if (amount != null && amount != undefined && typeof amount == "number") {
       mod.add.lifetime(amount)
@@ -34,10 +43,16 @@ var toast = (function() {
     }
   }
 
+  var clear = function() {
+    mod.clear.inventory()
+    mod.clear.lifetime()
+  }
+
   return {
     mod: mod,
     make: make,
-    consume: consume
+    consume: consume,
+    clear: clear,
   }
 
 })()

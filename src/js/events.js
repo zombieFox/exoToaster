@@ -181,7 +181,8 @@ var events = (function() {
             strategy.render.card({
               path: "all.strategy.autotoaster",
               unit: "autotoaster",
-              name: string.mod.name.autotoaster
+              name: string.mod.name.autotoaster,
+              description: string.mod.strategy.autotoaster.description
             })
           }
         },
@@ -202,7 +203,8 @@ var events = (function() {
             strategy.render.card({
               path: "all.strategy.megatoaster",
               unit: "megatoaster",
-              name: string.mod.name.megatoaster
+              name: string.mod.name.megatoaster,
+              description: string.mod.strategy.megatoaster.description
             })
           }
         },
@@ -223,7 +225,8 @@ var events = (function() {
             strategy.render.card({
               path: "all.strategy.rockettoaster",
               unit: "rockettoaster",
-              name: string.mod.name.rockettoaster
+              name: string.mod.name.rockettoaster,
+              description: string.mod.strategy.rockettoaster.description
             })
           }
         },
@@ -244,7 +247,8 @@ var events = (function() {
             strategy.render.card({
               path: "all.strategy.sonictoaster",
               unit: "sonictoaster",
-              name: string.mod.name.sonictoaster
+              name: string.mod.name.sonictoaster,
+              description: string.mod.strategy.sonictoaster.description
             })
           }
         },
@@ -265,7 +269,8 @@ var events = (function() {
             strategy.render.card({
               path: "all.strategy.plasmatoaster",
               unit: "plasmatoaster",
-              name: string.mod.name.plasmatoaster
+              name: string.mod.name.plasmatoaster,
+              description: string.mod.strategy.plasmatoaster.description
             })
           }
         },
@@ -286,7 +291,8 @@ var events = (function() {
             strategy.render.card({
               path: "all.strategy.atomictoaster",
               unit: "atomictoaster",
-              name: string.mod.name.atomictoaster
+              name: string.mod.name.atomictoaster,
+              description: string.mod.strategy.atomictoaster.description
             })
           }
         },
@@ -307,7 +313,8 @@ var events = (function() {
             strategy.render.card({
               path: "all.strategy.quantumtoaster",
               unit: "quantumtoaster",
-              name: string.mod.name.quantumtoaster
+              name: string.mod.name.quantumtoaster,
+              description: string.mod.strategy.quantumtoaster.description
             })
           }
         },
@@ -328,7 +335,8 @@ var events = (function() {
             strategy.render.card({
               path: "all.strategy.motivation",
               unit: "motivation",
-              name: string.mod.name.motivation
+              name: string.mod.name.motivation,
+              description: string.mod.strategy.motivation.description
             })
           }
         },
@@ -350,7 +358,7 @@ var events = (function() {
               path: "all.strategy.electromagnetic",
               unit: "electromagnetic",
               name: string.mod.name.electromagnetic,
-              description: ["Detect radiation beyond the system casing", "Could help understand the toast consumer"]
+              description: string.mod.strategy.electromagnetic.description
             })
           }
         },
@@ -379,7 +387,7 @@ var events = (function() {
               path: "all.strategy.sonic",
               unit: "sonic",
               name: string.mod.name.sonic,
-              description: ["Detect partical movement up to 100m radius", "Could help understand the toast consumer"]
+              description: string.mod.strategy.sonic.description
             })
           }
         },

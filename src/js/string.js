@@ -78,7 +78,8 @@ var string = (function() {
         type: "system",
         message: ["auto_toaster.data > ready"],
         format: "normal"
-      }
+      },
+      description: ["Simple subordinate drones that will make toast"]
     },
     megatoaster: {
       open: {
@@ -90,7 +91,8 @@ var string = (function() {
         type: "system",
         message: ["mega_toaster.data > ready"],
         format: "normal"
-      }
+      },
+      description: ["Advance drones that will make a lot of toast"]
     },
     rockettoaster: {
       open: {
@@ -102,7 +104,8 @@ var string = (function() {
         type: "system",
         message: ["rocket_toaster.data > ready"],
         format: "normal"
-      }
+      },
+      description: ["Drones that use combustion of reactive chemicals to blast out toast"]
     },
     sonictoaster: {
       open: {
@@ -114,7 +117,8 @@ var string = (function() {
         type: "system",
         message: ["sonic_toaster.data > ready"],
         format: "normal"
-      }
+      },
+      description: ["Bots which utilise sound waves to toast bread"]
     },
     plasmatoaster: {
       open: {
@@ -126,7 +130,8 @@ var string = (function() {
         type: "system",
         message: ["plasma_toaster.data > ready"],
         format: "normal"
-      }
+      },
+      description: ["Drones which use ionized plasma to forge new toast"]
     },
     atomictoaster: {
       open: {
@@ -138,7 +143,8 @@ var string = (function() {
         type: "system",
         message: ["atomic_toaster.data > ready"],
         format: "normal"
-      }
+      },
+      description: ["Rearrange atoms into the one true appropriate form of matter"]
     },
     quantumtoaster: {
       open: {
@@ -150,7 +156,8 @@ var string = (function() {
         type: "system",
         message: ["quantum_toaster.data > ready"],
         format: "normal"
-      }
+      },
+      description: ["Materialise toast from the void"]
     },
     motivation: {
       open: {
@@ -162,7 +169,8 @@ var string = (function() {
         type: "system",
         message: ["motivation.data > ready"],
         format: "normal"
-      }
+      },
+      description: ["Galvanise the drones to produce more toast"]
     },
     electromagnetic: {
       open: {
@@ -174,7 +182,8 @@ var string = (function() {
         type: "system",
         message: ["electromagnetic.data > ready"],
         format: "normal"
-      }
+      },
+      description: ["Detect radiation beyond the system casing", "Could help understand the toast consumer"]
     },
     sonic: {
       open: {
@@ -186,7 +195,8 @@ var string = (function() {
         type: "system",
         message: ["sonic.data > ready"],
         format: "normal"
-      }
+      },
+      description: ["Detect partical movement up to 100m radius", "Could help understand the toast consumer"]
     }
   }
 

@@ -34,8 +34,8 @@ var Generator = function(name, type, multiplier) {
     },
     interval: function(speed, multiplier) {
       var allIntervals = function(lower, upper, steps) {
-        const difference = upper - lower
-        const increment = difference / (steps - 1)
+        var difference = upper - lower
+        var increment = difference / (steps - 1)
         var results = [lower, ...Array(steps - 2).fill("").map(
           function(item, index) {
             return Math.round(lower + (increment * (index + 1)))

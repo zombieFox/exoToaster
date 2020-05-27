@@ -7,8 +7,6 @@ var strategy = (function() {
 
     var allCostGreaterThanMax = []
 
-    var nextCycleMax
-
     events.mod.addresses.forEach(function(path, index) {
       var stateData = helper.getObject({
         object: state.get.current(),
