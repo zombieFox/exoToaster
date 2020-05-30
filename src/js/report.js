@@ -127,6 +127,7 @@ var report = (function() {
   var render = function(override) {
     var options = {
       type: null,
+      noprefix: null,
       message: null,
       delay: null,
       format: null,
@@ -150,7 +151,9 @@ var report = (function() {
     }
     format[options.format]()
     var messageType = helper.node("span|class:report-message-type")
-    messageType.textContent = prefix[options.type]()
+    if (!options.noprefix) {
+      messageType.textContent = prefix[options.type]()
+    }
     var messageText = helper.node("span|class:report-message-text")
     newMessage.appendChild(messageType)
     newMessage.appendChild(messageText)

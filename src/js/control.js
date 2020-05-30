@@ -89,7 +89,6 @@ var control = (function() {
         element: "[control=motivation]",
         type: "button",
         func: function() {
-          motivation.render.message()
           motivation.mod.boost.add()
           motivation.render.boost.meter()
           motivation.render.boost.button()
