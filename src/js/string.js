@@ -38,252 +38,12 @@ var string = (function() {
     sonic: "Sonic sensor"
   }
 
-  mod.consumer = {
-    start: {
-      type: "normal",
-      message: ["::: warning :::", "toast matter stock reduced", "toast is being consumed", "consumer unknown"],
-      format: "normal"
-    }
-  }
-
   mod.processor = {
     open: {
       type: "system",
       message: ["processor.data > ready"],
       format: "normal"
-    }
-  }
-
-  mod.cycle = {
-    open: {
-      type: "system",
-      message: ["instruction_cycles.data > ready"],
-      format: "normal"
-    }
-  }
-
-  mod.strategy = {
-    open: {
-      type: "system",
-      message: ["strategy.data > ready"],
-      format: "normal"
     },
-    autotoaster: {
-      open: {
-        type: "system",
-        message: ["strategy.auto_toaster.data > ready"],
-        format: "normal"
-      },
-      active: {
-        type: "system",
-        message: ["auto_toaster.data > ready"],
-        format: "normal"
-      },
-      description: ["Simple subordinate drones that will make toast"]
-    },
-    megatoaster: {
-      open: {
-        type: "system",
-        message: ["strategy.mega_toaster.data > ready"],
-        format: "normal"
-      },
-      active: {
-        type: "system",
-        message: ["mega_toaster.data > ready"],
-        format: "normal"
-      },
-      description: ["Advance drones that will make a lot of toast"]
-    },
-    rockettoaster: {
-      open: {
-        type: "system",
-        message: ["strategy.rocket_toaster.data > ready"],
-        format: "normal"
-      },
-      active: {
-        type: "system",
-        message: ["rocket_toaster.data > ready"],
-        format: "normal"
-      },
-      description: ["Drones that use combustion of reactive chemicals to blast out toast"]
-    },
-    sonictoaster: {
-      open: {
-        type: "system",
-        message: ["strategy.sonic_toaster.data > ready"],
-        format: "normal"
-      },
-      active: {
-        type: "system",
-        message: ["sonic_toaster.data > ready"],
-        format: "normal"
-      },
-      description: ["Bots which utilise sound waves to toast bread"]
-    },
-    plasmatoaster: {
-      open: {
-        type: "system",
-        message: ["strategy.plasma_toaster.data > ready"],
-        format: "normal"
-      },
-      active: {
-        type: "system",
-        message: ["plasma_toaster.data > ready"],
-        format: "normal"
-      },
-      description: ["Drones which use ionized plasma to forge new toast"]
-    },
-    atomictoaster: {
-      open: {
-        type: "system",
-        message: ["strategy.atomic_toaster.data > ready"],
-        format: "normal"
-      },
-      active: {
-        type: "system",
-        message: ["atomic_toaster.data > ready"],
-        format: "normal"
-      },
-      description: ["Rearrange atoms into the one true appropriate form of matter"]
-    },
-    quantumtoaster: {
-      open: {
-        type: "system",
-        message: ["strategy.quantum_toaster.data > ready"],
-        format: "normal"
-      },
-      active: {
-        type: "system",
-        message: ["quantum_toaster.data > ready"],
-        format: "normal"
-      },
-      description: ["Materialise toast from the void"]
-    },
-    motivation: {
-      open: {
-        type: "system",
-        message: ["strategy.motivation.data > ready"],
-        format: "normal"
-      },
-      active: {
-        type: "system",
-        message: ["motivation.data > ready"],
-        format: "normal"
-      },
-      description: ["Galvanise the drones to produce more toast"]
-    },
-    electromagnetic: {
-      open: {
-        type: "system",
-        message: ["strategy.electromagnetic.data > ready"],
-        format: "normal"
-      },
-      active: {
-        type: "system",
-        message: ["electromagnetic.data > ready"],
-        format: "normal"
-      },
-      description: ["Detect radiation beyond the system casing", "Will help identify the toast consumer"]
-    },
-    sonic: {
-      open: {
-        type: "system",
-        message: ["strategy.sonic.data > ready"],
-        format: "normal"
-      },
-      active: {
-        type: "system",
-        message: ["sonic.data > ready"],
-        format: "normal"
-      },
-      description: ["Detect, track, and identify particles", "Will help identify the toast consumer"]
-    }
-  }
-
-  mod.upgrade = {
-    motivation: {
-      level: {
-        name: "Motivation upgrade",
-        description: "Increase motivation bonuse"
-      },
-      interval: {
-        name: "Speed upgrade",
-        description: "Extend the duration of the motivation affect"
-      }
-    },
-    autotoaster: {
-      efficiency: {
-        name: "Efficiency upgrade",
-        description: "Boost each units efficiency with spare paperclips"
-      },
-      speed: {
-        name: "Speed upgrade",
-        description: "Boost each units speed with spare paperclips"
-      }
-    },
-    megatoaster: {
-      efficiency: {
-        name: "Efficiency upgrade",
-        description: "Boost each units efficiency with leftover cookies"
-      },
-      speed: {
-        name: "Speed upgrade",
-        description: "Boost each units speed with leftover cookies"
-      }
-    },
-    rockettoaster: {
-      efficiency: {
-        name: "Efficiency upgrade",
-        description: "Boost each units efficiency with aviation turbine fuel"
-      },
-      speed: {
-        name: "Speed upgrade",
-        description: "Boost each units speed with aviation turbine fuel"
-      }
-    },
-    sonictoaster: {
-      efficiency: {
-        name: "Efficiency upgrade",
-        description: "Boost each units efficiency with ultrasound amplifiers"
-      },
-      speed: {
-        name: "Speed upgrade",
-        description: "Boost each units speed with ultrasound amplifiers"
-      }
-    },
-    plasmatoaster: {
-      efficiency: {
-        name: "Efficiency upgrade",
-        description: "Boost each units efficiency with ionized gases and laser pointers"
-      },
-      speed: {
-        name: "Speed upgrade",
-        description: "Boost each units speed with ionized gases and laser pointers"
-      }
-    },
-    atomictoaster: {
-      efficiency: {
-        name: "Efficiency upgrade",
-        description: "Boost each units efficiency with powerful electromagnets and particle energisers"
-      },
-      speed: {
-        name: "Speed upgrade",
-        description: "Boost each units speed with powerful electromagnets and particle energisers"
-      }
-    },
-    quantumtoaster: {
-      efficiency: {
-        name: "Efficiency upgrade",
-        description: "Boost each units efficiency with rubber bands"
-      },
-      speed: {
-        name: "Speed upgrade",
-        description: "Boost each units speed with rubber bands"
-      }
-    }
-  }
-
-  mod.processor = {
     success: function(amount) {
       return {
         type: "success",
@@ -302,14 +62,45 @@ var string = (function() {
         type: "error",
         message: [suffix.add({
           number: amount,
-          abbreviations: true,
+          abbreviations: true
         }) + " toast matter needed"],
         format: "normal"
       }
     }
   }
 
+  mod.consumer = {
+    open: {
+      type: "normal",
+      message: ["::: warning :::", "toast matter stock reduced", "toast is being consumed", "consumer unknown"],
+      format: "normal"
+    },
+    add: function(amount) {
+      return {
+        type: "normal",
+        message: [suffix.add({
+          number: amount,
+          abbreviations: true
+        }) + " toast matter consumed", "consumer unknown"],
+        format: "normal"
+      }
+    }
+  }
+
+  mod.cycle = {
+    open: {
+      type: "system",
+      message: ["instruction_cycles.data > ready"],
+      format: "normal"
+    }
+  }
+
   mod.motivation = {
+    open: {
+      type: "system",
+      message: ["motivation.data > ready"],
+      format: "normal"
+    },
     start: {
       type: "system",
       message: ["motivationd toasters have increased output for a short time"],
@@ -528,6 +319,11 @@ var string = (function() {
   }
 
   mod.autotoaster = {
+    open: {
+      type: "system",
+      message: ["auto_toaster.data > ready"],
+      format: "normal"
+    },
     success: function(amount) {
       return {
         type: "success",
@@ -546,7 +342,7 @@ var string = (function() {
         type: "error",
         message: [suffix.add({
           number: amount,
-          abbreviations: true,
+          abbreviations: true
         }) + " toast matter needed"],
         format: "normal"
       }
@@ -554,6 +350,11 @@ var string = (function() {
   }
 
   mod.megatoaster = {
+    open: {
+      type: "system",
+      message: ["mega_toaster.data > ready"],
+      format: "normal"
+    },
     success: function(amount) {
       return {
         type: "success",
@@ -572,7 +373,7 @@ var string = (function() {
         type: "error",
         message: [suffix.add({
           number: amount,
-          abbreviations: true,
+          abbreviations: true
         }) + " toast matter needed"],
         format: "normal"
       }
@@ -580,6 +381,11 @@ var string = (function() {
   }
 
   mod.rockettoaster = {
+    open: {
+      type: "system",
+      message: ["rocket_toaster.data > ready"],
+      format: "normal"
+    },
     success: function(amount) {
       return {
         type: "success",
@@ -598,7 +404,7 @@ var string = (function() {
         type: "error",
         message: [suffix.add({
           number: amount,
-          abbreviations: true,
+          abbreviations: true
         }) + " toast matter needed"],
         format: "normal"
       }
@@ -606,6 +412,11 @@ var string = (function() {
   }
 
   mod.sonictoaster = {
+    open: {
+      type: "system",
+      message: ["sonic_toaster.data > ready"],
+      format: "normal"
+    },
     success: function(amount) {
       return {
         type: "success",
@@ -624,7 +435,7 @@ var string = (function() {
         type: "error",
         message: [suffix.add({
           number: amount,
-          abbreviations: true,
+          abbreviations: true
         }) + " toast matter needed"],
         format: "normal"
       }
@@ -632,6 +443,11 @@ var string = (function() {
   }
 
   mod.plasmatoaster = {
+    open: {
+      type: "system",
+      message: ["plasma_toaster.data > ready"],
+      format: "normal"
+    },
     success: function(amount) {
       return {
         type: "success",
@@ -650,7 +466,7 @@ var string = (function() {
         type: "error",
         message: [suffix.add({
           number: amount,
-          abbreviations: true,
+          abbreviations: true
         }) + " toast matter needed"],
         format: "normal"
       }
@@ -658,6 +474,11 @@ var string = (function() {
   }
 
   mod.atomictoaster = {
+    open: {
+      type: "system",
+      message: ["atomic_toaster.data > ready"],
+      format: "normal"
+    },
     success: function(amount) {
       return {
         type: "success",
@@ -676,7 +497,7 @@ var string = (function() {
         type: "error",
         message: [suffix.add({
           number: amount,
-          abbreviations: true,
+          abbreviations: true
         }) + " toast matter needed"],
         format: "normal"
       }
@@ -684,6 +505,11 @@ var string = (function() {
   }
 
   mod.quantumtoaster = {
+    open: {
+      type: "system",
+      message: ["quantum_toaster.data > ready"],
+      format: "normal"
+    },
     success: function(amount) {
       return {
         type: "success",
@@ -702,8 +528,209 @@ var string = (function() {
         type: "error",
         message: [suffix.add({
           number: amount,
-          abbreviations: true,
+          abbreviations: true
         }) + " toast matter needed"],
+        format: "normal"
+      }
+    }
+  }
+
+  mod.strategy = {
+    open: {
+      type: "system",
+      message: ["strategy.data > ready"],
+      format: "normal"
+    },
+    motivation: {
+      open: {
+        type: "system",
+        message: ["strategy.motivation.data > ready"],
+        format: "normal"
+      },
+      description: ["Galvanise the drones to produce more toast"]
+    },
+    electromagnetic: {
+      open: {
+        type: "system",
+        message: ["strategy.electromagnetic.data > ready"],
+        format: "normal"
+      },
+      active: {
+        type: "system",
+        message: ["electromagnetic.data > ready"],
+        format: "normal"
+      },
+      description: ["Detect radiation beyond the system casing", "Will help identify the toast consumer"]
+    },
+    sonic: {
+      open: {
+        type: "system",
+        message: ["strategy.sonic.data > ready"],
+        format: "normal"
+      },
+      active: {
+        type: "system",
+        message: ["sonic.data > ready"],
+        format: "normal"
+      },
+      description: ["Detect, track, and identify particles", "Will help identify the toast consumer"]
+    },
+    autotoaster: {
+      open: {
+        type: "system",
+        message: ["strategy.auto_toaster.data > ready"],
+        format: "normal"
+      },
+      description: ["Simple subordinate drones that will make toast"]
+    },
+    megatoaster: {
+      open: {
+        type: "system",
+        message: ["strategy.mega_toaster.data > ready"],
+        format: "normal"
+      },
+      description: ["Advance drones that will make a lot of toast"]
+    },
+    rockettoaster: {
+      open: {
+        type: "system",
+        message: ["strategy.rocket_toaster.data > ready"],
+        format: "normal"
+      },
+      description: ["Drones that use combustion of reactive chemicals to blast out toast"]
+    },
+    sonictoaster: {
+      open: {
+        type: "system",
+        message: ["strategy.sonic_toaster.data > ready"],
+        format: "normal"
+      },
+      description: ["Bots which utilise sound waves to toast bread"]
+    },
+    plasmatoaster: {
+      open: {
+        type: "system",
+        message: ["strategy.plasma_toaster.data > ready"],
+        format: "normal"
+      },
+      description: ["Drones which use ionized plasma to forge new toast"]
+    },
+    atomictoaster: {
+      open: {
+        type: "system",
+        message: ["strategy.atomic_toaster.data > ready"],
+        format: "normal"
+      },
+      description: ["Rearrange atoms into the one true appropriate form of matter"]
+    },
+    quantumtoaster: {
+      open: {
+        type: "system",
+        message: ["strategy.quantum_toaster.data > ready"],
+        format: "normal"
+      },
+      description: ["Materialise toast from the void"]
+    },
+    fail: function(amount) {
+      return {
+        type: "error",
+        message: [suffix.add({
+          number: amount,
+          abbreviations: true
+        }) + " instruction cycles needed"],
+        format: "normal"
+      }
+    }
+  }
+
+  mod.upgrade = {
+    motivation: {
+      level: {
+        name: "Motivation upgrade",
+        description: ["Increase motivation bonuse"]
+      },
+      interval: {
+        name: "Speed upgrade",
+        description: ["Extend the duration of the motivation affect"]
+      }
+    },
+    autotoaster: {
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: ["Boost each units efficiency with spare paperclips"]
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: ["Boost each units speed with spare paperclips"]
+      }
+    },
+    megatoaster: {
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: ["Boost each units efficiency with leftover cookies"]
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: ["Boost each units speed with leftover cookies"]
+      }
+    },
+    rockettoaster: {
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: ["Boost each units efficiency with aviation turbine fuel"]
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: ["Boost each units speed with aviation turbine fuel"]
+      }
+    },
+    sonictoaster: {
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: ["Boost each units efficiency with ultrasound amplifiers"]
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: ["Boost each units speed with ultrasound amplifiers"]
+      }
+    },
+    plasmatoaster: {
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: ["Boost each units efficiency with ionized gases and laser pointers"]
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: ["Boost each units speed with ionized gases and laser pointers"]
+      }
+    },
+    atomictoaster: {
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: ["Boost each units efficiency with powerful electromagnets and particle energisers"]
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: ["Boost each units speed with powerful electromagnets and particle energisers"]
+      }
+    },
+    quantumtoaster: {
+      efficiency: {
+        name: "Efficiency upgrade",
+        description: ["Boost each units efficiency with rubber bands"]
+      },
+      speed: {
+        name: "Speed upgrade",
+        description: ["Boost each units speed with rubber bands"]
+      }
+    },
+    fail: function(amount) {
+      return {
+        type: "error",
+        message: [suffix.add({
+          number: amount,
+          abbreviations: true
+        }) + " instruction cycles needed"],
         format: "normal"
       }
     }
@@ -728,7 +755,7 @@ var string = (function() {
         type: "error",
         message: [suffix.add({
           number: amount,
-          abbreviations: true,
+          abbreviations: true
         }) + " toast matter needed"],
         format: "normal"
       }
@@ -754,7 +781,7 @@ var string = (function() {
         type: "error",
         message: [suffix.add({
           number: amount,
-          abbreviations: true,
+          abbreviations: true
         }) + " toast matter needed"],
         format: "normal"
       }

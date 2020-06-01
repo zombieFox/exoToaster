@@ -28,7 +28,6 @@ var control = (function() {
         func: function() {
           processor.add(1)
           cycle.max()
-          strategy.next()
         }
       }, {
         element: "[control=processor-level-add10]",
@@ -36,7 +35,6 @@ var control = (function() {
         func: function() {
           processor.add(10)
           cycle.max()
-          strategy.next()
         }
       }, {
         element: "[control=processor-level-add100]",
@@ -44,7 +42,6 @@ var control = (function() {
         func: function() {
           processor.add(100)
           cycle.max()
-          strategy.next()
         }
       }],
       electromagnetic: [{

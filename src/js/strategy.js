@@ -7,16 +7,17 @@ var strategy = (function() {
 
     var allCostGreaterThanMax = []
 
-    events.mod.addresses.forEach(function(path, index) {
-      var stateData = helper.getObject({
-        object: state.get.current(),
-        path: "events." + path
-      })
+    for (var unit in state.get.current().event.strategy) {
+      state.get.current().event.strategy[unit].forEach(function(event, index) {
+        event.condition.forEach(function(condition, index) {
 
-      if (path.includes("strategy") && stateData.condition && stateData.condition.processor > state.get.current().processor.level) {
-        allCostGreaterThanMax.push(stateData.condition.processor)
-      }
-    })
+          if (condition.check == "processor.level" && !event.passed) {
+            allCostGreaterThanMax.push(condition.value)
+          }
+
+        })
+      })
+    }
 
     if (allCostGreaterThanMax.length > 0) {
       nextCycleMax = Math.min(...allCostGreaterThanMax)
@@ -27,48 +28,31 @@ var strategy = (function() {
     state.get.current().strategy.next = nextCycleMax
   }
 
-  mod.activate = function(override) {
-    var options = {
-      path: null,
-      unit: null
-    }
-
-    if (override) {
-      options = helper.applyOptions(options, override)
-    }
+  mod.activate = function(options) {
 
     var stateData = helper.getObject({
       object: state.get.current(),
-      path: "events." + options.path
+      path: options.path
     })
 
-    if (state.get.current().cycle.current >= stateData.open.cost.cycle) {
-      cycle.consume(stateData.open.cost.cycle)
+    if (state.get.current().cycle.current >= stateData.cost) {
 
-      // set strategy restore to false to not re render the card
-      helper.setObject({
-        object: state.get.current(),
-        path: "events." + options.path + ".open.restore",
-        newValue: false
-      })
+      cycle.consume(stateData.cost)
 
-      // increase strategy level
-      helper.setObject({
-        object: state.get.current(),
-        path: "events." + options.path + ".active.level",
-        newValue: helper.getObject({
+      if (options.path) {
+        helper.setObject({
           object: state.get.current(),
-          path: "events." + options.path + ".active.level"
-        }) + 1
-      })
+          path: options.path + ".passed",
+          newValue: true
+        })
+      }
 
-      render.remove(options.unit)
+      options.card.remove()
+
     } else {
-      report.render({
-        type: "error",
-        message: [stateData.open.cost.cycle + " instruction cycles needed"],
-        format: "normal"
-      })
+
+      report.render(string.mod.strategy.fail(stateData.cost))
+
     }
   }
 
@@ -77,7 +61,6 @@ var strategy = (function() {
   render.card = function(override) {
     var options = {
       path: null,
-      unit: null,
       name: null,
       description: null
     }
@@ -88,16 +71,16 @@ var strategy = (function() {
 
     var stateData = helper.getObject({
       object: state.get.current(),
-      path: "events." + options.path
+      path: options.path
     })
 
-    if (stateData.open.restore) {
-
-      var cardBody = helper.node("div|class:card-body,strategy:" + options.unit)
+    if (!stateData.passed) {
+      var cardBody = helper.node("div|class:card-body")
 
       var button = helper.node("button:" + options.name + "|class:button button-line mb-2,tabindex:1")
 
       button.addEventListener("click", function() {
+        options.card = cardBody
         mod.activate(options)
       })
 
@@ -105,7 +88,7 @@ var strategy = (function() {
 
       var spanDevelop = helper.node("span:Develop cost ")
 
-      var strongCost = helper.node("strong:" + stateData.open.cost.cycle + " ")
+      var strongCost = helper.node("strong:" + stateData.cost + " ")
 
       var abbrIc = helper.node("abbr:Ic|title:Instruction cycles")
 
@@ -125,13 +108,9 @@ var strategy = (function() {
 
       cardBody.appendChild(paraCost)
 
-      helper.e("[stage=strategy]").appendChild(cardBody)
-
+      helper.e("[stage=strategy").appendChild(cardBody)
     }
-  }
 
-  render.remove = function(unit) {
-    helper.e("[strategy=" + unit + "]").remove()
   }
 
   render.next = function() {

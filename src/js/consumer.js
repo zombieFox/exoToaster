@@ -26,11 +26,7 @@ var consumer = (function() {
 
       toast.consume(amount)
 
-      report.render({
-        type: "normal",
-        message: [amount + " toast matter consumed", "consumer unknown"],
-        format: "normal"
-      })
+      report.render(string.mod.consumer.add(amount))
     }
   }
 

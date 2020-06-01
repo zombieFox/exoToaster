@@ -9,7 +9,7 @@ var events = (function() {
           name: "background",
           func: function() {
             mod.check()
-            upgrade.mod.check()
+            strategy.next()
             data.save()
           },
           interval: state.get.current().background.interval
@@ -34,62 +34,21 @@ var events = (function() {
     })
   }
 
-  mod.addresses = [
-    "all.consumer.start",
-    "all.consumer.stop",
-    "all.processor.open",
-    "all.cycle.open",
-    "all.cycle.start",
-    "all.cycle.stop",
-    "all.strategy.open",
-    "all.strategy.autotoaster.open",
-    "all.strategy.autotoaster.active",
-    "all.strategy.megatoaster.open",
-    "all.strategy.megatoaster.active",
-    "all.strategy.rockettoaster.open",
-    "all.strategy.rockettoaster.active",
-    "all.strategy.sonictoaster.open",
-    "all.strategy.sonictoaster.active",
-    "all.strategy.plasmatoaster.open",
-    "all.strategy.plasmatoaster.active",
-    "all.strategy.atomictoaster.open",
-    "all.strategy.atomictoaster.active",
-    "all.strategy.quantumtoaster.open",
-    "all.strategy.quantumtoaster.active",
-    "all.strategy.motivation.open",
-    "all.strategy.motivation.active",
-    "all.strategy.electromagnetic.open",
-    "all.strategy.electromagnetic.active",
-    "all.strategy.sonic.open",
-    "all.strategy.sonic.active",
-    "all.autotoaster.open",
-    "all.autotoaster.active",
-    "all.megatoaster.open",
-    "all.megatoaster.active",
-    "all.rockettoaster.open",
-    "all.rockettoaster.active",
-    "all.sonictoaster.open",
-    "all.sonictoaster.active",
-    "all.plasmatoaster.open",
-    "all.plasmatoaster.active",
-    "all.atomictoaster.open",
-    "all.atomictoaster.active",
-    "all.quantumtoaster.open",
-    "all.quantumtoaster.active",
-    "all.electromagnetic.open",
-    "all.sonic.open",
-    "all.motivation.open"
-  ]
-
-  mod.all = {
-    consumer: {
-      start: {
-        condition: function() {
-          return state.get.current().toast.lifetime.current >= state.get.current().events.all.consumer.start.condition.toast
-        },
-        stage: "consumer",
-        report: string.mod.consumer.start,
+  mod.action = {
+    processor: {
+      open: [{
         func: function() {
+          render.unlock("processor")
+        },
+        report: function() {
+          render.report(string.mod.processor.open)
+        }
+      }]
+    },
+    consumer: {
+      open: [{
+        func: function() {
+          render.unlock("consumer")
           tick.mod.set({
             name: "consumer",
             func: function() {
@@ -99,38 +58,22 @@ var events = (function() {
               return consumer.mod.interval()
             }
           })
-        }
-      },
-      stop: {
-        condition: function() {
-          return state.get.current().events.all.consumer.stop.passed
         },
-        func: function() {
-          tick.mod.remove("consumer")
+        report: function() {
+          render.report(string.mod.consumer.open)
         }
-      }
-    },
-    processor: {
-      open: {
-        condition: function() {
-          return state.get.current().toast.lifetime.current >= state.get.current().processor.cost.toast
-        },
-        stage: "processor",
-        report: string.mod.processor.open
-      }
+      }]
     },
     cycle: {
-      open: {
-        condition: function() {
-          return state.get.current().processor.level > 2
+      open: [{
+        func: function() {
+          render.unlock("cycle")
         },
-        stage: "cycle",
-        report: string.mod.cycle.open
-      },
-      start: {
-        condition: function() {
-          return state.get.current().processor.level > 2 && state.get.current().cycle.current != state.get.current().cycle.max
-        },
+        report: function() {
+          render.report(string.mod.cycle.open)
+        }
+      }],
+      start: [{
         func: function() {
           cycle.mod.interval.animation()
           tick.mod.set({
@@ -144,273 +87,36 @@ var events = (function() {
               return state.get.current().cycle.interval.current
             }
           })
-          state.get.current().events.all.cycle.stop.passed = false
+          state.get.current().event.cycle.stop[0].passed = false
         }
-      },
-      stop: {
-        condition: function() {
-          return state.get.current().cycle.current == state.get.current().cycle.max
-        },
+      }],
+      stop: [{
         func: function() {
           tick.mod.remove("cycle")
-          state.get.current().events.all.cycle.start.passed = false
+          state.get.current().event.cycle.start[0].passed = false
         }
-      }
+      }]
     },
-    strategy: {
-      open: {
-        condition: function() {
-          return state.get.current().processor.level >= state.get.current().events.all.strategy.open.condition.processor
+    motivation: {
+      open: [{
+        func: function() {
+          render.unlock("motivation")
         },
-        stage: "strategy",
-        report: string.mod.strategy.open
-      },
-      autotoaster: {
-        open: {
-          condition: function() {
-            return state.get.current().processor.level >= state.get.current().events.all.strategy.autotoaster.open.condition.processor
-          },
-          report: string.mod.strategy.autotoaster.open,
-          func: function() {
-            strategy.render.card({
-              path: "all.strategy.autotoaster",
-              unit: "autotoaster",
-              name: string.mod.name.autotoaster,
-              description: string.mod.strategy.autotoaster.description
-            })
-          }
-        },
-        active: {
-          condition: function() {
-            return state.get.current().events.all.strategy.autotoaster.active.level > 0
-          },
-          report: string.mod.strategy.autotoaster.active
+        report: function() {
+          render.report(string.mod.motivation.open)
         }
-      },
-      megatoaster: {
-        open: {
-          condition: function() {
-            return state.get.current().processor.level >= state.get.current().events.all.strategy.megatoaster.open.condition.processor
-          },
-          report: string.mod.strategy.megatoaster.open,
-          func: function() {
-            strategy.render.card({
-              path: "all.strategy.megatoaster",
-              unit: "megatoaster",
-              name: string.mod.name.megatoaster,
-              description: string.mod.strategy.megatoaster.description
-            })
-          }
-        },
-        active: {
-          condition: function() {
-            return state.get.current().events.all.strategy.megatoaster.active.level > 0
-          },
-          report: string.mod.strategy.megatoaster.active
-        }
-      },
-      rockettoaster: {
-        open: {
-          condition: function() {
-            return state.get.current().processor.level >= state.get.current().events.all.strategy.rockettoaster.open.condition.processor
-          },
-          report: string.mod.strategy.rockettoaster.open,
-          func: function() {
-            strategy.render.card({
-              path: "all.strategy.rockettoaster",
-              unit: "rockettoaster",
-              name: string.mod.name.rockettoaster,
-              description: string.mod.strategy.rockettoaster.description
-            })
-          }
-        },
-        active: {
-          condition: function() {
-            return state.get.current().events.all.strategy.rockettoaster.active.level > 0
-          },
-          report: string.mod.strategy.rockettoaster.active
-        }
-      },
-      sonictoaster: {
-        open: {
-          condition: function() {
-            return state.get.current().processor.level >= state.get.current().events.all.strategy.sonictoaster.open.condition.processor
-          },
-          report: string.mod.strategy.sonictoaster.open,
-          func: function() {
-            strategy.render.card({
-              path: "all.strategy.sonictoaster",
-              unit: "sonictoaster",
-              name: string.mod.name.sonictoaster,
-              description: string.mod.strategy.sonictoaster.description
-            })
-          }
-        },
-        active: {
-          condition: function() {
-            return state.get.current().events.all.strategy.sonictoaster.active.level > 0
-          },
-          report: string.mod.strategy.sonictoaster.active
-        }
-      },
-      plasmatoaster: {
-        open: {
-          condition: function() {
-            return state.get.current().processor.level >= state.get.current().events.all.strategy.plasmatoaster.open.condition.processor
-          },
-          report: string.mod.strategy.plasmatoaster.open,
-          func: function() {
-            strategy.render.card({
-              path: "all.strategy.plasmatoaster",
-              unit: "plasmatoaster",
-              name: string.mod.name.plasmatoaster,
-              description: string.mod.strategy.plasmatoaster.description
-            })
-          }
-        },
-        active: {
-          condition: function() {
-            return state.get.current().events.all.strategy.plasmatoaster.active.level > 0
-          },
-          report: string.mod.strategy.plasmatoaster.active
-        }
-      },
-      atomictoaster: {
-        open: {
-          condition: function() {
-            return state.get.current().processor.level >= state.get.current().events.all.strategy.atomictoaster.open.condition.processor
-          },
-          report: string.mod.strategy.atomictoaster.open,
-          func: function() {
-            strategy.render.card({
-              path: "all.strategy.atomictoaster",
-              unit: "atomictoaster",
-              name: string.mod.name.atomictoaster,
-              description: string.mod.strategy.atomictoaster.description
-            })
-          }
-        },
-        active: {
-          condition: function() {
-            return state.get.current().events.all.strategy.atomictoaster.active.level > 0
-          },
-          report: string.mod.strategy.atomictoaster.active
-        }
-      },
-      quantumtoaster: {
-        open: {
-          condition: function() {
-            return state.get.current().processor.level >= state.get.current().events.all.strategy.quantumtoaster.open.condition.processor
-          },
-          report: string.mod.strategy.quantumtoaster.open,
-          func: function() {
-            strategy.render.card({
-              path: "all.strategy.quantumtoaster",
-              unit: "quantumtoaster",
-              name: string.mod.name.quantumtoaster,
-              description: string.mod.strategy.quantumtoaster.description
-            })
-          }
-        },
-        active: {
-          condition: function() {
-            return state.get.current().events.all.strategy.quantumtoaster.active.level > 0
-          },
-          report: string.mod.strategy.quantumtoaster.active
-        }
-      },
-      motivation: {
-        open: {
-          condition: function() {
-            return state.get.current().processor.level >= state.get.current().events.all.strategy.motivation.open.condition.processor
-          },
-          report: string.mod.strategy.motivation.open,
-          func: function() {
-            strategy.render.card({
-              path: "all.strategy.motivation",
-              unit: "motivation",
-              name: string.mod.name.motivation,
-              description: string.mod.strategy.motivation.description
-            })
-          }
-        },
-        active: {
-          condition: function() {
-            return state.get.current().events.all.strategy.motivation.active.level > 0
-          },
-          report: string.mod.strategy.motivation.active
-        }
-      },
-      electromagnetic: {
-        open: {
-          condition: function() {
-            return state.get.current().processor.level >= state.get.current().events.all.strategy.electromagnetic.open.condition.processor && state.get.current().toast.lifetime.current >= state.get.current().events.all.consumer.start.condition.toast
-          },
-          report: string.mod.strategy.electromagnetic.open,
-          func: function() {
-            strategy.render.card({
-              path: "all.strategy.electromagnetic",
-              unit: "electromagnetic",
-              name: string.mod.name.electromagnetic,
-              description: string.mod.strategy.electromagnetic.description
-            })
-          }
-        },
-        active: {
-          condition: function() {
-            return state.get.current().events.all.strategy.electromagnetic.active.level > 0
-          },
-          report: string.mod.strategy.electromagnetic.active,
-          func: function() {
-            strategy.render.card({
-              path: "all.strategy.electromagnetic",
-              unit: "electromagnetic",
-              name: string.mod.name.electromagnetic
-            })
-          }
-        }
-      },
-      sonic: {
-        open: {
-          condition: function() {
-            return state.get.current().processor.level >= state.get.current().events.all.strategy.sonic.open.condition.processor && state.get.current().toast.lifetime.current >= state.get.current().events.all.consumer.start.condition.toast
-          },
-          report: string.mod.strategy.sonic.open,
-          func: function() {
-            strategy.render.card({
-              path: "all.strategy.sonic",
-              unit: "sonic",
-              name: string.mod.name.sonic,
-              description: string.mod.strategy.sonic.description
-            })
-          }
-        },
-        active: {
-          condition: function() {
-            return state.get.current().events.all.strategy.sonic.active.level > 0
-          },
-          report: string.mod.strategy.sonic.active,
-          func: function() {
-            strategy.render.card({
-              path: "all.strategy.sonic",
-              unit: "sonic",
-              name: string.mod.name.sonic
-            })
-          }
-        }
-      }
+      }]
     },
     autotoaster: {
-      open: {
-        condition: function() {
-          return state.get.current().events.all.strategy.autotoaster.active.passed
+      open: [{
+        func: function() {
+          render.unlock("autotoaster")
         },
-        stage: "autotoaster"
-      },
-      active: {
-        condition: function() {
-          return state.get.current().autotoaster.level >= 1
-        },
+        report: function() {
+          render.report(string.mod.autotoaster.open)
+        }
+      }],
+      start: [{
         func: function() {
           helper.e("[stage=autotoaster]").classList.add("active")
           autotoaster.render.interval()
@@ -425,19 +131,177 @@ var events = (function() {
             }
           })
         }
-      }
+      }],
+      efficiency1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "autotoaster",
+            path: "upgrade.autotoaster.efficiency1",
+            name: string.mod.upgrade.autotoaster.efficiency.name,
+            description: string.mod.upgrade.autotoaster.efficiency.description,
+            action: function() {
+              autotoaster.efficiency.add(1)
+              autotoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "autotoaster",
+            path: "upgrade.autotoaster.efficiency2",
+            name: string.mod.upgrade.autotoaster.efficiency.name,
+            description: string.mod.upgrade.autotoaster.efficiency.description,
+            action: function() {
+              autotoaster.efficiency.add(1)
+              autotoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "autotoaster",
+            path: "upgrade.autotoaster.efficiency3",
+            name: string.mod.upgrade.autotoaster.efficiency.name,
+            description: string.mod.upgrade.autotoaster.efficiency.description,
+            action: function() {
+              autotoaster.efficiency.add(1)
+              autotoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "autotoaster",
+            path: "upgrade.autotoaster.efficiency4",
+            name: string.mod.upgrade.autotoaster.efficiency.name,
+            description: string.mod.upgrade.autotoaster.efficiency.description,
+            action: function() {
+              autotoaster.efficiency.add(1)
+              autotoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "autotoaster",
+            path: "upgrade.autotoaster.speed1",
+            name: string.mod.upgrade.autotoaster.speed.name,
+            description: string.mod.upgrade.autotoaster.speed.description,
+            action: function() {
+              autotoaster.speed.add(1)
+              autotoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "autotoaster",
+            path: "upgrade.autotoaster.speed2",
+            name: string.mod.upgrade.autotoaster.speed.name,
+            description: string.mod.upgrade.autotoaster.speed.description,
+            action: function() {
+              autotoaster.speed.add(1)
+              autotoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "autotoaster",
+            path: "upgrade.autotoaster.speed3",
+            name: string.mod.upgrade.autotoaster.speed.name,
+            description: string.mod.upgrade.autotoaster.speed.description,
+            action: function() {
+              autotoaster.speed.add(1)
+              autotoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "autotoaster",
+            path: "upgrade.autotoaster.speed4",
+            name: string.mod.upgrade.autotoaster.speed.name,
+            description: string.mod.upgrade.autotoaster.speed.description,
+            action: function() {
+              autotoaster.speed.add(1)
+              autotoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed5: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "autotoaster",
+            path: "upgrade.autotoaster.speed5",
+            name: string.mod.upgrade.autotoaster.speed.name,
+            description: string.mod.upgrade.autotoaster.speed.description,
+            action: function() {
+              autotoaster.speed.add(1)
+              autotoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed6: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "autotoaster",
+            path: "upgrade.autotoaster.speed6",
+            name: string.mod.upgrade.autotoaster.speed.name,
+            description: string.mod.upgrade.autotoaster.speed.description,
+            action: function() {
+              autotoaster.speed.add(1)
+              autotoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed7: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "autotoaster",
+            path: "upgrade.autotoaster.speed7",
+            name: string.mod.upgrade.autotoaster.speed.name,
+            description: string.mod.upgrade.autotoaster.speed.description,
+            action: function() {
+              autotoaster.speed.add(1)
+              autotoaster.set.output()
+            }
+          })
+        }
+      }, {
+        func: function() {
+          autotoaster.speed.add(1)
+          autotoaster.set.output()
+        }
+      }]
     },
     megatoaster: {
-      open: {
-        condition: function() {
-          return state.get.current().events.all.strategy.megatoaster.active.passed
+      open: [{
+        func: function() {
+          render.unlock("megatoaster")
         },
-        stage: "megatoaster"
-      },
-      active: {
-        condition: function() {
-          return state.get.current().megatoaster.level >= 1
-        },
+        report: function() {
+          render.report(string.mod.megatoaster.open)
+        }
+      }],
+      start: [{
         func: function() {
           helper.e("[stage=megatoaster]").classList.add("active")
           megatoaster.render.interval()
@@ -452,19 +316,177 @@ var events = (function() {
             }
           })
         }
-      }
+      }],
+      efficiency1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "megatoaster",
+            path: "upgrade.megatoaster.efficiency1",
+            name: string.mod.upgrade.megatoaster.efficiency.name,
+            description: string.mod.upgrade.megatoaster.efficiency.description,
+            action: function() {
+              megatoaster.efficiency.add(1)
+              megatoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "megatoaster",
+            path: "upgrade.megatoaster.efficiency2",
+            name: string.mod.upgrade.megatoaster.efficiency.name,
+            description: string.mod.upgrade.megatoaster.efficiency.description,
+            action: function() {
+              megatoaster.efficiency.add(1)
+              megatoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "megatoaster",
+            path: "upgrade.megatoaster.efficiency3",
+            name: string.mod.upgrade.megatoaster.efficiency.name,
+            description: string.mod.upgrade.megatoaster.efficiency.description,
+            action: function() {
+              megatoaster.efficiency.add(1)
+              megatoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "megatoaster",
+            path: "upgrade.megatoaster.efficiency4",
+            name: string.mod.upgrade.megatoaster.efficiency.name,
+            description: string.mod.upgrade.megatoaster.efficiency.description,
+            action: function() {
+              megatoaster.efficiency.add(1)
+              megatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "megatoaster",
+            path: "upgrade.megatoaster.speed1",
+            name: string.mod.upgrade.megatoaster.speed.name,
+            description: string.mod.upgrade.megatoaster.speed.description,
+            action: function() {
+              megatoaster.speed.add(1)
+              megatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "megatoaster",
+            path: "upgrade.megatoaster.speed2",
+            name: string.mod.upgrade.megatoaster.speed.name,
+            description: string.mod.upgrade.megatoaster.speed.description,
+            action: function() {
+              megatoaster.speed.add(1)
+              megatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "megatoaster",
+            path: "upgrade.megatoaster.speed3",
+            name: string.mod.upgrade.megatoaster.speed.name,
+            description: string.mod.upgrade.megatoaster.speed.description,
+            action: function() {
+              megatoaster.speed.add(1)
+              megatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "megatoaster",
+            path: "upgrade.megatoaster.speed4",
+            name: string.mod.upgrade.megatoaster.speed.name,
+            description: string.mod.upgrade.megatoaster.speed.description,
+            action: function() {
+              megatoaster.speed.add(1)
+              megatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed5: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "megatoaster",
+            path: "upgrade.megatoaster.speed5",
+            name: string.mod.upgrade.megatoaster.speed.name,
+            description: string.mod.upgrade.megatoaster.speed.description,
+            action: function() {
+              megatoaster.speed.add(1)
+              megatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed6: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "megatoaster",
+            path: "upgrade.megatoaster.speed6",
+            name: string.mod.upgrade.megatoaster.speed.name,
+            description: string.mod.upgrade.megatoaster.speed.description,
+            action: function() {
+              megatoaster.speed.add(1)
+              megatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed7: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "megatoaster",
+            path: "upgrade.megatoaster.speed7",
+            name: string.mod.upgrade.megatoaster.speed.name,
+            description: string.mod.upgrade.megatoaster.speed.description,
+            action: function() {
+              megatoaster.speed.add(1)
+              megatoaster.set.output()
+            }
+          })
+        }
+      }, {
+        func: function() {
+          megatoaster.speed.add(1)
+          megatoaster.set.output()
+        }
+      }]
     },
     rockettoaster: {
-      open: {
-        condition: function() {
-          return state.get.current().events.all.strategy.rockettoaster.active.passed
+      open: [{
+        func: function() {
+          render.unlock("rockettoaster")
         },
-        stage: "rockettoaster"
-      },
-      active: {
-        condition: function() {
-          return state.get.current().rockettoaster.level >= 1
-        },
+        report: function() {
+          render.report(string.mod.rockettoaster.open)
+        }
+      }],
+      start: [{
         func: function() {
           helper.e("[stage=rockettoaster]").classList.add("active")
           rockettoaster.render.interval()
@@ -479,19 +501,177 @@ var events = (function() {
             }
           })
         }
-      }
+      }],
+      efficiency1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "rockettoaster",
+            path: "upgrade.rockettoaster.efficiency1",
+            name: string.mod.upgrade.rockettoaster.efficiency.name,
+            description: string.mod.upgrade.rockettoaster.efficiency.description,
+            action: function() {
+              rockettoaster.efficiency.add(1)
+              rockettoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "rockettoaster",
+            path: "upgrade.rockettoaster.efficiency2",
+            name: string.mod.upgrade.rockettoaster.efficiency.name,
+            description: string.mod.upgrade.rockettoaster.efficiency.description,
+            action: function() {
+              rockettoaster.efficiency.add(1)
+              rockettoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "rockettoaster",
+            path: "upgrade.rockettoaster.efficiency3",
+            name: string.mod.upgrade.rockettoaster.efficiency.name,
+            description: string.mod.upgrade.rockettoaster.efficiency.description,
+            action: function() {
+              rockettoaster.efficiency.add(1)
+              rockettoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "rockettoaster",
+            path: "upgrade.rockettoaster.efficiency4",
+            name: string.mod.upgrade.rockettoaster.efficiency.name,
+            description: string.mod.upgrade.rockettoaster.efficiency.description,
+            action: function() {
+              rockettoaster.efficiency.add(1)
+              rockettoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "rockettoaster",
+            path: "upgrade.rockettoaster.speed1",
+            name: string.mod.upgrade.rockettoaster.speed.name,
+            description: string.mod.upgrade.rockettoaster.speed.description,
+            action: function() {
+              rockettoaster.speed.add(1)
+              rockettoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "rockettoaster",
+            path: "upgrade.rockettoaster.speed2",
+            name: string.mod.upgrade.rockettoaster.speed.name,
+            description: string.mod.upgrade.rockettoaster.speed.description,
+            action: function() {
+              rockettoaster.speed.add(1)
+              rockettoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "rockettoaster",
+            path: "upgrade.rockettoaster.speed3",
+            name: string.mod.upgrade.rockettoaster.speed.name,
+            description: string.mod.upgrade.rockettoaster.speed.description,
+            action: function() {
+              rockettoaster.speed.add(1)
+              rockettoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "rockettoaster",
+            path: "upgrade.rockettoaster.speed4",
+            name: string.mod.upgrade.rockettoaster.speed.name,
+            description: string.mod.upgrade.rockettoaster.speed.description,
+            action: function() {
+              rockettoaster.speed.add(1)
+              rockettoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed5: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "rockettoaster",
+            path: "upgrade.rockettoaster.speed5",
+            name: string.mod.upgrade.rockettoaster.speed.name,
+            description: string.mod.upgrade.rockettoaster.speed.description,
+            action: function() {
+              rockettoaster.speed.add(1)
+              rockettoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed6: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "rockettoaster",
+            path: "upgrade.rockettoaster.speed6",
+            name: string.mod.upgrade.rockettoaster.speed.name,
+            description: string.mod.upgrade.rockettoaster.speed.description,
+            action: function() {
+              rockettoaster.speed.add(1)
+              rockettoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed7: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "rockettoaster",
+            path: "upgrade.rockettoaster.speed7",
+            name: string.mod.upgrade.rockettoaster.speed.name,
+            description: string.mod.upgrade.rockettoaster.speed.description,
+            action: function() {
+              rockettoaster.speed.add(1)
+              rockettoaster.set.output()
+            }
+          })
+        }
+      }, {
+        func: function() {
+          rockettoaster.speed.add(1)
+          rockettoaster.set.output()
+        }
+      }]
     },
     sonictoaster: {
-      open: {
-        condition: function() {
-          return state.get.current().events.all.strategy.sonictoaster.active.passed
+      open: [{
+        func: function() {
+          render.unlock("sonictoaster")
         },
-        stage: "sonictoaster"
-      },
-      active: {
-        condition: function() {
-          return state.get.current().sonictoaster.level >= 1
-        },
+        report: function() {
+          render.report(string.mod.sonictoaster.open)
+        }
+      }],
+      start: [{
         func: function() {
           helper.e("[stage=sonictoaster]").classList.add("active")
           sonictoaster.render.interval()
@@ -506,19 +686,177 @@ var events = (function() {
             }
           })
         }
-      }
+      }],
+      efficiency1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "sonictoaster",
+            path: "upgrade.sonictoaster.efficiency1",
+            name: string.mod.upgrade.sonictoaster.efficiency.name,
+            description: string.mod.upgrade.sonictoaster.efficiency.description,
+            action: function() {
+              sonictoaster.efficiency.add(1)
+              sonictoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "sonictoaster",
+            path: "upgrade.sonictoaster.efficiency2",
+            name: string.mod.upgrade.sonictoaster.efficiency.name,
+            description: string.mod.upgrade.sonictoaster.efficiency.description,
+            action: function() {
+              sonictoaster.efficiency.add(1)
+              sonictoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "sonictoaster",
+            path: "upgrade.sonictoaster.efficiency3",
+            name: string.mod.upgrade.sonictoaster.efficiency.name,
+            description: string.mod.upgrade.sonictoaster.efficiency.description,
+            action: function() {
+              sonictoaster.efficiency.add(1)
+              sonictoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "sonictoaster",
+            path: "upgrade.sonictoaster.efficiency4",
+            name: string.mod.upgrade.sonictoaster.efficiency.name,
+            description: string.mod.upgrade.sonictoaster.efficiency.description,
+            action: function() {
+              sonictoaster.efficiency.add(1)
+              sonictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "sonictoaster",
+            path: "upgrade.sonictoaster.speed1",
+            name: string.mod.upgrade.sonictoaster.speed.name,
+            description: string.mod.upgrade.sonictoaster.speed.description,
+            action: function() {
+              sonictoaster.speed.add(1)
+              sonictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "sonictoaster",
+            path: "upgrade.sonictoaster.speed2",
+            name: string.mod.upgrade.sonictoaster.speed.name,
+            description: string.mod.upgrade.sonictoaster.speed.description,
+            action: function() {
+              sonictoaster.speed.add(1)
+              sonictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "sonictoaster",
+            path: "upgrade.sonictoaster.speed3",
+            name: string.mod.upgrade.sonictoaster.speed.name,
+            description: string.mod.upgrade.sonictoaster.speed.description,
+            action: function() {
+              sonictoaster.speed.add(1)
+              sonictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "sonictoaster",
+            path: "upgrade.sonictoaster.speed4",
+            name: string.mod.upgrade.sonictoaster.speed.name,
+            description: string.mod.upgrade.sonictoaster.speed.description,
+            action: function() {
+              sonictoaster.speed.add(1)
+              sonictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed5: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "sonictoaster",
+            path: "upgrade.sonictoaster.speed5",
+            name: string.mod.upgrade.sonictoaster.speed.name,
+            description: string.mod.upgrade.sonictoaster.speed.description,
+            action: function() {
+              sonictoaster.speed.add(1)
+              sonictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed6: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "sonictoaster",
+            path: "upgrade.sonictoaster.speed6",
+            name: string.mod.upgrade.sonictoaster.speed.name,
+            description: string.mod.upgrade.sonictoaster.speed.description,
+            action: function() {
+              sonictoaster.speed.add(1)
+              sonictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed7: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "sonictoaster",
+            path: "upgrade.sonictoaster.speed7",
+            name: string.mod.upgrade.sonictoaster.speed.name,
+            description: string.mod.upgrade.sonictoaster.speed.description,
+            action: function() {
+              sonictoaster.speed.add(1)
+              sonictoaster.set.output()
+            }
+          })
+        }
+      }, {
+        func: function() {
+          sonictoaster.speed.add(1)
+          sonictoaster.set.output()
+        }
+      }]
     },
     plasmatoaster: {
-      open: {
-        condition: function() {
-          return state.get.current().events.all.strategy.plasmatoaster.active.passed
+      open: [{
+        func: function() {
+          render.unlock("plasmatoaster")
         },
-        stage: "plasmatoaster"
-      },
-      active: {
-        condition: function() {
-          return state.get.current().plasmatoaster.level >= 1
-        },
+        report: function() {
+          render.report(string.mod.plasmatoaster.open)
+        }
+      }],
+      start: [{
         func: function() {
           helper.e("[stage=plasmatoaster]").classList.add("active")
           plasmatoaster.render.interval()
@@ -533,19 +871,177 @@ var events = (function() {
             }
           })
         }
-      }
+      }],
+      efficiency1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "plasmatoaster",
+            path: "upgrade.plasmatoaster.efficiency1",
+            name: string.mod.upgrade.plasmatoaster.efficiency.name,
+            description: string.mod.upgrade.plasmatoaster.efficiency.description,
+            action: function() {
+              plasmatoaster.efficiency.add(1)
+              plasmatoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "plasmatoaster",
+            path: "upgrade.plasmatoaster.efficiency2",
+            name: string.mod.upgrade.plasmatoaster.efficiency.name,
+            description: string.mod.upgrade.plasmatoaster.efficiency.description,
+            action: function() {
+              plasmatoaster.efficiency.add(1)
+              plasmatoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "plasmatoaster",
+            path: "upgrade.plasmatoaster.efficiency3",
+            name: string.mod.upgrade.plasmatoaster.efficiency.name,
+            description: string.mod.upgrade.plasmatoaster.efficiency.description,
+            action: function() {
+              plasmatoaster.efficiency.add(1)
+              plasmatoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "plasmatoaster",
+            path: "upgrade.plasmatoaster.efficiency4",
+            name: string.mod.upgrade.plasmatoaster.efficiency.name,
+            description: string.mod.upgrade.plasmatoaster.efficiency.description,
+            action: function() {
+              plasmatoaster.efficiency.add(1)
+              plasmatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "plasmatoaster",
+            path: "upgrade.plasmatoaster.speed1",
+            name: string.mod.upgrade.plasmatoaster.speed.name,
+            description: string.mod.upgrade.plasmatoaster.speed.description,
+            action: function() {
+              plasmatoaster.speed.add(1)
+              plasmatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "plasmatoaster",
+            path: "upgrade.plasmatoaster.speed2",
+            name: string.mod.upgrade.plasmatoaster.speed.name,
+            description: string.mod.upgrade.plasmatoaster.speed.description,
+            action: function() {
+              plasmatoaster.speed.add(1)
+              plasmatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "plasmatoaster",
+            path: "upgrade.plasmatoaster.speed3",
+            name: string.mod.upgrade.plasmatoaster.speed.name,
+            description: string.mod.upgrade.plasmatoaster.speed.description,
+            action: function() {
+              plasmatoaster.speed.add(1)
+              plasmatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "plasmatoaster",
+            path: "upgrade.plasmatoaster.speed4",
+            name: string.mod.upgrade.plasmatoaster.speed.name,
+            description: string.mod.upgrade.plasmatoaster.speed.description,
+            action: function() {
+              plasmatoaster.speed.add(1)
+              plasmatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed5: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "plasmatoaster",
+            path: "upgrade.plasmatoaster.speed5",
+            name: string.mod.upgrade.plasmatoaster.speed.name,
+            description: string.mod.upgrade.plasmatoaster.speed.description,
+            action: function() {
+              plasmatoaster.speed.add(1)
+              plasmatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed6: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "plasmatoaster",
+            path: "upgrade.plasmatoaster.speed6",
+            name: string.mod.upgrade.plasmatoaster.speed.name,
+            description: string.mod.upgrade.plasmatoaster.speed.description,
+            action: function() {
+              plasmatoaster.speed.add(1)
+              plasmatoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed7: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "plasmatoaster",
+            path: "upgrade.plasmatoaster.speed7",
+            name: string.mod.upgrade.plasmatoaster.speed.name,
+            description: string.mod.upgrade.plasmatoaster.speed.description,
+            action: function() {
+              plasmatoaster.speed.add(1)
+              plasmatoaster.set.output()
+            }
+          })
+        }
+      }, {
+        func: function() {
+          plasmatoaster.speed.add(1)
+          plasmatoaster.set.output()
+        }
+      }]
     },
     atomictoaster: {
-      open: {
-        condition: function() {
-          return state.get.current().events.all.strategy.atomictoaster.active.passed
+      open: [{
+        func: function() {
+          render.unlock("atomictoaster")
         },
-        stage: "atomictoaster"
-      },
-      active: {
-        condition: function() {
-          return state.get.current().atomictoaster.level >= 1
-        },
+        report: function() {
+          render.report(string.mod.atomictoaster.open)
+        }
+      }],
+      start: [{
         func: function() {
           helper.e("[stage=atomictoaster]").classList.add("active")
           atomictoaster.render.interval()
@@ -560,19 +1056,172 @@ var events = (function() {
             }
           })
         }
-      }
+      }],
+      efficiency1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "atomictoaster",
+            path: "upgrade.atomictoaster.efficiency1",
+            name: string.mod.upgrade.atomictoaster.efficiency.name,
+            description: string.mod.upgrade.atomictoaster.efficiency.description,
+            action: function() {
+              atomictoaster.efficiency.add(1)
+              atomictoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "atomictoaster",
+            path: "upgrade.atomictoaster.efficiency2",
+            name: string.mod.upgrade.atomictoaster.efficiency.name,
+            description: string.mod.upgrade.atomictoaster.efficiency.description,
+            action: function() {
+              atomictoaster.efficiency.add(1)
+              atomictoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "atomictoaster",
+            path: "upgrade.atomictoaster.efficiency3",
+            name: string.mod.upgrade.atomictoaster.efficiency.name,
+            description: string.mod.upgrade.atomictoaster.efficiency.description,
+            action: function() {
+              atomictoaster.efficiency.add(1)
+              atomictoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "atomictoaster",
+            path: "upgrade.atomictoaster.efficiency4",
+            name: string.mod.upgrade.atomictoaster.efficiency.name,
+            description: string.mod.upgrade.atomictoaster.efficiency.description,
+            action: function() {
+              atomictoaster.efficiency.add(1)
+              atomictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "atomictoaster",
+            path: "upgrade.atomictoaster.speed1",
+            name: string.mod.upgrade.atomictoaster.speed.name,
+            description: string.mod.upgrade.atomictoaster.speed.description,
+            action: function() {
+              atomictoaster.speed.add(1)
+              atomictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "atomictoaster",
+            path: "upgrade.atomictoaster.speed2",
+            name: string.mod.upgrade.atomictoaster.speed.name,
+            description: string.mod.upgrade.atomictoaster.speed.description,
+            action: function() {
+              atomictoaster.speed.add(1)
+              atomictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "atomictoaster",
+            path: "upgrade.atomictoaster.speed3",
+            name: string.mod.upgrade.atomictoaster.speed.name,
+            description: string.mod.upgrade.atomictoaster.speed.description,
+            action: function() {
+              atomictoaster.speed.add(1)
+              atomictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "atomictoaster",
+            path: "upgrade.atomictoaster.speed4",
+            name: string.mod.upgrade.atomictoaster.speed.name,
+            description: string.mod.upgrade.atomictoaster.speed.description,
+            action: function() {
+              atomictoaster.speed.add(1)
+              atomictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed5: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "atomictoaster",
+            path: "upgrade.atomictoaster.speed5",
+            name: string.mod.upgrade.atomictoaster.speed.name,
+            description: string.mod.upgrade.atomictoaster.speed.description,
+            action: function() {
+              atomictoaster.speed.add(1)
+              atomictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed6: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "atomictoaster",
+            path: "upgrade.atomictoaster.speed6",
+            name: string.mod.upgrade.atomictoaster.speed.name,
+            description: string.mod.upgrade.atomictoaster.speed.description,
+            action: function() {
+              atomictoaster.speed.add(1)
+              atomictoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed7: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "atomictoaster",
+            path: "upgrade.atomictoaster.speed7",
+            name: string.mod.upgrade.atomictoaster.speed.name,
+            description: string.mod.upgrade.atomictoaster.speed.description,
+            action: function() {
+              atomictoaster.speed.add(1)
+              atomictoaster.set.output()
+            }
+          })
+        }
+      }]
     },
     quantumtoaster: {
-      open: {
-        condition: function() {
-          return state.get.current().events.all.strategy.quantumtoaster.active.passed
+      open: [{
+        func: function() {
+          render.unlock("quantumtoaster")
         },
-        stage: "quantumtoaster"
-      },
-      active: {
-        condition: function() {
-          return state.get.current().quantumtoaster.level >= 1
-        },
+        report: function() {
+          render.report(string.mod.quantumtoaster.open)
+        }
+      }],
+      start: [{
         func: function() {
           helper.e("[stage=quantumtoaster]").classList.add("active")
           quantumtoaster.render.interval()
@@ -587,117 +1236,384 @@ var events = (function() {
             }
           })
         }
-      }
+      }],
+      efficiency1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "quantumtoaster",
+            path: "upgrade.quantumtoaster.efficiency1",
+            name: string.mod.upgrade.quantumtoaster.efficiency.name,
+            description: string.mod.upgrade.quantumtoaster.efficiency.description,
+            action: function() {
+              quantumtoaster.efficiency.add(1)
+              quantumtoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "quantumtoaster",
+            path: "upgrade.quantumtoaster.efficiency2",
+            name: string.mod.upgrade.quantumtoaster.efficiency.name,
+            description: string.mod.upgrade.quantumtoaster.efficiency.description,
+            action: function() {
+              quantumtoaster.efficiency.add(1)
+              quantumtoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "quantumtoaster",
+            path: "upgrade.quantumtoaster.efficiency3",
+            name: string.mod.upgrade.quantumtoaster.efficiency.name,
+            description: string.mod.upgrade.quantumtoaster.efficiency.description,
+            action: function() {
+              quantumtoaster.efficiency.add(1)
+              quantumtoaster.set.output()
+            }
+          })
+        }
+      }],
+      efficiency4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "quantumtoaster",
+            path: "upgrade.quantumtoaster.efficiency4",
+            name: string.mod.upgrade.quantumtoaster.efficiency.name,
+            description: string.mod.upgrade.quantumtoaster.efficiency.description,
+            action: function() {
+              quantumtoaster.efficiency.add(1)
+              quantumtoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "quantumtoaster",
+            path: "upgrade.quantumtoaster.speed1",
+            name: string.mod.upgrade.quantumtoaster.speed.name,
+            description: string.mod.upgrade.quantumtoaster.speed.description,
+            action: function() {
+              quantumtoaster.speed.add(1)
+              quantumtoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "quantumtoaster",
+            path: "upgrade.quantumtoaster.speed2",
+            name: string.mod.upgrade.quantumtoaster.speed.name,
+            description: string.mod.upgrade.quantumtoaster.speed.description,
+            action: function() {
+              quantumtoaster.speed.add(1)
+              quantumtoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "quantumtoaster",
+            path: "upgrade.quantumtoaster.speed3",
+            name: string.mod.upgrade.quantumtoaster.speed.name,
+            description: string.mod.upgrade.quantumtoaster.speed.description,
+            action: function() {
+              quantumtoaster.speed.add(1)
+              quantumtoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "quantumtoaster",
+            path: "upgrade.quantumtoaster.speed4",
+            name: string.mod.upgrade.quantumtoaster.speed.name,
+            description: string.mod.upgrade.quantumtoaster.speed.description,
+            action: function() {
+              quantumtoaster.speed.add(1)
+              quantumtoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed5: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "quantumtoaster",
+            path: "upgrade.quantumtoaster.speed5",
+            name: string.mod.upgrade.quantumtoaster.speed.name,
+            description: string.mod.upgrade.quantumtoaster.speed.description,
+            action: function() {
+              quantumtoaster.speed.add(1)
+              quantumtoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed6: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "quantumtoaster",
+            path: "upgrade.quantumtoaster.speed6",
+            name: string.mod.upgrade.quantumtoaster.speed.name,
+            description: string.mod.upgrade.quantumtoaster.speed.description,
+            action: function() {
+              quantumtoaster.speed.add(1)
+              quantumtoaster.set.output()
+            }
+          })
+        }
+      }],
+      speed7: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "quantumtoaster",
+            path: "upgrade.quantumtoaster.speed7",
+            name: string.mod.upgrade.quantumtoaster.speed.name,
+            description: string.mod.upgrade.quantumtoaster.speed.description,
+            action: function() {
+              quantumtoaster.speed.add(1)
+              quantumtoaster.set.output()
+            }
+          })
+        }
+      }, {
+        func: function() {
+          quantumtoaster.speed.add(1)
+          quantumtoaster.set.output()
+        }
+      }]
     },
-    motivation: {
-      open: {
-        condition: function() {
-          return state.get.current().events.all.strategy.motivation.active.level >= 1
+    strategy: {
+      open: [{
+        func: function() {
+          render.unlock("strategy")
+        }
+      }],
+      motivation: [{
+        func: function() {
+          strategy.render.card({
+            path: "strategy.motivation",
+            name: string.mod.name.motivation,
+            description: string.mod.strategy.motivation.description
+          })
         },
-        stage: "motivation"
-      }
-    },
-    electromagnetic: {
-      open: {
-        condition: function() {
-          return state.get.current().events.all.strategy.electromagnetic.active.level >= 1
+        report: function() {
+          render.report(string.mod.strategy.motivation.open)
+        }
+      }],
+      autotoaster: [{
+        func: function() {
+          strategy.render.card({
+            path: "strategy.autotoaster",
+            name: string.mod.name.autotoaster,
+            description: string.mod.strategy.autotoaster.description,
+          })
         },
-        stage: "electromagnetic"
-      }
-    },
-    sonic: {
-      open: {
-        condition: function() {
-          return state.get.current().events.all.strategy.sonic.active.level >= 1
+        report: function() {
+          render.report(string.mod.strategy.autotoaster.open)
+        }
+      }],
+      megatoaster: [{
+        func: function() {
+          strategy.render.card({
+            path: "strategy.megatoaster",
+            name: string.mod.name.megatoaster,
+            description: string.mod.strategy.megatoaster.description,
+          })
         },
-        stage: "sonic"
-      }
+        report: function() {
+          render.report(string.mod.strategy.megatoaster.open)
+        }
+      }],
+      rockettoaster: [{
+        func: function() {
+          strategy.render.card({
+            path: "strategy.rockettoaster",
+            name: string.mod.name.rockettoaster,
+            description: string.mod.strategy.rockettoaster.description,
+          })
+        },
+        report: function() {
+          render.report(string.mod.strategy.rockettoaster.open)
+        }
+      }],
+      sonictoaster: [{
+        func: function() {
+          strategy.render.card({
+            path: "strategy.sonictoaster",
+            name: string.mod.name.sonictoaster,
+            description: string.mod.strategy.sonictoaster.description,
+          })
+        },
+        report: function() {
+          render.report(string.mod.strategy.sonictoaster.open)
+        }
+      }],
+      plasmatoaster: [{
+        func: function() {
+          strategy.render.card({
+            path: "strategy.plasmatoaster",
+            name: string.mod.name.plasmatoaster,
+            description: string.mod.strategy.plasmatoaster.description,
+          })
+        },
+        report: function() {
+          render.report(string.mod.strategy.plasmatoaster.open)
+        }
+      }],
+      atomictoaster: [{
+        func: function() {
+          strategy.render.card({
+            path: "strategy.atomictoaster",
+            name: string.mod.name.atomictoaster,
+            description: string.mod.strategy.atomictoaster.description,
+          })
+        },
+        report: function() {
+          render.report(string.mod.strategy.atomictoaster.open)
+        }
+      }],
+      quantumtoaster: [{
+        func: function() {
+          strategy.render.card({
+            path: "strategy.quantumtoaster",
+            name: string.mod.name.quantumtoaster,
+            description: string.mod.strategy.quantumtoaster.description,
+          })
+        },
+        report: function() {
+          render.report(string.mod.strategy.quantumtoaster.open)
+        }
+      }]
     }
+  }
+
+  mod.validateCondition = function functionName(eventData) {
+
+    var passCondition = []
+
+    eventData.condition.forEach(function(condition, index) {
+      switch (condition.operator) {
+        case ">":
+          passCondition.push(helper.getObject({
+            object: state.get.current(),
+            path: condition.check
+          }) > condition.value)
+          break
+
+        case ">=":
+          passCondition.push(helper.getObject({
+            object: state.get.current(),
+            path: condition.check
+          }) >= condition.value)
+          break
+
+        case "==":
+          passCondition.push(helper.getObject({
+            object: state.get.current(),
+            path: condition.check
+          }) == condition.value)
+          break
+
+        case "<":
+          passCondition.push(helper.getObject({
+            object: state.get.current(),
+            path: condition.check
+          }) < condition.value)
+          break
+
+        case "<=":
+          passCondition.push(helper.getObject({
+            object: state.get.current(),
+            path: condition.check
+          }) <= condition.value)
+          break
+
+        case "!=":
+          passCondition.push(helper.getObject({
+            object: state.get.current(),
+            path: condition.check
+          }) != condition.value)
+          break
+      }
+    })
+
+    return !passCondition.includes(false)
   }
 
   mod.check = function() {
-    var action = function functionName(path) {
-      // get state data
-      var stateData = helper.getObject({
-        object: state.get.current(),
-        path: "events." + path
-      })
+    for (var unit in state.get.current().event) {
+      for (var stat in state.get.current().event[unit]) {
+        state.get.current().event[unit][stat].forEach(function(event, index) {
 
-      // if event is not passed
-      if (!stateData.passed) {
-        // get event data
-        var eventData = helper.getObject({
-          object: mod,
-          path: path
+          var eventData = state.get.current().event[unit][stat][index]
+
+          // console.log(unit, stat, index, eventData);
+          if (mod.validateCondition(eventData) && !eventData.passed) {
+
+            eventData.passed = true
+
+            if (unit in mod.action) {
+              if (stat in mod.action[unit]) {
+                if ("func" in mod.action[unit][stat][index]) {
+                  mod.action[unit][stat][index].func()
+                }
+                if ("report" in mod.action[unit][stat][index]) {
+                  mod.action[unit][stat][index].report()
+                }
+              }
+            }
+          }
+
         })
-
-        // check if event condition has been met
-        if (eventData.condition()) {
-          // set event to passed so event will not be evaluated again
-          helper.setObject({
-            object: state.get.current(),
-            path: "events." + path + ".passed",
-            newValue: true
-          })
-
-          // run event data
-          if (eventData.stage) {
-            render.unlock(eventData.stage)
-          }
-          if (eventData.report) {
-            render.report(eventData.report)
-          }
-          if (eventData.func) {
-            eventData.func()
-          }
-        }
       }
     }
-
-    mod.addresses.forEach(function(path, index) {
-      action(path)
-    })
   }
 
-  mod.update = function() {
-    var action = function functionName(path) {
-      // get state data
-      var stateData = helper.getObject({
-        object: state.get.current(),
-        path: "events." + path
-      })
+  mod.restore = function() {
+    for (var unit in state.get.current().event) {
+      for (var stat in state.get.current().event[unit]) {
+        state.get.current().event[unit][stat].forEach(function(event, index) {
 
-      // if event is not passed and should be restored
-      if (stateData.passed && stateData.restore) {
-        // get event data
-        var eventData = helper.getObject({
-          object: mod,
-          path: path
+          var eventData = state.get.current().event[unit][stat][index]
+
+          if (eventData.passed) {
+            if (unit in mod.action) {
+              if (stat in mod.action[unit]) {
+                if ("func" in mod.action[unit][stat][index]) {
+                  mod.action[unit][stat][index].func()
+                }
+              }
+            }
+          }
+
         })
-
-        // run event data
-        if (eventData.stage) {
-          render.unlock(eventData.stage)
-        }
-        if (eventData.func) {
-          eventData.func()
-        }
       }
     }
-
-    mod.addresses.forEach(function(path, index) {
-      action(path)
-    })
   }
 
   var render = {}
 
-  render.unlock = function(name) {
-    helper.e("[stage=" + name + "]").classList.remove("is-hidden")
+  render.unlock = function(stageName) {
+    helper.e("[stage=" + stageName + "]").classList.remove("is-hidden")
   }
 
-  render.lock = function(name) {
-    helper.e("[stage=" + name + "]").classList.add("is-hidden")
+  render.lock = function(stageName) {
+    helper.e("[stage=" + stageName + "]").classList.add("is-hidden")
   }
 
   render.report = function(data) {
@@ -710,7 +1626,7 @@ var events = (function() {
 
   var init = function() {
     mod.background()
-    mod.update()
+    mod.restore()
   }
 
   return {

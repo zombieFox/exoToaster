@@ -20,6 +20,8 @@ var cycle = (function() {
 
   mod.max = function() {
     state.get.current().cycle.max = state.get.current().processor.level * state.get.current().cycle.maxmultiplier
+    state.get.current().event.cycle.start[0].condition[0].value = state.get.current().cycle.max
+    state.get.current().event.cycle.stop[0].condition[0].value = state.get.current().cycle.max
   }
 
   mod.interval = {

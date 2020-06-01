@@ -37,310 +37,6 @@ var state = (function() {
     background: {
       interval: 2000
     },
-    events: {
-      all: {
-        consumer: {
-          start: {
-            condition: {
-              toast: 300
-            },
-            passed: false,
-            restore: true
-          },
-          stop: {
-            passed: false,
-            restore: true
-          }
-        },
-        processor: {
-          open: {
-            passed: false,
-            restore: true
-          }
-        },
-        electromagnetic: {
-          open: {
-            passed: false,
-            restore: true
-          }
-        },
-        sonic: {
-          open: {
-            passed: false,
-            restore: true
-          }
-        },
-        cycle: {
-          open: {
-            passed: false,
-            restore: true
-          },
-          start: {
-            passed: false,
-            restore: true
-          },
-          stop: {
-            passed: false,
-            restore: true
-          }
-        },
-        strategy: {
-          open: {
-            condition: {
-              processor: 4
-            },
-            passed: false,
-            restore: true
-          },
-          autotoaster: {
-            open: {
-              passed: false,
-              restore: true,
-              condition: {
-                processor: 4
-              },
-              cost: {
-                cycle: 2
-              }
-            },
-            active: {
-              level: 0,
-              passed: false,
-              restore: true
-            }
-          },
-          megatoaster: {
-            open: {
-              passed: false,
-              restore: true,
-              condition: {
-                processor: 8
-              },
-              cost: {
-                cycle: 4
-              }
-            },
-            active: {
-              level: 0,
-              passed: false,
-              restore: true
-            }
-          },
-          rockettoaster: {
-            open: {
-              passed: false,
-              restore: true,
-              condition: {
-                processor: 12
-              },
-              cost: {
-                cycle: 8
-              }
-            },
-            active: {
-              level: 0,
-              passed: false,
-              restore: true
-            }
-          },
-          sonictoaster: {
-            open: {
-              passed: false,
-              restore: true,
-              condition: {
-                processor: 16
-              },
-              cost: {
-                cycle: 16
-              }
-            },
-            active: {
-              level: 0,
-              passed: false,
-              restore: true
-            }
-          },
-          plasmatoaster: {
-            open: {
-              passed: false,
-              restore: true,
-              condition: {
-                processor: 20
-              },
-              cost: {
-                cycle: 32
-              }
-            },
-            active: {
-              level: 0,
-              passed: false,
-              restore: true
-            }
-          },
-          atomictoaster: {
-            open: {
-              passed: false,
-              restore: true,
-              condition: {
-                processor: 24
-              },
-              cost: {
-                cycle: 64
-              }
-            },
-            active: {
-              level: 0,
-              passed: false,
-              restore: true
-            }
-          },
-          quantumtoaster: {
-            open: {
-              passed: false,
-              restore: true,
-              condition: {
-                processor: 28
-              },
-              cost: {
-                cycle: 128
-              }
-            },
-            active: {
-              level: 0,
-              passed: false,
-              restore: true
-            }
-          },
-          motivation: {
-            open: {
-              passed: false,
-              restore: true,
-              condition: {
-                processor: 24
-              },
-              cost: {
-                cycle: 32
-              }
-            },
-            active: {
-              level: 0,
-              passed: false,
-              restore: true
-            }
-          },
-          electromagnetic: {
-            open: {
-              passed: false,
-              restore: true,
-              condition: {
-                processor: 16
-              },
-              cost: {
-                cycle: 128
-              }
-            },
-            active: {
-              level: 0,
-              passed: false,
-              restore: true
-            }
-          },
-          sonic: {
-            open: {
-              passed: false,
-              restore: true,
-              condition: {
-                processor: 24
-              },
-              cost: {
-                cycle: 128
-              }
-            },
-            active: {
-              level: 0,
-              passed: false,
-              restore: true
-            }
-          }
-        },
-        autotoaster: {
-          open: {
-            passed: false,
-            restore: true
-          },
-          active: {
-            passed: false,
-            restore: true
-          }
-        },
-        megatoaster: {
-          open: {
-            passed: false,
-            restore: true
-          },
-          active: {
-            passed: false,
-            restore: true
-          }
-        },
-        rockettoaster: {
-          open: {
-            passed: false,
-            restore: true
-          },
-          active: {
-            passed: false,
-            restore: true
-          }
-        },
-        sonictoaster: {
-          open: {
-            passed: false,
-            restore: true
-          },
-          active: {
-            passed: false,
-            restore: true
-          }
-        },
-        plasmatoaster: {
-          open: {
-            passed: false,
-            restore: true
-          },
-          active: {
-            passed: false,
-            restore: true
-          }
-        },
-        atomictoaster: {
-          open: {
-            passed: false,
-            restore: true
-          },
-          active: {
-            passed: false,
-            restore: true
-          }
-        },
-        quantumtoaster: {
-          open: {
-            passed: false,
-            restore: true
-          },
-          active: {
-            passed: false,
-            restore: true
-          }
-        },
-        motivation: {
-          open: {
-            passed: false,
-            restore: true
-          }
-        }
-      }
-    },
     readout: {
       interval: 150
     },
@@ -381,7 +77,7 @@ var state = (function() {
     },
     cycle: {
       current: 0,
-      max: null,
+      max: 2,
       maxmultiplier: 2,
       interval: {
         starting: mod.formula.interval(3),
@@ -413,6 +109,14 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
+      },
+      upgrade: {
+        efficiency: {
+          cost: null
+        },
+        speed: {
+          cost: null
+        }
       }
     },
     megatoaster: {
@@ -431,6 +135,14 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
+      },
+      upgrade: {
+        efficiency: {
+          cost: null
+        },
+        speed: {
+          cost: null
+        }
       }
     },
     rockettoaster: {
@@ -449,6 +161,14 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
+      },
+      upgrade: {
+        efficiency: {
+          cost: null
+        },
+        speed: {
+          cost: null
+        }
       }
     },
     sonictoaster: {
@@ -467,6 +187,14 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
+      },
+      upgrade: {
+        efficiency: {
+          cost: null
+        },
+        speed: {
+          cost: null
+        }
       }
     },
     plasmatoaster: {
@@ -485,6 +213,14 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
+      },
+      upgrade: {
+        efficiency: {
+          cost: null
+        },
+        speed: {
+          cost: null
+        }
       }
     },
     atomictoaster: {
@@ -503,6 +239,14 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
+      },
+      upgrade: {
+        efficiency: {
+          cost: null
+        },
+        speed: {
+          cost: null
+        }
       }
     },
     quantumtoaster: {
@@ -521,6 +265,14 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
+      },
+      upgrade: {
+        efficiency: {
+          cost: null
+        },
+        speed: {
+          cost: null
+        }
       }
     },
     motivation: {
@@ -531,1203 +283,1605 @@ var state = (function() {
       running: false,
       interval: 200
     },
-    strategy: {
-      next: null
-    },
-    upgrade: {
-      autotoaster: {
-        efficiency: [{
-          name: string.mod.upgrade.rockettoaster.efficiency.name,
-          description: string.mod.upgrade.autotoaster.efficiency.description,
-          targetValue: "autotoaster.efficiency",
-          targetStage: "autotoaster",
-          check: "autotoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.autotoaster.efficiency.name,
-          description: string.mod.upgrade.autotoaster.efficiency.description,
-          targetValue: "autotoaster.efficiency",
-          targetStage: "autotoaster",
-          check: "autotoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.autotoaster.efficiency.name,
-          description: string.mod.upgrade.autotoaster.efficiency.description,
-          targetValue: "autotoaster.efficiency",
-          targetStage: "autotoaster",
-          check: "autotoaster.level",
-          comparisonOperators: "greater",
-          condition: 400,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.autotoaster.efficiency.name,
-          description: string.mod.upgrade.autotoaster.efficiency.description,
-          targetValue: "autotoaster.efficiency",
-          targetStage: "autotoaster",
-          check: "autotoaster.level",
-          comparisonOperators: "greater",
-          condition: 800,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 64,
-          onscreen: false,
-          passed: false
-        }],
-        speed: [{
-          name: string.mod.upgrade.autotoaster.speed.name,
-          description: string.mod.upgrade.autotoaster.speed.description,
-          targetValue: "autotoaster.speed",
-          targetStage: "autotoaster",
-          check: "autotoaster.level",
-          comparisonOperators: "greater",
-          condition: 50,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.autotoaster.speed.name,
-          description: string.mod.upgrade.autotoaster.speed.description,
-          targetValue: "autotoaster.speed",
-          targetStage: "autotoaster",
-          check: "autotoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.autotoaster.speed.name,
-          description: string.mod.upgrade.autotoaster.speed.description,
-          targetValue: "autotoaster.speed",
-          targetStage: "autotoaster",
-          check: "autotoaster.level",
-          comparisonOperators: "greater",
-          condition: 150,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 24,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.autotoaster.speed.name,
-          description: string.mod.upgrade.autotoaster.speed.description,
-          targetValue: "autotoaster.speed",
-          targetStage: "autotoaster",
-          check: "autotoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.autotoaster.speed.name,
-          description: string.mod.upgrade.autotoaster.speed.description,
-          targetValue: "autotoaster.speed",
-          targetStage: "autotoaster",
-          check: "autotoaster.level",
-          comparisonOperators: "greater",
-          condition: 250,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 40,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.autotoaster.speed.name,
-          description: string.mod.upgrade.autotoaster.speed.description,
-          targetValue: "autotoaster.speed",
-          targetStage: "autotoaster",
-          check: "autotoaster.level",
-          comparisonOperators: "greater",
-          condition: 300,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 48,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.autotoaster.speed.name,
-          description: string.mod.upgrade.autotoaster.speed.description,
-          targetValue: "autotoaster.speed",
-          targetStage: "autotoaster",
-          check: "autotoaster.level",
-          comparisonOperators: "greater",
-          condition: 350,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 56,
-          onscreen: false,
+    event: {
+      processor: {
+        open: [{
+          condition: [{
+            check: "toast.lifetime.current",
+            operator: ">=",
+            value: 10
+          }],
           passed: false
         }]
       },
-      megatoaster: {
-        efficiency: [{
-          name: string.mod.upgrade.megatoaster.efficiency.name,
-          description: string.mod.upgrade.megatoaster.efficiency.description,
-          targetValue: "megatoaster.efficiency",
-          targetStage: "megatoaster",
-          check: "megatoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.megatoaster.efficiency.name,
-          description: string.mod.upgrade.megatoaster.efficiency.description,
-          targetValue: "megatoaster.efficiency",
-          targetStage: "megatoaster",
-          check: "megatoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.megatoaster.efficiency.name,
-          description: string.mod.upgrade.megatoaster.efficiency.description,
-          targetValue: "megatoaster.efficiency",
-          targetStage: "megatoaster",
-          check: "megatoaster.level",
-          comparisonOperators: "greater",
-          condition: 400,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.megatoaster.efficiency.name,
-          description: string.mod.upgrade.megatoaster.efficiency.description,
-          targetValue: "megatoaster.efficiency",
-          targetStage: "megatoaster",
-          check: "megatoaster.level",
-          comparisonOperators: "greater",
-          condition: 800,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 64,
-          onscreen: false,
-          passed: false
-        }],
-        speed: [{
-          name: string.mod.upgrade.megatoaster.speed.name,
-          description: string.mod.upgrade.megatoaster.speed.description,
-          targetValue: "megatoaster.speed",
-          targetStage: "megatoaster",
-          check: "megatoaster.level",
-          comparisonOperators: "greater",
-          condition: 50,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.megatoaster.speed.name,
-          description: string.mod.upgrade.megatoaster.speed.description,
-          targetValue: "megatoaster.speed",
-          targetStage: "megatoaster",
-          check: "megatoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.megatoaster.speed.name,
-          description: string.mod.upgrade.megatoaster.speed.description,
-          targetValue: "megatoaster.speed",
-          targetStage: "megatoaster",
-          check: "megatoaster.level",
-          comparisonOperators: "greater",
-          condition: 150,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 24,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.megatoaster.speed.name,
-          description: string.mod.upgrade.megatoaster.speed.description,
-          targetValue: "megatoaster.speed",
-          targetStage: "megatoaster",
-          check: "megatoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.megatoaster.speed.name,
-          description: string.mod.upgrade.megatoaster.speed.description,
-          targetValue: "megatoaster.speed",
-          targetStage: "megatoaster",
-          check: "megatoaster.level",
-          comparisonOperators: "greater",
-          condition: 250,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 40,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.megatoaster.speed.name,
-          description: string.mod.upgrade.megatoaster.speed.description,
-          targetValue: "megatoaster.speed",
-          targetStage: "megatoaster",
-          check: "megatoaster.level",
-          comparisonOperators: "greater",
-          condition: 300,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 48,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.megatoaster.speed.name,
-          description: string.mod.upgrade.megatoaster.speed.description,
-          targetValue: "megatoaster.speed",
-          targetStage: "megatoaster",
-          check: "megatoaster.level",
-          comparisonOperators: "greater",
-          condition: 350,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 56,
-          onscreen: false,
+      consumer: {
+        open: [{
+          condition: [{
+            check: "toast.lifetime.current",
+            operator: ">=",
+            value: 300
+          }],
           passed: false
         }]
       },
-      rockettoaster: {
-        efficiency: [{
-          name: string.mod.upgrade.rockettoaster.efficiency.name,
-          description: string.mod.upgrade.rockettoaster.efficiency.description,
-          targetValue: "rockettoaster.efficiency",
-          targetStage: "rockettoaster",
-          check: "rockettoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.rockettoaster.efficiency.name,
-          description: string.mod.upgrade.rockettoaster.efficiency.description,
-          targetValue: "rockettoaster.efficiency",
-          targetStage: "rockettoaster",
-          check: "rockettoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.rockettoaster.efficiency.name,
-          description: string.mod.upgrade.rockettoaster.efficiency.description,
-          targetValue: "rockettoaster.efficiency",
-          targetStage: "rockettoaster",
-          check: "rockettoaster.level",
-          comparisonOperators: "greater",
-          condition: 400,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.rockettoaster.efficiency.name,
-          description: string.mod.upgrade.rockettoaster.efficiency.description,
-          targetValue: "rockettoaster.efficiency",
-          targetStage: "rockettoaster",
-          check: "rockettoaster.level",
-          comparisonOperators: "greater",
-          condition: 800,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 64,
-          onscreen: false,
+      cycle: {
+        open: [{
+          condition: [{
+            check: "processor.level",
+            operator: ">=",
+            value: 2
+          }],
           passed: false
         }],
-        speed: [{
-          name: string.mod.upgrade.rockettoaster.speed.name,
-          description: string.mod.upgrade.rockettoaster.speed.description,
-          targetValue: "rockettoaster.speed",
-          targetStage: "rockettoaster",
-          check: "rockettoaster.level",
-          comparisonOperators: "greater",
-          condition: 50,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.rockettoaster.speed.name,
-          description: string.mod.upgrade.rockettoaster.speed.description,
-          targetValue: "rockettoaster.speed",
-          targetStage: "rockettoaster",
-          check: "rockettoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.rockettoaster.speed.name,
-          description: string.mod.upgrade.rockettoaster.speed.description,
-          targetValue: "rockettoaster.speed",
-          targetStage: "rockettoaster",
-          check: "rockettoaster.level",
-          comparisonOperators: "greater",
-          condition: 150,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 24,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.rockettoaster.speed.name,
-          description: string.mod.upgrade.rockettoaster.speed.description,
-          targetValue: "rockettoaster.speed",
-          targetStage: "rockettoaster",
-          check: "rockettoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.rockettoaster.speed.name,
-          description: string.mod.upgrade.rockettoaster.speed.description,
-          targetValue: "rockettoaster.speed",
-          targetStage: "rockettoaster",
-          check: "rockettoaster.level",
-          comparisonOperators: "greater",
-          condition: 250,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 40,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.rockettoaster.speed.name,
-          description: string.mod.upgrade.rockettoaster.speed.description,
-          targetValue: "rockettoaster.speed",
-          targetStage: "rockettoaster",
-          check: "rockettoaster.level",
-          comparisonOperators: "greater",
-          condition: 300,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 48,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.rockettoaster.speed.name,
-          description: string.mod.upgrade.rockettoaster.speed.description,
-          targetValue: "rockettoaster.speed",
-          targetStage: "rockettoaster",
-          check: "rockettoaster.level",
-          comparisonOperators: "greater",
-          condition: 350,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 56,
-          onscreen: false,
-          passed: false
-        }]
-      },
-      sonictoaster: {
-        efficiency: [{
-          name: string.mod.upgrade.sonictoaster.efficiency.name,
-          description: string.mod.upgrade.sonictoaster.efficiency.description,
-          targetValue: "sonictoaster.efficiency",
-          targetStage: "sonictoaster",
-          check: "sonictoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.sonictoaster.efficiency.name,
-          description: string.mod.upgrade.sonictoaster.efficiency.description,
-          targetValue: "sonictoaster.efficiency",
-          targetStage: "sonictoaster",
-          check: "sonictoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.sonictoaster.efficiency.name,
-          description: string.mod.upgrade.sonictoaster.efficiency.description,
-          targetValue: "sonictoaster.efficiency",
-          targetStage: "sonictoaster",
-          check: "sonictoaster.level",
-          comparisonOperators: "greater",
-          condition: 400,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.sonictoaster.efficiency.name,
-          description: string.mod.upgrade.sonictoaster.efficiency.description,
-          targetValue: "sonictoaster.efficiency",
-          targetStage: "sonictoaster",
-          check: "sonictoaster.level",
-          comparisonOperators: "greater",
-          condition: 800,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 64,
-          onscreen: false,
+        start: [{
+          condition: [{
+            check: "cycle.current",
+            operator: "<",
+            value: 2
+          }, {
+            check: "processor.level",
+            operator: ">=",
+            value: 2
+          }],
           passed: false
         }],
-        speed: [{
-          name: string.mod.upgrade.sonictoaster.speed.name,
-          description: string.mod.upgrade.sonictoaster.speed.description,
-          targetValue: "sonictoaster.speed",
-          targetStage: "sonictoaster",
-          check: "sonictoaster.level",
-          comparisonOperators: "greater",
-          condition: 50,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.sonictoaster.speed.name,
-          description: string.mod.upgrade.sonictoaster.speed.description,
-          targetValue: "sonictoaster.speed",
-          targetStage: "sonictoaster",
-          check: "sonictoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.sonictoaster.speed.name,
-          description: string.mod.upgrade.sonictoaster.speed.description,
-          targetValue: "sonictoaster.speed",
-          targetStage: "sonictoaster",
-          check: "sonictoaster.level",
-          comparisonOperators: "greater",
-          condition: 150,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 24,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.sonictoaster.speed.name,
-          description: string.mod.upgrade.sonictoaster.speed.description,
-          targetValue: "sonictoaster.speed",
-          targetStage: "sonictoaster",
-          check: "sonictoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.sonictoaster.speed.name,
-          description: string.mod.upgrade.sonictoaster.speed.description,
-          targetValue: "sonictoaster.speed",
-          targetStage: "sonictoaster",
-          check: "sonictoaster.level",
-          comparisonOperators: "greater",
-          condition: 250,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 40,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.sonictoaster.speed.name,
-          description: string.mod.upgrade.sonictoaster.speed.description,
-          targetValue: "sonictoaster.speed",
-          targetStage: "sonictoaster",
-          check: "sonictoaster.level",
-          comparisonOperators: "greater",
-          condition: 300,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 48,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.sonictoaster.speed.name,
-          description: string.mod.upgrade.sonictoaster.speed.description,
-          targetValue: "sonictoaster.speed",
-          targetStage: "sonictoaster",
-          check: "sonictoaster.level",
-          comparisonOperators: "greater",
-          condition: 350,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 56,
-          onscreen: false,
-          passed: false
-        }]
-      },
-      plasmatoaster: {
-        efficiency: [{
-          name: string.mod.upgrade.plasmatoaster.efficiency.name,
-          description: string.mod.upgrade.plasmatoaster.efficiency.description,
-          targetValue: "plasmatoaster.efficiency",
-          targetStage: "plasmatoaster",
-          check: "plasmatoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.plasmatoaster.efficiency.name,
-          description: string.mod.upgrade.plasmatoaster.efficiency.description,
-          targetValue: "plasmatoaster.efficiency",
-          targetStage: "plasmatoaster",
-          check: "plasmatoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.plasmatoaster.efficiency.name,
-          description: string.mod.upgrade.plasmatoaster.efficiency.description,
-          targetValue: "plasmatoaster.efficiency",
-          targetStage: "plasmatoaster",
-          check: "plasmatoaster.level",
-          comparisonOperators: "greater",
-          condition: 400,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.plasmatoaster.efficiency.name,
-          description: string.mod.upgrade.plasmatoaster.efficiency.description,
-          targetValue: "plasmatoaster.efficiency",
-          targetStage: "plasmatoaster",
-          check: "plasmatoaster.level",
-          comparisonOperators: "greater",
-          condition: 800,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 64,
-          onscreen: false,
-          passed: false
-        }],
-        speed: [{
-          name: string.mod.upgrade.plasmatoaster.speed.name,
-          description: string.mod.upgrade.plasmatoaster.speed.description,
-          targetValue: "plasmatoaster.speed",
-          targetStage: "plasmatoaster",
-          check: "plasmatoaster.level",
-          comparisonOperators: "greater",
-          condition: 50,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.plasmatoaster.speed.name,
-          description: string.mod.upgrade.plasmatoaster.speed.description,
-          targetValue: "plasmatoaster.speed",
-          targetStage: "plasmatoaster",
-          check: "plasmatoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.plasmatoaster.speed.name,
-          description: string.mod.upgrade.plasmatoaster.speed.description,
-          targetValue: "plasmatoaster.speed",
-          targetStage: "plasmatoaster",
-          check: "plasmatoaster.level",
-          comparisonOperators: "greater",
-          condition: 150,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 24,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.plasmatoaster.speed.name,
-          description: string.mod.upgrade.plasmatoaster.speed.description,
-          targetValue: "plasmatoaster.speed",
-          targetStage: "plasmatoaster",
-          check: "plasmatoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.plasmatoaster.speed.name,
-          description: string.mod.upgrade.plasmatoaster.speed.description,
-          targetValue: "plasmatoaster.speed",
-          targetStage: "plasmatoaster",
-          check: "plasmatoaster.level",
-          comparisonOperators: "greater",
-          condition: 250,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 40,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.plasmatoaster.speed.name,
-          description: string.mod.upgrade.plasmatoaster.speed.description,
-          targetValue: "plasmatoaster.speed",
-          targetStage: "plasmatoaster",
-          check: "plasmatoaster.level",
-          comparisonOperators: "greater",
-          condition: 300,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 48,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.plasmatoaster.speed.name,
-          description: string.mod.upgrade.plasmatoaster.speed.description,
-          targetValue: "plasmatoaster.speed",
-          targetStage: "plasmatoaster",
-          check: "plasmatoaster.level",
-          comparisonOperators: "greater",
-          condition: 350,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 56,
-          onscreen: false,
-          passed: false
-        }]
-      },
-      atomictoaster: {
-        efficiency: [{
-          name: string.mod.upgrade.atomictoaster.efficiency.name,
-          description: string.mod.upgrade.atomictoaster.efficiency.description,
-          targetValue: "atomictoaster.efficiency",
-          targetStage: "atomictoaster",
-          check: "atomictoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.atomictoaster.efficiency.name,
-          description: string.mod.upgrade.atomictoaster.efficiency.description,
-          targetValue: "atomictoaster.efficiency",
-          targetStage: "atomictoaster",
-          check: "atomictoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.atomictoaster.efficiency.name,
-          description: string.mod.upgrade.atomictoaster.efficiency.description,
-          targetValue: "atomictoaster.efficiency",
-          targetStage: "atomictoaster",
-          check: "atomictoaster.level",
-          comparisonOperators: "greater",
-          condition: 400,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.atomictoaster.efficiency.name,
-          description: string.mod.upgrade.atomictoaster.efficiency.description,
-          targetValue: "atomictoaster.efficiency",
-          targetStage: "atomictoaster",
-          check: "atomictoaster.level",
-          comparisonOperators: "greater",
-          condition: 800,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 64,
-          onscreen: false,
-          passed: false
-        }],
-        speed: [{
-          name: string.mod.upgrade.atomictoaster.speed.name,
-          description: string.mod.upgrade.atomictoaster.speed.description,
-          targetValue: "atomictoaster.speed",
-          targetStage: "atomictoaster",
-          check: "atomictoaster.level",
-          comparisonOperators: "greater",
-          condition: 50,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.atomictoaster.speed.name,
-          description: string.mod.upgrade.atomictoaster.speed.description,
-          targetValue: "atomictoaster.speed",
-          targetStage: "atomictoaster",
-          check: "atomictoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.atomictoaster.speed.name,
-          description: string.mod.upgrade.atomictoaster.speed.description,
-          targetValue: "atomictoaster.speed",
-          targetStage: "atomictoaster",
-          check: "atomictoaster.level",
-          comparisonOperators: "greater",
-          condition: 150,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 24,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.atomictoaster.speed.name,
-          description: string.mod.upgrade.atomictoaster.speed.description,
-          targetValue: "atomictoaster.speed",
-          targetStage: "atomictoaster",
-          check: "atomictoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.atomictoaster.speed.name,
-          description: string.mod.upgrade.atomictoaster.speed.description,
-          targetValue: "atomictoaster.speed",
-          targetStage: "atomictoaster",
-          check: "atomictoaster.level",
-          comparisonOperators: "greater",
-          condition: 250,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 40,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.atomictoaster.speed.name,
-          description: string.mod.upgrade.atomictoaster.speed.description,
-          targetValue: "atomictoaster.speed",
-          targetStage: "atomictoaster",
-          check: "atomictoaster.level",
-          comparisonOperators: "greater",
-          condition: 300,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 48,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.atomictoaster.speed.name,
-          description: string.mod.upgrade.atomictoaster.speed.description,
-          targetValue: "atomictoaster.speed",
-          targetStage: "atomictoaster",
-          check: "atomictoaster.level",
-          comparisonOperators: "greater",
-          condition: 350,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 56,
-          onscreen: false,
-          passed: false
-        }]
-      },
-      quantumtoaster: {
-        efficiency: [{
-          name: string.mod.upgrade.quantumtoaster.efficiency.name,
-          description: string.mod.upgrade.quantumtoaster.efficiency.description,
-          targetValue: "quantumtoaster.efficiency",
-          targetStage: "quantumtoaster",
-          check: "quantumtoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.quantumtoaster.efficiency.name,
-          description: string.mod.upgrade.quantumtoaster.efficiency.description,
-          targetValue: "quantumtoaster.efficiency",
-          targetStage: "quantumtoaster",
-          check: "quantumtoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.quantumtoaster.efficiency.name,
-          description: string.mod.upgrade.quantumtoaster.efficiency.description,
-          targetValue: "quantumtoaster.efficiency",
-          targetStage: "quantumtoaster",
-          check: "quantumtoaster.level",
-          comparisonOperators: "greater",
-          condition: 400,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.quantumtoaster.efficiency.name,
-          description: string.mod.upgrade.quantumtoaster.efficiency.description,
-          targetValue: "quantumtoaster.efficiency",
-          targetStage: "quantumtoaster",
-          check: "quantumtoaster.level",
-          comparisonOperators: "greater",
-          condition: 800,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 64,
-          onscreen: false,
-          passed: false
-        }],
-        speed: [{
-          name: string.mod.upgrade.quantumtoaster.speed.name,
-          description: string.mod.upgrade.quantumtoaster.speed.description,
-          targetValue: "quantumtoaster.speed",
-          targetStage: "quantumtoaster",
-          check: "quantumtoaster.level",
-          comparisonOperators: "greater",
-          condition: 50,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 8,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.quantumtoaster.speed.name,
-          description: string.mod.upgrade.quantumtoaster.speed.description,
-          targetValue: "quantumtoaster.speed",
-          targetStage: "quantumtoaster",
-          check: "quantumtoaster.level",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 16,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.quantumtoaster.speed.name,
-          description: string.mod.upgrade.quantumtoaster.speed.description,
-          targetValue: "quantumtoaster.speed",
-          targetStage: "quantumtoaster",
-          check: "quantumtoaster.level",
-          comparisonOperators: "greater",
-          condition: 150,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 24,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.quantumtoaster.speed.name,
-          description: string.mod.upgrade.quantumtoaster.speed.description,
-          targetValue: "quantumtoaster.speed",
-          targetStage: "quantumtoaster",
-          check: "quantumtoaster.level",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.quantumtoaster.speed.name,
-          description: string.mod.upgrade.quantumtoaster.speed.description,
-          targetValue: "quantumtoaster.speed",
-          targetStage: "quantumtoaster",
-          check: "quantumtoaster.level",
-          comparisonOperators: "greater",
-          condition: 250,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 40,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.quantumtoaster.speed.name,
-          description: string.mod.upgrade.quantumtoaster.speed.description,
-          targetValue: "quantumtoaster.speed",
-          targetStage: "quantumtoaster",
-          check: "quantumtoaster.level",
-          comparisonOperators: "greater",
-          condition: 300,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 48,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.quantumtoaster.speed.name,
-          description: string.mod.upgrade.quantumtoaster.speed.description,
-          targetValue: "quantumtoaster.speed",
-          targetStage: "quantumtoaster",
-          check: "quantumtoaster.level",
-          comparisonOperators: "greater",
-          condition: 350,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 56,
-          onscreen: false,
+        stop: [{
+          condition: [{
+            check: "cycle.current",
+            operator: "==",
+            value: 2
+          }],
           passed: false
         }]
       },
       motivation: {
-        level: [{
-          name: string.mod.upgrade.motivation.level.name,
-          description: string.mod.upgrade.motivation.level.description,
-          targetValue: "motivation.level",
-          targetStage: "motivation",
-          check: "motivation.count",
-          comparisonOperators: "greater",
-          condition: 50,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 32,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.motivation.level.name,
-          description: string.mod.upgrade.motivation.level.description,
-          targetValue: "motivation.level",
-          targetStage: "motivation",
-          check: "motivation.count",
-          comparisonOperators: "greater",
-          condition: 100,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 64,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.motivation.level.name,
-          description: string.mod.upgrade.motivation.level.description,
-          targetValue: "motivation.level",
-          targetStage: "motivation",
-          check: "motivation.count",
-          comparisonOperators: "greater",
-          condition: 200,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 128,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.motivation.level.name,
-          description: string.mod.upgrade.motivation.level.description,
-          targetValue: "motivation.level",
-          targetStage: "motivation",
-          check: "motivation.count",
-          comparisonOperators: "greater",
-          condition: 400,
-          success: "add",
-          bonus: 1,
-          currency: "cycle",
-          cost: 256,
-          onscreen: false,
-          passed: false
-        }],
-        interval: [{
-          name: string.mod.upgrade.motivation.interval.name,
-          description: string.mod.upgrade.motivation.interval.description,
-          targetValue: "motivation.interval",
-          targetStage: "motivation",
-          check: "motivation.level",
-          comparisonOperators: "greater",
-          condition: 3,
-          success: "add",
-          bonus: 200,
-          currency: "cycle",
-          cost: 256,
-          onscreen: false,
-          passed: false
-        }, {
-          name: string.mod.upgrade.motivation.interval.name,
-          description: string.mod.upgrade.motivation.interval.description,
-          targetValue: "motivation.interval",
-          targetStage: "motivation",
-          check: "motivation.level",
-          comparisonOperators: "greater",
-          condition: 4,
-          success: "add",
-          bonus: 200,
-          currency: "cycle",
-          cost: 256,
-          onscreen: false,
+        open: [{
+          condition: [{
+            check: "strategy.motivation.passed",
+            operator: "==",
+            value: true
+          }],
           passed: false
         }]
+      },
+      autotoaster: {
+        open: [{
+          condition: [{
+            check: "strategy.autotoaster.passed",
+            operator: "==",
+            value: true
+          }],
+          passed: false
+        }],
+        start: [{
+          condition: [{
+            check: "strategy.autotoaster.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "autotoaster.level",
+            operator: ">",
+            value: 0
+          }],
+          passed: false
+        }],
+        efficiency1: [{
+          condition: [{
+            check: "autotoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "autotoaster.efficiency",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        efficiency2: [{
+          condition: [{
+            check: "autotoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "autotoaster.efficiency",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        efficiency3: [{
+          condition: [{
+            check: "autotoaster.level",
+            operator: ">=",
+            value: 400
+          }, {
+            check: "autotoaster.efficiency",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        efficiency4: [{
+          condition: [{
+            check: "autotoaster.level",
+            operator: ">=",
+            value: 800
+          }, {
+            check: "autotoaster.efficiency",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed1: [{
+          condition: [{
+            check: "autotoaster.level",
+            operator: ">=",
+            value: 50
+          }, {
+            check: "autotoaster.speed",
+            operator: "==",
+            value: 0
+          }],
+          passed: false
+        }],
+        speed2: [{
+          condition: [{
+            check: "autotoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "autotoaster.speed",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        speed3: [{
+          condition: [{
+            check: "autotoaster.level",
+            operator: ">=",
+            value: 150
+          }, {
+            check: "autotoaster.speed",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        speed4: [{
+          condition: [{
+            check: "autotoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "autotoaster.speed",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        speed5: [{
+          condition: [{
+            check: "autotoaster.level",
+            operator: ">=",
+            value: 250
+          }, {
+            check: "autotoaster.speed",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed6: [{
+          condition: [{
+            check: "autotoaster.level",
+            operator: ">=",
+            value: 300
+          }, {
+            check: "autotoaster.speed",
+            operator: "==",
+            value: 5
+          }],
+          passed: false
+        }],
+        speed7: [{
+          condition: [{
+            check: "autotoaster.level",
+            operator: ">=",
+            value: 350
+          }, {
+            check: "autotoaster.speed",
+            operator: "==",
+            value: 6
+          }],
+          passed: false
+        }]
+      },
+      megatoaster: {
+        open: [{
+          condition: [{
+            check: "strategy.megatoaster.passed",
+            operator: "==",
+            value: true
+          }],
+          passed: false
+        }],
+        start: [{
+          condition: [{
+            check: "strategy.megatoaster.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "megatoaster.level",
+            operator: ">",
+            value: 0
+          }],
+          passed: false
+        }],
+        efficiency1: [{
+          condition: [{
+            check: "megatoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "megatoaster.efficiency",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        efficiency2: [{
+          condition: [{
+            check: "megatoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "megatoaster.efficiency",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        efficiency3: [{
+          condition: [{
+            check: "megatoaster.level",
+            operator: ">=",
+            value: 400
+          }, {
+            check: "megatoaster.efficiency",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        efficiency4: [{
+          condition: [{
+            check: "megatoaster.level",
+            operator: ">=",
+            value: 800
+          }, {
+            check: "megatoaster.efficiency",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed1: [{
+          condition: [{
+            check: "megatoaster.level",
+            operator: ">=",
+            value: 50
+          }, {
+            check: "megatoaster.speed",
+            operator: "==",
+            value: 0
+          }],
+          passed: false
+        }],
+        speed2: [{
+          condition: [{
+            check: "megatoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "megatoaster.speed",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        speed3: [{
+          condition: [{
+            check: "megatoaster.level",
+            operator: ">=",
+            value: 150
+          }, {
+            check: "megatoaster.speed",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        speed4: [{
+          condition: [{
+            check: "megatoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "megatoaster.speed",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        speed5: [{
+          condition: [{
+            check: "megatoaster.level",
+            operator: ">=",
+            value: 250
+          }, {
+            check: "megatoaster.speed",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed6: [{
+          condition: [{
+            check: "megatoaster.level",
+            operator: ">=",
+            value: 300
+          }, {
+            check: "megatoaster.speed",
+            operator: "==",
+            value: 5
+          }],
+          passed: false
+        }],
+        speed7: [{
+          condition: [{
+            check: "megatoaster.level",
+            operator: ">=",
+            value: 350
+          }, {
+            check: "megatoaster.speed",
+            operator: "==",
+            value: 6
+          }],
+          passed: false
+        }]
+      },
+      rockettoaster: {
+        open: [{
+          condition: [{
+            check: "strategy.rockettoaster.passed",
+            operator: "==",
+            value: true
+          }],
+          passed: false
+        }],
+        start: [{
+          condition: [{
+            check: "strategy.rockettoaster.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "rockettoaster.level",
+            operator: ">",
+            value: 0
+          }],
+          passed: false
+        }],
+        efficiency1: [{
+          condition: [{
+            check: "rockettoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "rockettoaster.efficiency",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        efficiency2: [{
+          condition: [{
+            check: "rockettoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "rockettoaster.efficiency",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        efficiency3: [{
+          condition: [{
+            check: "rockettoaster.level",
+            operator: ">=",
+            value: 400
+          }, {
+            check: "rockettoaster.efficiency",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        efficiency4: [{
+          condition: [{
+            check: "rockettoaster.level",
+            operator: ">=",
+            value: 800
+          }, {
+            check: "rockettoaster.efficiency",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed1: [{
+          condition: [{
+            check: "rockettoaster.level",
+            operator: ">=",
+            value: 50
+          }, {
+            check: "rockettoaster.speed",
+            operator: "==",
+            value: 0
+          }],
+          passed: false
+        }],
+        speed2: [{
+          condition: [{
+            check: "rockettoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "rockettoaster.speed",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        speed3: [{
+          condition: [{
+            check: "rockettoaster.level",
+            operator: ">=",
+            value: 150
+          }, {
+            check: "rockettoaster.speed",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        speed4: [{
+          condition: [{
+            check: "rockettoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "rockettoaster.speed",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        speed5: [{
+          condition: [{
+            check: "rockettoaster.level",
+            operator: ">=",
+            value: 250
+          }, {
+            check: "rockettoaster.speed",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed6: [{
+          condition: [{
+            check: "rockettoaster.level",
+            operator: ">=",
+            value: 300
+          }, {
+            check: "rockettoaster.speed",
+            operator: "==",
+            value: 5
+          }],
+          passed: false
+        }],
+        speed7: [{
+          condition: [{
+            check: "rockettoaster.level",
+            operator: ">=",
+            value: 350
+          }, {
+            check: "rockettoaster.speed",
+            operator: "==",
+            value: 6
+          }],
+          passed: false
+        }]
+      },
+      sonictoaster: {
+        open: [{
+          condition: [{
+            check: "strategy.sonictoaster.passed",
+            operator: "==",
+            value: true
+          }],
+          passed: false
+        }],
+        start: [{
+          condition: [{
+            check: "strategy.sonictoaster.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "sonictoaster.level",
+            operator: ">",
+            value: 0
+          }],
+          passed: false
+        }],
+        efficiency1: [{
+          condition: [{
+            check: "sonictoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "sonictoaster.efficiency",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        efficiency2: [{
+          condition: [{
+            check: "sonictoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "sonictoaster.efficiency",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        efficiency3: [{
+          condition: [{
+            check: "sonictoaster.level",
+            operator: ">=",
+            value: 400
+          }, {
+            check: "sonictoaster.efficiency",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        efficiency4: [{
+          condition: [{
+            check: "sonictoaster.level",
+            operator: ">=",
+            value: 800
+          }, {
+            check: "sonictoaster.efficiency",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed1: [{
+          condition: [{
+            check: "sonictoaster.level",
+            operator: ">=",
+            value: 50
+          }, {
+            check: "sonictoaster.speed",
+            operator: "==",
+            value: 0
+          }],
+          passed: false
+        }],
+        speed2: [{
+          condition: [{
+            check: "sonictoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "sonictoaster.speed",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        speed3: [{
+          condition: [{
+            check: "sonictoaster.level",
+            operator: ">=",
+            value: 150
+          }, {
+            check: "sonictoaster.speed",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        speed4: [{
+          condition: [{
+            check: "sonictoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "sonictoaster.speed",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        speed5: [{
+          condition: [{
+            check: "sonictoaster.level",
+            operator: ">=",
+            value: 250
+          }, {
+            check: "sonictoaster.speed",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed6: [{
+          condition: [{
+            check: "sonictoaster.level",
+            operator: ">=",
+            value: 300
+          }, {
+            check: "sonictoaster.speed",
+            operator: "==",
+            value: 5
+          }],
+          passed: false
+        }],
+        speed7: [{
+          condition: [{
+            check: "sonictoaster.level",
+            operator: ">=",
+            value: 350
+          }, {
+            check: "sonictoaster.speed",
+            operator: "==",
+            value: 6
+          }],
+          passed: false
+        }]
+      },
+      plasmatoaster: {
+        open: [{
+          condition: [{
+            check: "strategy.plasmatoaster.passed",
+            operator: "==",
+            value: true
+          }],
+          passed: false
+        }],
+        start: [{
+          condition: [{
+            check: "strategy.plasmatoaster.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "plasmatoaster.level",
+            operator: ">",
+            value: 0
+          }],
+          passed: false
+        }],
+        efficiency1: [{
+          condition: [{
+            check: "plasmatoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "plasmatoaster.efficiency",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        efficiency2: [{
+          condition: [{
+            check: "plasmatoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "plasmatoaster.efficiency",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        efficiency3: [{
+          condition: [{
+            check: "plasmatoaster.level",
+            operator: ">=",
+            value: 400
+          }, {
+            check: "plasmatoaster.efficiency",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        efficiency4: [{
+          condition: [{
+            check: "plasmatoaster.level",
+            operator: ">=",
+            value: 800
+          }, {
+            check: "plasmatoaster.efficiency",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed1: [{
+          condition: [{
+            check: "plasmatoaster.level",
+            operator: ">=",
+            value: 50
+          }, {
+            check: "plasmatoaster.speed",
+            operator: "==",
+            value: 0
+          }],
+          passed: false
+        }],
+        speed2: [{
+          condition: [{
+            check: "plasmatoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "plasmatoaster.speed",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        speed3: [{
+          condition: [{
+            check: "plasmatoaster.level",
+            operator: ">=",
+            value: 150
+          }, {
+            check: "plasmatoaster.speed",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        speed4: [{
+          condition: [{
+            check: "plasmatoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "plasmatoaster.speed",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        speed5: [{
+          condition: [{
+            check: "plasmatoaster.level",
+            operator: ">=",
+            value: 250
+          }, {
+            check: "plasmatoaster.speed",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed6: [{
+          condition: [{
+            check: "plasmatoaster.level",
+            operator: ">=",
+            value: 300
+          }, {
+            check: "plasmatoaster.speed",
+            operator: "==",
+            value: 5
+          }],
+          passed: false
+        }],
+        speed7: [{
+          condition: [{
+            check: "plasmatoaster.level",
+            operator: ">=",
+            value: 350
+          }, {
+            check: "plasmatoaster.speed",
+            operator: "==",
+            value: 6
+          }],
+          passed: false
+        }]
+      },
+      atomictoaster: {
+        open: [{
+          condition: [{
+            check: "strategy.atomictoaster.passed",
+            operator: "==",
+            value: true
+          }],
+          passed: false
+        }],
+        start: [{
+          condition: [{
+            check: "strategy.atomictoaster.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "atomictoaster.level",
+            operator: ">",
+            value: 0
+          }],
+          passed: false
+        }],
+        efficiency1: [{
+          condition: [{
+            check: "atomictoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "atomictoaster.efficiency",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        efficiency2: [{
+          condition: [{
+            check: "atomictoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "atomictoaster.efficiency",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        efficiency3: [{
+          condition: [{
+            check: "atomictoaster.level",
+            operator: ">=",
+            value: 400
+          }, {
+            check: "atomictoaster.efficiency",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        efficiency4: [{
+          condition: [{
+            check: "atomictoaster.level",
+            operator: ">=",
+            value: 800
+          }, {
+            check: "atomictoaster.efficiency",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed1: [{
+          condition: [{
+            check: "atomictoaster.level",
+            operator: ">=",
+            value: 50
+          }, {
+            check: "atomictoaster.speed",
+            operator: "==",
+            value: 0
+          }],
+          passed: false
+        }],
+        speed2: [{
+          condition: [{
+            check: "atomictoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "atomictoaster.speed",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        speed3: [{
+          condition: [{
+            check: "atomictoaster.level",
+            operator: ">=",
+            value: 150
+          }, {
+            check: "atomictoaster.speed",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        speed4: [{
+          condition: [{
+            check: "atomictoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "atomictoaster.speed",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        speed5: [{
+          condition: [{
+            check: "atomictoaster.level",
+            operator: ">=",
+            value: 250
+          }, {
+            check: "atomictoaster.speed",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed6: [{
+          condition: [{
+            check: "atomictoaster.level",
+            operator: ">=",
+            value: 300
+          }, {
+            check: "atomictoaster.speed",
+            operator: "==",
+            value: 5
+          }],
+          passed: false
+        }],
+        speed7: [{
+          condition: [{
+            check: "atomictoaster.level",
+            operator: ">=",
+            value: 350
+          }, {
+            check: "atomictoaster.speed",
+            operator: "==",
+            value: 6
+          }],
+          passed: false
+        }]
+      },
+      quantumtoaster: {
+        open: [{
+          condition: [{
+            check: "strategy.quantumtoaster.passed",
+            operator: "==",
+            value: true
+          }],
+          passed: false
+        }],
+        start: [{
+          condition: [{
+            check: "strategy.quantumtoaster.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "quantumtoaster.level",
+            operator: ">",
+            value: 0
+          }],
+          passed: false
+        }],
+        efficiency1: [{
+          condition: [{
+            check: "quantumtoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "quantumtoaster.efficiency",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        efficiency2: [{
+          condition: [{
+            check: "quantumtoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "quantumtoaster.efficiency",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        efficiency3: [{
+          condition: [{
+            check: "quantumtoaster.level",
+            operator: ">=",
+            value: 400
+          }, {
+            check: "quantumtoaster.efficiency",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        efficiency4: [{
+          condition: [{
+            check: "quantumtoaster.level",
+            operator: ">=",
+            value: 800
+          }, {
+            check: "quantumtoaster.efficiency",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed1: [{
+          condition: [{
+            check: "quantumtoaster.level",
+            operator: ">=",
+            value: 50
+          }, {
+            check: "quantumtoaster.speed",
+            operator: "==",
+            value: 0
+          }],
+          passed: false
+        }],
+        speed2: [{
+          condition: [{
+            check: "quantumtoaster.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "quantumtoaster.speed",
+            operator: "==",
+            value: 1
+          }],
+          passed: false
+        }],
+        speed3: [{
+          condition: [{
+            check: "quantumtoaster.level",
+            operator: ">=",
+            value: 150
+          }, {
+            check: "quantumtoaster.speed",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        speed4: [{
+          condition: [{
+            check: "quantumtoaster.level",
+            operator: ">=",
+            value: 200
+          }, {
+            check: "quantumtoaster.speed",
+            operator: "==",
+            value: 3
+          }],
+          passed: false
+        }],
+        speed5: [{
+          condition: [{
+            check: "quantumtoaster.level",
+            operator: ">=",
+            value: 250
+          }, {
+            check: "quantumtoaster.speed",
+            operator: "==",
+            value: 4
+          }],
+          passed: false
+        }],
+        speed6: [{
+          condition: [{
+            check: "quantumtoaster.level",
+            operator: ">=",
+            value: 300
+          }, {
+            check: "quantumtoaster.speed",
+            operator: "==",
+            value: 5
+          }],
+          passed: false
+        }],
+        speed7: [{
+          condition: [{
+            check: "quantumtoaster.level",
+            operator: ">=",
+            value: 350
+          }, {
+            check: "quantumtoaster.speed",
+            operator: "==",
+            value: 6
+          }],
+          passed: false
+        }]
+      },
+      strategy: {
+        open: [{
+          condition: [{
+            check: "processor.level",
+            operator: ">=",
+            value: 4
+          }],
+          passed: false
+        }],
+        motivation: [{
+          condition: [{
+            check: "processor.level",
+            operator: ">=",
+            value: 24
+          }],
+          passed: false
+        }],
+        autotoaster: [{
+          condition: [{
+            check: "processor.level",
+            operator: ">=",
+            value: 4
+          }, {
+            check: "strategy.autotoaster.passed",
+            operator: "==",
+            value: false
+          }],
+          passed: false
+        }],
+        megatoaster: [{
+          condition: [{
+            check: "processor.level",
+            operator: ">=",
+            value: 8
+          }, {
+            check: "strategy.megatoaster.passed",
+            operator: "==",
+            value: false
+          }],
+          passed: false
+        }],
+        rockettoaster: [{
+          condition: [{
+            check: "processor.level",
+            operator: ">=",
+            value: 12
+          }, {
+            check: "strategy.rockettoaster.passed",
+            operator: "==",
+            value: false
+          }],
+          passed: false
+        }],
+        sonictoaster: [{
+          condition: [{
+            check: "processor.level",
+            operator: ">=",
+            value: 16
+          }, {
+            check: "strategy.sonictoaster.passed",
+            operator: "==",
+            value: false
+          }],
+          passed: false
+        }],
+        plasmatoaster: [{
+          condition: [{
+            check: "processor.level",
+            operator: ">=",
+            value: 20
+          }, {
+            check: "strategy.plasmatoaster.passed",
+            operator: "==",
+            value: false
+          }],
+          passed: false
+        }],
+        atomictoaster: [{
+          condition: [{
+            check: "processor.level",
+            operator: ">=",
+            value: 24
+          }, {
+            check: "strategy.atomictoaster.passed",
+            operator: "==",
+            value: false
+          }],
+          passed: false
+        }],
+        quantumtoaster: [{
+          condition: [{
+            check: "processor.level",
+            operator: ">=",
+            value: 28
+          }, {
+            check: "strategy.quantumtoaster.passed",
+            operator: "==",
+            value: false
+          }],
+          passed: false
+        }]
+      }
+    },
+    strategy: {
+      next: 0,
+      motivation: {
+        passed: false,
+        cost: 32
+      },
+      autotoaster: {
+        passed: false,
+        cost: 2
+      },
+      megatoaster: {
+        passed: false,
+        cost: 4
+      },
+      rockettoaster: {
+        passed: false,
+        cost: 8
+      },
+      sonictoaster: {
+        passed: false,
+        cost: 16
+      },
+      plasmatoaster: {
+        passed: false,
+        cost: 32
+      },
+      atomictoaster: {
+        passed: false,
+        cost: 64
+      },
+      quantumtoaster: {
+        passed: false,
+        cost: 128
+      }
+    },
+    upgrade: {
+      autotoaster: {
+        efficiency1: {
+          passed: false,
+          cost: 8
+        },
+        efficiency2: {
+          passed: false,
+          cost: 16
+        },
+        efficiency3: {
+          passed: false,
+          cost: 32
+        },
+        efficiency4: {
+          passed: false,
+          cost: 64
+        },
+        speed1: {
+          passed: false,
+          cost: 8
+        },
+        speed2: {
+          passed: false,
+          cost: 16
+        },
+        speed3: {
+          passed: false,
+          cost: 24
+        },
+        speed4: {
+          passed: false,
+          cost: 32
+        },
+        speed5: {
+          passed: false,
+          cost: 40
+        },
+        speed6: {
+          passed: false,
+          cost: 48
+        },
+        speed7: {
+          passed: false,
+          cost: 56
+        },
+      },
+      megatoaster: {
+        efficiency1: {
+          passed: false,
+          cost: 8
+        },
+        efficiency2: {
+          passed: false,
+          cost: 16
+        },
+        efficiency3: {
+          passed: false,
+          cost: 32
+        },
+        efficiency4: {
+          passed: false,
+          cost: 64
+        },
+        speed1: {
+          passed: false,
+          cost: 8
+        },
+        speed2: {
+          passed: false,
+          cost: 16
+        },
+        speed3: {
+          passed: false,
+          cost: 24
+        },
+        speed4: {
+          passed: false,
+          cost: 32
+        },
+        speed5: {
+          passed: false,
+          cost: 40
+        },
+        speed6: {
+          passed: false,
+          cost: 48
+        },
+        speed7: {
+          passed: false,
+          cost: 56
+        },
+      },
+      rockettoaster: {
+        efficiency1: {
+          passed: false,
+          cost: 8
+        },
+        efficiency2: {
+          passed: false,
+          cost: 16
+        },
+        efficiency3: {
+          passed: false,
+          cost: 32
+        },
+        efficiency4: {
+          passed: false,
+          cost: 64
+        },
+        speed1: {
+          passed: false,
+          cost: 8
+        },
+        speed2: {
+          passed: false,
+          cost: 16
+        },
+        speed3: {
+          passed: false,
+          cost: 24
+        },
+        speed4: {
+          passed: false,
+          cost: 32
+        },
+        speed5: {
+          passed: false,
+          cost: 40
+        },
+        speed6: {
+          passed: false,
+          cost: 48
+        },
+        speed7: {
+          passed: false,
+          cost: 56
+        },
+      },
+      sonictoaster: {
+        efficiency1: {
+          passed: false,
+          cost: 8
+        },
+        efficiency2: {
+          passed: false,
+          cost: 16
+        },
+        efficiency3: {
+          passed: false,
+          cost: 32
+        },
+        efficiency4: {
+          passed: false,
+          cost: 64
+        },
+        speed1: {
+          passed: false,
+          cost: 8
+        },
+        speed2: {
+          passed: false,
+          cost: 16
+        },
+        speed3: {
+          passed: false,
+          cost: 24
+        },
+        speed4: {
+          passed: false,
+          cost: 32
+        },
+        speed5: {
+          passed: false,
+          cost: 40
+        },
+        speed6: {
+          passed: false,
+          cost: 48
+        },
+        speed7: {
+          passed: false,
+          cost: 56
+        },
+      },
+      plasmatoaster: {
+        efficiency1: {
+          passed: false,
+          cost: 8
+        },
+        efficiency2: {
+          passed: false,
+          cost: 16
+        },
+        efficiency3: {
+          passed: false,
+          cost: 32
+        },
+        efficiency4: {
+          passed: false,
+          cost: 64
+        },
+        speed1: {
+          passed: false,
+          cost: 8
+        },
+        speed2: {
+          passed: false,
+          cost: 16
+        },
+        speed3: {
+          passed: false,
+          cost: 24
+        },
+        speed4: {
+          passed: false,
+          cost: 32
+        },
+        speed5: {
+          passed: false,
+          cost: 40
+        },
+        speed6: {
+          passed: false,
+          cost: 48
+        },
+        speed7: {
+          passed: false,
+          cost: 56
+        },
+      },
+      atomictoaster: {
+        efficiency1: {
+          passed: false,
+          cost: 8
+        },
+        efficiency2: {
+          passed: false,
+          cost: 16
+        },
+        efficiency3: {
+          passed: false,
+          cost: 32
+        },
+        efficiency4: {
+          passed: false,
+          cost: 64
+        },
+        speed1: {
+          passed: false,
+          cost: 8
+        },
+        speed2: {
+          passed: false,
+          cost: 16
+        },
+        speed3: {
+          passed: false,
+          cost: 24
+        },
+        speed4: {
+          passed: false,
+          cost: 32
+        },
+        speed5: {
+          passed: false,
+          cost: 40
+        },
+        speed6: {
+          passed: false,
+          cost: 48
+        },
+        speed7: {
+          passed: false,
+          cost: 56
+        },
+      },
+      quantumtoaster: {
+        efficiency1: {
+          passed: false,
+          cost: 8
+        },
+        efficiency2: {
+          passed: false,
+          cost: 16
+        },
+        efficiency3: {
+          passed: false,
+          cost: 32
+        },
+        efficiency4: {
+          passed: false,
+          cost: 64
+        },
+        speed1: {
+          passed: false,
+          cost: 8
+        },
+        speed2: {
+          passed: false,
+          cost: 16
+        },
+        speed3: {
+          passed: false,
+          cost: 24
+        },
+        speed4: {
+          passed: false,
+          cost: 32
+        },
+        speed5: {
+          passed: false,
+          cost: 40
+        },
+        speed6: {
+          passed: false,
+          cost: 48
+        },
+        speed7: {
+          passed: false,
+          cost: 56
+        },
       }
     },
     theme: {

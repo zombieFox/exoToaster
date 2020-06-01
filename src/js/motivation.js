@@ -120,7 +120,6 @@ var motivation = (function() {
     render.boost.button()
   }
 
-
   var init = function() {
     mod.boost.reset()
   }

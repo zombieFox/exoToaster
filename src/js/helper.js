@@ -102,7 +102,7 @@ var helper = (function() {
       }
       var finalKey = address.shift()
       if (!(finalKey in options.object)) {
-        return ""
+        return false
       } else {
         return options.object[finalKey]
       }
