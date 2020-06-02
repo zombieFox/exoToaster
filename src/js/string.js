@@ -649,7 +649,7 @@ var string = (function() {
         name: "Motivation upgrade",
         description: ["Increase motivation bonuse"]
       },
-      interval: {
+      speed: {
         name: "Speed upgrade",
         description: ["Extend the duration of the motivation affect"]
       }

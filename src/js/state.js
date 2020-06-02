@@ -93,6 +93,15 @@ var state = (function() {
         toast: null
       }
     },
+    motivation: {
+      level: 1,
+      step: 0,
+      max: 10,
+      count: 0,
+      speed: 1,
+      interval: null,
+      running: false
+    },
     autotoaster: {
       level: null,
       toastperunit: null,
@@ -109,14 +118,6 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
-      },
-      upgrade: {
-        efficiency: {
-          cost: null
-        },
-        speed: {
-          cost: null
-        }
       }
     },
     megatoaster: {
@@ -135,14 +136,6 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
-      },
-      upgrade: {
-        efficiency: {
-          cost: null
-        },
-        speed: {
-          cost: null
-        }
       }
     },
     rockettoaster: {
@@ -161,14 +154,6 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
-      },
-      upgrade: {
-        efficiency: {
-          cost: null
-        },
-        speed: {
-          cost: null
-        }
       }
     },
     sonictoaster: {
@@ -187,14 +172,6 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
-      },
-      upgrade: {
-        efficiency: {
-          cost: null
-        },
-        speed: {
-          cost: null
-        }
       }
     },
     plasmatoaster: {
@@ -213,14 +190,6 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
-      },
-      upgrade: {
-        efficiency: {
-          cost: null
-        },
-        speed: {
-          cost: null
-        }
       }
     },
     atomictoaster: {
@@ -239,14 +208,6 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
-      },
-      upgrade: {
-        efficiency: {
-          cost: null
-        },
-        speed: {
-          cost: null
-        }
       }
     },
     quantumtoaster: {
@@ -265,23 +226,7 @@ var state = (function() {
         constant: null,
         difference: null,
         toast: null
-      },
-      upgrade: {
-        efficiency: {
-          cost: null
-        },
-        speed: {
-          cost: null
-        }
       }
-    },
-    motivation: {
-      level: 1,
-      step: 0,
-      max: 10,
-      count: 0,
-      running: false,
-      interval: 200
     },
     event: {
       processor: {
@@ -340,6 +285,150 @@ var state = (function() {
             check: "strategy.motivation.passed",
             operator: "==",
             value: true
+          }],
+          passed: false
+        }],
+        level1: [{
+          condition: [{
+            check: "strategy.motivation.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "motivation.level",
+            operator: "==",
+            value: 1
+          }, {
+            check: "motivation.count",
+            operator: ">=",
+            value: 50
+          }],
+          passed: false
+        }],
+        level2: [{
+          condition: [{
+            check: "strategy.motivation.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "motivation.level",
+            operator: "==",
+            value: 2
+          }, {
+            check: "motivation.count",
+            operator: ">=",
+            value: 100
+          }],
+          passed: false
+        }],
+        level3: [{
+          condition: [{
+            check: "strategy.motivation.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "motivation.level",
+            operator: "==",
+            value: 3
+          }, {
+            check: "motivation.count",
+            operator: ">=",
+            value: 200
+          }],
+          passed: false
+        }],
+        speed1: [{
+          condition: [{
+            check: "strategy.motivation.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "motivation.speed",
+            operator: "==",
+            value: 1
+          }, {
+            check: "motivation.count",
+            operator: ">=",
+            value: 40
+          }],
+          passed: false
+        }],
+        speed2: [{
+          condition: [{
+            check: "strategy.motivation.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "motivation.speed",
+            operator: "==",
+            value: 2
+          }, {
+            check: "motivation.count",
+            operator: ">=",
+            value: 80
+          }],
+          passed: false
+        }],
+        speed3: [{
+          condition: [{
+            check: "strategy.motivation.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "motivation.speed",
+            operator: "==",
+            value: 3
+          }, {
+            check: "motivation.count",
+            operator: ">=",
+            value: 120
+          }],
+          passed: false
+        }],
+        speed4: [{
+          condition: [{
+            check: "strategy.motivation.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "motivation.speed",
+            operator: "==",
+            value: 4
+          }, {
+            check: "motivation.count",
+            operator: ">=",
+            value: 160
+          }],
+          passed: false
+        }],
+        speed5: [{
+          condition: [{
+            check: "strategy.motivation.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "motivation.speed",
+            operator: "==",
+            value: 5
+          }, {
+            check: "motivation.count",
+            operator: ">=",
+            value: 200
+          }],
+          passed: false
+        }],
+        speed6: [{
+          condition: [{
+            check: "strategy.motivation.passed",
+            operator: "==",
+            value: true
+          }, {
+            check: "motivation.speed",
+            operator: "==",
+            value: 6
+          }, {
+            check: "motivation.count",
+            operator: ">=",
+            value: 240
           }],
           passed: false
         }]
@@ -1561,6 +1650,44 @@ var state = (function() {
       }
     },
     upgrade: {
+      motivation: {
+        level1: {
+          passed: false,
+          cost: 64
+        },
+        level2: {
+          passed: false,
+          cost: 128
+        },
+        level3: {
+          passed: false,
+          cost: 256
+        },
+        speed1: {
+          passed: false,
+          cost: 8
+        },
+        speed2: {
+          passed: false,
+          cost: 16
+        },
+        speed3: {
+          passed: false,
+          cost: 32
+        },
+        speed4: {
+          passed: false,
+          cost: 64
+        },
+        speed5: {
+          passed: false,
+          cost: 128
+        },
+        speed6: {
+          passed: false,
+          cost: 256
+        }
+      },
       autotoaster: {
         efficiency1: {
           passed: false,

@@ -2,6 +2,38 @@ var motivation = (function() {
 
   var mod = {}
 
+  mod.formula = {
+    interval: function(speed) {
+      return 100 + (speed * 100)
+    }
+  }
+
+  mod.interval = {
+    set: function() {
+      state.get.current().motivation.interval = mod.formula.interval(state.get.current().motivation.speed)
+    }
+  }
+
+  mod.level = {
+    add: function(amount) {
+      state.get.current().motivation.level = state.get.current().motivation.level + amount
+    },
+    remove: function(amount) {
+      state.get.current().motivation.level = state.get.current().motivation.level - amount
+    }
+  }
+
+  mod.speed = {
+    add: function(amount) {
+      state.get.current().motivation.speed = state.get.current().motivation.speed + amount
+      mod.interval.set()
+    },
+    remove: function(amount) {
+      state.get.current().motivation.speed = state.get.current().motivation.speed - amount
+      mod.interval.set()
+    }
+  }
+
   mod.next = null
 
   mod.delayMotivation = null
@@ -122,6 +154,7 @@ var motivation = (function() {
 
   var init = function() {
     mod.boost.reset()
+    mod.interval.set()
   }
 
   return {

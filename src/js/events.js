@@ -105,6 +105,123 @@ var events = (function() {
         report: function() {
           report.render.message(string.mod.motivation.open)
         }
+      }],
+      level1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "motivation",
+            path: "upgrade.motivation.level1",
+            name: string.mod.upgrade.motivation.level.name,
+            description: string.mod.upgrade.motivation.level.description,
+            action: function() {
+              motivation.mod.level.add(1)
+            }
+          })
+        }
+      }],
+      level2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "motivation",
+            path: "upgrade.motivation.level2",
+            name: string.mod.upgrade.motivation.level.name,
+            description: string.mod.upgrade.motivation.level.description,
+            action: function() {
+              motivation.mod.level.add(1)
+            }
+          })
+        }
+      }],
+      level3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "motivation",
+            path: "upgrade.motivation.level3",
+            name: string.mod.upgrade.motivation.level.name,
+            description: string.mod.upgrade.motivation.level.description,
+            action: function() {
+              motivation.mod.level.add(1)
+            }
+          })
+        }
+      }],
+      speed1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "motivation",
+            path: "upgrade.motivation.speed1",
+            name: string.mod.upgrade.motivation.speed.name,
+            description: string.mod.upgrade.motivation.speed.description,
+            action: function() {
+              motivation.mod.speed.add(1)
+            }
+          })
+        }
+      }],
+      speed2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "motivation",
+            path: "upgrade.motivation.speed2",
+            name: string.mod.upgrade.motivation.speed.name,
+            description: string.mod.upgrade.motivation.speed.description,
+            action: function() {
+              motivation.mod.speed.add(1)
+            }
+          })
+        }
+      }],
+      speed3: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "motivation",
+            path: "upgrade.motivation.speed3",
+            name: string.mod.upgrade.motivation.speed.name,
+            description: string.mod.upgrade.motivation.speed.description,
+            action: function() {
+              motivation.mod.speed.add(1)
+            }
+          })
+        }
+      }],
+      speed4: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "motivation",
+            path: "upgrade.motivation.speed4",
+            name: string.mod.upgrade.motivation.speed.name,
+            description: string.mod.upgrade.motivation.speed.description,
+            action: function() {
+              motivation.mod.speed.add(1)
+            }
+          })
+        }
+      }],
+      speed5: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "motivation",
+            path: "upgrade.motivation.speed5",
+            name: string.mod.upgrade.motivation.speed.name,
+            description: string.mod.upgrade.motivation.speed.description,
+            action: function() {
+              motivation.mod.speed.add(1)
+            }
+          })
+        }
+      }],
+      speed6: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "motivation",
+            path: "upgrade.motivation.speed6",
+            name: string.mod.upgrade.motivation.speed.name,
+            description: string.mod.upgrade.motivation.speed.description,
+            action: function() {
+              motivation.mod.speed.add(1)
+            }
+          })
+        }
       }]
     },
     autotoaster: {
