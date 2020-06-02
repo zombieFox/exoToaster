@@ -77,7 +77,6 @@ b,
 caption,
 strong {
   color: rgb(var(--theme-style-text));
-  font-family: var(--theme-font-ui-name);
   font-weight: 700;
 }
 

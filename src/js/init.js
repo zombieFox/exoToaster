@@ -1,7 +1,6 @@
 // systems
 var processor = new System("processor", "geometric", 2)
-var electromagnetic = new System("electromagnetic", "geometric", 1.1)
-var sonic = new System("sonic", "geometric", 1.1)
+var electromagnetic = new System("electromagnetic", "geometric", 10)
 
 // generators
 var autotoaster = new Generator("autotoaster", "arithmetic", 1)

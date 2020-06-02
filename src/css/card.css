@@ -35,13 +35,13 @@
 .card-header {
   background-color: rgb(var(--theme-color-04));
   padding: 0.75em 1.25em;
-  transition: background-color var(--layout-timing-extra-fast), border var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-timing-extra-fast);
 }
 
 .card-body {
   background-color: rgb(var(--theme-color-03));
   padding: 0.75em 1.25em;
-  transition: background-color var(--layout-timing-extra-fast), border var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-timing-extra-fast);
 }
 
 .card-body hr {
@@ -55,7 +55,7 @@
 .card-footer {
   background-color: rgb(var(--theme-color-04));
   padding: 0.75em 1.25em;
-  transition: background-color var(--layout-timing-extra-fast), border var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-timing-extra-fast);
 }
 
 .card-footer:not(:last-child):not(:only-child) {

@@ -35,9 +35,25 @@ var strategy = (function() {
       path: options.path
     })
 
-    if (state.get.current().cycle.current >= stateData.cost) {
+    var condition
 
-      cycle.consume(stateData.cost)
+    if ("cycle" in stateData.cost && "toast" in stateData.cost) {
+      condition = state.get.current().cycle.current >= stateData.cost.cycle && state.get.current().toast.inventory.current >= stateData.cost.toast
+    } else if ("cycle" in stateData.cost) {
+      condition = state.get.current().cycle.current >= stateData.cost.cycle
+    } else if ("toast" in stateData.cost) {
+      condition = state.get.current().toast.inventory.current >= stateData.cost.toast
+    }
+
+    if (condition) {
+
+      if ("cycle" in stateData.cost) {
+        cycle.consume(stateData.cost.cycle)
+      }
+
+      if ("toast" in stateData.cost) {
+        toast.consume(stateData.cost.toast)
+      }
 
       if (options.path) {
         helper.setObject({
@@ -51,7 +67,7 @@ var strategy = (function() {
 
     } else {
 
-      report.render.message(string.mod.strategy.fail(stateData.cost))
+      report.render.message(string.mod.strategy.fail(stateData))
 
     }
   }
@@ -88,15 +104,43 @@ var strategy = (function() {
 
       var spanDevelop = helper.node("span:Develop cost ")
 
-      var strongCost = helper.node("strong:" + stateData.cost + " ")
-
-      var abbrIc = helper.node("abbr:Ic|title:Instruction cycles")
-
       paraCost.appendChild(spanDevelop)
 
-      paraCost.appendChild(strongCost)
+      var strongCost
 
-      paraCost.appendChild(abbrIc)
+      var abbrCost
+
+      if ("cycle" in stateData.cost) {
+        var strongCost = helper.node("strong:" + suffix.add({
+          number: stateData.cost.cycle,
+          abbreviations: true
+        }) + " ")
+
+        var abbrCost = helper.node("abbr:Ic|title:Instruction cycle")
+
+        paraCost.appendChild(strongCost)
+
+        paraCost.appendChild(abbrCost)
+      }
+
+      if ("cycle" in stateData.cost && "toast" in stateData.cost) {
+        var spanAnd = helper.node("span: and ")
+
+        paraCost.appendChild(spanAnd)
+      }
+
+      if ("toast" in stateData.cost) {
+        var strongCost = helper.node("strong:" + suffix.add({
+          number: stateData.cost.toast,
+          abbreviations: true
+        }) + " ")
+
+        var abbrCost = helper.node("abbr:Tm|title:Toast matter")
+
+        paraCost.appendChild(strongCost)
+
+        paraCost.appendChild(abbrCost)
+      }
 
       cardBody.appendChild(button)
 

@@ -67,14 +67,6 @@ var state = (function() {
         toast: null
       }
     },
-    sonic: {
-      level: null,
-      cost: {
-        constant: null,
-        difference: null,
-        toast: null
-      }
-    },
     cycle: {
       current: 0,
       max: 2,
@@ -229,6 +221,17 @@ var state = (function() {
       }
     },
     event: {
+      toast: {
+        toastpersec: [{
+          condition: [{
+            check: "strategy.toastpersec.passed",
+            operator: "==",
+            value: true
+          }],
+          passed: false
+        }],
+        click1: []
+      },
       processor: {
         open: [{
           condition: [{
@@ -275,6 +278,16 @@ var state = (function() {
             check: "cycle.current",
             operator: "==",
             value: 2
+          }],
+          passed: false
+        }]
+      },
+      electromagnetic: {
+        open: [{
+          condition: [{
+            check: "strategy.electromagnetic.passed",
+            operator: "==",
+            value: true
           }],
           passed: false
         }]
@@ -1520,11 +1533,52 @@ var state = (function() {
           }],
           passed: false
         }],
+        toastpersec: [{
+          condition: [{
+            check: "autotoaster.level",
+            operator: ">",
+            value: 0
+          }, {
+            check: "megatoaster.level",
+            operator: ">",
+            value: 0
+          }, {
+            check: "rockettoaster.level",
+            operator: ">",
+            value: 0
+          }, {
+            check: "sonictoaster.level",
+            operator: ">",
+            value: 0
+          }, {
+            check: "plasmatoaster.level",
+            operator: ">",
+            value: 0
+          }, {
+            check: "atomictoaster.level",
+            operator: ">",
+            value: 0
+          }, {
+            check: "quantumtoaster.level",
+            operator: ">",
+            value: 0
+          }],
+          anyCondition: true,
+          passed: false
+        }],
+        electromagnetic: [{
+          condition: [{
+            check: "processor.level",
+            operator: ">=",
+            value: 32
+          }],
+          passed: false
+        }],
         motivation: [{
           condition: [{
             check: "processor.level",
             operator: ">=",
-            value: 24
+            value: 16
           }],
           passed: false
         }],
@@ -1616,398 +1670,608 @@ var state = (function() {
     },
     strategy: {
       next: 0,
+      toastpersec: {
+        passed: false,
+        cost: {
+          cycle: 8,
+          toast: 8000
+        }
+      },
+      electromagnetic: {
+        passed: false,
+        cost: {
+          cycle: 256,
+          toast: 256000
+        }
+      },
       motivation: {
         passed: false,
-        cost: 32
+        cost: {
+          cycle: 16,
+          toast: 1600
+        }
       },
       autotoaster: {
         passed: false,
-        cost: 2
+        cost: {
+          cycle: 2,
+          toast: 200
+        }
       },
       megatoaster: {
         passed: false,
-        cost: 4
+        cost: {
+          cycle: 4,
+          toast: 400
+        }
       },
       rockettoaster: {
         passed: false,
-        cost: 8
+        cost: {
+          cycle: 8,
+          toast: 800
+        }
       },
       sonictoaster: {
         passed: false,
-        cost: 16
+        cost: {
+          cycle: 16,
+          toast: 1600
+        }
       },
       plasmatoaster: {
         passed: false,
-        cost: 32
+        cost: {
+          cycle: 32,
+          toast: 3200
+        }
       },
       atomictoaster: {
         passed: false,
-        cost: 64
+        cost: {
+          cycle: 64,
+          toast: 6400
+        }
       },
       quantumtoaster: {
         passed: false,
-        cost: 128
+        cost: {
+          cycle: 128,
+          toast: 12800
+        }
       }
     },
     upgrade: {
       motivation: {
         level1: {
           passed: false,
-          cost: 64
+          cost: {
+            cycle: 64
+          }
         },
         level2: {
           passed: false,
-          cost: 128
+          cost: {
+            cycle: 128
+          }
         },
         level3: {
           passed: false,
-          cost: 256
+          cost: {
+            cycle: 256
+          }
         },
         speed1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         speed2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         speed3: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         speed4: {
           passed: false,
-          cost: 64
+          cost: {
+            cycle: 64
+          }
         },
         speed5: {
           passed: false,
-          cost: 128
+          cost: {
+            cycle: 128
+          }
         },
         speed6: {
           passed: false,
-          cost: 256
+          cost: {
+            cycle: 256
+          }
         }
       },
       autotoaster: {
         efficiency1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         efficiency2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         efficiency3: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         efficiency4: {
           passed: false,
-          cost: 64
+          cost: {
+            cycle: 64
+          }
         },
         speed1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         speed2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         speed3: {
           passed: false,
-          cost: 24
+          cost: {
+            cycle: 24
+          }
         },
         speed4: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         speed5: {
           passed: false,
-          cost: 40
+          cost: {
+            cycle: 40
+          }
         },
         speed6: {
           passed: false,
-          cost: 48
+          cost: {
+            cycle: 48
+          }
         },
         speed7: {
           passed: false,
-          cost: 56
+          cost: {
+            cycle: 56
+          }
         },
       },
       megatoaster: {
         efficiency1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         efficiency2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         efficiency3: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         efficiency4: {
           passed: false,
-          cost: 64
+          cost: {
+            cycle: 64
+          }
         },
         speed1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         speed2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         speed3: {
           passed: false,
-          cost: 24
+          cost: {
+            cycle: 24
+          }
         },
         speed4: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         speed5: {
           passed: false,
-          cost: 40
+          cost: {
+            cycle: 40
+          }
         },
         speed6: {
           passed: false,
-          cost: 48
+          cost: {
+            cycle: 48
+          }
         },
         speed7: {
           passed: false,
-          cost: 56
+          cost: {
+            cycle: 56
+          }
         },
       },
       rockettoaster: {
         efficiency1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         efficiency2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         efficiency3: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         efficiency4: {
           passed: false,
-          cost: 64
+          cost: {
+            cycle: 64
+          }
         },
         speed1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         speed2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         speed3: {
           passed: false,
-          cost: 24
+          cost: {
+            cycle: 24
+          }
         },
         speed4: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         speed5: {
           passed: false,
-          cost: 40
+          cost: {
+            cycle: 40
+          }
         },
         speed6: {
           passed: false,
-          cost: 48
+          cost: {
+            cycle: 48
+          }
         },
         speed7: {
           passed: false,
-          cost: 56
+          cost: {
+            cycle: 56
+          }
         },
       },
       sonictoaster: {
         efficiency1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         efficiency2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         efficiency3: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         efficiency4: {
           passed: false,
-          cost: 64
+          cost: {
+            cycle: 64
+          }
         },
         speed1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         speed2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         speed3: {
           passed: false,
-          cost: 24
+          cost: {
+            cycle: 24
+          }
         },
         speed4: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         speed5: {
           passed: false,
-          cost: 40
+          cost: {
+            cycle: 40
+          }
         },
         speed6: {
           passed: false,
-          cost: 48
+          cost: {
+            cycle: 48
+          }
         },
         speed7: {
           passed: false,
-          cost: 56
+          cost: {
+            cycle: 56
+          }
         },
       },
       plasmatoaster: {
         efficiency1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         efficiency2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         efficiency3: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         efficiency4: {
           passed: false,
-          cost: 64
+          cost: {
+            cycle: 64
+          }
         },
         speed1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         speed2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         speed3: {
           passed: false,
-          cost: 24
+          cost: {
+            cycle: 24
+          }
         },
         speed4: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         speed5: {
           passed: false,
-          cost: 40
+          cost: {
+            cycle: 40
+          }
         },
         speed6: {
           passed: false,
-          cost: 48
+          cost: {
+            cycle: 48
+          }
         },
         speed7: {
           passed: false,
-          cost: 56
+          cost: {
+            cycle: 56
+          }
         },
       },
       atomictoaster: {
         efficiency1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         efficiency2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         efficiency3: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         efficiency4: {
           passed: false,
-          cost: 64
+          cost: {
+            cycle: 64
+          }
         },
         speed1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         speed2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         speed3: {
           passed: false,
-          cost: 24
+          cost: {
+            cycle: 24
+          }
         },
         speed4: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         speed5: {
           passed: false,
-          cost: 40
+          cost: {
+            cycle: 40
+          }
         },
         speed6: {
           passed: false,
-          cost: 48
+          cost: {
+            cycle: 48
+          }
         },
         speed7: {
           passed: false,
-          cost: 56
+          cost: {
+            cycle: 56
+          }
         },
       },
       quantumtoaster: {
         efficiency1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         efficiency2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         efficiency3: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         efficiency4: {
           passed: false,
-          cost: 64
+          cost: {
+            cycle: 64
+          }
         },
         speed1: {
           passed: false,
-          cost: 8
+          cost: {
+            cycle: 8
+          }
         },
         speed2: {
           passed: false,
-          cost: 16
+          cost: {
+            cycle: 16
+          }
         },
         speed3: {
           passed: false,
-          cost: 24
+          cost: {
+            cycle: 24
+          }
         },
         speed4: {
           passed: false,
-          cost: 32
+          cost: {
+            cycle: 32
+          }
         },
         speed5: {
           passed: false,
-          cost: 40
+          cost: {
+            cycle: 40
+          }
         },
         speed6: {
           passed: false,
-          cost: 48
+          cost: {
+            cycle: 48
+          }
         },
         speed7: {
           passed: false,
-          cost: 56
+          cost: {
+            cycle: 56
+          }
         },
       }
     },

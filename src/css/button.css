@@ -24,6 +24,7 @@ input[type="submit"] {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  user-select: none;
   transition: background-color var(--layout-timing-extra-fast), border-color var(--layout-timing-extra-fast), color var(--layout-timing-extra-fast);
 }
 

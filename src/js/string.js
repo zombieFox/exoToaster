@@ -35,7 +35,46 @@ var string = (function() {
     quantumtoaster: "Quantum Toaster",
     motivation: "Motivation",
     electromagnetic: "Electromagnetic sensor",
-    sonic: "Sonic sensor"
+    toastpersec: "Toast per second count"
+  }
+
+  mod.toast = {
+    toastpersec: {
+      type: "system",
+      message: ["toast_per_second.data > ready"],
+      format: "normal"
+    }
+  }
+
+  mod.electromagnetic = {
+    open: {
+      type: "system",
+      message: ["electromagnetic.data > ready"],
+      format: "normal"
+    },
+    success: function(amount) {
+      return {
+        type: "success",
+        message: ["+" + suffix.add({
+          number: amount,
+          abbreviations: true
+        }) + " unit, " + suffix.add({
+          number: state.get.current().electromagnetic.level,
+          abbreviations: true
+        }) + " electromagnetic sensor resolution increased"],
+        format: "normal"
+      }
+    },
+    fail: function(amount) {
+      return {
+        type: "error",
+        message: [suffix.add({
+          number: amount,
+          abbreviations: true
+        }) + " toast matter needed"],
+        format: "normal"
+      }
+    }
   }
 
   mod.processor = {
@@ -541,6 +580,14 @@ var string = (function() {
       message: ["strategy.data > ready"],
       format: "normal"
     },
+    toastpersec: {
+      open: {
+        type: "system",
+        message: ["strategy.motivation.data > ready"],
+        format: "normal"
+      },
+      description: ["Galvanise the drones to produce more toast"]
+    },
     motivation: {
       open: {
         type: "system",
@@ -560,20 +607,7 @@ var string = (function() {
         message: ["electromagnetic.data > ready"],
         format: "normal"
       },
-      description: ["Detect radiation beyond the system casing", "Will help identify the toast consumer"]
-    },
-    sonic: {
-      open: {
-        type: "system",
-        message: ["strategy.sonic.data > ready"],
-        format: "normal"
-      },
-      active: {
-        type: "system",
-        message: ["sonic.data > ready"],
-        format: "normal"
-      },
-      description: ["Detect, track, and identify particles", "Will help identify the toast consumer"]
+      description: ["Detect electromagnetic radiation of all wavelengths and energies", "Will help identify the toast consumer"]
     },
     autotoaster: {
       open: {
@@ -631,13 +665,32 @@ var string = (function() {
       },
       description: ["Materialise toast from the void"]
     },
-    fail: function(amount) {
+    fail: function(stateData) {
+      var message = ""
+
+      if ("cycle" in stateData.cost) {
+        message = message + suffix.add({
+          number: stateData.cost.cycle,
+          abbreviations: true
+        }) + " instruction cycles"
+      }
+
+      if ("cycle" in stateData.cost && "toast" in stateData.cost) {
+        message = message + " and "
+      }
+
+      if ("toast" in stateData.cost) {
+        message = message + suffix.add({
+          number: stateData.cost.toast,
+          abbreviations: true
+        }) + " toast matter"
+      }
+
+      message = message + " needed"
+
       return {
         type: "error",
-        message: [suffix.add({
-          number: amount,
-          abbreviations: true
-        }) + " instruction cycles needed"],
+        message: [message],
         format: "normal"
       }
     }
@@ -724,65 +777,32 @@ var string = (function() {
         description: ["Boost each units speed with rubber bands"]
       }
     },
-    fail: function(amount) {
-      return {
-        type: "error",
-        message: [suffix.add({
-          number: amount,
-          abbreviations: true
-        }) + " instruction cycles needed"],
-        format: "normal"
-      }
-    }
-  }
+    fail: function(stateData) {
+      var message = ""
 
-  mod.electromagnetic = {
-    success: function(amount) {
-      return {
-        type: "success",
-        message: ["+" + suffix.add({
-          number: amount,
+      if ("cycle" in stateData.cost) {
+        message = message + suffix.add({
+          number: stateData.cost.cycle,
           abbreviations: true
-        }) + " unit, " + suffix.add({
-          number: state.get.current().electromagnetic.level,
-          abbreviations: true
-        }) + " electromagnetic sensor resolution increased"],
-        format: "normal"
+        }) + " instruction cycles"
       }
-    },
-    fail: function(amount) {
-      return {
-        type: "error",
-        message: [suffix.add({
-          number: amount,
-          abbreviations: true
-        }) + " toast matter needed"],
-        format: "normal"
-      }
-    }
-  }
 
-  mod.sonic = {
-    success: function(amount) {
-      return {
-        type: "success",
-        message: ["+" + suffix.add({
-          number: amount,
-          abbreviations: true
-        }) + " unit, " + suffix.add({
-          number: state.get.current().sonic.level,
-          abbreviations: true
-        }) + " sonic sensor resolution increased"],
-        format: "normal"
+      if ("cycle" in stateData.cost && "toast" in stateData.cost) {
+        message = message + " and "
       }
-    },
-    fail: function(amount) {
+
+      if ("toast" in stateData.cost) {
+        message = message + suffix.add({
+          number: stateData.cost.toast,
+          abbreviations: true
+        }) + " toast matter"
+      }
+
+      message = message + " needed"
+
       return {
         type: "error",
-        message: [suffix.add({
-          number: amount,
-          abbreviations: true
-        }) + " toast matter needed"],
+        message: [message],
         format: "normal"
       }
     }

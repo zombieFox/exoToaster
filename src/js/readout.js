@@ -77,19 +77,6 @@ var readout = (function() {
       },
       suffix: true
     }],
-    sonic: [{
-      element: "[readout=sonic-level]",
-      value: function() {
-        return state.get.current().sonic.level
-      },
-      suffix: true
-    }, {
-      element: "[readout=sonic-cost-toast]",
-      value: function() {
-        return state.get.current().sonic.cost.toast
-      },
-      suffix: true
-    }],
     motivation: [{
       element: "[readout=motivation-bonus]",
       value: function() {

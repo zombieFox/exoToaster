@@ -63,25 +63,6 @@ var control = (function() {
           electromagnetic.add(100)
         }
       }],
-      sonic: [{
-        element: "[control=sonic-level-add1]",
-        type: "button",
-        func: function() {
-          sonic.add(1)
-        }
-      }, {
-        element: "[control=sonic-level-add10]",
-        type: "button",
-        func: function() {
-          sonic.add(10)
-        }
-      }, {
-        element: "[control=sonic-level-add100]",
-        type: "button",
-        func: function() {
-          sonic.add(100)
-        }
-      }],
       motivation: [{
         element: "[control=motivation]",
         type: "button",

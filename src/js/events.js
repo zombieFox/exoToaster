@@ -35,6 +35,16 @@ var events = (function() {
   }
 
   mod.action = {
+    toast: {
+      toastpersec: [{
+        func: function() {
+          render.unlock("toast-per-second")
+        },
+        report: function() {
+          report.render.message(string.mod.toast.toastpersec)
+        }
+      }]
+    },
     processor: {
       open: [{
         func: function() {
@@ -94,6 +104,16 @@ var events = (function() {
         func: function() {
           tick.mod.remove("cycle")
           state.get.current().event.cycle.start[0].passed = false
+        }
+      }]
+    },
+    electromagnetic: {
+      open: [{
+        func: function() {
+          render.unlock("electromagnetic")
+        },
+        report: function() {
+          report.render.message(string.mod.electromagnetic.open)
         }
       }]
     },
@@ -1520,6 +1540,30 @@ var events = (function() {
           render.unlock("strategy")
         }
       }],
+      electromagnetic: [{
+        func: function() {
+          strategy.render.card({
+            path: "strategy.electromagnetic",
+            name: string.mod.name.electromagnetic,
+            description: string.mod.strategy.electromagnetic.description
+          })
+        },
+        report: function() {
+          report.render.message(string.mod.strategy.electromagnetic.open)
+        }
+      }],
+      toastpersec: [{
+        func: function() {
+          strategy.render.card({
+            path: "strategy.toastpersec",
+            name: string.mod.name.toastpersec,
+            description: string.mod.strategy.toastpersec.description
+          })
+        },
+        report: function() {
+          report.render.message(string.mod.strategy.toastpersec.open)
+        }
+      }],
       motivation: [{
         func: function() {
           strategy.render.card({
@@ -1669,7 +1713,11 @@ var events = (function() {
       }
     })
 
-    return !passCondition.includes(false)
+    if (eventData.anyCondition) {
+      return passCondition.includes(true)
+    } else {
+      return !passCondition.includes(false)
+    }
   }
 
   mod.check = function() {
