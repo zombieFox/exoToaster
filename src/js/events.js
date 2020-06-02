@@ -41,7 +41,7 @@ var events = (function() {
           render.unlock("processor")
         },
         report: function() {
-          render.report(string.mod.processor.open)
+          report.render.message(string.mod.processor.open)
         }
       }]
     },
@@ -60,7 +60,7 @@ var events = (function() {
           })
         },
         report: function() {
-          render.report(string.mod.consumer.open)
+          report.render.message(string.mod.consumer.open)
         }
       }]
     },
@@ -70,7 +70,7 @@ var events = (function() {
           render.unlock("cycle")
         },
         report: function() {
-          render.report(string.mod.cycle.open)
+          report.render.message(string.mod.cycle.open)
         }
       }],
       start: [{
@@ -103,7 +103,7 @@ var events = (function() {
           render.unlock("motivation")
         },
         report: function() {
-          render.report(string.mod.motivation.open)
+          report.render.message(string.mod.motivation.open)
         }
       }]
     },
@@ -113,7 +113,7 @@ var events = (function() {
           render.unlock("autotoaster")
         },
         report: function() {
-          render.report(string.mod.autotoaster.open)
+          report.render.message(string.mod.autotoaster.open)
         }
       }],
       start: [{
@@ -298,7 +298,7 @@ var events = (function() {
           render.unlock("megatoaster")
         },
         report: function() {
-          render.report(string.mod.megatoaster.open)
+          report.render.message(string.mod.megatoaster.open)
         }
       }],
       start: [{
@@ -483,7 +483,7 @@ var events = (function() {
           render.unlock("rockettoaster")
         },
         report: function() {
-          render.report(string.mod.rockettoaster.open)
+          report.render.message(string.mod.rockettoaster.open)
         }
       }],
       start: [{
@@ -668,7 +668,7 @@ var events = (function() {
           render.unlock("sonictoaster")
         },
         report: function() {
-          render.report(string.mod.sonictoaster.open)
+          report.render.message(string.mod.sonictoaster.open)
         }
       }],
       start: [{
@@ -853,7 +853,7 @@ var events = (function() {
           render.unlock("plasmatoaster")
         },
         report: function() {
-          render.report(string.mod.plasmatoaster.open)
+          report.render.message(string.mod.plasmatoaster.open)
         }
       }],
       start: [{
@@ -1038,7 +1038,7 @@ var events = (function() {
           render.unlock("atomictoaster")
         },
         report: function() {
-          render.report(string.mod.atomictoaster.open)
+          report.render.message(string.mod.atomictoaster.open)
         }
       }],
       start: [{
@@ -1218,7 +1218,7 @@ var events = (function() {
           render.unlock("quantumtoaster")
         },
         report: function() {
-          render.report(string.mod.quantumtoaster.open)
+          report.render.message(string.mod.quantumtoaster.open)
         }
       }],
       start: [{
@@ -1412,7 +1412,7 @@ var events = (function() {
           })
         },
         report: function() {
-          render.report(string.mod.strategy.motivation.open)
+          report.render.message(string.mod.strategy.motivation.open)
         }
       }],
       autotoaster: [{
@@ -1424,7 +1424,7 @@ var events = (function() {
           })
         },
         report: function() {
-          render.report(string.mod.strategy.autotoaster.open)
+          report.render.message(string.mod.strategy.autotoaster.open)
         }
       }],
       megatoaster: [{
@@ -1436,7 +1436,7 @@ var events = (function() {
           })
         },
         report: function() {
-          render.report(string.mod.strategy.megatoaster.open)
+          report.render.message(string.mod.strategy.megatoaster.open)
         }
       }],
       rockettoaster: [{
@@ -1448,7 +1448,7 @@ var events = (function() {
           })
         },
         report: function() {
-          render.report(string.mod.strategy.rockettoaster.open)
+          report.render.message(string.mod.strategy.rockettoaster.open)
         }
       }],
       sonictoaster: [{
@@ -1460,7 +1460,7 @@ var events = (function() {
           })
         },
         report: function() {
-          render.report(string.mod.strategy.sonictoaster.open)
+          report.render.message(string.mod.strategy.sonictoaster.open)
         }
       }],
       plasmatoaster: [{
@@ -1472,7 +1472,7 @@ var events = (function() {
           })
         },
         report: function() {
-          render.report(string.mod.strategy.plasmatoaster.open)
+          report.render.message(string.mod.strategy.plasmatoaster.open)
         }
       }],
       atomictoaster: [{
@@ -1484,7 +1484,7 @@ var events = (function() {
           })
         },
         report: function() {
-          render.report(string.mod.strategy.atomictoaster.open)
+          report.render.message(string.mod.strategy.atomictoaster.open)
         }
       }],
       quantumtoaster: [{
@@ -1496,7 +1496,7 @@ var events = (function() {
           })
         },
         report: function() {
-          render.report(string.mod.strategy.quantumtoaster.open)
+          report.render.message(string.mod.strategy.quantumtoaster.open)
         }
       }]
     }
@@ -1614,14 +1614,6 @@ var events = (function() {
 
   render.lock = function(stageName) {
     helper.e("[stage=" + stageName + "]").classList.add("is-hidden")
-  }
-
-  render.report = function(data) {
-    report.render({
-      type: data.type,
-      message: data.message,
-      format: data.format
-    })
   }
 
   var init = function() {

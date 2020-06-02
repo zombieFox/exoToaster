@@ -78,7 +78,7 @@ var motivation = (function() {
       randomIndex = index
     }
 
-    report.render({
+    report.render.message({
       type: "motivation",
       message: [string.mod.motivation.messages.toast[randomIndex]],
       format: "normal"
@@ -106,10 +106,10 @@ var motivation = (function() {
     },
     success: {
       start: function() {
-        report.render(string.mod.motivation.start)
+        report.render.message(string.mod.motivation.start)
       },
       end: function() {
-        report.render(string.mod.motivation.end)
+        report.render.message(string.mod.motivation.end)
       }
     }
   }

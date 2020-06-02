@@ -61,9 +61,9 @@ var System = function(name, type, multiplier) {
       toast.consume(priceDetails.cost.total)
       this.level.add(amount)
       this.cost.increase(priceDetails)
-      report.render(string.mod[this.name].success(amount))
+      report.render.message(string.mod[this.name].success(amount))
     } else {
-      report.render(string.mod[this.name].fail(priceDetails.cost.total))
+      report.render.message(string.mod[this.name].fail(priceDetails.cost.total))
     }
   }
 

@@ -5,22 +5,22 @@ var boot = (function() {
   mod.messages = [{
     delay: 0,
     func: function() {
-      report.render(string.mod.boot.exotoaster)
+      report.render.message(string.mod.boot.exotoaster)
     }
   }, {
     delay: 1000,
     func: function() {
-      report.render(string.mod.boot.directive)
+      report.render.message(string.mod.boot.directive)
     }
   }, {
     delay: 500,
     func: function() {
-      report.render(string.mod.boot.directivelist)
+      report.render.message(string.mod.boot.directivelist)
     }
   }, {
     delay: 1000,
     func: function() {
-      report.render(string.mod.boot.motivation)
+      report.render.message(string.mod.boot.motivation)
     }
   }, {
     delay: 1000,

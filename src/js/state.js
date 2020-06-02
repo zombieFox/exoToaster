@@ -1949,6 +1949,11 @@ var state = (function() {
           dark: 4
         },
       }
+    },
+    report: {
+      message: {
+        max: 100
+      }
     }
   }
 

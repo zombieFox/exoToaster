@@ -51,7 +51,7 @@ var strategy = (function() {
 
     } else {
 
-      report.render(string.mod.strategy.fail(stateData.cost))
+      report.render.message(string.mod.strategy.fail(stateData.cost))
 
     }
   }

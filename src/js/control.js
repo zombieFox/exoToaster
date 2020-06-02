@@ -300,6 +300,12 @@ var control = (function() {
             menu.nav("theme")
           }
         }, {
+          element: "[control=menu-report]",
+          type: "button",
+          func: function() {
+            menu.nav("report")
+          }
+        }, {
           element: "[control=menu-data]",
           type: "button",
           func: function() {
@@ -1992,6 +1998,49 @@ var control = (function() {
           func: function() {
             theme.accent.random()
             render.update.control.menu()
+          }
+        }]
+      },
+      report: {
+        max: [{
+          element: "[control=report-max-range]",
+          path: "report.message.max",
+          type: "range",
+          valueModify: {
+            min: 1,
+            max: 500
+          },
+          mirrorElement: [{
+            element: "[control=report-max-number]",
+            path: "report.message.max",
+            type: "number"
+          }]
+        }, {
+          element: "[control=report-max-number]",
+          path: "report.message.max",
+          type: "number",
+          valueModify: {
+            min: 1,
+            max: 500
+          },
+          mirrorElement: [{
+            element: "[control=report-max-range]",
+            path: "report.message.max",
+            type: "range"
+          }]
+        }, {
+          element: "[control=report-max-default]",
+          type: "button",
+          func: function() {
+            mod.default("report.message.max")
+            render.update.control.menu()
+          }
+        }],
+        clear: [{
+          element: "[control=report-clear]",
+          type: "button",
+          func: function() {
+            report.render.clear()
           }
         }]
       },

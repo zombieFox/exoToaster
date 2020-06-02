@@ -13,6 +13,7 @@ var menu = (function() {
   mod.nav = {
     state: {
       theme: true,
+      report: false,
       data: false,
       coffee: false,
       exotoaster: false

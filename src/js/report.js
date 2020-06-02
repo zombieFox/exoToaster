@@ -1,6 +1,8 @@
 var report = (function() {
 
-  var cursor = {
+  var mod = {}
+
+  mod.cursor = {
     success: "*",
     normal: "#",
     error: "!",
@@ -8,7 +10,7 @@ var report = (function() {
     motivation: "_"
   }
 
-  var prefix = {
+  mod.prefix = {
     success: function() {
       return "!!!"
     },
@@ -53,7 +55,9 @@ var report = (function() {
     }
   }
 
-  var typeWriter = function(override) {
+  var render = {}
+
+  render.typeWriter = function(override) {
     var options = {
       text: null,
       index: null,
@@ -68,7 +72,7 @@ var report = (function() {
 
     if (options.index <= options.text.length) {
       options.target.innerHTML = options.text.substring(0, options.index + 1)
-      scrollToBottom()
+      render.scrollToBottom()
       var delay
       if (options.delay != null) {
         delay = options.delay
@@ -77,7 +81,7 @@ var report = (function() {
       }
 
       setTimeout(function() {
-        typeWriter({
+        render.typeWriter({
           text: options.text,
           index: options.index + 1,
           target: options.target,
@@ -92,7 +96,7 @@ var report = (function() {
     }
   }
 
-  var startTypeWriter = function(override) {
+  render.startTypeWriter = function(override) {
     var options = {
       textArray: null,
       index: null,
@@ -114,7 +118,7 @@ var report = (function() {
       item.appendChild(string)
       item.appendChild(cursor)
       options.target.appendChild(item)
-      typeWriter({
+      render.typeWriter({
         text: arrayItem,
         index: 1,
         target: string,
@@ -124,7 +128,7 @@ var report = (function() {
     })
   }
 
-  var render = function(override) {
+  render.message = function(override) {
     var options = {
       type: null,
       noprefix: null,
@@ -152,42 +156,43 @@ var report = (function() {
     format[options.format]()
     var messageType = helper.node("span|class:report-message-type")
     if (!options.noprefix) {
-      messageType.textContent = prefix[options.type]()
+      messageType.textContent = mod.prefix[options.type]()
     }
     var messageText = helper.node("span|class:report-message-text")
     newMessage.appendChild(messageType)
     newMessage.appendChild(messageText)
-    while (report.childNodes.length > maxMessages) {
+    while (report.childNodes.length >= maxMessages) {
       report.firstChild.remove()
     }
 
     report.appendChild(newMessage)
 
-    startTypeWriter({
+    render.startTypeWriter({
       textArray: options.message,
       index: 0,
       delay: options.delay,
       target: messageText,
-      cursor: cursor[options.type],
+      cursor: mod.cursor[options.type],
       callback: options.callback
     })
   }
 
-  var clear = function() {
+  render.clear = function() {
     var report = helper.e(".report")
+
     while (report.lastChild) {
       report.removeChild(report.lastChild)
     }
   }
 
-  var scrollToBottom = function() {
+  render.scrollToBottom = function() {
     var report = helper.e(".report")
     report.scrollTop = report.scrollHeight
   }
 
   return {
-    render: render,
-    clear: clear
+    mod: mod,
+    render: render
   }
 
 })()

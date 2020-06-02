@@ -26,7 +26,7 @@ var consumer = (function() {
 
       toast.consume(amount)
 
-      report.render(string.mod.consumer.add(amount))
+      report.render.message(string.mod.consumer.add(amount))
     }
   }
 

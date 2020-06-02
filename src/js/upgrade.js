@@ -29,7 +29,7 @@ var upgrade = (function() {
 
     } else {
 
-      report.render(string.mod.upgrade.fail(stateData.cost))
+      report.render.message(string.mod.upgrade.fail(stateData.cost))
 
     }
   }
