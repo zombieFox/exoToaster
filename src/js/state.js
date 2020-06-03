@@ -68,9 +68,9 @@ var state = (function() {
       }
     },
     cycle: {
+      level: 2,
       current: 0,
       max: 2,
-      maxmultiplier: 2,
       interval: {
         starting: mod.formula.interval(3),
         current: null,
@@ -278,6 +278,30 @@ var state = (function() {
             check: "cycle.current",
             operator: "==",
             value: 2
+          }],
+          passed: false
+        }],
+        level1: [{
+          condition: [{
+            check: "processor.level",
+            operator: ">=",
+            value: 50
+          }, {
+            check: "cycle.level",
+            operator: "==",
+            value: 2
+          }],
+          passed: false
+        }],
+        level2: [{
+          condition: [{
+            check: "processor.level",
+            operator: ">=",
+            value: 100
+          }, {
+            check: "cycle.level",
+            operator: "==",
+            value: 3
           }],
           passed: false
         }]
@@ -1742,6 +1766,22 @@ var state = (function() {
       }
     },
     upgrade: {
+      cycle: {
+        level1: {
+          passed: false,
+          cost: {
+            cycle: 64,
+            toast: 64000
+          }
+        },
+        level2: {
+          passed: false,
+          cost: {
+            cycle: 128,
+            toast: 128000
+          }
+        }
+      },
       motivation: {
         level1: {
           passed: false,

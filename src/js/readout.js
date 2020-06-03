@@ -59,9 +59,9 @@ var readout = (function() {
         return state.get.current().cycle.interval.current / 1000
       }
     }, {
-      element: "[readout=cycle-maxmultiplier]",
+      element: "[readout=cycle-level]",
       value: function() {
-        return state.get.current().cycle.maxmultiplier
+        return state.get.current().cycle.level
       }
     }],
     electromagnetic: [{

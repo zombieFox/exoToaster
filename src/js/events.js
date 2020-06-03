@@ -105,6 +105,34 @@ var events = (function() {
           tick.mod.remove("cycle")
           state.get.current().event.cycle.start[0].passed = false
         }
+      }],
+      level1: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "cycle",
+            path: "upgrade.cycle.level1",
+            name: string.mod.upgrade.cycle.level.name,
+            description: string.mod.upgrade.cycle.level.description,
+            action: function() {
+              cycle.mod.level.add(1)
+              cycle.max()
+            }
+          })
+        }
+      }],
+      level2: [{
+        func: function() {
+          upgrade.render.card({
+            stage: "cycle",
+            path: "upgrade.cycle.level2",
+            name: string.mod.upgrade.cycle.level.name,
+            description: string.mod.upgrade.cycle.level.description,
+            action: function() {
+              cycle.mod.level.add(1)
+              cycle.max()
+            }
+          })
+        }
       }]
     },
     electromagnetic: {

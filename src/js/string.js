@@ -586,7 +586,7 @@ var string = (function() {
         message: ["strategy.motivation.data > ready"],
         format: "normal"
       },
-      description: ["Galvanise the drones to produce more toast"]
+      description: ["Calculate the amount of toast automatically created per second"]
     },
     motivation: {
       open: {
@@ -697,6 +697,12 @@ var string = (function() {
   }
 
   mod.upgrade = {
+    cycle: {
+      level: {
+        name: "Cycle upgrade",
+        description: ["Increase the max cycles gained from each processor core"]
+      },
+    },
     motivation: {
       level: {
         name: "Motivation upgrade",
