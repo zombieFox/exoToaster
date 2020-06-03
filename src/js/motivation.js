@@ -76,6 +76,7 @@ var motivation = (function() {
       }
     },
     start: function() {
+      helper.e("html").classList.add("is-motivation")
       render.message()
       mod.boost.count()
       autotoaster.motivation.add(state.get.current().motivation.level)
@@ -87,6 +88,7 @@ var motivation = (function() {
       quantumtoaster.motivation.add(state.get.current().motivation.level)
     },
     end: function() {
+      helper.e("html").classList.remove("is-motivation")
       autotoaster.motivation.remove(state.get.current().motivation.level)
       megatoaster.motivation.remove(state.get.current().motivation.level)
       rockettoaster.motivation.remove(state.get.current().motivation.level)

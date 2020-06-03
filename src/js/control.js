@@ -44,25 +44,6 @@ var control = (function() {
           cycle.max()
         }
       }],
-      electromagnetic: [{
-        element: "[control=electromagnetic-level-add1]",
-        type: "button",
-        func: function() {
-          electromagnetic.add(1)
-        }
-      }, {
-        element: "[control=electromagnetic-level-add10]",
-        type: "button",
-        func: function() {
-          electromagnetic.add(10)
-        }
-      }, {
-        element: "[control=electromagnetic-level-add100]",
-        type: "button",
-        func: function() {
-          electromagnetic.add(100)
-        }
-      }],
       motivation: [{
         element: "[control=motivation]",
         type: "button",

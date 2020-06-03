@@ -170,3 +170,23 @@
     opacity: 1;
   }
 }
+
+@keyframes ring-flash {
+  0% {
+    box-shadow: var(--form-ring-accent);
+  }
+
+  100% {
+    box-shadow: none;
+  }
+}
+
+@keyframes progress-stripe {
+  0% {
+    background-position-x: 0;
+  }
+
+  100% {
+    background-position-x: var(--progress-stripe-size);
+  }
+}

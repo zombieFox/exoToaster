@@ -1566,6 +1566,9 @@ var events = (function() {
       open: [{
         func: function() {
           render.unlock("strategy")
+        },
+        report: function() {
+          report.render.message(string.mod.strategy.open)
         }
       }],
       electromagnetic: [{

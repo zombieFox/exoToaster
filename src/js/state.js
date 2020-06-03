@@ -1786,55 +1786,64 @@ var state = (function() {
         level1: {
           passed: false,
           cost: {
-            cycle: 64
+            cycle: 64,
+            toast: 6400
           }
         },
         level2: {
           passed: false,
           cost: {
-            cycle: 128
+            cycle: 128,
+            toast: 12800
           }
         },
         level3: {
           passed: false,
           cost: {
-            cycle: 256
+            cycle: 256,
+            toast: 25600
           }
         },
         speed1: {
           passed: false,
           cost: {
-            cycle: 8
+            cycle: 8,
+            toast: 800
           }
         },
         speed2: {
           passed: false,
           cost: {
-            cycle: 16
+            cycle: 16,
+            toast: 1600
           }
         },
         speed3: {
           passed: false,
           cost: {
-            cycle: 32
+            cycle: 32,
+            toast: 3200
           }
         },
         speed4: {
           passed: false,
           cost: {
-            cycle: 64
+            cycle: 64,
+            toast: 6400
           }
         },
         speed5: {
           passed: false,
           cost: {
-            cycle: 128
+            cycle: 128,
+            toast: 12800
           }
         },
         speed6: {
           passed: false,
           cost: {
-            cycle: 256
+            cycle: 256,
+            toast: 25600
           }
         }
       },
