@@ -88,11 +88,12 @@ const jsFiles = [
   path.src + '/js/menu.js',
   path.src + '/js/modal.js',
   path.src + '/js/boot.js',
+  path.src + '/js/favicon.js',
   path.src + '/js/init.js'
 ]
 
 const assetFiles = [
-  path.src + '/assets/favicon.svg'
+  path.src + '/assets/**.*'
 ]
 
 const build = {
