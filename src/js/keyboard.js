@@ -39,7 +39,6 @@ var keyboard = (function() {
       // ctrl+alt+r
       if (state.get.current().theme.accent.random.active && event.ctrlKey && event.altKey && event.keyCode == 82) {
         theme.accent.random()
-        control.render.update.control.header()
         control.render.update.control.menu()
         data.save()
       }

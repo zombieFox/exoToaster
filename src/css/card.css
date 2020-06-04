@@ -4,9 +4,9 @@
   transform: scale(1);
   opacity: 1;
   animation-duration: 1.75s;
-  animation-name: swing;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in-out;
+  animation-name: appear, swing;
+  animation-iteration-count: 1, 0.75s;
+  animation-timing-function: ease-in-out, ease-in-out;
   animation-fill-mode: backwards;
   animation-delay: 0s;
   transform-origin: top center;
@@ -41,9 +41,9 @@
 .card-body {
   background-color: rgb(var(--theme-color-03));
   padding: 0.75em 1.25em;
-  transition: background-color var(--layout-timing-extra-fast);
   position: relative;
   z-index: 1;
+  transition: background-color var(--layout-timing-extra-fast), border-bottom-color var(--layout-timing-extra-fast);
 }
 
 .card-body hr {
@@ -57,7 +57,7 @@
 .card-footer {
   background-color: rgb(var(--theme-color-04));
   padding: 0.75em 1.25em;
-  transition: background-color var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-timing-extra-fast), border-bottom-color var(--layout-timing-extra-fast);
 }
 
 .card-footer:not(:last-child):not(:only-child) {
