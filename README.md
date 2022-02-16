@@ -1,5 +1,7 @@
 # exoToaster
 
+## find exotoast at: https://exotoasterhtml.bluefalconhd.repl.co/ (not official but the github page is down)
+
 #### The toast will sustain
 
 An incremental game
